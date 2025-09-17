@@ -1,3 +1,20 @@
-[gd_scene format=3 uid="uid://brt3h1dkgckj8"]
+[gd_scene load_steps=4 format=4 uid="uid://brt3h1dkgckj8"]
+
+[ext_resource type="Texture2D" uid="uid://vgjsb2mgfodd" path="res://tilesets/desertTest.png" id="1_updj8"]
+
+[sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_uthck"]
+texture = ExtResource("1_updj8")
+1:0/0 = 0
+0:1/0 = 0
+1:1/0 = 0
+2:1/0 = 0
+1:2/0 = 0
+
+[sub_resource type="TileSet" id="TileSet_ktmmm"]
+sources/0 = SubResource("TileSetAtlasSource_uthck")
 
 [node name="DesertRoom" type="Node2D"]
+
+[node name="TileMapLayer" type="TileMapLayer" parent="."]
+tile_map_data = PackedByteArray("AAAAAAAAAAABAAEAAAD//wAAAAABAAEAAAABAAAAAAABAAEAAAAAAP//AAABAAEAAAD+/wAAAAABAAEAAAD//wEAAAABAAEAAAAAAAEAAAABAAEAAAD/////AAABAAEAAAABAAEAAAABAAEAAAD+/wEAAAABAAEAAAD+////AAABAAEAAAABAP//AAABAAEAAAAAAP7/AAABAAEAAAABAP7/AAABAAEAAAD///7/AAABAAEAAAD+//7/AAABAAEAAAD9//7/AAABAAEAAAD9/wAAAAABAAEAAAD9////AAABAAEAAAD9/wEAAAABAAEAAAD9/wIAAAABAAEAAAD+/wIAAAABAAEAAAD//wIAAAABAAEAAAAAAAIAAAABAAEAAAABAAIAAAABAAEAAAACAAIAAAABAAEAAAADAAIAAAABAAEAAAAEAAIAAAABAAEAAAADAAEAAAABAAEAAAACAAEAAAABAAEAAAAEAAEAAAABAAEAAAAEAAAAAAABAAEAAAADAAAAAAABAAEAAAACAAAAAAABAAEAAAADAP//AAABAAEAAAAEAP//AAABAAEAAAACAP//AAABAAEAAAACAP7/AAABAAEAAAADAP7/AAABAAEAAAAEAP7/AAABAAEAAAA=")
+tile_set = SubResource("TileSet_ktmmm")
