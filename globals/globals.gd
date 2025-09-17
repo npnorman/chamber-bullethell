@@ -2,10 +2,15 @@ extends Node
 
 signal stat_changed
 
-var ammo: int = 30:
+# Enums to show what names correspond to what IDs
+enum Bullets {Normal, Ricochet, Shotgun, Empty = -1}
+
+# Ammo array where a given bullet ID's ammo is shown in the index of the ID number
+var ammo: Array[int] = [30, 12, 12]:
 	get:
 		return ammo
-	set(value):
-		ammo = value
-		# This signal will be used to change the UI number in the future
-		stat_changed.emit()
+
+# 6 cylinder magazine represented by a size 6 array that is frequently being changed
+var magazine: Array[int] = [2, 0, 0, 0, 0, 0]:
+	get:
+		return magazine

@@ -1,6 +1,7 @@
 extends Area2D
 
-@export var speed: int = 1000
+@export var speed: int = 1500
+@export var bullet_id: int = 0
 var direction: Vector2 = Vector2.UP
 
 func _ready():
