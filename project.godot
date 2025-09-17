@@ -11,6 +11,7 @@ config_version=5
 [application]
 
 config/name="chamber-bullethell"
+run/main_scene="uid://cd0v14frrlgju"
 config/features=PackedStringArray("4.4", "Forward Plus")
 config/icon="res://icon.svg"
 
