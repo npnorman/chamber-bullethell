@@ -1,0 +1,79 @@
+extends CharacterBody2D
+
+var can_shoot: bool = true
+var player_direction: Vector2
+var speed: int = 150
+@export var selected_bullet_id: int = 1
+
+signal bullet_fired(pos: Vector2, direction: Vector2, id: int)
+
+func _process(_delta):
+	var movement_direction = Input.get_vector("Left", "Right", "Up", "Down")
+	velocity = movement_direction * speed
+	move_and_slide()
+	rotate_gun()
+	player_direction = (get_global_mouse_position() - position).normalized()
+	
+	# Bullet Cycling Inputs (for choosing your special ammo type, mouse wheel isn't working for me)
+	if Input.is_action_pressed("Cycle Bullet Forward"):
+		if selected_bullet_id < 2:
+			selected_bullet_id += 1
+	if Input.is_action_pressed("Cycle Bullet Backward"):
+		if selected_bullet_id > 1:
+			selected_bullet_id -= 1
+	
+	# Shoot Input
+	if Input.is_action_pressed("Shoot") and can_shoot:
+		print_bullet_name(Globals.magazine[0])
+		shoot()
+	
+	# Normal reload and Special reload inputs
+	if Input.is_action_just_pressed("Main Reload") and Globals.magazine[0] == Globals.Bullets.Empty and Globals.ammo[0] > 0:
+		reload(0)
+	elif Input.is_action_just_pressed("Secondary Reload") and Globals.magazine[0] == Globals.Bullets.Empty and Globals.ammo[selected_bullet_id] > 0:
+		reload(selected_bullet_id)
+	
+
+# This function will aim the revolver to where the mouse is and can rotate the 
+# sprite vertically depending on which direction it is facing
+func rotate_gun():
+	$GunSprite.look_at(get_global_mouse_position())
+	var rounded_rotation: int = abs($GunSprite.rotation_degrees)
+	if (rounded_rotation % 360) > 90 and (rounded_rotation % 360) < 270:
+		$GunSprite.flip_v = true
+	else:
+		$GunSprite.flip_v = false
+
+# Starts shot cooldown, sends shoot signal to level manager, rotates cylinder, updates magazine
+func shoot():
+	can_shoot = false
+	$ShootCooldown.start()
+	if Globals.magazine[0] >= 0:
+		if $GunSprite.flip_v:
+			bullet_fired.emit($GunSprite/BulletOrigin2.global_position, player_direction, Globals.magazine[0])
+		else:
+			bullet_fired.emit($GunSprite/BulletOrigin1.global_position, player_direction, Globals.magazine[0])
+		Globals.magazine[0] = Globals.Bullets.Empty
+	cycle_cylinder()
+
+# Loads in a normal or special bullet depending on what button was pressed to call this method
+func reload(id: int):
+	Globals.magazine[0] = id
+	Globals.ammo[id] -= 1
+	cycle_cylinder()
+
+# Moves every bullet in the cyclinder to the left (or right) once
+func cycle_cylinder():
+	var magazine_temp = Globals.magazine.duplicate()
+	for i in range(5):
+		Globals.magazine[i] = magazine_temp[i+1]
+	Globals.magazine[5] = magazine_temp[0]
+	print(Globals.magazine)
+		
+# Prints the name of the bullet type corresponding to the given ID
+func print_bullet_name(id: int):
+	print(Globals.Bullets.find_key(id))
+
+# Cooldown between shots
+func _on_shoot_cooldown_timeout() -> void:
+	can_shoot = true
