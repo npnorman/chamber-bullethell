@@ -12,11 +12,6 @@ colors = PackedColorArray(0, 0, 0, 1, 1, 0, 0.0166664, 1)
 [node name="Enemy" type="CharacterBody2D" node_paths=PackedStringArray("nav_agent") groups=["Enemy", "NavigationAgents"]]
 script = ExtResource("1_md0e3")
 nav_agent = NodePath("NavigationAgent2D")
-speed = 100
-
-[node name="Area2D" type="Area2D" parent="."]
-
-[node name="CollisionShape2D" type="CollisionShape2D" parent="Area2D"]
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 position = Vector2(0, -2)
@@ -37,3 +32,9 @@ color_ramp = SubResource("Gradient_lgt6d")
 texture = ExtResource("1_cpy70")
 
 [node name="NavigationAgent2D" type="NavigationAgent2D" parent="."]
+
+[node name="RerouteTimer" type="Timer" parent="."]
+wait_time = 3.0
+autostart = true
+
+[connection signal="timeout" from="RerouteTimer" to="." method="_on_reroute_timer_timeout"]

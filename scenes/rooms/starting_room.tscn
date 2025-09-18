@@ -138,4 +138,10 @@ zoom = Vector2(2, 2)
 
 [node name="HUD" parent="." instance=ExtResource("7_7e8gg")]
 
+[node name="Enemy" parent="." instance=ExtResource("2_ckyam")]
+position = Vector2(-205, -61)
+
+[node name="Enemy2" parent="." instance=ExtResource("2_ckyam")]
+position = Vector2(216, 139)
+
 [connection signal="bullet_fired" from="Player" to="." method="_on_player_bullet_fired"]
