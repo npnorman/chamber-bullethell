@@ -1,6 +1,7 @@
-[gd_scene load_steps=4 format=3 uid="uid://be3bjg0ua7h2c"]
+[gd_scene load_steps=5 format=3 uid="uid://be3bjg0ua7h2c"]
 
 [ext_resource type="Texture2D" uid="uid://ciqmgfqnlu8n3" path="res://sprites/bounty-hunter.png" id="1_cpy70"]
+[ext_resource type="Script" uid="uid://codcr8smm4onm" path="res://scripts/enemy.gd" id="1_md0e3"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_32hc7"]
 size = Vector2(35, 69)
@@ -8,7 +9,14 @@ size = Vector2(35, 69)
 [sub_resource type="Gradient" id="Gradient_lgt6d"]
 colors = PackedColorArray(0, 0, 0, 1, 1, 0, 0.0166664, 1)
 
-[node name="Enemy" type="CharacterBody2D"]
+[node name="Enemy" type="CharacterBody2D" node_paths=PackedStringArray("nav_agent") groups=["Enemy", "NavigationAgents"]]
+script = ExtResource("1_md0e3")
+nav_agent = NodePath("NavigationAgent2D")
+speed = 100
+
+[node name="Area2D" type="Area2D" parent="."]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Area2D"]
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 position = Vector2(0, -2)
@@ -27,3 +35,5 @@ color_ramp = SubResource("Gradient_lgt6d")
 
 [node name="Sprite2D" type="Sprite2D" parent="."]
 texture = ExtResource("1_cpy70")
+
+[node name="NavigationAgent2D" type="NavigationAgent2D" parent="."]
