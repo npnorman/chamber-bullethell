@@ -1,8 +1,56 @@
-[gd_scene load_steps=5 format=3 uid="uid://ckx3iy06eedai"]
+[gd_scene load_steps=11 format=3 uid="uid://ckx3iy06eedai"]
 
-[ext_resource type="Texture2D" uid="uid://b0152m3fe4sh2" path="res://icon.svg" id="1_3vyb7"]
 [ext_resource type="Script" uid="uid://defl6cxtq7gxe" path="res://scenes/player/player.gd" id="1_g2els"]
+[ext_resource type="Texture2D" uid="uid://c6ctxmnkckhvd" path="res://sprites/player/player-sheet.png" id="2_gmlin"]
 [ext_resource type="Texture2D" uid="uid://vx50mifkm2vd" path="res://sprites/test_revolver.png" id="3_qhqgy"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_lvxji"]
+atlas = ExtResource("2_gmlin")
+region = Rect2(32, 0, 32, 64)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_p47bc"]
+atlas = ExtResource("2_gmlin")
+region = Rect2(0, 0, 32, 64)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_75vfm"]
+atlas = ExtResource("2_gmlin")
+region = Rect2(32, 0, 32, 64)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_0owmy"]
+atlas = ExtResource("2_gmlin")
+region = Rect2(64, 0, 32, 64)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_qek5x"]
+atlas = ExtResource("2_gmlin")
+region = Rect2(96, 0, 32, 64)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_5gtgg"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_lvxji")
+}],
+"loop": true,
+"name": &"idle",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_p47bc")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_75vfm")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_0owmy")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_qek5x")
+}],
+"loop": true,
+"name": &"walk",
+"speed": 5.0
+}]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_qhqgy"]
 size = Vector2(30, 30)
@@ -10,12 +58,14 @@ size = Vector2(30, 30)
 [node name="Player" type="CharacterBody2D" groups=["Player"]]
 script = ExtResource("1_g2els")
 
-[node name="PlayerSprite" type="Sprite2D" parent="."]
-position = Vector2(-7.62939e-06, 0)
-scale = Vector2(0.242188, 0.242188)
-texture = ExtResource("1_3vyb7")
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
+sprite_frames = SubResource("SpriteFrames_5gtgg")
+animation = &"walk"
+autoplay = "idle"
+frame_progress = 0.752861
 
 [node name="GunSprite" type="Sprite2D" parent="."]
+position = Vector2(3, 8)
 texture = ExtResource("3_qhqgy")
 
 [node name="BulletOrigin1" type="Marker2D" parent="GunSprite"]

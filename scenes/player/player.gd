@@ -5,6 +5,9 @@ var player_direction: Vector2
 var speed: int = 150
 @export var selected_bullet_id: int = 1
 
+# onready variables
+@onready var animated_sprite_2d: AnimatedSprite2D = $AnimatedSprite2D
+
 signal bullet_fired(pos: Vector2, direction: Vector2, id: int)
 
 func _process(_delta):
@@ -33,6 +36,21 @@ func _process(_delta):
 	elif Input.is_action_just_pressed("Secondary Reload") and Globals.magazine[0] == Globals.Bullets.Empty and Globals.ammo[selected_bullet_id] > 0:
 		reload(selected_bullet_id)
 	
+	# Animations
+	if Input.is_action_pressed("Down"):
+		animated_sprite_2d.play("walk")
+	
+	elif Input.is_action_pressed("Up"):
+		animated_sprite_2d.play("idle")
+		
+	elif Input.is_action_pressed("Right"):
+		pass
+		
+	elif Input.is_action_pressed("Left"):
+		pass
+	
+	else:
+		animated_sprite_2d.play("idle")
 
 # This function will aim the revolver to where the mouse is and can rotate the 
 # sprite vertically depending on which direction it is facing
