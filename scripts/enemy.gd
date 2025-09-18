@@ -1,10 +1,13 @@
 extends CharacterBody2D
 
 var target:CharacterBody2D
-@export var nav_agent:NavigationAgent2D
-@export var speed:float = 300.0
-@export var health:int = 2
-@export var distance_from_player:float = 100
+@export var speed : float = 300.0
+@export var health : int = 2
+@export var distance_from_player : float = 100
+
+@onready var sprite: Sprite2D = $Sprite2D
+@onready var nav_agent: NavigationAgent2D = $NavigationAgent2D
+@onready var animation_player: AnimationPlayer = $AnimationPlayer
 
 var is_moving:bool = true
 var last_static_position:Vector2
@@ -47,10 +50,12 @@ func take_damage(damage:int):
 	health -= damage
 	if health <= 0:
 		enemy_die()
+	else:
+		animation_player.play("color_red")
 
 func enemy_die():
 	# or dead body
-	self.queue_free()
+	animation_player.play("death")
 
 func _on_reroute_timer_timeout() -> void:
 	# reroute navagent
