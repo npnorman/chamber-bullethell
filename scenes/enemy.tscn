@@ -1,7 +1,8 @@
-[gd_scene load_steps=10 format=3 uid="uid://be3bjg0ua7h2c"]
+[gd_scene load_steps=11 format=3 uid="uid://be3bjg0ua7h2c"]
 
 [ext_resource type="Texture2D" uid="uid://ciqmgfqnlu8n3" path="res://sprites/bounty-hunter.png" id="1_cpy70"]
 [ext_resource type="Script" uid="uid://codcr8smm4onm" path="res://scripts/enemy.gd" id="1_md0e3"]
+[ext_resource type="PackedScene" uid="uid://driwak3eok3gy" path="res://scenes/player/bullets/player-bullet.tscn" id="2_4ra3w"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_32hc7"]
 size = Vector2(35, 69)
@@ -11,21 +12,6 @@ colors = PackedColorArray(0, 0, 0, 1, 1, 0, 0.0166664, 1)
 
 [sub_resource type="Gradient" id="Gradient_md0e3"]
 colors = PackedColorArray(0.734561, 3.66756e-05, 0.152641, 1, 0.265568, 0, 0.0435677, 1)
-
-[sub_resource type="Animation" id="Animation_md0e3"]
-resource_name = "color_red"
-tracks/0/type = "value"
-tracks/0/imported = false
-tracks/0/enabled = true
-tracks/0/path = NodePath("Sprite2D:modulate")
-tracks/0/interp = 1
-tracks/0/loop_wrap = true
-tracks/0/keys = {
-"times": PackedFloat32Array(0, 0.1, 0.2),
-"transitions": PackedFloat32Array(1, 1, 1),
-"update": 0,
-"values": [Color(1, 1, 1, 1), Color(0.91615, 0, 0.137719, 1), Color(1, 1, 1, 1)]
-}
 
 [sub_resource type="Animation" id="Animation_4ra3w"]
 length = 0.001
@@ -88,6 +74,21 @@ tracks/4/keys = {
 "transitions": PackedFloat32Array(1),
 "update": 1,
 "values": [false]
+}
+
+[sub_resource type="Animation" id="Animation_md0e3"]
+resource_name = "color_red"
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Sprite2D:modulate")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.1, 0.2),
+"transitions": PackedFloat32Array(1, 1, 1),
+"update": 0,
+"values": [Color(1, 1, 1, 1), Color(0.91615, 0, 0.137719, 1), Color(1, 1, 1, 1)]
 }
 
 [sub_resource type="Animation" id="Animation_5uy6h"]
@@ -164,6 +165,7 @@ _data = {
 
 [node name="Enemy" type="CharacterBody2D" groups=["Enemy", "NavigationAgents"]]
 script = ExtResource("1_md0e3")
+bulletScene = ExtResource("2_4ra3w")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 position = Vector2(0, -2)

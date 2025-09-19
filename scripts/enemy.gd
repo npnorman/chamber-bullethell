@@ -3,19 +3,26 @@ extends CharacterBody2D
 var target:CharacterBody2D
 @export var speed : float = 300.0
 @export var health : int = 2
+@export var bulletDamage: int = 1
+@export var bulletSpeed : float = 300.0
 @export var distance_from_player : float = 100
+@export var bulletScene:PackedScene
 
 @onready var sprite: Sprite2D = $Sprite2D
 @onready var nav_agent: NavigationAgent2D = $NavigationAgent2D
 @onready var animation_player: AnimationPlayer = $AnimationPlayer
+@onready var reroute_timer: Timer = $RerouteTimer
 
 var is_moving:bool = true
 var last_static_position:Vector2
 var is_wiggle_room_set = true
 var wiggle_room:float = 1.0
+var wait_time:float = 3.0
 
 func _ready() -> void:
 	target = get_tree().get_nodes_in_group("Player")[0]
+	reroute_timer.wait_time = wait_time
+	decide_nav_route()
 
 func _physics_process(delta: float) -> void:
 	
@@ -57,7 +64,27 @@ func enemy_die():
 	# or dead body
 	animation_player.play("death")
 
+func shoot():
+	var newBullet:Area2D = bulletScene.instantiate()
+	
+	newBullet.get_node("Sprite2D").modulate = Color("green")
+	newBullet.damage = bulletDamage
+	newBullet.speed = bulletSpeed
+	newBullet.isEnemyBullet = true
+	newBullet.global_position = global_position
+	newBullet.direction = global_position.direction_to(target.global_position)
+	newBullet.rotation = global_position.angle_to_point(target.global_position) + deg_to_rad(90.0)
+	
+	get_parent().add_child(newBullet)
+
 func _on_reroute_timer_timeout() -> void:
 	# reroute navagent
 	# stops jittering
+	shoot()
 	decide_nav_route()
+	
+	# random
+	var times = [-2,2]
+	var rng = RandomNumberGenerator.new()
+	var wiggle = times[rng.randi_range(0,times.size()-1)]
+	reroute_timer.wait_time = wait_time + wiggle
