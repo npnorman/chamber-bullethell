@@ -74,6 +74,10 @@ func cycle_cylinder():
 func print_bullet_name(id: int):
 	print(Globals.Bullets.find_key(id))
 
+func take_damage():
+	#fill this out
+	pass
+
 # Cooldown between shots
 func _on_shoot_cooldown_timeout() -> void:
 	can_shoot = true
