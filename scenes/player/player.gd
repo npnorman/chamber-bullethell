@@ -92,7 +92,7 @@ func cycle_cylinder():
 func print_bullet_name(id: int):
 	print(Globals.Bullets.find_key(id))
 
-func take_damage():
+func take_damage(damage):
 	#fill this out
 	pass
 
