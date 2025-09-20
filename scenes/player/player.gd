@@ -1,8 +1,11 @@
 extends CharacterBody2D
 
 var can_shoot: bool = true
-var player_direction: Vector2
-var speed: int = 150
+var is_invincible: bool = false
+var player_knockback: Vector2
+@export var player_direction: Vector2
+@export var speed: int = 150
+@export var health: int = 6
 @export var selected_bullet_id: int = 1
 
 # onready variables
@@ -12,7 +15,9 @@ signal bullet_fired(pos: Vector2, direction: Vector2, id: int)
 
 func _process(_delta):
 	var movement_direction = Input.get_vector("Left", "Right", "Up", "Down")
-	velocity = movement_direction * speed
+	velocity = movement_direction * speed + player_knockback
+	if player_knockback.length() > 0:
+		player_knockback = player_knockback * 0.9
 	move_and_slide()
 	rotate_gun()
 	player_direction = (get_global_mouse_position() - position).normalized()
@@ -71,6 +76,7 @@ func shoot():
 			bullet_fired.emit($GunSprite/BulletOrigin2.global_position, player_direction, Globals.magazine[0])
 		else:
 			bullet_fired.emit($GunSprite/BulletOrigin1.global_position, player_direction, Globals.magazine[0])
+		add_shot_knockback(Globals.magazine[0])
 		Globals.magazine[0] = Globals.Bullets.Empty
 	cycle_cylinder()
 
@@ -92,10 +98,22 @@ func cycle_cylinder():
 func print_bullet_name(id: int):
 	print(Globals.Bullets.find_key(id))
 
+# Adds knockback to player from shooting. Can be reworked later to change for different bullets
+func add_shot_knockback(bullet_id: int):
+	if bullet_id == Globals.Bullets.Shotgun:
+		player_knockback = (player_direction * -1) * 1000
+
+# Takes 1 health from the player, currently starts with 6 total
 func take_damage(damage):
-	#fill this out
-	pass
+	if not is_invincible:
+		health -= damage
+		is_invincible = true
+		$IFrames.start()
 
 # Cooldown between shots
 func _on_shoot_cooldown_timeout() -> void:
 	can_shoot = true
+
+# Invincibility timer after taking damage
+func _on_i_frames_timeout() -> void:
+	is_invincible = false

@@ -1,4 +1,4 @@
-[gd_scene load_steps=12 format=4 uid="uid://cd0v14frrlgju"]
+[gd_scene load_steps=14 format=4 uid="uid://cd0v14frrlgju"]
 
 [ext_resource type="Texture2D" uid="uid://bu1pm22omtv21" path="res://sprites/tiles/test-tiles.png" id="1_tvp71"]
 [ext_resource type="Script" uid="uid://dhhfbfplukf3b" path="res://scenes/rooms/test_level.gd" id="1_u75bg"]
@@ -100,6 +100,12 @@ texture_region_size = Vector2i(32, 32)
 tile_size = Vector2i(32, 32)
 sources/0 = SubResource("TileSetAtlasSource_7xo3q")
 
+[sub_resource type="PlaceholderTexture2D" id="PlaceholderTexture2D_02uo2"]
+size = Vector2(20, 100)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_7e8gg"]
+size = Vector2(20, 100)
+
 [node name="Starting Room" type="Node2D"]
 script = ExtResource("1_u75bg")
 
@@ -143,5 +149,14 @@ position = Vector2(-205, -61)
 
 [node name="Enemy2" parent="." instance=ExtResource("2_ckyam")]
 position = Vector2(216, 139)
+
+[node name="TestWall" type="StaticBody2D" parent="."]
+position = Vector2(-400, 0)
+
+[node name="Sprite2D" type="Sprite2D" parent="TestWall"]
+texture = SubResource("PlaceholderTexture2D_02uo2")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="TestWall"]
+shape = SubResource("RectangleShape2D_7e8gg")
 
 [connection signal="bullet_fired" from="Player" to="." method="_on_player_bullet_fired"]
