@@ -1,3 +1,65 @@
-[gd_scene format=3 uid="uid://chtu6kuwhxen6"]
+[gd_scene load_steps=5 format=3 uid="uid://chtu6kuwhxen6"]
+
+[ext_resource type="Script" uid="uid://cxl6hj6ji3sd2" path="res://scenes/UI/hud.gd" id="1_rd3kb"]
+[ext_resource type="Texture2D" uid="uid://bw4tu7hye1h12" path="res://sprites/chamber_hud.png" id="2_y5tme"]
+
+[sub_resource type="Animation" id="Animation_18exe"]
+resource_name = "rotate_cylinder"
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("CylinderNode/CylinderContainer/CylinderTexture:rotation")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(),
+"transitions": PackedFloat32Array(),
+"update": 0,
+"values": []
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_0jeyp"]
+_data = {
+&"rotate_cylinder": SubResource("Animation_18exe")
+}
 
 [node name="HUD" type="CanvasLayer"]
+script = ExtResource("1_rd3kb")
+
+[node name="CylinderNode" type="Control" parent="."]
+layout_mode = 3
+anchors_preset = 7
+anchor_left = 0.5
+anchor_top = 1.0
+anchor_right = 0.5
+anchor_bottom = 1.0
+offset_left = -125.0
+offset_top = -250.0
+offset_right = 125.0
+grow_horizontal = 2
+grow_vertical = 0
+
+[node name="CylinderContainer" type="VBoxContainer" parent="CylinderNode"]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -125.0
+offset_top = -125.0
+offset_right = 125.0
+offset_bottom = 125.0
+grow_horizontal = 2
+grow_vertical = 2
+pivot_offset = Vector2(125, 125)
+
+[node name="CylinderTexture" type="TextureRect" parent="CylinderNode/CylinderContainer"]
+layout_mode = 2
+size_flags_vertical = 3
+texture = ExtResource("2_y5tme")
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="."]
+libraries = {
+&"": SubResource("AnimationLibrary_0jeyp")
+}

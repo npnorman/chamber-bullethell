@@ -3,6 +3,9 @@ class_name LevelParent
 
 var bullet_scene: PackedScene = preload("res://scenes/player/bullets/player-bullet.tscn")
 
+func _on_player_cylinder_cycled() -> void:
+	$HUD.start_rotating()
+
 func _on_player_bullet_fired(pos, dir, id):
 	
 	match id:

@@ -1,6 +1,7 @@
 extends CharacterBody2D
 
 var can_shoot: bool = true
+var can_reload: bool = true
 var is_invincible: bool = false
 var player_knockback: Vector2
 @export var player_direction: Vector2
@@ -10,8 +11,10 @@ var player_knockback: Vector2
 
 # onready variables
 @onready var animated_sprite_2d: AnimatedSprite2D = $AnimatedSprite2D
+@onready var gun_sprite: Sprite2D = $GunSprite
 
 signal bullet_fired(pos: Vector2, direction: Vector2, id: int)
+signal cylinder_cycled
 
 func _process(_delta):
 	var movement_direction = Input.get_vector("Left", "Right", "Up", "Down")
@@ -60,19 +63,19 @@ func _process(_delta):
 # This function will aim the revolver to where the mouse is and can rotate the 
 # sprite vertically depending on which direction it is facing
 func rotate_gun():
-	$GunSprite.look_at(get_global_mouse_position())
-	var rounded_rotation: int = abs($GunSprite.rotation_degrees)
+	gun_sprite.look_at(get_global_mouse_position())
+	var rounded_rotation: int = abs(gun_sprite.rotation_degrees)
 	if (rounded_rotation % 360) > 90 and (rounded_rotation % 360) < 270:
-		$GunSprite.flip_v = true
+		gun_sprite.flip_v = true
 	else:
-		$GunSprite.flip_v = false
+		gun_sprite.flip_v = false
 
 # Starts shot cooldown, sends shoot signal to level manager, rotates cylinder, updates magazine
 func shoot():
 	can_shoot = false
 	$ShootCooldown.start()
 	if Globals.magazine[0] >= 0:
-		if $GunSprite.flip_v:
+		if gun_sprite.flip_v:
 			bullet_fired.emit($GunSprite/BulletOrigin2.global_position, player_direction, Globals.magazine[0])
 		else:
 			bullet_fired.emit($GunSprite/BulletOrigin1.global_position, player_direction, Globals.magazine[0])
@@ -85,6 +88,8 @@ func reload(id: int):
 	Globals.magazine[0] = id
 	Globals.ammo[id] -= 1
 	cycle_cylinder()
+	can_reload = false
+	$ReloadCooldown.start()
 
 # Moves every bullet in the cyclinder to the left (or right) once
 func cycle_cylinder():
@@ -92,6 +97,7 @@ func cycle_cylinder():
 	for i in range(5):
 		Globals.magazine[i] = magazine_temp[i+1]
 	Globals.magazine[5] = magazine_temp[0]
+	cylinder_cycled.emit()
 	print(Globals.magazine)
 		
 # Prints the name of the bullet type corresponding to the given ID
@@ -121,3 +127,6 @@ func _on_shoot_cooldown_timeout() -> void:
 # Invincibility timer after taking damage
 func _on_i_frames_timeout() -> void:
 	is_invincible = false
+
+func _on_reload_cooldown_timeout() -> void:
+	can_reload = true
