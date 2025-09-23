@@ -70,7 +70,6 @@ func shoot():
 	newBullet.get_node("Sprite2D").modulate = Color("green")
 	newBullet.damage = bulletDamage
 	newBullet.speed = bulletSpeed
-	newBullet.isEnemyBullet = true
 	newBullet.global_position = global_position
 	newBullet.direction = global_position.direction_to(target.global_position)
 	newBullet.rotation = global_position.angle_to_point(target.global_position) + deg_to_rad(90.0)

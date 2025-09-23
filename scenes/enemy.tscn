@@ -2,7 +2,7 @@
 
 [ext_resource type="Texture2D" uid="uid://ciqmgfqnlu8n3" path="res://sprites/bounty-hunter.png" id="1_cpy70"]
 [ext_resource type="Script" uid="uid://codcr8smm4onm" path="res://scripts/enemy.gd" id="1_md0e3"]
-[ext_resource type="PackedScene" uid="uid://driwak3eok3gy" path="res://scenes/player/bullets/player-bullet.tscn" id="2_4ra3w"]
+[ext_resource type="PackedScene" uid="uid://bivpy44qgcvdq" path="res://scenes/player/bullets/enemy-bullet.tscn" id="2_4ra3w"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_32hc7"]
 size = Vector2(35, 69)
@@ -164,6 +164,8 @@ _data = {
 }
 
 [node name="Enemy" type="CharacterBody2D" groups=["Enemy", "NavigationAgents"]]
+collision_layer = 4
+collision_mask = 11
 script = ExtResource("1_md0e3")
 bulletScene = ExtResource("2_4ra3w")
 

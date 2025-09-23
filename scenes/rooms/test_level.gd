@@ -21,6 +21,7 @@ func _on_player_bullet_fired(pos, dir, id):
 			bullet.position = pos
 			bullet.rotation_degrees = rad_to_deg(dir.angle()) + 90
 			bullet.direction = dir
+			bullet.ricochets = 1
 			bullet.bullet_id = Globals.Bullets.Ricochet
 			$Projectiles.add_child(bullet)
 			
