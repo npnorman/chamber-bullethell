@@ -4,7 +4,6 @@ extends Area2D
 @export var damage: int = 1
 @export var bullet_id: int = 0
 @export var ricochets: int = 0
-var isEnemyBullet:bool = false
 var direction: Vector2 = Vector2.UP
 var collision_normal: Vector2
 
@@ -22,13 +21,13 @@ func _on_despawn_timer_timeout() -> void:
 	self.queue_free()
 
 func _on_body_entered(body: Node2D) -> void:
-	if body.is_in_group("Enemy") and !isEnemyBullet:
+	if body.is_in_group("Enemy"):
 		if body.has_method("take_damage"):
 			body.take_damage(damage)
 		
 		self.queue_free()
 		
-	elif body.is_in_group("Player") and isEnemyBullet:
+	elif body.is_in_group("Player"):
 		print("Enemy Hit Player")
 		if body.has_method("take_damage"):
 			body.take_damage(damage)

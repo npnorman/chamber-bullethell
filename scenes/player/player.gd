@@ -109,6 +109,10 @@ func take_damage(damage):
 		health -= damage
 		is_invincible = true
 		$IFrames.start()
+		
+func player_die():
+	# For now may just have a similar particle effect to enemy and a game over text
+	pass
 
 # Cooldown between shots
 func _on_shoot_cooldown_timeout() -> void:
