@@ -28,11 +28,13 @@ func _process(_delta):
 	
 	# Bullet Cycling Inputs (for choosing your special ammo type, mouse wheel isn't working for me)
 	if Input.is_action_pressed("Cycle Bullet Forward"):
-		if selected_bullet_id < 2:
-			selected_bullet_id += 1
+		#if selected_bullet_id < 2:
+			#selected_bullet_id += 1
+		reload(2)
 	if Input.is_action_pressed("Cycle Bullet Backward"):
-		if selected_bullet_id > 1:
-			selected_bullet_id -= 1
+		#if selected_bullet_id > 1:
+			#selected_bullet_id -= 1
+		reload(1)
 	
 	# Shoot Input
 	if Input.is_action_pressed("Shoot") and can_shoot:
@@ -42,8 +44,8 @@ func _process(_delta):
 	# Normal reload and Special reload inputs
 	if Input.is_action_just_pressed("Main Reload") and Globals.magazine[active_bullet_pos] == Globals.Bullets.Empty and Globals.ammo[0] > 0:
 		reload(0)
-	elif Input.is_action_just_pressed("Secondary Reload") and Globals.magazine[active_bullet_pos] == Globals.Bullets.Empty and Globals.ammo[selected_bullet_id] > 0:
-		reload(selected_bullet_id)
+	#elif Input.is_action_just_pressed("Secondary Reload") and Globals.magazine[active_bullet_pos] == Globals.Bullets.Empty and Globals.ammo[selected_bullet_id] > 0:
+		#reload(selected_bullet_id)
 	
 	# Animations
 	if Input.is_action_pressed("Down"):

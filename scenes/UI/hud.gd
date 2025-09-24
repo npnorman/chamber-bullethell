@@ -25,7 +25,6 @@ func update_chamber_textures():
 	for texture: TextureRect in chamber_array:
 		if Globals.magazine[index] >= 0:
 			texture.texture = bullet_textures[Globals.magazine[index]]
-			print(Globals.magazine[index])
 			texture.visible = true
 		else:
 			texture.visible = false
