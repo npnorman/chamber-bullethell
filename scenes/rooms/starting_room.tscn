@@ -160,3 +160,4 @@ texture = SubResource("PlaceholderTexture2D_02uo2")
 shape = SubResource("RectangleShape2D_7e8gg")
 
 [connection signal="bullet_fired" from="Player" to="." method="_on_player_bullet_fired"]
+[connection signal="cylinder_cycled" from="Player" to="." method="_on_player_cylinder_cycled"]
