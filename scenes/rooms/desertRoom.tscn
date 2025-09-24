@@ -1,8 +1,8 @@
 [gd_scene load_steps=8 format=4 uid="uid://c6katb16pstce"]
 
-[ext_resource type="Texture2D" uid="uid://8ml14yh2dh84" path="res://tilesets/desertTest.png" id="1_uthck"]
+[ext_resource type="Texture2D" uid="uid://8ml14yh2dh84" path="res://tilesets/desertTiles.png" id="1_uthck"]
 [ext_resource type="Texture2D" uid="uid://ciqmgfqnlu8n3" path="res://sprites/bounty-hunter.png" id="2_uthck"]
-[ext_resource type="Texture2D" uid="uid://cukjiygq3y73c" path="res://tilesets/cactusSample.png" id="3_ktmmm"]
+[ext_resource type="Texture2D" uid="uid://cukjiygq3y73c" path="res://tilesets/cactus.png" id="3_ktmmm"]
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_wm02h"]
 texture = ExtResource("1_uthck")

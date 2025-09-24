@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://cukjiygq3y73c"
-path="res://.godot/imported/cactusSample.png-beeccd53d4f5849ad7a9a66f55e8b8b6.ctex"
+uid="uid://b5l7w2s3y1apx"
+path="res://.godot/imported/hellTiles.png-c23f55439dbd93b486e6f0138eb02d2b.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://tilesets/cactusSample.png"
-dest_files=["res://.godot/imported/cactusSample.png-beeccd53d4f5849ad7a9a66f55e8b8b6.ctex"]
+source_file="res://tilesets/hellTiles.png"
+dest_files=["res://.godot/imported/hellTiles.png-c23f55439dbd93b486e6f0138eb02d2b.ctex"]
 
 [params]
 

@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://b5l7w2s3y1apx"
-path="res://.godot/imported/hellTileTEST.png-1d56512eaf347451979d916e14378de8.ctex"
+uid="uid://8ml14yh2dh84"
+path="res://.godot/imported/desertTiles.png-4671470cdc7979608870c939f27da7df.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://tilesets/hellTileTEST.png"
-dest_files=["res://.godot/imported/hellTileTEST.png-1d56512eaf347451979d916e14378de8.ctex"]
+source_file="res://tilesets/desertTiles.png"
+dest_files=["res://.godot/imported/desertTiles.png-4671470cdc7979608870c939f27da7df.ctex"]
 
 [params]
 
