@@ -5,8 +5,8 @@ extends CanvasLayer
 @onready var ricochet_back: Resource = preload("res://sprites/ricochet_back.png")
 @onready var shotgun_back: Resource = preload("res://sprites/shotgun_back.png")
 @onready var chamber_array: Array[TextureRect] = [$CylinderNode/Chamber1/BulletTexture1, $CylinderNode/Chamber2/BulletTexture2, $CylinderNode/Chamber3/BulletTexture3, $CylinderNode/Chamber4/BulletTexture4, $CylinderNode/Chamber5/BulletTexture5, $CylinderNode/Chamber6/BulletTexture6]
-
 @onready var bullet_textures: Array[Resource] = [basic_back, ricochet_back, shotgun_back]
+@onready var ammo_counters: Array[Label] = [$SpecialBullets/BasicAmmo, $SpecialBullets/RicochetAmmo, $SpecialBullets/ShotgunAmmo]
 
 func _ready():
 	update_chamber_textures()
@@ -17,9 +17,11 @@ func _process(_delta):
 		if roundi($CylinderNode.rotation_degrees) % 60 == 0:
 			is_rotating = false
 
+# Rotates cylinder after receiving signal from level script
 func start_rotating():
 	is_rotating = true
 
+# 
 func update_chamber_textures():
 	var index: int = 0
 	for texture: TextureRect in chamber_array:
@@ -28,4 +30,8 @@ func update_chamber_textures():
 			texture.visible = true
 		else:
 			texture.visible = false
+		index += 1
+	index = 0
+	for counter: Label in ammo_counters:
+		counter.text = str(Globals.ammo[index])
 		index += 1

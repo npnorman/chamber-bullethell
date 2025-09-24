@@ -3,6 +3,7 @@ class_name LevelParent
 
 var bullet_scene: PackedScene = preload("res://scenes/player/bullets/player-bullet.tscn")
 
+# Adjust HUD when cylinder changes
 func _on_player_cylinder_cycled() -> void:
 	$HUD.start_rotating()
 	$HUD.update_chamber_textures()
