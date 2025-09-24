@@ -85,11 +85,12 @@ func shoot():
 
 # Loads in a normal or special bullet depending on what button was pressed to call this method
 func reload(id: int):
-	Globals.magazine[0] = id
-	Globals.ammo[id] -= 1
-	cycle_cylinder()
-	can_reload = false
-	$ReloadCooldown.start()
+	if can_reload:
+		Globals.magazine[0] = id
+		Globals.ammo[id] -= 1
+		cycle_cylinder()
+		can_reload = false
+		$ReloadCooldown.start()
 
 # Moves every bullet in the cyclinder to the left (or right) once
 func cycle_cylinder():

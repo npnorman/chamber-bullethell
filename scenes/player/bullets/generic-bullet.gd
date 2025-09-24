@@ -35,7 +35,6 @@ func _on_body_entered(body: Node2D) -> void:
 		self.queue_free()
 		
 	elif ricochets > 0:
-		print(collision_normal)
 		self.direction = direction.bounce(collision_normal).normalized()
 		self.rotation_degrees = rad_to_deg(self.direction.angle()) + 90
 		ricochets -= 1
