@@ -63,7 +63,7 @@ func take_damage(damage:int):
 
 func enemy_die():
 	# or dead body
-	animated_sprite_2d.play("deathr")
+	animated_sprite_2d.play("death")
 	animation_player.play("death")
 
 func shoot():
