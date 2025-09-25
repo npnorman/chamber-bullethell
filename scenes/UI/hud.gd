@@ -8,6 +8,8 @@ extends CanvasLayer
 @onready var bullet_textures: Array[Resource] = [basic_back, ricochet_back, shotgun_back]
 @onready var ammo_counters: Array[Label] = [$SpecialBullets/BasicAmmo, $SpecialBullets/RicochetAmmo, $SpecialBullets/ShotgunAmmo]
 
+signal rotation_completed
+
 func _ready():
 	update_chamber_textures()
 
@@ -16,11 +18,11 @@ func _process(_delta):
 		$CylinderNode.rotation_degrees += 5
 		if roundi($CylinderNode.rotation_degrees) % 60 == 0:
 			is_rotating = false
+			rotation_completed.emit()
 
 # Rotates cylinder after receiving signal from level script
 func start_rotating():
 	is_rotating = true
-
 # 
 func update_chamber_textures():
 	var index: int = 0

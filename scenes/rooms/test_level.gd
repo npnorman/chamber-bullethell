@@ -1,5 +1,5 @@
 extends Node2D
-class_name LevelParent
+class_name LevelContainer
 
 var bullet_scene: PackedScene = preload("res://scenes/player/bullets/player-bullet.tscn")
 
@@ -7,6 +7,9 @@ var bullet_scene: PackedScene = preload("res://scenes/player/bullets/player-bull
 func _on_player_cylinder_cycled() -> void:
 	$HUD.start_rotating()
 	$HUD.update_chamber_textures()
+
+func _on_hud_rotation_completed() -> void:
+	$Player.can_reload = true
 
 func _on_player_bullet_fired(pos, dir, id):
 	
@@ -37,6 +40,7 @@ func _on_player_bullet_fired(pos, dir, id):
 				bullet.position = pos
 				bullet.bullet_id = Globals.Bullets.Shotgun
 				bullet.speed = 750
+				bullet.damage = 3
 				var new_angle = dir.angle() + randf_range(-0.5, 0.5)
 				bullet.rotation_degrees = rad_to_deg(new_angle) + 90
 				bullet.direction = Vector2(cos(new_angle), sin(new_angle))

@@ -1,14 +1,17 @@
 extends CharacterBody2D
 
 var can_shoot: bool = true
-var can_reload: bool = true
+var can_blank: bool = true
 var is_invincible: bool = false
 var player_knockback: Vector2
 var active_bullet_pos: int = 0
+@export var can_reload: bool = true
 @export var player_direction: Vector2
 @export var speed: int = 150
 @export var health: int = 6
-@export var selected_bullet_id: int = 1
+@export var special_bullet_1: int = 1
+@export var special_bullet_2: int = 2
+@export var special_bullet_3: int = -1
 
 # onready variables
 @onready var animated_sprite_2d: AnimatedSprite2D = $AnimatedSprite2D
@@ -21,31 +24,30 @@ func _process(_delta):
 	var movement_direction = Input.get_vector("Left", "Right", "Up", "Down")
 	velocity = movement_direction * speed + player_knockback
 	if player_knockback.length() > 0:
-		player_knockback = player_knockback * 0.9
+		player_knockback = player_knockback.move_toward(Vector2.ZERO, _delta * 10000)
 	move_and_slide()
 	rotate_gun()
 	player_direction = (get_global_mouse_position() - position).normalized()
-	
-	# Bullet Cycling Inputs (for choosing your special ammo type, mouse wheel isn't working for me)
-	if Input.is_action_pressed("Cycle Bullet Forward"):
-		#if selected_bullet_id < 2:
-			#selected_bullet_id += 1
-		reload(2)
-	if Input.is_action_pressed("Cycle Bullet Backward"):
-		#if selected_bullet_id > 1:
-			#selected_bullet_id -= 1
-		reload(1)
 	
 	# Shoot Input
 	if Input.is_action_pressed("Shoot") and can_shoot:
 		print_bullet_name(Globals.magazine[active_bullet_pos])
 		shoot()
 	
+	if Input.is_action_pressed("Blank") and can_blank:
+		add_shot_knockback(Globals.Bullets.Shotgun, 1500)
+		can_blank = false
+		$BlankCooldown.start()
+	
 	# Normal reload and Special reload inputs
 	if Input.is_action_just_pressed("Main Reload") and Globals.magazine[active_bullet_pos] == Globals.Bullets.Empty and Globals.ammo[0] > 0:
 		reload(0)
-	#elif Input.is_action_just_pressed("Secondary Reload") and Globals.magazine[active_bullet_pos] == Globals.Bullets.Empty and Globals.ammo[selected_bullet_id] > 0:
-		#reload(selected_bullet_id)
+	if Input.is_action_just_pressed("Special Reload 1") and Globals.magazine[active_bullet_pos] == Globals.Bullets.Empty and Globals.ammo[special_bullet_1] > 0:
+		reload(special_bullet_1)
+	if Input.is_action_just_pressed("Special Reload 2") and Globals.magazine[active_bullet_pos] == Globals.Bullets.Empty and Globals.ammo[special_bullet_2] > 0:
+		reload(special_bullet_2)
+	if Input.is_action_just_pressed("Special Reload 3") and Globals.magazine[active_bullet_pos] == Globals.Bullets.Empty and Globals.ammo[special_bullet_3] > 0:
+		reload(special_bullet_3)
 	
 	# Animations
 	if Input.is_action_pressed("Down"):
@@ -59,7 +61,7 @@ func _process(_delta):
 		
 	elif Input.is_action_pressed("Left"):
 		pass
-	
+
 	else:
 		animated_sprite_2d.play("idle")
 
@@ -88,12 +90,11 @@ func shoot():
 
 # Loads in a normal or special bullet depending on what button was pressed to call this method
 func reload(id: int):
-	if can_reload:
+	if can_reload and id != -1:
 		Globals.magazine[active_bullet_pos] = id
 		Globals.ammo[id] -= 1
 		cycle_cylinder()
 		can_reload = false
-		$ReloadCooldown.start()
 
 # Moves every bullet in the cyclinder to the left (or right) once
 func cycle_cylinder():
@@ -101,21 +102,16 @@ func cycle_cylinder():
 		active_bullet_pos += 1
 	else:
 		active_bullet_pos = 0
-	#var magazine_temp = Globals.magazine.duplicate()
-	#for i in range(5):
-		#Globals.magazine[i] = magazine_temp[i+1]
-	#Globals.magazine[5] = magazine_temp[0]
 	cylinder_cycled.emit()
-	print(Globals.magazine)
 		
 # Prints the name of the bullet type corresponding to the given ID
 func print_bullet_name(id: int):
 	print(Globals.Bullets.find_key(id))
 
 # Adds knockback to player from shooting. Can be reworked later to change for different bullets
-func add_shot_knockback(bullet_id: int):
+func add_shot_knockback(bullet_id: int = 0, knockback_amount = 1000):
 	if bullet_id == Globals.Bullets.Shotgun:
-		player_knockback = (player_direction * -1) * 1000
+		player_knockback = (player_direction * -1) * knockback_amount
 
 # Takes 1 health from the player, currently starts with 6 total
 func take_damage(damage):
@@ -123,7 +119,7 @@ func take_damage(damage):
 		health -= damage
 		is_invincible = true
 		$IFrames.start()
-		
+
 func player_die():
 	# For now may just have a similar particle effect to enemy and a game over text
 	pass
@@ -136,5 +132,5 @@ func _on_shoot_cooldown_timeout() -> void:
 func _on_i_frames_timeout() -> void:
 	is_invincible = false
 
-func _on_reload_cooldown_timeout() -> void:
-	can_reload = true
+func _on_blank_cooldown_timeout() -> void:
+	can_blank = true

@@ -2,7 +2,7 @@ extends CharacterBody2D
 
 var target:CharacterBody2D
 @export var speed : float = 300.0
-@export var health : int = 2
+@export var health : int = 12
 @export var bulletDamage: int = 1
 @export var bulletSpeed : float = 300.0
 @export var distance_from_player : float = 100
@@ -58,6 +58,7 @@ func take_damage(damage:int):
 	if health <= 0:
 		enemy_die()
 	else:
+		animation_player.stop()
 		animation_player.play("color_red")
 
 func enemy_die():

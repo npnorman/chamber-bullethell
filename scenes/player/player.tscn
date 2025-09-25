@@ -84,9 +84,9 @@ wait_time = 0.33
 
 [node name="IFrames" type="Timer" parent="."]
 
-[node name="ReloadCooldown" type="Timer" parent="."]
-wait_time = 0.15
+[node name="BlankCooldown" type="Timer" parent="."]
+wait_time = 1.5
 
 [connection signal="timeout" from="ShootCooldown" to="." method="_on_shoot_cooldown_timeout"]
 [connection signal="timeout" from="IFrames" to="." method="_on_i_frames_timeout"]
-[connection signal="timeout" from="ReloadCooldown" to="." method="_on_reload_cooldown_timeout"]
+[connection signal="timeout" from="BlankCooldown" to="." method="_on_blank_cooldown_timeout"]

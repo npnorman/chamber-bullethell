@@ -62,7 +62,6 @@ theme_override_styles/panel = SubResource("StyleBoxEmpty_rd3kb")
 
 [node name="BulletTexture1" type="TextureRect" parent="CylinderNode/Chamber1"]
 layout_mode = 2
-texture = ExtResource("3_y5tme")
 
 [node name="Chamber2" type="PanelContainer" parent="CylinderNode"]
 layout_mode = 1
@@ -79,7 +78,6 @@ theme_override_styles/panel = SubResource("StyleBoxEmpty_rd3kb")
 
 [node name="BulletTexture2" type="TextureRect" parent="CylinderNode/Chamber2"]
 layout_mode = 2
-texture = ExtResource("3_y5tme")
 
 [node name="Chamber3" type="PanelContainer" parent="CylinderNode"]
 layout_mode = 1
@@ -96,7 +94,6 @@ theme_override_styles/panel = SubResource("StyleBoxEmpty_rd3kb")
 
 [node name="BulletTexture3" type="TextureRect" parent="CylinderNode/Chamber3"]
 layout_mode = 2
-texture = ExtResource("3_y5tme")
 
 [node name="Chamber4" type="PanelContainer" parent="CylinderNode"]
 layout_mode = 1
@@ -113,7 +110,6 @@ theme_override_styles/panel = SubResource("StyleBoxEmpty_rd3kb")
 
 [node name="BulletTexture4" type="TextureRect" parent="CylinderNode/Chamber4"]
 layout_mode = 2
-texture = ExtResource("3_y5tme")
 
 [node name="Chamber5" type="PanelContainer" parent="CylinderNode"]
 layout_mode = 1
@@ -130,7 +126,6 @@ theme_override_styles/panel = SubResource("StyleBoxEmpty_rd3kb")
 
 [node name="BulletTexture5" type="TextureRect" parent="CylinderNode/Chamber5"]
 layout_mode = 2
-texture = ExtResource("3_y5tme")
 
 [node name="Chamber6" type="PanelContainer" parent="CylinderNode"]
 layout_mode = 1
@@ -147,7 +142,6 @@ theme_override_styles/panel = SubResource("StyleBoxEmpty_rd3kb")
 
 [node name="BulletTexture6" type="TextureRect" parent="CylinderNode/Chamber6"]
 layout_mode = 2
-texture = ExtResource("3_y5tme")
 
 [node name="SpecialBullets" type="Control" parent="."]
 layout_mode = 3
@@ -165,7 +159,7 @@ offset_left = 13.0
 offset_top = 2.0
 offset_right = 44.0
 offset_bottom = 25.0
-text = "[ R ]"
+text = "[ F ]"
 
 [node name="BasicAmmo" type="Label" parent="SpecialBullets"]
 layout_mode = 1
@@ -187,7 +181,7 @@ offset_top = 2.0
 offset_right = 15.0
 offset_bottom = 25.0
 grow_horizontal = 2
-text = "[ 1 ]"
+text = "[ Q ]"
 
 [node name="RicochetAmmo" type="Label" parent="SpecialBullets"]
 layout_mode = 1
@@ -212,7 +206,7 @@ offset_top = 2.0
 offset_right = -13.0
 offset_bottom = 25.0
 grow_horizontal = 0
-text = "[ 2 ]"
+text = "[ E ]"
 
 [node name="ShotgunAmmo" type="Label" parent="SpecialBullets"]
 layout_mode = 1
