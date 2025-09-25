@@ -1,8 +1,9 @@
-[gd_scene load_steps=11 format=3 uid="uid://be3bjg0ua7h2c"]
+[gd_scene load_steps=19 format=3 uid="uid://be3bjg0ua7h2c"]
 
-[ext_resource type="Texture2D" uid="uid://ciqmgfqnlu8n3" path="res://sprites/bounty-hunter.png" id="1_cpy70"]
 [ext_resource type="Script" uid="uid://codcr8smm4onm" path="res://scripts/enemy.gd" id="1_md0e3"]
 [ext_resource type="PackedScene" uid="uid://bivpy44qgcvdq" path="res://scenes/player/bullets/enemy-bullet.tscn" id="2_4ra3w"]
+[ext_resource type="Texture2D" uid="uid://bqonpyxd8or02" path="res://sprites/enemy/bounty-hunter-walk.png" id="3_4ra3w"]
+[ext_resource type="Texture2D" uid="uid://cwlan1a62urcl" path="res://sprites/empty.png" id="3_5uy6h"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_32hc7"]
 size = Vector2(35, 69)
@@ -13,67 +14,115 @@ colors = PackedColorArray(0, 0, 0, 1, 1, 0, 0.0166664, 1)
 [sub_resource type="Gradient" id="Gradient_md0e3"]
 colors = PackedColorArray(0.734561, 3.66756e-05, 0.152641, 1, 0.265568, 0, 0.0435677, 1)
 
+[sub_resource type="AtlasTexture" id="AtlasTexture_md484"]
+atlas = ExtResource("3_5uy6h")
+region = Rect2(0, 0, 32, 64)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_5uy6h"]
+atlas = ExtResource("3_4ra3w")
+region = Rect2(0, 0, 32, 64)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_c4w8v"]
+atlas = ExtResource("3_4ra3w")
+region = Rect2(32, 0, 32, 64)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_xwavj"]
+atlas = ExtResource("3_4ra3w")
+region = Rect2(64, 0, 32, 64)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_nenq2"]
+atlas = ExtResource("3_4ra3w")
+region = Rect2(96, 0, 32, 64)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_ipns3"]
+atlas = ExtResource("3_4ra3w")
+region = Rect2(0, 0, 32, 64)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_md484"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_md484")
+}],
+"loop": true,
+"name": &"death",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_5uy6h")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_c4w8v")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_xwavj")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_nenq2")
+}],
+"loop": true,
+"name": &"default",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_ipns3")
+}],
+"loop": true,
+"name": &"idle",
+"speed": 5.0
+}]
+
 [sub_resource type="Animation" id="Animation_4ra3w"]
 length = 0.001
 tracks/0/type = "value"
 tracks/0/imported = false
 tracks/0/enabled = true
-tracks/0/path = NodePath("Sprite2D:modulate")
+tracks/0/path = NodePath("CollisionShape2D:disabled")
 tracks/0/interp = 1
 tracks/0/loop_wrap = true
 tracks/0/keys = {
 "times": PackedFloat32Array(0),
 "transitions": PackedFloat32Array(1),
-"update": 0,
-"values": [Color(1, 1, 1, 1)]
+"update": 1,
+"values": [false]
 }
 tracks/1/type = "value"
 tracks/1/imported = false
 tracks/1/enabled = true
-tracks/1/path = NodePath("CollisionShape2D:disabled")
+tracks/1/path = NodePath("CPUParticles2D:emitting")
 tracks/1/interp = 1
 tracks/1/loop_wrap = true
 tracks/1/keys = {
 "times": PackedFloat32Array(0),
 "transitions": PackedFloat32Array(1),
 "update": 1,
-"values": [false]
+"values": [true]
 }
 tracks/2/type = "value"
 tracks/2/imported = false
 tracks/2/enabled = true
-tracks/2/path = NodePath("Sprite2D:visible")
+tracks/2/path = NodePath("DeathParticles:emitting")
 tracks/2/interp = 1
 tracks/2/loop_wrap = true
 tracks/2/keys = {
 "times": PackedFloat32Array(0),
 "transitions": PackedFloat32Array(1),
 "update": 1,
-"values": [true]
+"values": [false]
 }
 tracks/3/type = "value"
 tracks/3/imported = false
 tracks/3/enabled = true
-tracks/3/path = NodePath("CPUParticles2D:emitting")
+tracks/3/path = NodePath("AnimatedSprite2D:self_modulate")
 tracks/3/interp = 1
 tracks/3/loop_wrap = true
 tracks/3/keys = {
 "times": PackedFloat32Array(0),
 "transitions": PackedFloat32Array(1),
-"update": 1,
-"values": [true]
-}
-tracks/4/type = "value"
-tracks/4/imported = false
-tracks/4/enabled = true
-tracks/4/path = NodePath("DeathParticles:emitting")
-tracks/4/interp = 1
-tracks/4/loop_wrap = true
-tracks/4/keys = {
-"times": PackedFloat32Array(0),
-"transitions": PackedFloat32Array(1),
-"update": 1,
-"values": [false]
+"update": 0,
+"values": [Color(1, 1, 1, 1)]
 }
 
 [sub_resource type="Animation" id="Animation_md0e3"]
@@ -81,14 +130,14 @@ resource_name = "color_red"
 tracks/0/type = "value"
 tracks/0/imported = false
 tracks/0/enabled = true
-tracks/0/path = NodePath("Sprite2D:modulate")
+tracks/0/path = NodePath("AnimatedSprite2D:self_modulate")
 tracks/0/interp = 1
 tracks/0/loop_wrap = true
 tracks/0/keys = {
-"times": PackedFloat32Array(0, 0.1, 0.2),
-"transitions": PackedFloat32Array(1, 1, 1),
+"times": PackedFloat32Array(0, 0.333333),
+"transitions": PackedFloat32Array(1, 1),
 "update": 0,
-"values": [Color(1, 1, 1, 1), Color(0.91615, 0, 0.137719, 1), Color(1, 1, 1, 1)]
+"values": [Color(0.542598, 0, 0.100681, 1), Color(1, 1, 1, 1)]
 }
 
 [sub_resource type="Animation" id="Animation_5uy6h"]
@@ -108,7 +157,7 @@ tracks/0/keys = {
 tracks/1/type = "value"
 tracks/1/imported = false
 tracks/1/enabled = true
-tracks/1/path = NodePath("Sprite2D:visible")
+tracks/1/path = NodePath("CPUParticles2D:emitting")
 tracks/1/interp = 1
 tracks/1/loop_wrap = true
 tracks/1/keys = {
@@ -120,34 +169,22 @@ tracks/1/keys = {
 tracks/2/type = "value"
 tracks/2/imported = false
 tracks/2/enabled = true
-tracks/2/path = NodePath("CPUParticles2D:emitting")
+tracks/2/path = NodePath("DeathParticles:emitting")
 tracks/2/interp = 1
 tracks/2/loop_wrap = true
 tracks/2/keys = {
 "times": PackedFloat32Array(0),
 "transitions": PackedFloat32Array(1),
 "update": 1,
-"values": [false]
+"values": [true]
 }
-tracks/3/type = "value"
+tracks/3/type = "method"
 tracks/3/imported = false
 tracks/3/enabled = true
-tracks/3/path = NodePath("DeathParticles:emitting")
+tracks/3/path = NodePath(".")
 tracks/3/interp = 1
 tracks/3/loop_wrap = true
 tracks/3/keys = {
-"times": PackedFloat32Array(0),
-"transitions": PackedFloat32Array(1),
-"update": 1,
-"values": [true]
-}
-tracks/4/type = "method"
-tracks/4/imported = false
-tracks/4/enabled = true
-tracks/4/path = NodePath(".")
-tracks/4/interp = 1
-tracks/4/loop_wrap = true
-tracks/4/keys = {
 "times": PackedFloat32Array(0.6),
 "transitions": PackedFloat32Array(1),
 "values": [{
@@ -184,9 +221,6 @@ initial_velocity_min = 20.0
 initial_velocity_max = 50.0
 color_ramp = SubResource("Gradient_lgt6d")
 
-[node name="Sprite2D" type="Sprite2D" parent="."]
-texture = ExtResource("1_cpy70")
-
 [node name="DeathParticles" type="CPUParticles2D" parent="."]
 position = Vector2(-1, -3)
 emitting = false
@@ -204,6 +238,11 @@ initial_velocity_max = 643.43
 scale_amount_min = 3.0
 scale_amount_max = 5.0
 color_initial_ramp = SubResource("Gradient_md0e3")
+
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
+sprite_frames = SubResource("SpriteFrames_md484")
+animation = &"idle"
+autoplay = "default"
 
 [node name="NavigationAgent2D" type="NavigationAgent2D" parent="."]
 

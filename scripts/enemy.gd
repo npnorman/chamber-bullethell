@@ -12,6 +12,7 @@ var target:CharacterBody2D
 @onready var nav_agent: NavigationAgent2D = $NavigationAgent2D
 @onready var animation_player: AnimationPlayer = $AnimationPlayer
 @onready var reroute_timer: Timer = $RerouteTimer
+@onready var animated_sprite_2d: AnimatedSprite2D = $AnimatedSprite2D
 
 var is_moving:bool = true
 var last_static_position:Vector2
@@ -63,6 +64,7 @@ func take_damage(damage:int):
 
 func enemy_die():
 	# or dead body
+	animated_sprite_2d.play("death")
 	animation_player.play("death")
 
 func shoot():
