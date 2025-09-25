@@ -52,13 +52,13 @@ func _process(_delta):
 		animated_sprite_2d.play("walk")
 	
 	elif Input.is_action_pressed("Up"):
-		animated_sprite_2d.play("idle")
+		animated_sprite_2d.play("walk")
 		
 	elif Input.is_action_pressed("Right"):
-		pass
+		animated_sprite_2d.play("walk")
 		
 	elif Input.is_action_pressed("Left"):
-		pass
+		animated_sprite_2d.play("walk")
 	
 	else:
 		animated_sprite_2d.play("idle")
