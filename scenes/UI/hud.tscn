@@ -1,7 +1,7 @@
 [gd_scene load_steps=8 format=3 uid="uid://chtu6kuwhxen6"]
 
 [ext_resource type="Script" uid="uid://cxl6hj6ji3sd2" path="res://scenes/UI/hud.gd" id="1_rd3kb"]
-[ext_resource type="Texture2D" uid="uid://bw4tu7hye1h12" path="res://sprites/chamber_hud.png" id="2_y5tme"]
+[ext_resource type="Texture2D" uid="uid://22hhbot01gou" path="res://sprites/ChamberNew.png" id="2_0jeyp"]
 [ext_resource type="Texture2D" uid="uid://c8dov2pb1s143" path="res://sprites/basic_back.png" id="3_y5tme"]
 [ext_resource type="Texture2D" uid="uid://ch3j6c6lp65sy" path="res://sprites/ricochet_back.png" id="4_0jeyp"]
 [ext_resource type="Texture2D" uid="uid://dvobpj1fasv8k" path="res://sprites/shotgun_back.png" id="5_cg4gw"]
@@ -45,7 +45,7 @@ pivot_offset = Vector2(125, 125)
 [node name="CylinderTexture" type="TextureRect" parent="CylinderNode/CylinderContainer"]
 layout_mode = 2
 size_flags_vertical = 3
-texture = ExtResource("2_y5tme")
+texture = ExtResource("2_0jeyp")
 
 [node name="Chamber1" type="PanelContainer" parent="CylinderNode"]
 layout_mode = 1
