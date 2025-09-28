@@ -1,4 +1,4 @@
-[gd_scene load_steps=7 format=4 uid="uid://bt4soc20brr5m"]
+[gd_scene load_steps=7 format=4 uid="uid://28fpi5kes32x"]
 
 [ext_resource type="Texture2D" uid="uid://b5l7w2s3y1apx" path="res://tilesets/hellTiles.png" id="1_xxkmp"]
 [ext_resource type="Texture2D" uid="uid://c8rdbv3u77b5i" path="res://tilesets/HelltileWalls.png" id="2_r82mq"]
