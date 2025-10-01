@@ -52,8 +52,9 @@ animations = [{
 "speed": 5.0
 }]
 
-[sub_resource type="RectangleShape2D" id="RectangleShape2D_qhqgy"]
-size = Vector2(30, 30)
+[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_gmlin"]
+radius = 8.0
+height = 54.0
 
 [node name="Player" type="CharacterBody2D" groups=["Player"]]
 collision_layer = 2
@@ -77,7 +78,8 @@ position = Vector2(11, -4)
 position = Vector2(11, 4)
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
-shape = SubResource("RectangleShape2D_qhqgy")
+position = Vector2(0, 3)
+shape = SubResource("CapsuleShape2D_gmlin")
 
 [node name="ShootCooldown" type="Timer" parent="."]
 wait_time = 0.33

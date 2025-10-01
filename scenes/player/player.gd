@@ -34,6 +34,7 @@ func _process(_delta):
 		print_bullet_name(Globals.magazine[active_bullet_pos])
 		shoot()
 	
+	# Blank input, adds knockback for no bullet cost and has a 1.5 second cooldown
 	if Input.is_action_pressed("Blank") and can_blank:
 		add_shot_knockback(Globals.Bullets.Shotgun, 1500)
 		can_blank = false
@@ -109,9 +110,15 @@ func print_bullet_name(id: int):
 	print(Globals.Bullets.find_key(id))
 
 # Adds knockback to player from shooting. Can be reworked later to change for different bullets
-func add_shot_knockback(bullet_id: int = 0, knockback_amount = 1000):
+func add_shot_knockback(bullet_id: int = 0, knockback_amount = 750):
 	if bullet_id == Globals.Bullets.Shotgun:
 		player_knockback = (player_direction * -1) * knockback_amount
+
+# Updates Global script ammo type array to match what the Player has
+func update_bullet_types():
+	Globals.ammo_types[1] = special_bullet_1
+	Globals.ammo_types[2] = special_bullet_2
+	Globals.ammo_types[3] = special_bullet_3
 
 # Takes 1 health from the player, currently starts with 6 total
 func take_damage(damage):
@@ -132,5 +139,6 @@ func _on_shoot_cooldown_timeout() -> void:
 func _on_i_frames_timeout() -> void:
 	is_invincible = false
 
+# Cooldown between blanks
 func _on_blank_cooldown_timeout() -> void:
 	can_blank = true
