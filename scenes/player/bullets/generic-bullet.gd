@@ -1,7 +1,7 @@
 extends Area2D
 
 @export var speed: int = 1000
-@export var damage: int = 1
+@export var damage: int = 4
 @export var bullet_id: int = 0
 @export var ricochets: int = 0
 var direction: Vector2 = Vector2.UP
@@ -37,9 +37,12 @@ func _on_body_entered(body: Node2D) -> void:
 			self.queue_free()
 			
 		elif ricochets > 0:
-			self.direction = direction.bounce(collision_normal).normalized()
+			self.position -= self.direction.normalized() * 3
+			self.direction = self.direction.bounce(collision_normal).normalized()
 			self.rotation_degrees = rad_to_deg(self.direction.angle()) + 90
 			ricochets -= 1
+			if bullet_id == Globals.Bullets.Ricochet:
+				damage *= 2
 			can_collide = false
 			$CollisionTimer.start()
 		else:

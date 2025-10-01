@@ -1,14 +1,20 @@
-[gd_scene load_steps=8 format=3 uid="uid://chtu6kuwhxen6"]
+[gd_scene load_steps=9 format=3 uid="uid://chtu6kuwhxen6"]
 
 [ext_resource type="Script" uid="uid://cxl6hj6ji3sd2" path="res://scenes/UI/hud.gd" id="1_rd3kb"]
-[ext_resource type="Texture2D" uid="uid://22hhbot01gou" path="res://sprites/ChamberNew.png" id="2_0jeyp"]
-[ext_resource type="Texture2D" uid="uid://c8dov2pb1s143" path="res://sprites/basic_back.png" id="3_y5tme"]
-[ext_resource type="Texture2D" uid="uid://ch3j6c6lp65sy" path="res://sprites/ricochet_back.png" id="4_0jeyp"]
-[ext_resource type="Texture2D" uid="uid://dvobpj1fasv8k" path="res://sprites/shotgun_back.png" id="5_cg4gw"]
+[ext_resource type="Texture2D" uid="uid://qrarrw5bha70" path="res://sprites/HudNoChamber.png" id="2_xh8q5"]
+[ext_resource type="Texture2D" uid="uid://c0q3kso3x2tj2" path="res://sprites/SingleChamber.png" id="3_cg4gw"]
+[ext_resource type="Texture2D" uid="uid://bqroonmtnxn5s" path="res://sprites/basic_back.png" id="4_h03ao"]
 
 [sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_rd3kb"]
 
-[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_xh8q5"]
+[sub_resource type="CompressedTexture2D" id="CompressedTexture2D_18exe"]
+load_path = "res://.godot/imported/basic_back.png-362d1b077b04b76295f3a4d708438641.ctex"
+
+[sub_resource type="CompressedTexture2D" id="CompressedTexture2D_0jeyp"]
+load_path = "res://.godot/imported/ricochet_back.png-8059bd98b549afcc6254001d7cb621d2.ctex"
+
+[sub_resource type="CompressedTexture2D" id="CompressedTexture2D_cg4gw"]
+load_path = "res://.godot/imported/shotgun_back.png-6dc6cb3c2b70ccd77e4f55f814ed218c.ctex"
 
 [node name="HUD" type="CanvasLayer"]
 script = ExtResource("1_rd3kb")
@@ -45,237 +51,234 @@ pivot_offset = Vector2(125, 125)
 [node name="CylinderTexture" type="TextureRect" parent="CylinderNode/CylinderContainer"]
 layout_mode = 2
 size_flags_vertical = 3
-texture = ExtResource("2_0jeyp")
+texture = ExtResource("2_xh8q5")
 
 [node name="Chamber1" type="PanelContainer" parent="CylinderNode"]
 layout_mode = 1
 anchors_preset = -1
-anchor_left = 0.508
-anchor_top = 0.234
-anchor_right = 0.508
-anchor_bottom = 0.234
-offset_left = -27.095
-offset_top = -20.665
-offset_right = 28.905
-offset_bottom = 22.335
+anchor_left = 0.497
+anchor_top = 0.235
+anchor_right = 0.497
+anchor_bottom = 0.235
+offset_left = -30.75
+offset_top = -31.385
+offset_right = 32.25
+offset_bottom = 31.615
 theme_override_styles/panel = SubResource("StyleBoxEmpty_rd3kb")
+
+[node name="Chamber1Texture" type="TextureRect" parent="CylinderNode/Chamber1"]
+layout_mode = 2
+texture = ExtResource("3_cg4gw")
 
 [node name="BulletTexture1" type="TextureRect" parent="CylinderNode/Chamber1"]
 layout_mode = 2
-texture = ExtResource("3_y5tme")
+texture = ExtResource("4_h03ao")
 
 [node name="Chamber2" type="PanelContainer" parent="CylinderNode"]
 layout_mode = 1
 anchors_preset = -1
-anchor_left = 0.282
-anchor_top = 0.375
-anchor_right = 0.282
-anchor_bottom = 0.375
-offset_left = -26.5
-offset_top = -20.67
-offset_right = 29.5
-offset_bottom = 22.33
+anchor_left = 0.271
+anchor_top = 0.351
+anchor_right = 0.271
+anchor_bottom = 0.351
+offset_left = -31.995
+offset_top = -30.75
+offset_right = 31.005
+offset_bottom = 32.25
+rotation = 5.23599
+pivot_offset = Vector2(32, 32)
 theme_override_styles/panel = SubResource("StyleBoxEmpty_rd3kb")
+
+[node name="Chamber2Texture" type="TextureRect" parent="CylinderNode/Chamber2"]
+layout_mode = 2
+texture = ExtResource("3_cg4gw")
 
 [node name="BulletTexture2" type="TextureRect" parent="CylinderNode/Chamber2"]
 layout_mode = 2
-texture = ExtResource("3_y5tme")
+texture = ExtResource("4_h03ao")
 
 [node name="Chamber3" type="PanelContainer" parent="CylinderNode"]
 layout_mode = 1
 anchors_preset = -1
-anchor_left = 0.282
-anchor_top = 0.602
-anchor_right = 0.282
-anchor_bottom = 0.602
-offset_left = -28.0
-offset_top = -20.76
-offset_right = 28.0
-offset_bottom = 22.24
+anchor_left = 0.272
+anchor_top = 0.618
+anchor_right = 0.272
+anchor_bottom = 0.618
+offset_left = -30.0
+offset_top = -32.5
+offset_right = 33.0
+offset_bottom = 30.5
+rotation = 4.18879
+pivot_offset = Vector2(32, 32)
 theme_override_styles/panel = SubResource("StyleBoxEmpty_rd3kb")
+
+[node name="Chamber3Texture" type="TextureRect" parent="CylinderNode/Chamber3"]
+layout_mode = 2
+texture = ExtResource("3_cg4gw")
 
 [node name="BulletTexture3" type="TextureRect" parent="CylinderNode/Chamber3"]
 layout_mode = 2
-texture = ExtResource("3_y5tme")
+texture = ExtResource("4_h03ao")
 
 [node name="Chamber4" type="PanelContainer" parent="CylinderNode"]
 layout_mode = 1
 anchors_preset = -1
-anchor_left = 0.508
+anchor_left = 0.5
 anchor_top = 0.75
-anchor_right = 0.508
+anchor_right = 0.5
 anchor_bottom = 0.75
-offset_left = -27.185
-offset_top = -20.68
-offset_right = 28.815
-offset_bottom = 22.32
+offset_left = -31.5
+offset_top = -31.5
+offset_right = 31.5
+offset_bottom = 31.5
+rotation = 3.14159
+pivot_offset = Vector2(31.5, 31.5)
 theme_override_styles/panel = SubResource("StyleBoxEmpty_rd3kb")
+
+[node name="Chamber4Texture" type="TextureRect" parent="CylinderNode/Chamber4"]
+layout_mode = 2
+texture = ExtResource("3_cg4gw")
 
 [node name="BulletTexture4" type="TextureRect" parent="CylinderNode/Chamber4"]
 layout_mode = 2
-texture = ExtResource("3_y5tme")
+texture = ExtResource("4_h03ao")
 
 [node name="Chamber5" type="PanelContainer" parent="CylinderNode"]
 layout_mode = 1
 anchors_preset = -1
-anchor_left = 0.734
-anchor_top = 0.602
-anchor_right = 0.734
-anchor_bottom = 0.602
-offset_left = -26.79
-offset_top = -20.725
-offset_right = 29.21
-offset_bottom = 22.275
+anchor_left = 0.727
+anchor_top = 0.617
+anchor_right = 0.727
+anchor_bottom = 0.617
+offset_left = -31.9
+offset_top = -32.25
+offset_right = 31.1
+offset_bottom = 30.75
+rotation = 2.0944
+pivot_offset = Vector2(32, 32)
 theme_override_styles/panel = SubResource("StyleBoxEmpty_rd3kb")
+
+[node name="Chamber5Texture" type="TextureRect" parent="CylinderNode/Chamber5"]
+layout_mode = 2
+texture = ExtResource("3_cg4gw")
 
 [node name="BulletTexture5" type="TextureRect" parent="CylinderNode/Chamber5"]
 layout_mode = 2
-texture = ExtResource("3_y5tme")
+texture = ExtResource("4_h03ao")
 
 [node name="Chamber6" type="PanelContainer" parent="CylinderNode"]
 layout_mode = 1
 anchors_preset = -1
-anchor_left = 0.734
-anchor_top = 0.374
-anchor_right = 0.734
-anchor_bottom = 0.374
-offset_left = -26.89
-offset_top = -20.385
-offset_right = 29.11
-offset_bottom = 22.615
+anchor_left = 0.727
+anchor_top = 0.351
+anchor_right = 0.727
+anchor_bottom = 0.351
+offset_left = -31.88
+offset_top = -30.75
+offset_right = 31.12
+offset_bottom = 32.25
+rotation = 1.0472
+pivot_offset = Vector2(32, 32)
 theme_override_styles/panel = SubResource("StyleBoxEmpty_rd3kb")
+
+[node name="Chamber6Texture" type="TextureRect" parent="CylinderNode/Chamber6"]
+layout_mode = 2
+texture = ExtResource("3_cg4gw")
 
 [node name="BulletTexture6" type="TextureRect" parent="CylinderNode/Chamber6"]
 layout_mode = 2
-texture = ExtResource("3_y5tme")
+texture = ExtResource("4_h03ao")
 
 [node name="SpecialBullets" type="Control" parent="."]
 layout_mode = 3
-anchors_preset = 2
-anchor_top = 1.0
-anchor_bottom = 1.0
-offset_left = 10.0
-offset_top = -120.0
-offset_right = 190.0
+anchor_left = 0.049
+anchor_top = 0.973
+anchor_right = 0.049
+anchor_bottom = 0.973
+offset_left = -0.176003
+offset_top = -120.264
+offset_right = 239.824
+offset_bottom = -0.264038
 grow_vertical = 0
 
-[node name="BasicKey" type="Label" parent="SpecialBullets"]
+[node name="NormalAmmoBox" type="VBoxContainer" parent="SpecialBullets"]
 layout_mode = 1
-offset_left = 13.0
-offset_top = 2.0
-offset_right = 44.0
-offset_bottom = 25.0
-text = "[ R ]"
-
-[node name="BasicAmmo" type="Label" parent="SpecialBullets"]
-layout_mode = 1
-anchors_preset = 2
-anchor_top = 1.0
-anchor_bottom = 1.0
-offset_left = 8.0
-offset_top = -23.0
-offset_right = 48.0
-grow_vertical = 0
-
-[node name="RicochetKey" type="Label" parent="SpecialBullets"]
-layout_mode = 1
-anchors_preset = 5
-anchor_left = 0.5
-anchor_right = 0.5
-offset_left = -14.0
-offset_top = 2.0
-offset_right = 15.0
-offset_bottom = 25.0
-grow_horizontal = 2
-text = "[ 1 ]"
-
-[node name="RicochetAmmo" type="Label" parent="SpecialBullets"]
-layout_mode = 1
-anchors_preset = 7
-anchor_left = 0.5
-anchor_top = 1.0
-anchor_right = 0.5
-anchor_bottom = 1.0
-offset_left = -14.0
-offset_top = -23.0
-offset_right = 26.0
-grow_horizontal = 2
-grow_vertical = 0
-
-[node name="ShotgunKey" type="Label" parent="SpecialBullets"]
-layout_mode = 1
-anchors_preset = 1
-anchor_left = 1.0
-anchor_right = 1.0
-offset_left = -44.0
-offset_top = 2.0
-offset_right = -13.0
-offset_bottom = 25.0
-grow_horizontal = 0
-text = "[ 2 ]"
-
-[node name="ShotgunAmmo" type="Label" parent="SpecialBullets"]
-layout_mode = 1
-anchors_preset = 3
-anchor_left = 1.0
-anchor_top = 1.0
-anchor_right = 1.0
-anchor_bottom = 1.0
-offset_left = -44.0
-offset_top = -23.0
-offset_right = -4.0
-grow_horizontal = 0
-grow_vertical = 0
-
-[node name="PanelContainer" type="PanelContainer" parent="SpecialBullets"]
-layout_mode = 1
-anchors_preset = 4
+anchors_preset = -1
 anchor_top = 0.5
 anchor_bottom = 0.5
-offset_top = -30.0
+offset_top = -60.0
 offset_right = 60.0
-offset_bottom = 30.0
-grow_vertical = 2
-theme_override_styles/panel = SubResource("StyleBoxEmpty_xh8q5")
+offset_bottom = 60.0
 
-[node name="TextureRect" type="TextureRect" parent="SpecialBullets/PanelContainer"]
+[node name="BasicKey" type="Label" parent="SpecialBullets/NormalAmmoBox"]
 layout_mode = 2
-texture = ExtResource("3_y5tme")
+text = "[ F ]"
+horizontal_alignment = 1
 
-[node name="PanelContainer2" type="PanelContainer" parent="SpecialBullets"]
-layout_mode = 1
-anchors_preset = 8
-anchor_left = 0.5
-anchor_top = 0.5
-anchor_right = 0.5
-anchor_bottom = 0.5
-offset_left = -30.0
-offset_top = -30.0
-offset_right = 30.0
-offset_bottom = 30.0
-grow_horizontal = 2
-grow_vertical = 2
-theme_override_styles/panel = SubResource("StyleBoxEmpty_xh8q5")
-
-[node name="TextureRect" type="TextureRect" parent="SpecialBullets/PanelContainer2"]
+[node name="NormalTexture" type="TextureRect" parent="SpecialBullets/NormalAmmoBox"]
 layout_mode = 2
-texture = ExtResource("4_0jeyp")
+size_flags_vertical = 3
+texture = SubResource("CompressedTexture2D_18exe")
 
-[node name="PanelContainer3" type="PanelContainer" parent="SpecialBullets"]
-layout_mode = 1
-anchors_preset = 6
-anchor_left = 1.0
-anchor_top = 0.5
-anchor_right = 1.0
-anchor_bottom = 0.5
-offset_left = -58.385
-offset_top = -30.0
-offset_right = 1.61499
-offset_bottom = 30.0
-grow_horizontal = 0
-grow_vertical = 2
-theme_override_styles/panel = SubResource("StyleBoxEmpty_xh8q5")
-
-[node name="TextureRect" type="TextureRect" parent="SpecialBullets/PanelContainer3"]
+[node name="BasicAmmo" type="Label" parent="SpecialBullets/NormalAmmoBox"]
 layout_mode = 2
-texture = ExtResource("5_cg4gw")
+horizontal_alignment = 1
+
+[node name="SpecialAmmoBox1" type="VBoxContainer" parent="SpecialBullets"]
+layout_mode = 0
+offset_left = 60.0
+offset_right = 120.0
+offset_bottom = 120.0
+
+[node name="SpecialKey1" type="Label" parent="SpecialBullets/SpecialAmmoBox1"]
+layout_mode = 2
+text = "[ Q ]"
+horizontal_alignment = 1
+
+[node name="SpecialTexture1" type="TextureRect" parent="SpecialBullets/SpecialAmmoBox1"]
+layout_mode = 2
+size_flags_vertical = 3
+texture = SubResource("CompressedTexture2D_0jeyp")
+
+[node name="SpecialAmmo1" type="Label" parent="SpecialBullets/SpecialAmmoBox1"]
+layout_mode = 2
+horizontal_alignment = 1
+
+[node name="SpecialAmmoBox2" type="VBoxContainer" parent="SpecialBullets"]
+layout_mode = 0
+offset_left = 120.0
+offset_right = 180.0
+offset_bottom = 120.0
+
+[node name="SpecialKey2" type="Label" parent="SpecialBullets/SpecialAmmoBox2"]
+layout_mode = 2
+text = "[ E ]"
+horizontal_alignment = 1
+
+[node name="SpecialTexture2" type="TextureRect" parent="SpecialBullets/SpecialAmmoBox2"]
+layout_mode = 2
+size_flags_vertical = 3
+texture = SubResource("CompressedTexture2D_cg4gw")
+
+[node name="SpecialAmmo2" type="Label" parent="SpecialBullets/SpecialAmmoBox2"]
+layout_mode = 2
+horizontal_alignment = 1
+
+[node name="SpecialAmmoBox3" type="VBoxContainer" parent="SpecialBullets"]
+layout_mode = 0
+offset_left = 180.0
+offset_right = 240.0
+offset_bottom = 120.0
+
+[node name="SpecialKey3" type="Label" parent="SpecialBullets/SpecialAmmoBox3"]
+layout_mode = 2
+text = "[ R ]"
+horizontal_alignment = 1
+
+[node name="SpecialTexture3" type="TextureRect" parent="SpecialBullets/SpecialAmmoBox3"]
+layout_mode = 2
+size_flags_vertical = 3
+
+[node name="SpecialAmmo3" type="Label" parent="SpecialBullets/SpecialAmmoBox3"]
+layout_mode = 2
+horizontal_alignment = 1
