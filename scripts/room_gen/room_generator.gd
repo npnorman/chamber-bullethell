@@ -1,23 +1,12 @@
 extends Node2D
 
-var test_room:PackedScene = preload("res://scenes/RoomGen/test_room.tscn")
-
-enum ExitType {
-	FOUR,
-	THREE,
-	TWO_CLOSE,
-	TWO_APART,
-	ONE,
-	ZERO,
-	NONE
-}
-
-enum Rotation {
-	ZERO,
-	NINETY,
-	ONEEIGHTY,
-	TWOSEVENTY
-}
+@export var test_room:PackedScene
+var one_room = preload("res://scenes/RoomGen/room_types/test_one.tscn")
+var two_close_room = preload("res://scenes/RoomGen/room_types/test_two_close.tscn")
+var two_apart_room = preload("res://scenes/RoomGen/room_types/test_two_apart.tscn")
+var three_room = preload("res://scenes/RoomGen/room_types/test_three.tscn")
+var four_room = preload("res://scenes/RoomGen/room_types/test_four.tscn")
+var start_room = preload("res://scenes/RoomGen/room_types/testStart.tscn")
 
 # map
 # m x m (m = 10) expand to 11 for overflow
@@ -25,9 +14,10 @@ var current_location:Vector2 = Vector2(0,0)
 var current_room:int = 0
 
 var roomstack:Array = []
-var starting_room:Vector4 = Vector4(0,0,ExitType.ONE,Rotation.NINETY)
+var starting_room:Vector4 = Vector4(0,0,Globals.ExitType.ONE,Globals.Rotation.NINETY)
 var rooms:Array = []
 var knapsack:Array = []
+var roomsack:Array = []
 
 func generateRooms(exit, rotation, count):
 	var rooms:Array = []
@@ -58,7 +48,12 @@ func _ready() -> void:
 	current_location.y = centerN
 	
 	#define rooms in bag to pull
-	knapsack += generateRooms(ExitType.FOUR,Rotation.ZERO,15)
+	#knapsack += generateRooms(Globals.ExitType.FOUR,Globals.Rotation.ZERO,15)
+	roomsack += [one_room,two_close_room,two_apart_room,three_room,four_room,start_room]
+	knapsack += generateRooms(Globals.ExitType.FOUR,Globals.Rotation.ZERO,5)
+	knapsack += generateRooms(Globals.ExitType.THREE,Globals.Rotation.ZERO,1)
+	knapsack += generateRooms(Globals.ExitType.TWO_APART,Globals.Rotation.ZERO,2)
+	#knapsack += generateRooms(Globals.ExitType.TWO_CLOSE,Globals.Rotation.ZERO,5)
 	
 	add_room_current_location(starting_room)
 	generateMap(m,n)
@@ -101,7 +96,13 @@ func display_rooms(center:Vector2):
 func place_room_at_xy(coords:Vector4,center:Vector2):
 	var tile_offset = 32 * 16 #32 tiles each at 16 pixels
 	
-	var newRoom:Node2D = test_room.instantiate()
+	var newRoom:Node2D
+	
+	for i in range(0,len(roomsack)):
+		var tempRoom = roomsack[i].instantiate()
+		if tempRoom.get_exit_type() == coords.z:
+			if tempRoom.get_room_rotation() == coords.w:
+				newRoom = tempRoom
 	
 	var adjusted_coords:Vector2 = Vector2(coords.x,coords.y)
 	adjusted_coords -= center
@@ -130,6 +131,16 @@ func pick_room_from_knapsack(rng:RandomNumberGenerator,m,n):
 	var possible_index:Array = [0,1,2,3]
 	var exit_index = possible_index[rng.rand_weighted(exits)]
 	
+	var is_blocking = false
+	
+	var new_exits:Array = get_exits(newRoom)
+	var new_exit_index:int = (exit_index + 2) % 4
+	#check to see if it matches an exit
+	if exits[exit_index] == 1 and new_exits[new_exit_index] == 1:
+		is_blocking = false
+	else:
+		is_blocking = true
+	
 	exits[0] *= -1
 	exits[3] *= -1
 	
@@ -144,8 +155,6 @@ func pick_room_from_knapsack(rng:RandomNumberGenerator,m,n):
 	
 	var checkingCoordinates:Vector2 = Vector2(0,0)
 	checkingCoordinates = current_location + offset
-	
-	var is_blocking = false
 	
 	# check if that spot (x,y) is taken
 	if abs(checkingCoordinates.x) > m or abs(checkingCoordinates.y) > n:
@@ -224,48 +233,48 @@ func get_number_of_exits(room:Vector4):
 	var number_of_exits = 0
 	
 	match room.z:
-		ExitType.ZERO:
+		Globals.ExitType.ZERO:
 			number_of_exits = 0
-		ExitType.NONE:
+		Globals.ExitType.NONE:
 			number_of_exits = 0
-		ExitType.ONE:
+		Globals.ExitType.ONE:
 			number_of_exits = 1
-		ExitType.TWO_CLOSE:
+		Globals.ExitType.TWO_CLOSE:
 			number_of_exits = 2
-		ExitType.TWO_APART:
+		Globals.ExitType.TWO_APART:
 			number_of_exits = 2
-		ExitType.THREE:
+		Globals.ExitType.THREE:
 			number_of_exits = 3
-		ExitType.FOUR:
+		Globals.ExitType.FOUR:
 			number_of_exits = 4
 	
 	return number_of_exits
 
 func get_exits(room:Vector4):
 	var exits:Array = [0,0,0,0]
-	# offset of (x-1,y+1,x-1,y-1)
+	# offset of (x+1,y+1,x-1,y-1)
 		# a 1 if correct, a zero if not
 	
 	match int(room.z):
-		ExitType.ONE:
-			exits = [1,0,0,0]
-		ExitType.TWO_CLOSE:
-			exits = [1,1,0,0]
-		ExitType.TWO_APART:
+		Globals.ExitType.ONE:
+			exits = [0,0,1,0]
+		Globals.ExitType.TWO_CLOSE:
+			exits = [0,1,1,0]
+		Globals.ExitType.TWO_APART:
 			exits = [1,0,1,0]
-		ExitType.THREE:
-			exits = [1,1,1,0]
-		ExitType.FOUR:
+		Globals.ExitType.THREE:
+			exits = [1,1,0,1]
+		Globals.ExitType.FOUR:
 			exits = [1,1,1,1]
 	
 	var amount = 0
 	
 	match int(room.w):
-		Rotation.NINETY:
+		Globals.Rotation.NINETY:
 			amount = 1
-		Rotation.ONEEIGHTY:
+		Globals.Rotation.ONEEIGHTY:
 			amount = 2
-		Rotation.TWOSEVENTY:
+		Globals.Rotation.TWOSEVENTY:
 			amount = 3
 	
 	exits = rotate_exits(exits,amount)
@@ -279,10 +288,10 @@ func rotate_exits(exits:Array, amount:int):
 
 func cyclic_shift(exits:Array):
 	var swap = exits[3]
-	exits[3] = exits[2]
-	exits[2] = exits[1]
-	exits[1] = exits[0]
-	exits[0] = swap
+	exits[3] = exits[0]
+	exits[0] = exits[1]
+	exits[1] = exits[2]
+	exits[2] = swap
 	
 	return exits
 
