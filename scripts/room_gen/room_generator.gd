@@ -58,23 +58,23 @@ func _ready() -> void:
 	current_location.y = centerN
 	
 	#define rooms in bag to pull
-	knapsack += generateRooms(ExitType.FOUR,Rotation.ZERO,5)
+	knapsack += generateRooms(ExitType.FOUR,Rotation.ZERO,15)
 	
 	add_room_current_location(starting_room)
-	generateMap()
+	generateMap(m,n)
 	print("Roomstack")
 	print(roomstack)
 	
 	# after stack is full,
 	display_rooms(center)
 
-func generateMap(seed:int = -1):
+func generateMap(m,n,seed:int = -1):
 	var rng:RandomNumberGenerator = RandomNumberGenerator.new()
 	if seed != -1:
 		rng.seed = seed
 	
 	while len(knapsack) > 0:
-		pick_room_from_knapsack(rng)
+		pick_room_from_knapsack(rng,m,n)
 		
 		# if no room can fit, remove the topmost room from stack
 			# try a different room from knapsack
@@ -86,6 +86,9 @@ func generateMap(seed:int = -1):
 		# for each exit
 			# if there is no room there
 				# add a dead end (generate one)
+				# shop and treasure room count
+				# get exits
+				# create a room to satisfy all exits
 
 func display_rooms(center:Vector2):
 	for i in range(0,len(roomstack)):
@@ -108,10 +111,8 @@ func place_room_at_xy(coords:Vector4,center:Vector2):
 	newRoom.global_position = adjusted_coords
 	
 	add_child(newRoom)
-	print(get_child_count())
-	print("Room added")
 
-func pick_room_from_knapsack(rng:RandomNumberGenerator):
+func pick_room_from_knapsack(rng:RandomNumberGenerator,m,n):
 	# pick a random room in the knapsack, and remove it
 	var knapsack_index:int = rng.randi_range(0,len(knapsack)-1)
 	var newRoom:Vector4 = knapsack.pop_at(knapsack_index)
@@ -147,7 +148,10 @@ func pick_room_from_knapsack(rng:RandomNumberGenerator):
 	var is_blocking = false
 	
 	# check if that spot (x,y) is taken
-	if is_room_in_xy(checkingCoordinates):
+	if abs(checkingCoordinates.x) > m or abs(checkingCoordinates.y) > n:
+		is_blocking = true
+		
+	elif is_room_in_xy(checkingCoordinates):
 		is_blocking = true
 		
 	else:
