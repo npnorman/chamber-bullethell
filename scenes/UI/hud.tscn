@@ -1,4 +1,4 @@
-[gd_scene load_steps=9 format=3 uid="uid://chtu6kuwhxen6"]
+[gd_scene load_steps=16 format=3 uid="uid://chtu6kuwhxen6"]
 
 [ext_resource type="Script" uid="uid://cxl6hj6ji3sd2" path="res://scenes/UI/hud.gd" id="1_rd3kb"]
 [ext_resource type="Texture2D" uid="uid://qrarrw5bha70" path="res://sprites/HudNoChamber.png" id="2_xh8q5"]
@@ -6,6 +6,106 @@
 [ext_resource type="Texture2D" uid="uid://bqroonmtnxn5s" path="res://sprites/basic_back.png" id="4_h03ao"]
 
 [sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_rd3kb"]
+
+[sub_resource type="Animation" id="Animation_18exe"]
+resource_name = "Rotate_1"
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:rotation")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.1),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [0.0, 1.0472]
+}
+
+[sub_resource type="Animation" id="Animation_0jeyp"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:rotation")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [0.0]
+}
+
+[sub_resource type="Animation" id="Animation_cg4gw"]
+resource_name = "Rotate_2"
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:rotation")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.1),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [1.0472, 2.0944]
+}
+
+[sub_resource type="Animation" id="Animation_xh8q5"]
+resource_name = "Rotate_3"
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:rotation")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.1),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [2.0944, 3.14159]
+}
+
+[sub_resource type="Animation" id="Animation_h03ao"]
+resource_name = "Rotate_4"
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:rotation")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.1),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [3.14159, 4.18879]
+}
+
+[sub_resource type="Animation" id="Animation_7wvwv"]
+resource_name = "Rotate_5"
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:rotation")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.1),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [4.18879, 5.23599]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_k00v8"]
+_data = {
+&"RESET": SubResource("Animation_0jeyp"),
+&"Rotate_1": SubResource("Animation_18exe"),
+&"Rotate_2": SubResource("Animation_cg4gw"),
+&"Rotate_3": SubResource("Animation_xh8q5"),
+&"Rotate_4": SubResource("Animation_h03ao"),
+&"Rotate_5": SubResource("Animation_7wvwv")
+}
 
 [sub_resource type="CompressedTexture2D" id="CompressedTexture2D_18exe"]
 load_path = "res://.godot/imported/basic_back.png-362d1b077b04b76295f3a4d708438641.ctex"
@@ -188,6 +288,11 @@ texture = ExtResource("3_cg4gw")
 [node name="BulletTexture6" type="TextureRect" parent="CylinderNode/Chamber6"]
 layout_mode = 2
 texture = ExtResource("4_h03ao")
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="CylinderNode"]
+libraries = {
+&"": SubResource("AnimationLibrary_k00v8")
+}
 
 [node name="SpecialBullets" type="Control" parent="."]
 layout_mode = 3

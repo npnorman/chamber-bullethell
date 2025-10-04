@@ -87,6 +87,7 @@ func shoot():
 			bullet_fired.emit($GunSprite/BulletOrigin1.global_position, player_direction, Globals.magazine[active_bullet_pos])
 		add_shot_knockback(Globals.magazine[active_bullet_pos])
 		Globals.magazine[active_bullet_pos] = Globals.Bullets.Empty
+	can_reload = false
 	cycle_cylinder()
 
 # Loads in a normal or special bullet depending on what button was pressed to call this method
@@ -94,8 +95,9 @@ func reload(id: int):
 	if can_reload and id != -1:
 		Globals.magazine[active_bullet_pos] = id
 		Globals.ammo[id] -= 1
-		cycle_cylinder()
 		can_reload = false
+		cycle_cylinder()
+		
 
 # Moves every bullet in the cyclinder to the left (or right) once
 func cycle_cylinder():

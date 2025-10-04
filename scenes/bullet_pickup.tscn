@@ -1,0 +1,51 @@
+[gd_scene load_steps=7 format=3 uid="uid://b3pyw2ywa2gic"]
+
+[ext_resource type="Script" uid="uid://b5hu42q4dthhi" path="res://scenes/bullet_pickup.gd" id="1_4367f"]
+[ext_resource type="Texture2D" uid="uid://lj0q8273oj2b" path="res://sprites/test_bullet.png" id="1_cpad5"]
+
+[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_cpad5"]
+radius = 7.0
+height = 20.0
+
+[sub_resource type="Curve" id="Curve_4367f"]
+_limits = [-500.0, 500.0, 0.0, 1.0]
+_data = [Vector2(0, 1), 0.0, 0.0, 0, 0, Vector2(1, 1), 0.0, 0.0, 0, 0]
+point_count = 2
+
+[sub_resource type="Curve" id="Curve_scdq0"]
+_limits = [-360.0, 360.0, 0.0, 1.0]
+_data = [Vector2(0, 1), 0.0, 0.0, 0, 0, Vector2(1, 1), 0.0, 0.0, 0, 0]
+point_count = 2
+
+[sub_resource type="Gradient" id="Gradient_dvr55"]
+offsets = PackedFloat32Array(0, 0.8)
+
+[node name="BulletPickup" type="Area2D"]
+top_level = true
+scale = Vector2(1.33, 1.33)
+collision_layer = 0
+collision_mask = 2
+script = ExtResource("1_4367f")
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+texture = ExtResource("1_cpad5")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+shape = SubResource("CapsuleShape2D_cpad5")
+
+[node name="CPUParticles2D" type="CPUParticles2D" parent="."]
+amount = 16
+spread = 180.0
+gravity = Vector2(0, 0)
+initial_velocity_min = 50.0
+initial_velocity_max = 50.0
+orbit_velocity_min = 1.5
+orbit_velocity_max = 2.0
+orbit_velocity_curve = SubResource("Curve_4367f")
+angle_curve = SubResource("Curve_scdq0")
+scale_amount_min = 1.5
+scale_amount_max = 1.5
+color = Color(0.669434, 0.200684, 0.999991, 1)
+color_ramp = SubResource("Gradient_dvr55")
+
+[connection signal="body_entered" from="." to="." method="_on_body_entered"]

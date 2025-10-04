@@ -14,11 +14,12 @@ signal rotation_completed
 
 func _ready():
 	update_chamber_textures()
+	update_counters()
 	set_ammo_types()
 
 func _process(_delta):
 	if is_rotating:
-		$CylinderNode.rotation_degrees += 5
+		$CylinderNode.rotation_degrees += 6
 		if roundi($CylinderNode.rotation_degrees) % 60 == 0:
 			is_rotating = false
 			rotation_completed.emit()
@@ -48,7 +49,9 @@ func update_chamber_textures():
 		else:
 			texture.visible = false
 		index += 1
-	index = 0
+
+func update_counters():
+	var index: int = 0
 	for counter: Label in ammo_counters:
 		if Globals.ammo_types[index] > -1:
 			counter.text = str(Globals.ammo[Globals.ammo_types[index]])

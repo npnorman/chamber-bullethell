@@ -2,15 +2,33 @@ extends Node2D
 class_name LevelContainer
 
 var bullet_scene: PackedScene = preload("res://scenes/player/bullets/player-bullet.tscn")
+var bullet_pickup_scene: PackedScene = preload("res://scenes/bullet_pickup.tscn")
+
+func _ready():
+	for enemy: CharacterBody2D in $Enemies.get_children():
+		enemy.killed.connect(_on_enemy_killed)
+	$Pickups/BulletPickup.ammo_changed.connect(_on_bullet_pickup_ammo_changed)
 
 # Adjust HUD when cylinder changes
 func _on_player_cylinder_cycled() -> void:
 	$HUD.start_rotating()
 	$HUD.update_chamber_textures()
+	$HUD.update_counters()
 
 # Allow player to reload again once cylinder is done spinning
 func _on_hud_rotation_completed() -> void:
 	$Player.can_reload = true
+
+func _on_enemy_killed(enemy_position: Vector2, ammo_dropped: int) -> void:
+	var bullet_pickup: Area2D = bullet_pickup_scene.instantiate()
+	bullet_pickup.global_position = enemy_position
+	bullet_pickup.amount = ammo_dropped
+	bullet_pickup.ammo_changed.connect(_on_bullet_pickup_ammo_changed)
+	$Pickups.add_child(bullet_pickup)
+		
+
+func _on_bullet_pickup_ammo_changed() -> void:
+	$HUD.update_counters()
 
 func _on_player_bullet_fired(pos, dir, id):
 	

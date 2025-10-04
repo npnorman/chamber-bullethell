@@ -1,6 +1,6 @@
 extends Node
 
-signal stat_changed
+#signal stat_changed
 
 # Enums to show what names correspond to what IDs
 enum Bullets {Normal, Ricochet, Shotgun, Empty = -1}
@@ -9,6 +9,8 @@ enum Bullets {Normal, Ricochet, Shotgun, Empty = -1}
 var ammo: Array[int] = [30, 18, 18, 0, 0, 0, 0, 0, 0, 0, 0, 0]:
 	get:
 		return ammo
+
+var ammo_max: Array[int] = [999, 30, 30, 30, 30, 30, 30, 30, 30, 30, 30, 30]
 
 # Array of the IDs of ammo the player currently has, with -1 meaning nothing is in the slot
 var ammo_types: Array[int] = [0, 1, 2, -1]
