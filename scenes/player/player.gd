@@ -9,9 +9,7 @@ var active_bullet_pos: int = 0
 @export var player_direction: Vector2
 @export var speed: int = 150
 @export var health: int = 6
-@export var special_bullet_1: int = 1
-@export var special_bullet_2: int = 2
-@export var special_bullet_3: int = -1
+@export var bullet_types: Array[int] = [0, -1, -1, -1]
 
 # onready variables
 @onready var animated_sprite_2d: AnimatedSprite2D = $AnimatedSprite2D
@@ -43,12 +41,12 @@ func _process(_delta):
 	# Normal reload and Special reload inputs
 	if Input.is_action_just_pressed("Main Reload") and Globals.magazine[active_bullet_pos] == Globals.Bullets.Empty and Globals.ammo[0] > 0:
 		reload(0)
-	if Input.is_action_just_pressed("Special Reload 1") and Globals.magazine[active_bullet_pos] == Globals.Bullets.Empty and Globals.ammo[special_bullet_1] > 0:
-		reload(special_bullet_1)
-	if Input.is_action_just_pressed("Special Reload 2") and Globals.magazine[active_bullet_pos] == Globals.Bullets.Empty and Globals.ammo[special_bullet_2] > 0:
-		reload(special_bullet_2)
-	if Input.is_action_just_pressed("Special Reload 3") and Globals.magazine[active_bullet_pos] == Globals.Bullets.Empty and Globals.ammo[special_bullet_3] > 0:
-		reload(special_bullet_3)
+	if Input.is_action_just_pressed("Special Reload 1") and Globals.magazine[active_bullet_pos] == Globals.Bullets.Empty and Globals.ammo[bullet_types[1]] > 0:
+		reload(bullet_types[1])
+	if Input.is_action_just_pressed("Special Reload 2") and Globals.magazine[active_bullet_pos] == Globals.Bullets.Empty and Globals.ammo[bullet_types[2]] > 0:
+		reload(bullet_types[2])
+	if Input.is_action_just_pressed("Special Reload 3") and Globals.magazine[active_bullet_pos] == Globals.Bullets.Empty and Globals.ammo[bullet_types[3]] > 0:
+		reload(bullet_types[3])
 	
 	# Animations
 	if Input.is_action_pressed("Down"):
@@ -118,9 +116,9 @@ func add_shot_knockback(bullet_id: int = 0, knockback_amount = 750):
 
 # Updates Global script ammo type array to match what the Player has
 func update_bullet_types():
-	Globals.ammo_types[1] = special_bullet_1
-	Globals.ammo_types[2] = special_bullet_2
-	Globals.ammo_types[3] = special_bullet_3
+	Globals.ammo_types[1] = bullet_types[1]
+	Globals.ammo_types[2] = bullet_types[2]
+	Globals.ammo_types[3] = bullet_types[3]
 
 # Takes 1 health from the player, currently starts with 6 total
 func take_damage(damage):

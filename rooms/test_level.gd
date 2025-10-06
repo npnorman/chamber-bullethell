@@ -4,10 +4,13 @@ class_name LevelContainer
 var bullet_scene: PackedScene = preload("res://scenes/player/bullets/player-bullet.tscn")
 var bullet_pickup_scene: PackedScene = preload("res://scenes/bullet_pickup.tscn")
 
+# Connects signals for testing, will work differently in the future
 func _ready():
 	for enemy: CharacterBody2D in $Enemies.get_children():
 		enemy.killed.connect(_on_enemy_killed)
 	$Pickups/BulletPickup.ammo_changed.connect(_on_bullet_pickup_ammo_changed)
+	$Pickups/RicochetPickup.ammo_changed.connect(_on_bullet_pickup_ammo_changed)
+	$Pickups/ShotgunPickup.ammo_changed.connect(_on_bullet_pickup_ammo_changed)
 
 # Adjust HUD when cylinder changes
 func _on_player_cylinder_cycled() -> void:
@@ -19,6 +22,7 @@ func _on_player_cylinder_cycled() -> void:
 func _on_hud_rotation_completed() -> void:
 	$Player.can_reload = true
 
+# When an enemy dies, spawn an ammo pickup at their location
 func _on_enemy_killed(enemy_position: Vector2, ammo_dropped: int) -> void:
 	var bullet_pickup: Area2D = bullet_pickup_scene.instantiate()
 	bullet_pickup.global_position = enemy_position
@@ -26,8 +30,12 @@ func _on_enemy_killed(enemy_position: Vector2, ammo_dropped: int) -> void:
 	bullet_pickup.ammo_changed.connect(_on_bullet_pickup_ammo_changed)
 	$Pickups.add_child(bullet_pickup)
 		
-
-func _on_bullet_pickup_ammo_changed() -> void:
+# Updates HUD when ammo is picked up
+func _on_bullet_pickup_ammo_changed(new_ammo_type: bool, slot: int, bullet_id: int) -> void:
+	if new_ammo_type:
+		$Player.bullet_types[slot] = bullet_id
+		$Player.update_bullet_types()
+		$HUD.set_ammo_types()
 	$HUD.update_counters()
 
 func _on_player_bullet_fired(pos, dir, id):
