@@ -1,8 +1,9 @@
-[gd_scene load_steps=6 format=4 uid="uid://b2wfyvk33nwth"]
+[gd_scene load_steps=7 format=4 uid="uid://b2wfyvk33nwth"]
 
 [ext_resource type="Texture2D" uid="uid://8ml14yh2dh84" path="res://tilesets/desertTiles.png" id="1_du7bw"]
 [ext_resource type="Texture2D" uid="uid://c2joxft8stuwm" path="res://sprites/Cactus1.png" id="2_mm6rb"]
 [ext_resource type="Texture2D" uid="uid://dp1dtnta02t6i" path="res://sprites/Cactus2.png" id="3_eocq4"]
+[ext_resource type="Texture2D" uid="uid://cnnyk1ubxirgl" path="res://sprites/treasureChest1.png" id="4_eocq4"]
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_mm6rb"]
 texture = ExtResource("1_du7bw")
@@ -91,3 +92,7 @@ texture = ExtResource("3_eocq4")
 [node name="Cactus3" type="Sprite2D" parent="."]
 position = Vector2(123, 407)
 texture = ExtResource("2_mm6rb")
+
+[node name="TreasureChest1" type="Sprite2D" parent="."]
+position = Vector2(271, 264)
+texture = ExtResource("4_eocq4")
