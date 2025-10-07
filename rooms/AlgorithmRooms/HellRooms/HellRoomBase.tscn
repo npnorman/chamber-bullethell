@@ -3,7 +3,7 @@
 [ext_resource type="Texture2D" uid="uid://b5l7w2s3y1apx" path="res://tilesets/hellTiles.png" id="1_hkysq"]
 [ext_resource type="Texture2D" uid="uid://c8rdbv3u77b5i" path="res://tilesets/HelltileWalls.png" id="2_epseb"]
 
-[sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_h70r7"]
+[sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_hkysq"]
 texture = ExtResource("1_hkysq")
 0:0/0 = 0
 1:0/0 = 0
@@ -71,9 +71,9 @@ texture = ExtResource("1_hkysq")
 7:7/0 = 0
 
 [sub_resource type="TileSet" id="TileSet_0rvkj"]
-sources/0 = SubResource("TileSetAtlasSource_h70r7")
+sources/0 = SubResource("TileSetAtlasSource_hkysq")
 
-[sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_7m8d3"]
+[sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_epseb"]
 texture = ExtResource("2_epseb")
 0:0/0 = 0
 1:0/0 = 0
@@ -141,7 +141,7 @@ texture = ExtResource("2_epseb")
 7:7/0 = 0
 
 [sub_resource type="TileSet" id="TileSet_t1qit"]
-sources/0 = SubResource("TileSetAtlasSource_7m8d3")
+sources/0 = SubResource("TileSetAtlasSource_epseb")
 
 [node name="HellRoomBase" type="Node2D"]
 
