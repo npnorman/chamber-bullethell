@@ -241,7 +241,6 @@ color_initial_ramp = SubResource("Gradient_md0e3")
 
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
 sprite_frames = SubResource("SpriteFrames_md484")
-animation = &"idle"
 autoplay = "default"
 
 [node name="NavigationAgent2D" type="NavigationAgent2D" parent="."]

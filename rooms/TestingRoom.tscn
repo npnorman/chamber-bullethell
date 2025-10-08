@@ -1,9 +1,10 @@
-[gd_scene load_steps=15 format=4 uid="uid://cd0v14frrlgju"]
+[gd_scene load_steps=16 format=4 uid="uid://cd0v14frrlgju"]
 
 [ext_resource type="Texture2D" uid="uid://bu1pm22omtv21" path="res://sprites/tiles/test-tiles.png" id="1_tvp71"]
 [ext_resource type="Script" uid="uid://dhhfbfplukf3b" path="res://rooms/test_level.gd" id="1_u75bg"]
 [ext_resource type="PackedScene" uid="uid://be3bjg0ua7h2c" path="res://scenes/enemy.tscn" id="2_ckyam"]
 [ext_resource type="PackedScene" uid="uid://ckx3iy06eedai" path="res://scenes/player/player.tscn" id="3_i3fwb"]
+[ext_resource type="PackedScene" uid="uid://crwot1rdef6uf" path="res://scenes/interactables/chest.tscn" id="3_ovcuh"]
 [ext_resource type="Texture2D" uid="uid://b5l7w2s3y1apx" path="res://tilesets/hellTiles.png" id="4_w65w3"]
 [ext_resource type="Texture2D" uid="uid://c8rdbv3u77b5i" path="res://tilesets/HelltileWalls.png" id="7_0yuyw"]
 [ext_resource type="PackedScene" uid="uid://chtu6kuwhxen6" path="res://scenes/UI/hud.tscn" id="7_7e8gg"]
@@ -166,6 +167,18 @@ position = Vector2(-205, -61)
 position = Vector2(216, 139)
 
 [node name="Projectiles" type="Node" parent="."]
+
+[node name="Chests" type="Node" parent="."]
+
+[node name="Chest" parent="Chests" instance=ExtResource("3_ovcuh")]
+position = Vector2(-281, -187)
+bullet_id = 1
+
+[node name="Chest2" parent="Chests" instance=ExtResource("3_ovcuh")]
+position = Vector2(268, -182)
+bullet_id = 2
+
+[node name="Pickups" type="Node" parent="."]
 
 [node name="NavigationRegion2D" type="NavigationRegion2D" parent="."]
 position = Vector2(-7, -7)

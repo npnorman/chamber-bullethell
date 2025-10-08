@@ -15,10 +15,13 @@ var target:CharacterBody2D
 @onready var animated_sprite_2d: AnimatedSprite2D = $AnimatedSprite2D
 
 var is_moving:bool = true
+var is_dead:bool = false
 var last_static_position:Vector2
 var is_wiggle_room_set = true
 var wiggle_room:float = 1.0
 var wait_time:float = 3.0
+
+signal killed(enemy_position: Vector2, ammo_dropped: int)
 
 func _ready() -> void:
 	target = get_tree().get_nodes_in_group("Player")[0]
@@ -64,6 +67,9 @@ func take_damage(damage:int):
 
 func enemy_die():
 	# or dead body
+	if not is_dead:
+		killed.emit(self.global_position, 5)
+	is_dead = true
 	animated_sprite_2d.play("death")
 	animation_player.play("death")
 
