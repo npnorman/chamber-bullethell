@@ -1,6 +1,6 @@
 [gd_scene load_steps=4 format=3 uid="uid://driwak3eok3gy"]
 
-[ext_resource type="Script" uid="uid://bm3e88vnqx2pw" path="res://scenes/player/bullets/player-bullet.gd" id="1_ene0p"]
+[ext_resource type="Script" uid="uid://bm3e88vnqx2pw" path="res://scenes/player/bullets/generic-bullet.gd" id="1_ene0p"]
 [ext_resource type="Texture2D" uid="uid://lj0q8273oj2b" path="res://sprites/test_bullet.png" id="2_j6rts"]
 
 [sub_resource type="CapsuleShape2D" id="CapsuleShape2D_d1cmj"]
@@ -8,6 +8,8 @@ radius = 3.0
 height = 8.0
 
 [node name="Player-bullet" type="Area2D"]
+collision_layer = 0
+collision_mask = 13
 script = ExtResource("1_ene0p")
 
 [node name="Sprite2D" type="Sprite2D" parent="."]
@@ -19,5 +21,13 @@ shape = SubResource("CapsuleShape2D_d1cmj")
 [node name="DespawnTimer" type="Timer" parent="."]
 wait_time = 2.5
 
+[node name="CollisionTimer" type="Timer" parent="."]
+wait_time = 0.05
+
+[node name="RayCast2D" type="RayCast2D" parent="."]
+target_position = Vector2(0, -18)
+collision_mask = 13
+
 [connection signal="body_entered" from="." to="." method="_on_body_entered"]
 [connection signal="timeout" from="DespawnTimer" to="." method="_on_despawn_timer_timeout"]
+[connection signal="timeout" from="CollisionTimer" to="." method="_on_collision_timer_timeout"]

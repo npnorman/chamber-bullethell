@@ -2,7 +2,7 @@ extends CharacterBody2D
 
 var target:CharacterBody2D
 @export var speed : float = 300.0
-@export var health : int = 2
+@export var health : int = 12
 @export var bulletDamage: int = 1
 @export var bulletSpeed : float = 300.0
 @export var distance_from_player : float = 100
@@ -12,12 +12,16 @@ var target:CharacterBody2D
 @onready var nav_agent: NavigationAgent2D = $NavigationAgent2D
 @onready var animation_player: AnimationPlayer = $AnimationPlayer
 @onready var reroute_timer: Timer = $RerouteTimer
+@onready var animated_sprite_2d: AnimatedSprite2D = $AnimatedSprite2D
 
 var is_moving:bool = true
+var is_dead:bool = false
 var last_static_position:Vector2
 var is_wiggle_room_set = true
 var wiggle_room:float = 1.0
 var wait_time:float = 3.0
+
+signal killed(enemy_position: Vector2, ammo_dropped: int)
 
 func _ready() -> void:
 	target = get_tree().get_nodes_in_group("Player")[0]
@@ -58,10 +62,15 @@ func take_damage(damage:int):
 	if health <= 0:
 		enemy_die()
 	else:
+		animation_player.stop()
 		animation_player.play("color_red")
 
 func enemy_die():
 	# or dead body
+	if not is_dead:
+		killed.emit(self.global_position, 5)
+	is_dead = true
+	animated_sprite_2d.play("death")
 	animation_player.play("death")
 
 func shoot():
@@ -70,7 +79,6 @@ func shoot():
 	newBullet.get_node("Sprite2D").modulate = Color("green")
 	newBullet.damage = bulletDamage
 	newBullet.speed = bulletSpeed
-	newBullet.isEnemyBullet = true
 	newBullet.global_position = global_position
 	newBullet.direction = global_position.direction_to(target.global_position)
 	newBullet.rotation = global_position.angle_to_point(target.global_position) + deg_to_rad(90.0)
