@@ -1,11 +1,11 @@
 [gd_scene load_steps=13 format=4 uid="uid://cd0v14frrlgju"]
 
 [ext_resource type="Texture2D" uid="uid://bu1pm22omtv21" path="res://sprites/tiles/test-tiles.png" id="1_tvp71"]
-[ext_resource type="Script" uid="uid://dhhfbfplukf3b" path="res://scenes/rooms/test_level.gd" id="1_u75bg"]
+[ext_resource type="Script" path="res://scenes/rooms/test_level.gd" id="1_u75bg"]
 [ext_resource type="PackedScene" uid="uid://be3bjg0ua7h2c" path="res://scenes/enemy.tscn" id="2_ckyam"]
 [ext_resource type="PackedScene" uid="uid://ckx3iy06eedai" path="res://scenes/player/player.tscn" id="3_i3fwb"]
 [ext_resource type="Texture2D" uid="uid://b5l7w2s3y1apx" path="res://tilesets/hellTileTEST.png" id="4_w65w3"]
-[ext_resource type="Script" uid="uid://bsacta1udq1es" path="res://scripts/room_generation.gd" id="7_0yuyw"]
+[ext_resource type="Script" path="res://scripts/room_generation.gd" id="7_0yuyw"]
 [ext_resource type="PackedScene" uid="uid://chtu6kuwhxen6" path="res://scenes/UI/hud.tscn" id="7_7e8gg"]
 
 [sub_resource type="NavigationPolygon" id="NavigationPolygon_02uo2"]
