@@ -8,9 +8,8 @@ var bullet_pickup_scene: PackedScene = preload("res://scenes/bullet_pickup.tscn"
 func _ready():
 	for enemy: CharacterBody2D in $Enemies.get_children():
 		enemy.killed.connect(_on_enemy_killed)
-	$Pickups/BulletPickup.ammo_changed.connect(_on_bullet_pickup_ammo_changed)
-	$Pickups/RicochetPickup.ammo_changed.connect(_on_bullet_pickup_ammo_changed)
-	$Pickups/ShotgunPickup.ammo_changed.connect(_on_bullet_pickup_ammo_changed)
+	for chest: Area2D in $Chests.get_children():
+		chest.chest_opened.connect(_on_chest_opened)
 
 # Adjust HUD when cylinder changes
 func _on_player_cylinder_cycled() -> void:
@@ -28,6 +27,19 @@ func _on_enemy_killed(enemy_position: Vector2, ammo_dropped: int) -> void:
 	bullet_pickup.global_position = enemy_position
 	bullet_pickup.amount = ammo_dropped
 	bullet_pickup.ammo_changed.connect(_on_bullet_pickup_ammo_changed)
+	$Pickups.add_child(bullet_pickup)
+
+func _on_chest_opened(bullet_id: int, chest_position: Vector2):
+	var bullet_pickup: Area2D = bullet_pickup_scene.instantiate()
+	bullet_pickup.global_position = chest_position + Vector2(0, 8)
+	bullet_pickup.bullet_id = bullet_id
+	bullet_pickup.amount = Globals.ammo_max[bullet_id]
+	bullet_pickup.ammo_changed.connect(_on_bullet_pickup_ammo_changed)
+	#TODO: Get rid of the below code and have bullet pickup sprite depend on rarity
+	if bullet_id == 1:
+		bullet_pickup.modulate = Color(0, 0.5, 1, 1)
+	elif bullet_id == 2:
+		bullet_pickup.modulate = Color(1, 0, 0, 1)
 	$Pickups.add_child(bullet_pickup)
 		
 # Updates HUD when ammo is picked up

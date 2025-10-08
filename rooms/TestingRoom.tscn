@@ -4,10 +4,10 @@
 [ext_resource type="Script" uid="uid://dhhfbfplukf3b" path="res://rooms/test_level.gd" id="1_u75bg"]
 [ext_resource type="PackedScene" uid="uid://be3bjg0ua7h2c" path="res://scenes/enemy.tscn" id="2_ckyam"]
 [ext_resource type="PackedScene" uid="uid://ckx3iy06eedai" path="res://scenes/player/player.tscn" id="3_i3fwb"]
+[ext_resource type="PackedScene" uid="uid://crwot1rdef6uf" path="res://scenes/interactables/chest.tscn" id="3_ovcuh"]
 [ext_resource type="Texture2D" uid="uid://b5l7w2s3y1apx" path="res://tilesets/hellTiles.png" id="4_w65w3"]
 [ext_resource type="Texture2D" uid="uid://c8rdbv3u77b5i" path="res://tilesets/HelltileWalls.png" id="7_0yuyw"]
 [ext_resource type="PackedScene" uid="uid://chtu6kuwhxen6" path="res://scenes/UI/hud.tscn" id="7_7e8gg"]
-[ext_resource type="PackedScene" uid="uid://b3pyw2ywa2gic" path="res://scenes/bullet_pickup.tscn" id="8_cx3nh"]
 
 [sub_resource type="NavigationPolygon" id="NavigationPolygon_02uo2"]
 vertices = PackedVector2Array(161, 17, 161, -51, 269, -3, 269, 65, 337, 65, 347.594, 223.781, -327.063, 210.188, 125, 17, -329.922, -202.828, 125, -51, 331.367, -192.148, 337, -3)
@@ -168,23 +168,17 @@ position = Vector2(216, 139)
 
 [node name="Projectiles" type="Node" parent="."]
 
-[node name="Pickups" type="Node" parent="."]
+[node name="Chests" type="Node" parent="."]
 
-[node name="BulletPickup" parent="Pickups" instance=ExtResource("8_cx3nh")]
-position = Vector2(3, -188)
-amount = 5
-
-[node name="RicochetPickup" parent="Pickups" instance=ExtResource("8_cx3nh")]
-modulate = Color(3.85046e-07, 0.505291, 0.774033, 1)
-position = Vector2(-313, -191)
+[node name="Chest" parent="Chests" instance=ExtResource("3_ovcuh")]
+position = Vector2(-281, -187)
 bullet_id = 1
-amount = 30
 
-[node name="ShotgunPickup" parent="Pickups" instance=ExtResource("8_cx3nh")]
-modulate = Color(0.954458, 3.60981e-06, 1.34766e-06, 1)
-position = Vector2(298, -185)
+[node name="Chest2" parent="Chests" instance=ExtResource("3_ovcuh")]
+position = Vector2(268, -182)
 bullet_id = 2
-amount = 30
+
+[node name="Pickups" type="Node" parent="."]
 
 [node name="NavigationRegion2D" type="NavigationRegion2D" parent="."]
 position = Vector2(-7, -7)

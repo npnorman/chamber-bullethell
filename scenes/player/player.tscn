@@ -63,9 +63,8 @@ script = ExtResource("1_g2els")
 
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
 sprite_frames = SubResource("SpriteFrames_5gtgg")
-animation = &"walk"
+animation = &"idle"
 autoplay = "idle"
-frame_progress = 0.752861
 
 [node name="GunSprite" type="Sprite2D" parent="."]
 position = Vector2(3, 8)
