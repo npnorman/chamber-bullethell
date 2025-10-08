@@ -1,0 +1,11 @@
+[gd_scene load_steps=3 format=3 uid="uid://d1pe7q747exgv"]
+
+[ext_resource type="Script" uid="uid://tnedpv5i1cmu" path="res://scripts/room_gen/room_generator.gd" id="1_urdsy"]
+[ext_resource type="PackedScene" uid="uid://co6uhf24eyjvb" path="res://scenes/RoomGen/room_types/test_room.tscn" id="2_8gw76"]
+
+[node name="First-level" type="Node2D"]
+
+[node name="RoomGen" type="Node2D" parent="."]
+position = Vector2(-4, -16)
+script = ExtResource("1_urdsy")
+test_room = ExtResource("2_8gw76")
