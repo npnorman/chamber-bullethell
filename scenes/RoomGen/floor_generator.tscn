@@ -1,0 +1,10 @@
+[gd_scene load_steps=3 format=3 uid="uid://d1pe7q747exgv"]
+
+[ext_resource type="Script" uid="uid://tnedpv5i1cmu" path="res://scripts/room_gen/room_generator.gd" id="1_0dl7b"]
+[ext_resource type="PackedScene" uid="uid://co6uhf24eyjvb" path="res://scenes/RoomGen/room_types/test_room.tscn" id="2_p7csa"]
+
+[node name="FloorGenerator" type="Node2D"]
+
+[node name="RoomGen" type="Node2D" parent="."]
+script = ExtResource("1_0dl7b")
+test_room = ExtResource("2_p7csa")
