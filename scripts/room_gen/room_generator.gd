@@ -5,7 +5,7 @@ var one_room = preload("res://scenes/RoomGen/room_types/test_one.tscn")
 var two_close_room = preload("res://scenes/RoomGen/room_types/test_two_close.tscn")
 var two_apart_room = preload("res://scenes/RoomGen/room_types/test_two_apart.tscn")
 var three_room = preload("res://scenes/RoomGen/room_types/test_three.tscn")
-var four_room = preload("res://scenes/RoomGen/room_types/test_four.tscn")
+var four_room = preload("res://rooms/AlgorithmRooms/DesertRooms/DesertRoom0.tscn")
 var start_room = preload("res://scenes/RoomGen/room_types/testStart.tscn")
 
 # map
@@ -51,8 +51,6 @@ func _ready() -> void:
 	#knapsack += generateRooms(Globals.ExitType.FOUR,Globals.Rotation.ZERO,15)
 	roomsack += [one_room,two_close_room,two_apart_room,three_room,four_room,start_room]
 	knapsack += generateRooms(Globals.ExitType.FOUR,Globals.Rotation.ZERO,5)
-	knapsack += generateRooms(Globals.ExitType.THREE,Globals.Rotation.ZERO,1)
-	knapsack += generateRooms(Globals.ExitType.TWO_APART,Globals.Rotation.ZERO,2)
 	#knapsack += generateRooms(Globals.ExitType.TWO_CLOSE,Globals.Rotation.ZERO,5)
 	
 	add_room_current_location(starting_room)
@@ -108,6 +106,7 @@ func place_room_at_xy(coords:Vector4,center:Vector2):
 	adjusted_coords -= center
 	adjusted_coords *= tile_offset
 	adjusted_coords.y *= -1
+	
 	
 	newRoom.global_position = adjusted_coords
 	
