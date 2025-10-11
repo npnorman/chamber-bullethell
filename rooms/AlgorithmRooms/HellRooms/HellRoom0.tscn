@@ -149,5 +149,5 @@ tile_map_data = PackedByteArray("AAABAN7/AQADAAEAAAABAN//AAAGAAAAAAABAOD/AAAGAAA
 tile_set = SubResource("TileSet_0rvkj")
 
 [node name="TreasureChest1" type="Sprite2D" parent="."]
-position = Vector2(274, -253)
+position = Vector2(269, -308)
 texture = ExtResource("3_r82mq")
