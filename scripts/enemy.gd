@@ -1,11 +1,14 @@
 extends CharacterBody2D
 
 var target:CharacterBody2D
+@export var is_active: bool = true
 @export var speed : float = 300.0
 @export var health : int = 12
 @export var bulletDamage: int = 1
 @export var bulletSpeed : float = 300.0
 @export var distance_from_player : float = 100
+@export var wait_time:float = 3.0
+@export var wiggle : float = 2.0
 @export var bulletScene:PackedScene
 
 @onready var sprite: Sprite2D = $Sprite2D
@@ -14,40 +17,34 @@ var target:CharacterBody2D
 @onready var reroute_timer: Timer = $RerouteTimer
 @onready var animated_sprite_2d: AnimatedSprite2D = $AnimatedSprite2D
 
-var is_moving:bool = true
+var is_target_reached:bool = false
 var is_dead:bool = false
-var last_static_position:Vector2
-var is_wiggle_room_set = true
-var wiggle_room:float = 1.0
-var wait_time:float = 3.0
 
 signal killed(enemy_position: Vector2, ammo_dropped: int)
 
 func _ready() -> void:
+	
+	nav_agent.target_desired_distance = distance_from_player
+	
 	target = get_tree().get_nodes_in_group("Player")[0]
 	reroute_timer.wait_time = wait_time
 	decide_nav_route()
 
 func _physics_process(delta: float) -> void:
 	
-	move_to_target(delta)
-	
-	move_and_slide()
-
-func is_within_distance_from_target():
-	
-	if target.global_position.distance_to(global_position) <= distance_from_player:
-		return true
+	if is_active and !is_dead:
 		
-	return false
+		if !is_target_reached:
+			move_to_target(delta)
+		else:
+			velocity = velocity.lerp(Vector2.ZERO,0.5)
+		
+		move_and_slide()
 
 func decide_nav_route():
 	#set target
-	#TODO: make more inline with what we want later
-	var v1 = target.global_position - global_position
-	var v1n = v1.normalized()
-	
-	nav_agent.target_position = target.global_position - (v1n * distance_from_player)
+	is_target_reached = false
+	nav_agent.target_position = target.global_position
 
 func move_to_target(delta):
 	#move towards target
@@ -75,24 +72,32 @@ func enemy_die():
 
 func shoot():
 	var newBullet:Area2D = bulletScene.instantiate()
+	var shoot_target:Vector2 = get_shoot_target()
 	
 	newBullet.get_node("Sprite2D").modulate = Color("green")
 	newBullet.damage = bulletDamage
 	newBullet.speed = bulletSpeed
 	newBullet.global_position = global_position
-	newBullet.direction = global_position.direction_to(target.global_position)
-	newBullet.rotation = global_position.angle_to_point(target.global_position) + deg_to_rad(90.0)
+	newBullet.direction = global_position.direction_to(shoot_target)
+	newBullet.rotation = global_position.angle_to_point(shoot_target) + deg_to_rad(90.0)
 	
 	get_parent().add_child(newBullet)
 
+func get_shoot_target():
+	return target.global_position
+
 func _on_reroute_timer_timeout() -> void:
 	# reroute navagent
-	# stops jittering
-	shoot()
-	decide_nav_route()
-	
-	# random
-	var times = [-2,2]
-	var rng = RandomNumberGenerator.new()
-	var wiggle = times[rng.randi_range(0,times.size()-1)]
-	reroute_timer.wait_time = wait_time + wiggle
+	if !is_dead:
+		shoot()
+		decide_nav_route()
+		
+		# random
+		var times = [-wiggle,wiggle]
+		var rng = RandomNumberGenerator.new()
+		var wiggle = times[rng.randi_range(0,times.size()-1)]
+		reroute_timer.wait_time = wait_time + wiggle
+
+func _on_navigation_agent_2d_target_reached() -> void:
+	print("Target reached")
+	is_target_reached = true

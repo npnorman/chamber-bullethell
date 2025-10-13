@@ -254,4 +254,5 @@ libraries = {
 &"": SubResource("AnimationLibrary_5uy6h")
 }
 
+[connection signal="target_reached" from="NavigationAgent2D" to="." method="_on_navigation_agent_2d_target_reached"]
 [connection signal="timeout" from="RerouteTimer" to="." method="_on_reroute_timer_timeout"]
