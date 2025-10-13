@@ -84,6 +84,7 @@ func shoot():
 		else:
 			bullet_fired.emit($GunSprite/BulletOrigin1.global_position, player_direction, Globals.magazine[active_bullet_pos])
 		add_shot_knockback(Globals.magazine[active_bullet_pos])
+		SfxPlayer.player_shot_sound()
 		Globals.magazine[active_bullet_pos] = Globals.Bullets.Empty
 	can_reload = false
 	cycle_cylinder()

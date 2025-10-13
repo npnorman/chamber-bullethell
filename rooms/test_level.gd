@@ -20,6 +20,7 @@ func _on_player_cylinder_cycled() -> void:
 # Allow player to reload again once cylinder is done spinning
 func _on_hud_rotation_completed() -> void:
 	$Player.can_reload = true
+	SfxPlayer.cylinder_click_sound()
 
 # When an enemy dies, spawn an ammo pickup at their location
 func _on_enemy_killed(enemy_position: Vector2, ammo_dropped: int) -> void:

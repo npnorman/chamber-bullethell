@@ -18,6 +18,10 @@ config/icon="res://icon.svg"
 [autoload]
 
 Globals="*res://globals/globals.gd"
+SfxPlayer="*res://globals/sfx_player.gd"
+SfxPlayerScene="*res://globals/sfx_player.tscn"
+MusicPlayerScene="*res://globals/music_player.tscn"
+MusicPlayer="*res://globals/music_player.gd"
 
 [display]
 
