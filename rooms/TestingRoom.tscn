@@ -146,16 +146,14 @@ script = ExtResource("1_u75bg")
 [node name="Enemies" type="Node" parent="."]
 
 [node name="Enemy1" parent="Enemies" instance=ExtResource("2_ckyam")]
-position = Vector2(2195, -116)
+position = Vector2(152, -105)
 is_active = false
 
 [node name="Enemy2" parent="Enemies" instance=ExtResource("2_ckyam")]
-position = Vector2(1990, -177)
-is_active = false
+position = Vector2(-53, -166)
 
 [node name="Enemy3" parent="Enemies" instance=ExtResource("2_ckyam")]
-position = Vector2(2256, -2)
-is_active = false
+position = Vector2(213, 9)
 
 [node name="DiagonalEnemy" parent="Enemies" instance=ExtResource("9_ovcuh")]
 position = Vector2(-197, -129)
