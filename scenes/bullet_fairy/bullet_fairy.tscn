@@ -1,0 +1,44 @@
+[gd_scene load_steps=7 format=3 uid="uid://chqsm4w7oks0t"]
+
+[ext_resource type="Texture2D" uid="uid://dj78tha4xkjpf" path="res://sprites/bullet_fairy/miner.png" id="1_wrpmb"]
+[ext_resource type="Script" uid="uid://dk6alrwsdfo0k" path="res://scripts/bullet_fairy/bullet_fairy.gd" id="1_ywtwx"]
+[ext_resource type="PackedScene" uid="uid://b3pyw2ywa2gic" path="res://scenes/bullet_pickup.tscn" id="2_plh5f"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_ywtwx"]
+size = Vector2(35, 42.5)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_plh5f"]
+atlas = ExtResource("1_wrpmb")
+region = Rect2(0, 0, 32, 64)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_6a2kq"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_plh5f")
+}],
+"loop": true,
+"name": &"default",
+"speed": 5.0
+}]
+
+[node name="BulletFairy" type="CharacterBody2D"]
+collision_layer = 0
+collision_mask = 0
+script = ExtResource("1_ywtwx")
+square_radius = 6
+bullet_scene = ExtResource("2_plh5f")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+position = Vector2(0, 11.25)
+shape = SubResource("RectangleShape2D_ywtwx")
+
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
+sprite_frames = SubResource("SpriteFrames_6a2kq")
+autoplay = "default"
+
+[node name="Timer" type="Timer" parent="."]
+wait_time = 0.5
+autostart = true
+
+[connection signal="timeout" from="Timer" to="." method="_on_timer_timeout"]

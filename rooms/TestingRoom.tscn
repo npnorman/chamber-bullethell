@@ -1,4 +1,4 @@
-[gd_scene load_steps=14 format=4 uid="uid://cd0v14frrlgju"]
+[gd_scene load_steps=16 format=4 uid="uid://cd0v14frrlgju"]
 
 [ext_resource type="Script" uid="uid://dhhfbfplukf3b" path="res://rooms/test_level.gd" id="1_u75bg"]
 [ext_resource type="PackedScene" uid="uid://be3bjg0ua7h2c" path="res://scenes/enemy.tscn" id="2_ckyam"]
@@ -6,8 +6,10 @@
 [ext_resource type="PackedScene" uid="uid://ckx3iy06eedai" path="res://scenes/player/player.tscn" id="3_i3fwb"]
 [ext_resource type="PackedScene" uid="uid://crwot1rdef6uf" path="res://scenes/interactables/chest.tscn" id="3_ovcuh"]
 [ext_resource type="Texture2D" uid="uid://b5l7w2s3y1apx" path="res://tilesets/hellTiles.png" id="4_w65w3"]
+[ext_resource type="PackedScene" uid="uid://chqsm4w7oks0t" path="res://scenes/bullet_fairy/bullet_fairy.tscn" id="5_b6v1o"]
 [ext_resource type="Texture2D" uid="uid://c8rdbv3u77b5i" path="res://tilesets/HelltileWalls.png" id="7_0yuyw"]
 [ext_resource type="PackedScene" uid="uid://chtu6kuwhxen6" path="res://scenes/UI/hud.tscn" id="7_7e8gg"]
+[ext_resource type="PackedScene" uid="uid://dhsj01pefhfqp" path="res://scenes/diagonal_enemy.tscn" id="9_ovcuh"]
 
 [sub_resource type="NavigationPolygon" id="NavigationPolygon_02uo2"]
 vertices = PackedVector2Array(161, 17, 161, -51, 269, -3, 269, 65, 337, 65, 347.594, 223.781, -327.063, 210.188, 125, 17, -329.922, -202.828, 125, -51, 331.367, -192.148, 337, -3)
@@ -145,13 +147,19 @@ script = ExtResource("1_u75bg")
 [node name="Enemies" type="Node" parent="."]
 
 [node name="Enemy1" parent="Enemies" instance=ExtResource("2_ckyam")]
-position = Vector2(676, -301)
+position = Vector2(2412, 1809)
+is_active = false
 
 [node name="Enemy2" parent="Enemies" instance=ExtResource("2_ckyam")]
-position = Vector2(471, -362)
+position = Vector2(2207, 1748)
 
 [node name="Enemy3" parent="Enemies" instance=ExtResource("2_ckyam")]
-position = Vector2(737, -187)
+position = Vector2(2473, 1923)
+
+[node name="DiagonalEnemy" parent="Enemies" instance=ExtResource("9_ovcuh")]
+position = Vector2(2063, 1785)
+distance_diagonal_from_player = 50.0
+distance_from_player = 200.0
 
 [node name="Projectiles" type="Node" parent="."]
 
@@ -178,10 +186,14 @@ tile_set = SubResource("TileSet_komxo")
 
 [node name="GameManager" type="Node" parent="."]
 
+[node name="BulletFairy" parent="." instance=ExtResource("5_b6v1o")]
+position = Vector2(-168, 31)
+
 [node name="Player" parent="." instance=ExtResource("3_i3fwb")]
 top_level = true
 
 [node name="Camera2D" type="Camera2D" parent="Player"]
+zoom = Vector2(1.34, 1.34)
 
 [node name="HUD" parent="." instance=ExtResource("7_7e8gg")]
 
