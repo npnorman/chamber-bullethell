@@ -99,5 +99,4 @@ func _on_reroute_timer_timeout() -> void:
 		reroute_timer.wait_time = wait_time + wiggle
 
 func _on_navigation_agent_2d_target_reached() -> void:
-	print("Target reached")
 	is_target_reached = true
