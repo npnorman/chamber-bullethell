@@ -7,6 +7,7 @@ extends Area2D
 var direction: Vector2 = Vector2.UP
 var collision_normal: Vector2
 var can_collide: bool = true
+var found_angle: bool = false
 
 @onready var raycast: RayCast2D = $RayCast2D
 
@@ -15,8 +16,9 @@ func _ready():
 	
 func _process(delta):
 	position += direction * speed * delta
-	if raycast.is_colliding():
+	if raycast.is_colliding() and not found_angle:
 		collision_normal = raycast.get_collision_normal()
+		found_angle = true
 
 func _on_despawn_timer_timeout() -> void:
 	self.queue_free()
@@ -44,6 +46,7 @@ func _on_body_entered(body: Node2D) -> void:
 			if bullet_id == Globals.Bullets.Ricochet:
 				damage *= 2
 			can_collide = false
+			found_angle = false
 			$CollisionTimer.start()
 		else:
 			self.queue_free()

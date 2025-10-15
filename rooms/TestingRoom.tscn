@@ -189,13 +189,13 @@ tile_set = SubResource("TileSet_komxo")
 [node name="BulletFairy" parent="." instance=ExtResource("5_b6v1o")]
 position = Vector2(-168, 31)
 
+[node name="HUD" parent="." instance=ExtResource("7_7e8gg")]
+
 [node name="Player" parent="." instance=ExtResource("3_i3fwb")]
 top_level = true
 
 [node name="Camera2D" type="Camera2D" parent="Player"]
 zoom = Vector2(1.34, 1.34)
-
-[node name="HUD" parent="." instance=ExtResource("7_7e8gg")]
 
 [node name="WallTileLayer" type="TileMapLayer" parent="."]
 position = Vector2(-736, -476)
@@ -203,6 +203,9 @@ tile_map_data = PackedByteArray("AADq//D/AAAGAAUAAADr//D/AAAGAAUAAADs//D/AAAGAAU
 enabled = false
 tile_set = SubResource("TileSet_5vbr4")
 
+[connection signal="ammo_dropped" from="HUD" to="." method="_on_hud_ammo_dropped"]
+[connection signal="rotation_completed" from="HUD" to="." method="_on_hud_rotation_completed"]
 [connection signal="bullet_fired" from="Player" to="." method="_on_player_bullet_fired"]
 [connection signal="cylinder_cycled" from="Player" to="." method="_on_player_cylinder_cycled"]
-[connection signal="rotation_completed" from="HUD" to="." method="_on_hud_rotation_completed"]
+[connection signal="toggle_inventory" from="Player" to="." method="_on_player_toggle_inventory"]
+[connection signal="ui_click" from="Player" to="." method="_on_player_ui_click"]
