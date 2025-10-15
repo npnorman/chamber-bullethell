@@ -21,6 +21,8 @@ var selected_box: int
 @onready var inventory = $InventoryAreas
 @onready var held_item = $HeldItem
 @onready var held_texture = $HeldItem/HeldTexture
+@onready var text_panel = $TextPanel
+@onready var bullet_text = $TextPanel/TextDescription
 signal rotation_completed
 signal ammo_dropped(bullet_id: int, amount: int)
 
@@ -28,6 +30,25 @@ func _ready():
 	update_chamber_textures()
 	update_counters()
 	set_ammo_types()
+
+func _process(delta: float) -> void:
+	if mouse_over_box and inventory.visible and Globals.ammo_types[active_box] != -1:
+		match active_box:
+			0:
+				bullet_text.text = Texts.bullet_texts[0]
+				text_panel.position = Vector2(180, 140)
+			1:
+				bullet_text.text = Texts.bullet_texts[Globals.ammo_types[1]]
+				text_panel.position = Vector2(303, 140)
+			2:
+				bullet_text.text = Texts.bullet_texts[Globals.ammo_types[2]]
+				text_panel.position = Vector2(426, 140)
+			3:
+				bullet_text.text = Texts.bullet_texts[Globals.ammo_types[3]]
+				text_panel.position = Vector2(549, 140)
+		text_panel.visible = true
+	elif text_panel.visible:
+		text_panel.visible = false
 
 # Rotates cylinder after receiving signal from level script
 func start_rotating():
@@ -47,6 +68,9 @@ func start_rotating():
 	rotation_count += 1
 	if rotation_count > 5:
 		rotation_count = 0
+
+func _on_cylinder_animation_animation_finished(anim_name: StringName) -> void:
+	rotation_completed.emit()
 
 # Sets textures for HUD ammo counters and makes the key invisible when no ammo type is there
 func set_ammo_types():
@@ -85,13 +109,12 @@ func update_counters():
 			counter.text = ''
 		index += 1
 
-func _on_cylinder_animation_animation_finished(anim_name: StringName) -> void:
-	rotation_completed.emit()
-
 # toggles visibility of inventory 
 func display_inventory() -> void:
 	inventory.visible = not inventory.visible
 
+# Sets held item texture to that of the box clicked and lets you drag it around. If let go of above the trash icon,
+# drops the item to the left of the player
 func _input(event: InputEvent) -> void:
 	if Input.is_action_just_pressed("Shoot") and mouse_over_box:
 		if Globals.ammo_types[active_box] >= 0:
@@ -105,12 +128,14 @@ func _input(event: InputEvent) -> void:
 	elif Input.is_action_just_released("Shoot"):
 		dragging_box = false
 		held_item.visible = false
-		if mouse_over_trash and selected_box != 0:
+		if mouse_over_trash and selected_box > 0:
 			ammo_dropped.emit(Globals.ammo_types[selected_box], Globals.ammo[Globals.ammo_types[selected_box]])
 			Globals.ammo[Globals.ammo_types[selected_box]] = 0
 			Globals.ammo_types[selected_box] = -1
 			set_ammo_types()
+		selected_box = -1
 
+# One million signals below to inform the script which inventory box the mouse is hovering over
 func _on_area_1_mouse_entered() -> void:
 	mouse_over_box = true
 	active_box = 0

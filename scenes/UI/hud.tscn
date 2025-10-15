@@ -1,10 +1,9 @@
-[gd_scene load_steps=25 format=3 uid="uid://chtu6kuwhxen6"]
+[gd_scene load_steps=24 format=3 uid="uid://chtu6kuwhxen6"]
 
 [ext_resource type="Script" uid="uid://cxl6hj6ji3sd2" path="res://scenes/UI/hud.gd" id="1_rd3kb"]
 [ext_resource type="Texture2D" uid="uid://qrarrw5bha70" path="res://sprites/HudNoChamber.png" id="2_xh8q5"]
 [ext_resource type="Texture2D" uid="uid://c0q3kso3x2tj2" path="res://sprites/SingleChamber.png" id="3_cg4gw"]
 [ext_resource type="Texture2D" uid="uid://bqroonmtnxn5s" path="res://sprites/basic_back.png" id="4_h03ao"]
-[ext_resource type="Texture2D" uid="uid://buxge0ajsojmg" path="res://sprites/Explosive.png" id="5_h03ao"]
 [ext_resource type="Texture2D" uid="uid://xuro3v25b35w" path="res://sprites/Gamblers.png" id="6_7wvwv"]
 [ext_resource type="Texture2D" uid="uid://cur0ykjqsjmlq" path="res://sprites/Trash.png" id="7_xh8q5"]
 
@@ -434,12 +433,6 @@ theme_override_styles/panel = SubResource("StyleBoxEmpty_h03ao")
 layout_mode = 2
 texture = ExtResource("6_7wvwv")
 
-[node name="TextDescription" type="RichTextLabel" parent="."]
-visible = false
-offset_right = 40.0
-offset_bottom = 40.0
-mouse_filter = 1
-
 [node name="InventoryAreas" type="Control" parent="."]
 visible = false
 layout_mode = 3
@@ -472,7 +465,7 @@ grow_vertical = 2
 
 [node name="Ammo1" type="TextureRect" parent="InventoryAreas/InventoryView"]
 layout_mode = 2
-texture = ExtResource("5_h03ao")
+texture = ExtResource("4_h03ao")
 expand_mode = 2
 
 [node name="Area1" type="Area2D" parent="InventoryAreas/InventoryView/Ammo1"]
@@ -484,6 +477,7 @@ shape = SubResource("RectangleShape2D_h03ao")
 
 [node name="Ammo2" type="TextureRect" parent="InventoryAreas/InventoryView"]
 layout_mode = 2
+texture = ExtResource("4_h03ao")
 expand_mode = 2
 
 [node name="Area2" type="Area2D" parent="InventoryAreas/InventoryView/Ammo2"]
@@ -495,6 +489,7 @@ shape = SubResource("RectangleShape2D_7wvwv")
 
 [node name="Ammo3" type="TextureRect" parent="InventoryAreas/InventoryView"]
 layout_mode = 2
+texture = ExtResource("4_h03ao")
 expand_mode = 2
 
 [node name="Area3" type="Area2D" parent="InventoryAreas/InventoryView/Ammo3"]
@@ -506,6 +501,7 @@ shape = SubResource("RectangleShape2D_k00v8")
 
 [node name="Ammo4" type="TextureRect" parent="InventoryAreas/InventoryView"]
 layout_mode = 2
+texture = ExtResource("4_h03ao")
 expand_mode = 2
 
 [node name="Area4" type="Area2D" parent="InventoryAreas/InventoryView/Ammo4"]
@@ -536,6 +532,28 @@ texture = ExtResource("7_xh8q5")
 position = Vector2(60, 59)
 scale = Vector2(7, 7)
 shape = SubResource("RectangleShape2D_kj32l")
+
+[node name="TextPanel" type="PanelContainer" parent="."]
+visible = false
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = 41.0
+offset_top = -244.0
+offset_right = 341.0
+offset_bottom = -94.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="TextDescription" type="RichTextLabel" parent="TextPanel"]
+layout_mode = 2
+mouse_filter = 1
+bbcode_enabled = true
+text = "[color=yellow]Basic Bullet[/color]
+This is your trusty standard bullet! 
+While this bullet may not have any special effects, it is so widely used that it is accepted as currency just about anywhere!"
 
 [connection signal="animation_finished" from="CylinderNode/CylinderAnimation" to="." method="_on_cylinder_animation_animation_finished"]
 [connection signal="mouse_entered" from="InventoryAreas/InventoryView/Ammo1/Area1" to="." method="_on_area_1_mouse_entered"]

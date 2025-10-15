@@ -22,6 +22,7 @@ SfxPlayer="*res://globals/sfx_player.gd"
 SfxPlayerScene="*res://globals/sfx_player.tscn"
 MusicPlayerScene="*res://globals/music_player.tscn"
 MusicPlayer="*res://globals/music_player.gd"
+Texts="*res://globals/texts.gd"
 
 [display]
 
