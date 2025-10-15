@@ -1,16 +1,28 @@
 extends CanvasLayer
 
 var rotation_count: int = 0
+var mouse_over_box: bool = false
+var mouse_over_trash: bool = false
+var dragging_box: bool = false
+var drag_distance: float
+var drag_dir: Vector2
+var new_position: Vector2
+var active_box: int
+var selected_box: int
 @onready var basic_back: Resource = preload("res://sprites/basic_back.png")
 @onready var ricochet_back: Resource = preload("res://sprites/ricochet_back.png")
 @onready var shotgun_back: Resource = preload("res://sprites/shotgun_back.png")
 @onready var chamber_array: Array[TextureRect] = [$CylinderNode/Chamber1/BulletTexture1, $CylinderNode/Chamber2/BulletTexture2, $CylinderNode/Chamber3/BulletTexture3, $CylinderNode/Chamber4/BulletTexture4, $CylinderNode/Chamber5/BulletTexture5, $CylinderNode/Chamber6/BulletTexture6]
 @onready var bullet_textures: Array[Resource] = [basic_back, ricochet_back, shotgun_back]
 @onready var ammo_counters: Array[Label] = [$SpecialBullets/NormalAmmoBox/BasicAmmo, $SpecialBullets/SpecialAmmoBox1/SpecialAmmo1, $SpecialBullets/SpecialAmmoBox2/SpecialAmmo2, $SpecialBullets/SpecialAmmoBox3/SpecialAmmo3]
-@onready var ammo_keys: Array[Label] = [$SpecialBullets/SpecialAmmoBox1/SpecialKey1, $SpecialBullets/SpecialAmmoBox2/SpecialKey2, $SpecialBullets/SpecialAmmoBox3/SpecialKey3]
+@onready var ammo_keys: Array[Label] = [$SpecialBullets/NormalAmmoBox/BasicKey, $SpecialBullets/SpecialAmmoBox1/SpecialKey1, $SpecialBullets/SpecialAmmoBox2/SpecialKey2, $SpecialBullets/SpecialAmmoBox3/SpecialKey3]
 @onready var hud_ammo_textures: Array[TextureRect] = [$SpecialBullets/NormalAmmoBox/NormalTexture, $SpecialBullets/SpecialAmmoBox1/SpecialTexture1, $SpecialBullets/SpecialAmmoBox2/SpecialTexture2, $SpecialBullets/SpecialAmmoBox3/SpecialTexture3]
-
+@onready var inventory_array: Array[TextureRect] = [$InventoryAreas/InventoryView/Ammo1, $InventoryAreas/InventoryView/Ammo2, $InventoryAreas/InventoryView/Ammo3, $InventoryAreas/InventoryView/Ammo4]
+@onready var inventory = $InventoryAreas
+@onready var held_item = $HeldItem
+@onready var held_texture = $HeldItem/HeldTexture
 signal rotation_completed
+signal ammo_dropped(bullet_id: int, amount: int)
 
 func _ready():
 	update_chamber_textures()
@@ -39,12 +51,17 @@ func start_rotating():
 # Sets textures for HUD ammo counters and makes the key invisible when no ammo type is there
 func set_ammo_types():
 	var index: int = 0
-	for ammo_sprite: TextureRect in hud_ammo_textures:
+	while index < 4:
 		if Globals.ammo_types[index] > -1:
-			ammo_sprite.texture = bullet_textures[Globals.ammo_types[index]]
-			ammo_keys[index - 1].visible = true
+			hud_ammo_textures[index].texture = bullet_textures[Globals.ammo_types[index]]
+			inventory_array[index].texture = bullet_textures[Globals.ammo_types[index]]
+			ammo_keys[index].visible = true
+			ammo_counters[index].visible = true
 		else: 
-			ammo_keys[index - 1].visible = false
+			ammo_keys[index].visible = false
+			hud_ammo_textures[index].texture = null
+			inventory_array[index].texture = null
+			ammo_counters[index].visible = false
 		index += 1
 
 # Called after shooting/reloading, changes each chambers' textures based on global magazine array
@@ -70,3 +87,55 @@ func update_counters():
 
 func _on_cylinder_animation_animation_finished(anim_name: StringName) -> void:
 	rotation_completed.emit()
+
+# toggles visibility of inventory 
+func display_inventory() -> void:
+	inventory.visible = not inventory.visible
+
+func _input(event: InputEvent) -> void:
+	if Input.is_action_just_pressed("Shoot") and mouse_over_box:
+		if Globals.ammo_types[active_box] >= 0:
+			selected_box = active_box
+			held_texture.texture = bullet_textures[Globals.ammo_types[selected_box]]
+			held_item.visible = true
+			held_item.position = get_viewport().get_mouse_position() - Vector2(60, 60)
+			dragging_box = true
+	elif Input.is_action_pressed("Shoot") and dragging_box:
+		held_item.position = get_viewport().get_mouse_position() - Vector2(60, 60)
+	elif Input.is_action_just_released("Shoot"):
+		dragging_box = false
+		held_item.visible = false
+		if mouse_over_trash and selected_box != 0:
+			ammo_dropped.emit(Globals.ammo_types[selected_box], Globals.ammo[Globals.ammo_types[selected_box]])
+			Globals.ammo[Globals.ammo_types[selected_box]] = 0
+			Globals.ammo_types[selected_box] = -1
+			set_ammo_types()
+
+func _on_area_1_mouse_entered() -> void:
+	mouse_over_box = true
+	active_box = 0
+func _on_area_1_mouse_exited() -> void:
+	mouse_over_box = false
+
+func _on_area_2_mouse_entered() -> void:
+	mouse_over_box = true
+	active_box = 1
+func _on_area_2_mouse_exited() -> void:
+	mouse_over_box = false
+
+func _on_area_3_mouse_entered() -> void:
+	mouse_over_box = true
+	active_box = 2
+func _on_area_3_mouse_exited() -> void:
+	mouse_over_box = false
+
+func _on_area_4_mouse_entered() -> void:
+	mouse_over_box = true
+	active_box = 3
+func _on_area_4_mouse_exited() -> void:
+	mouse_over_box = false
+
+func _on_drop_area_mouse_entered() -> void:
+	mouse_over_trash = true
+func _on_drop_area_mouse_exited() -> void:
+	mouse_over_trash = false

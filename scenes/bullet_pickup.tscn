@@ -1,7 +1,11 @@
-[gd_scene load_steps=7 format=3 uid="uid://b3pyw2ywa2gic"]
+[gd_scene load_steps=11 format=3 uid="uid://b3pyw2ywa2gic"]
 
 [ext_resource type="Script" uid="uid://b5hu42q4dthhi" path="res://scenes/bullet_pickup.gd" id="1_4367f"]
 [ext_resource type="Texture2D" uid="uid://lj0q8273oj2b" path="res://sprites/test_bullet.png" id="1_cpad5"]
+[ext_resource type="Texture2D" uid="uid://cc4hc01da2x4y" path="res://sprites/BasicBulletDrop.png" id="2_3rgd5"]
+[ext_resource type="Texture2D" uid="uid://bugv1hmlnh0wu" path="res://sprites/CommonBulletDrop.png" id="2_ld35a"]
+[ext_resource type="Texture2D" uid="uid://dx0ucmv3avgjj" path="res://sprites/UncommonBulletDrop.png" id="3_3rgd5"]
+[ext_resource type="Texture2D" uid="uid://clldi7xhmpemh" path="res://sprites/LegendaryBulletDrop.png" id="4_c4o03"]
 
 [sub_resource type="CapsuleShape2D" id="CapsuleShape2D_cpad5"]
 radius = 7.0
@@ -26,6 +30,7 @@ scale = Vector2(1.33, 1.33)
 collision_layer = 0
 collision_mask = 2
 script = ExtResource("1_4367f")
+pickup_textures = Array[Resource]([ExtResource("2_3rgd5"), ExtResource("2_ld35a"), ExtResource("3_3rgd5"), ExtResource("4_c4o03")])
 
 [node name="Sprite2D" type="Sprite2D" parent="."]
 texture = ExtResource("1_cpad5")

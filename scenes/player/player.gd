@@ -2,6 +2,7 @@ extends CharacterBody2D
 
 var can_shoot: bool = true
 var can_blank: bool = true
+var mouse_ui_mode: bool = false
 var is_invincible: bool = false
 var player_knockback: Vector2
 var active_bullet_pos: int = 0
@@ -17,6 +18,8 @@ var active_bullet_pos: int = 0
 
 signal bullet_fired(pos: Vector2, direction: Vector2, id: int)
 signal cylinder_cycled
+signal toggle_inventory
+signal ui_click
 
 func _process(_delta):
 	var movement_direction = Input.get_vector("Left", "Right", "Up", "Down")
@@ -27,16 +30,17 @@ func _process(_delta):
 	rotate_gun()
 	player_direction = (get_global_mouse_position() - position).normalized()
 	
-	# Shoot Input
-	if Input.is_action_pressed("Shoot") and can_shoot:
-		print_bullet_name(Globals.magazine[active_bullet_pos])
-		shoot()
-	
-	# Blank input, adds knockback for no bullet cost and has a 1.5 second cooldown
-	if Input.is_action_pressed("Blank") and can_blank:
-		add_shot_knockback(Globals.Bullets.Shotgun, 1500)
-		can_blank = false
-		$BlankCooldown.start()
+	if not mouse_ui_mode:
+		# Shoot Input
+		if Input.is_action_pressed("Shoot") and can_shoot:
+			print_bullet_name(Globals.magazine[active_bullet_pos])
+			shoot()
+		
+		# Blank input, adds knockback for no bullet cost and has a 1.5 second cooldown
+		if Input.is_action_pressed("Blank") and can_blank:
+			add_shot_knockback(Globals.Bullets.Shotgun, 1500)
+			can_blank = false
+			$BlankCooldown.start()
 	
 	# Normal reload and Special reload inputs
 	if Input.is_action_just_pressed("Main Reload") and Globals.magazine[active_bullet_pos] == Globals.Bullets.Empty and Globals.ammo[0] > 0:
@@ -47,6 +51,14 @@ func _process(_delta):
 		reload(bullet_types[2])
 	if Input.is_action_just_pressed("Special Reload 3") and Globals.magazine[active_bullet_pos] == Globals.Bullets.Empty and Globals.ammo[bullet_types[3]] > 0:
 		reload(bullet_types[3])
+		
+	
+	# Menu/Inventory
+	if Input.is_action_just_pressed("Inventory"):
+		toggle_inventory.emit()
+		mouse_ui_mode = not mouse_ui_mode
+	if Input.is_action_just_released("Menu"):
+		pass
 	
 	# Animations
 	if Input.is_action_pressed("Down"):

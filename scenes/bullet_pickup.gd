@@ -1,10 +1,16 @@
 extends Area2D
 
+var moving_up: bool = true
+@export var active_texture: int = 0
 @export var bullet_id: int
 @export var amount: int
-var moving_up: bool = true
+@export var pickup_textures: Array[Resource]
+@onready var sprite: Sprite2D = $Sprite2D
 
 signal ammo_changed(new_ammo_type: bool, slot: int, bullet_id: int)
+
+func _ready() -> void:
+	sprite.texture = pickup_textures[active_texture]
 
 # When entering the area, gives ammo to correspond type if you have it already. If you don't and
 # have an open slot, fills the slot with the new ammo type. Otherwise, does nothing
