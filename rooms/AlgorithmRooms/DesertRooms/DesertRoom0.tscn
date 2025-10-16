@@ -76,7 +76,7 @@ texture = ExtResource("1_du7bw")
 [sub_resource type="TileSet" id="TileSet_f35jl"]
 sources/1 = SubResource("TileSetAtlasSource_mm6rb")
 
-[node name="HellRoom" type="Node2D"]
+[node name="HellRoom" type="Node2D" groups=["Rooms"]]
 script = ExtResource("1_33vsf")
 
 [node name="BaseLayer" type="TileMapLayer" parent="."]

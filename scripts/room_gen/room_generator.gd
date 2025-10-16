@@ -92,7 +92,7 @@ func display_rooms(center:Vector2):
 		# (rooms should have centered walkways to connect)
 
 func place_room_at_xy(coords:Vector4,center:Vector2):
-	var tile_offset = 32 * 16 #32 tiles each at 16 pixels
+	var tile_offset = Globals.room_size * Globals.tile_size
 	
 	var newRoom:Node2D
 	

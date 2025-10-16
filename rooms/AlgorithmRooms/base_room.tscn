@@ -3,7 +3,7 @@
 [ext_resource type="Script" uid="uid://b0xvu25cslpnt" path="res://scripts/room_gen/room_classification.gd" id="1_wwbhp"]
 [ext_resource type="TileSet" uid="uid://b5dr7xs5s30fq" path="res://tilesets/multi_tileset.tres" id="2_715ep"]
 
-[node name="BaseRoom" type="Node2D"]
+[node name="BaseRoom" type="Node2D" groups=["Rooms"]]
 script = ExtResource("1_wwbhp")
 
 [node name="NavigationRegion2D" type="NavigationRegion2D" parent="."]
@@ -14,3 +14,6 @@ tile_set = ExtResource("2_715ep")
 [node name="Enemies" type="Node" parent="."]
 
 [node name="Interactables" type="Node" parent="."]
+
+[node name="Center" type="Marker2D" parent="."]
+position = Vector2(280, 280)

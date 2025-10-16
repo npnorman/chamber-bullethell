@@ -3,13 +3,19 @@ class_name LevelContainer
 
 var bullet_scene: PackedScene = preload("res://scenes/player/bullets/player-bullet.tscn")
 var bullet_pickup_scene: PackedScene = preload("res://scenes/bullet_pickup.tscn")
+
+@export var bullet_fairy:PackedScene
+
 @onready var hud: CanvasLayer = $HUD
 @onready var player: CharacterBody2D = $Player
 @onready var enemies: Node = $Enemies
 @onready var pickups: Node = $Pickups
 @onready var chests: Node = $Chests
 @onready var projectiles: Node = $Projectiles
+@onready var bullet_fairy_timer: Timer = $BulletFairyTimer
 
+var is_bullet_fairy_spawned = false
+var current_room_center = Vector2.ZERO
 
 # Connects signals for testing, will work differently in the future
 func _ready():
@@ -17,6 +23,46 @@ func _ready():
 		enemy.killed.connect(_on_enemy_killed)
 	for chest: Area2D in chests.get_children():
 		chest.chest_opened.connect(_on_chest_opened)
+
+func _process(delta: float) -> void:
+	check_for_bullet_fairy_spawn()
+	update_center_room()
+
+func check_for_bullet_fairy_spawn():
+	var total_bullets = Globals.ammo.reduce(func(a,b): return a+b)
+
+	if total_bullets <= 0:
+		if is_bullet_fairy_spawned == false:
+			is_bullet_fairy_spawned = true
+			bullet_fairy_timer.start()
+	else:
+		is_bullet_fairy_spawned = false
+
+var room_radius = Globals.tile_size * Globals.room_size / 2
+
+func update_center_room():
+	var rooms = get_tree().get_nodes_in_group("Rooms")
+	
+	var temp_distance = 10000000000
+	var temp_closest_room = Vector2.ZERO
+	# for each room, get center
+	for room in rooms:
+		# save closest room
+		var center = Vector2(room.global_position.x + room_radius,room.global_position.y - room_radius)
+		
+		###DEBUG
+		var sprite:Sprite2D = Sprite2D.new()
+		sprite.texture = ImageTexture.create_from_image(Image.load_from_file("res://sprites/Barrel.png"))
+		sprite.global_position = center
+		add_child(sprite)
+		
+		var player_temp_distance = center.distance_to(player.global_position)
+		if  player_temp_distance < temp_distance:
+			#new closest
+			temp_distance = player_temp_distance
+			temp_closest_room = center
+			# save as var
+	current_room_center = temp_closest_room
 
 # Adjust HUD when cylinder changes
 func _on_player_cylinder_cycled() -> void:
@@ -97,3 +143,14 @@ func _on_player_bullet_fired(pos, dir, id):
 	
 func _on_player_toggle_inventory() -> void:
 	hud.display_inventory()
+
+func _on_bullet_fairy_timer_timeout() -> void:
+	#spawn bullet fairy
+	var temp_bullet_fairy = bullet_fairy.instantiate()
+	temp_bullet_fairy.starting_position = current_room_center
+	temp_bullet_fairy.global_position = Vector2.ZERO
+	add_child(temp_bullet_fairy)
+	print("Spawned bullet fairy")
+	print("PlayerLoc",player.global_position)
+	print("RoomLoc",current_room_center)
+	print("BF:",temp_bullet_fairy.global_position,Vector2(current_room_center.x - room_radius,current_room_center.y + room_radius))

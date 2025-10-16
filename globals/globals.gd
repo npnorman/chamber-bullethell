@@ -1,5 +1,8 @@
 extends Node
 
+var room_size:int = 32
+var tile_size:int = 16
+
 #signal stat_changed
 
 # Enums to show what names correspond to what IDs
@@ -24,7 +27,7 @@ enum Rotation {
 }
 
 # Ammo array where a given bullet ID's ammo is shown in the index of the ID number
-var ammo: Array[int] = [30, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0]:
+var ammo: Array[int] = [3, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0]:
 	get:
 		return ammo
 
