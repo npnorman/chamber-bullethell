@@ -142,8 +142,8 @@ func _on_player_bullet_fired(pos, dir, id):
 				bullet.rotation_degrees = rad_to_deg(new_angle) + 90
 				bullet.direction = Vector2(cos(new_angle), sin(new_angle))
 				projectiles.add_child(bullet)
-        
-    #Gambler Bullets
+		
+	#Gambler Bullets
 		Globals.Bullets.Gambler:
 			var dice_roll = randi_range(1, 6)
 			var bullet = bullet_scene.instantiate()
@@ -164,9 +164,6 @@ func _on_player_bullet_fired(pos, dir, id):
 			bullet.rotation_degrees = rad_to_deg(dir.angle()) + 90
 			bullet.direction = dir
 			projectiles.add_child(bullet)
-      
-func _on_player_toggle_inventory() -> void:
-	hud.display_inventory()
 
 func _on_bullet_fairy_timer_timeout() -> void:
 	#spawn bullet fairy
