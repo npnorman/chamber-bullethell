@@ -5,7 +5,7 @@ var one_room = preload("res://scenes/RoomGen/room_types/test_one.tscn")
 var two_close_room = preload("res://scenes/RoomGen/room_types/test_two_close.tscn")
 var two_apart_room = preload("res://scenes/RoomGen/room_types/test_two_apart.tscn")
 var three_room = preload("res://scenes/RoomGen/room_types/test_three.tscn")
-var four_room = preload("res://rooms/AlgorithmRooms/DesertRooms/DesertRoom0.tscn")
+var four_room = preload("res://rooms/AlgorithmRooms/DesertRooms/DesertRoom4.tscn")
 var start_room = preload("res://scenes/RoomGen/room_types/testStart.tscn")
 
 # map
