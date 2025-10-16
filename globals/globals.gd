@@ -44,3 +44,6 @@ var ammo_rarities: Array[int] = [0, 1, 1, 1, 1, 2, 2, 0, 0, 0, 0, 0]
 var magazine: Array[int] = [-1, -1, -1, -1, -1, -1]:
 	get:
 		return magazine
+
+func change_scene(file_name:String):
+	get_tree().change_scene_to_file(file_name)
