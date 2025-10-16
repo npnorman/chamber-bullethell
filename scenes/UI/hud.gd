@@ -9,11 +9,8 @@ var drag_dir: Vector2
 var new_position: Vector2
 var active_box: int
 var selected_box: int
-@onready var basic_back: Resource = preload("res://sprites/basic_back.png")
-@onready var ricochet_back: Resource = preload("res://sprites/ricochet_back.png")
-@onready var shotgun_back: Resource = preload("res://sprites/shotgun_back.png")
 @onready var chamber_array: Array[TextureRect] = [$CylinderNode/Chamber1/BulletTexture1, $CylinderNode/Chamber2/BulletTexture2, $CylinderNode/Chamber3/BulletTexture3, $CylinderNode/Chamber4/BulletTexture4, $CylinderNode/Chamber5/BulletTexture5, $CylinderNode/Chamber6/BulletTexture6]
-@onready var bullet_textures: Array[Resource] = [basic_back, ricochet_back, shotgun_back]
+@export var bullet_textures: Array[Resource]
 @onready var ammo_counters: Array[Label] = [$SpecialBullets/NormalAmmoBox/BasicAmmo, $SpecialBullets/SpecialAmmoBox1/SpecialAmmo1, $SpecialBullets/SpecialAmmoBox2/SpecialAmmo2, $SpecialBullets/SpecialAmmoBox3/SpecialAmmo3]
 @onready var ammo_keys: Array[Label] = [$SpecialBullets/NormalAmmoBox/BasicKey, $SpecialBullets/SpecialAmmoBox1/SpecialKey1, $SpecialBullets/SpecialAmmoBox2/SpecialKey2, $SpecialBullets/SpecialAmmoBox3/SpecialKey3]
 @onready var hud_ammo_textures: Array[TextureRect] = [$SpecialBullets/NormalAmmoBox/NormalTexture, $SpecialBullets/SpecialAmmoBox1/SpecialTexture1, $SpecialBullets/SpecialAmmoBox2/SpecialTexture2, $SpecialBullets/SpecialAmmoBox3/SpecialTexture3]
