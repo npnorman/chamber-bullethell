@@ -105,6 +105,9 @@ func _on_bullet_pickup_ammo_changed(new_ammo_type: bool, slot: int, bullet_id: i
 		hud.set_ammo_types()
 	hud.update_counters()
 
+func _on_player_toggle_inventory() -> void:
+	hud.display_inventory()
+
 func _on_player_bullet_fired(pos, dir, id):
 	
 	match id:
@@ -117,7 +120,7 @@ func _on_player_bullet_fired(pos, dir, id):
 			bullet.direction = dir
 			projectiles.add_child(bullet)
 			
-		# Ricochet Bullets (Special effect not yet implemented)
+		# Ricochet Bullets
 		Globals.Bullets.Ricochet:
 			var bullet = bullet_scene.instantiate()
 			bullet.position = pos
@@ -139,8 +142,29 @@ func _on_player_bullet_fired(pos, dir, id):
 				bullet.rotation_degrees = rad_to_deg(new_angle) + 90
 				bullet.direction = Vector2(cos(new_angle), sin(new_angle))
 				projectiles.add_child(bullet)
-			
-	
+        
+    #Gambler Bullets
+		Globals.Bullets.Gambler:
+			var dice_roll = randi_range(1, 6)
+			var bullet = bullet_scene.instantiate()
+			match dice_roll:
+				1:
+					bullet.damage = -1
+				2:
+					bullet.damage = 4
+				3:
+					bullet.damage = 8
+				4:
+					bullet.damage = 16
+				5:
+					bullet.damage = 32
+				6:
+					bullet.damage = 100
+			bullet.position = pos
+			bullet.rotation_degrees = rad_to_deg(dir.angle()) + 90
+			bullet.direction = dir
+			projectiles.add_child(bullet)
+      
 func _on_player_toggle_inventory() -> void:
 	hud.display_inventory()
 
