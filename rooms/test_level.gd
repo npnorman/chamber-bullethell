@@ -13,6 +13,7 @@ var bullet_pickup_scene: PackedScene = preload("res://scenes/bullet_pickup.tscn"
 @onready var chests: Node = $Chests
 @onready var projectiles: Node = $Projectiles
 @onready var bullet_fairy_timer: Timer = $BulletFairyTimer
+@onready var camera: Camera2D = $Camera2D
 
 var is_bullet_fairy_spawned = false
 var current_room_center = Vector2.ZERO
@@ -27,6 +28,7 @@ func _ready():
 func _process(delta: float) -> void:
 	check_for_bullet_fairy_spawn()
 	update_center_room()
+	update_camera_position()
 
 func check_for_bullet_fairy_spawn():
 	var total_bullets = Globals.ammo.reduce(func(a,b): return a+b)
@@ -50,12 +52,6 @@ func update_center_room():
 		# save closest room
 		var center = Vector2(room.global_position.x + room_radius,room.global_position.y - room_radius)
 		
-		###DEBUG
-		var sprite:Sprite2D = Sprite2D.new()
-		sprite.texture = ImageTexture.create_from_image(Image.load_from_file("res://sprites/Barrel.png"))
-		sprite.global_position = center
-		add_child(sprite)
-		
 		var player_temp_distance = center.distance_to(player.global_position)
 		if  player_temp_distance < temp_distance:
 			#new closest
@@ -63,6 +59,12 @@ func update_center_room():
 			temp_closest_room = center
 			# save as var
 	current_room_center = temp_closest_room
+
+func update_camera_position():
+	# set the camera position to the room the player is in
+	print("updating")
+	print("CR",current_room_center)
+	camera.position = current_room_center
 
 # Adjust HUD when cylinder changes
 func _on_player_cylinder_cycled() -> void:

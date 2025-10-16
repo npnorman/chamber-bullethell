@@ -1,6 +1,6 @@
 extends Node
 
-var room_size:int = 32
+var room_size:int = 35
 var tile_size:int = 16
 
 #signal stat_changed

@@ -144,7 +144,7 @@ script = ExtResource("1_u75bg")
 bullet_fairy = ExtResource("5_b6v1o")
 
 [node name="BulletFairyTimer" type="Timer" parent="."]
-wait_time = 0.5
+wait_time = 10.0
 one_shot = true
 
 [node name="FloorGenerator" parent="." instance=ExtResource("2_ovcuh")]
@@ -193,11 +193,12 @@ tile_set = SubResource("TileSet_komxo")
 
 [node name="HUD" parent="." instance=ExtResource("7_7e8gg")]
 
+[node name="Camera2D" type="Camera2D" parent="."]
+zoom = Vector2(1.37, 1.37)
+position_smoothing_enabled = true
+
 [node name="Player" parent="." instance=ExtResource("3_i3fwb")]
 top_level = true
-
-[node name="Camera2D" type="Camera2D" parent="Player"]
-zoom = Vector2(1.34, 1.34)
 
 [node name="WallTileLayer" type="TileMapLayer" parent="."]
 position = Vector2(-736, -476)
