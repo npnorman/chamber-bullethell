@@ -141,6 +141,11 @@ sources/0 = SubResource("TileSetAtlasSource_gc8kv")
 
 [node name="Starting Room" type="Node2D"]
 script = ExtResource("1_u75bg")
+bullet_fairy = ExtResource("5_b6v1o")
+
+[node name="BulletFairyTimer" type="Timer" parent="."]
+wait_time = 0.5
+one_shot = true
 
 [node name="FloorGenerator" parent="." instance=ExtResource("2_ovcuh")]
 
@@ -186,9 +191,6 @@ tile_set = SubResource("TileSet_komxo")
 
 [node name="GameManager" type="Node" parent="."]
 
-[node name="BulletFairy" parent="." instance=ExtResource("5_b6v1o")]
-position = Vector2(-168, 31)
-
 [node name="HUD" parent="." instance=ExtResource("7_7e8gg")]
 
 [node name="Player" parent="." instance=ExtResource("3_i3fwb")]
@@ -203,6 +205,7 @@ tile_map_data = PackedByteArray("AADq//D/AAAGAAUAAADr//D/AAAGAAUAAADs//D/AAAGAAU
 enabled = false
 tile_set = SubResource("TileSet_5vbr4")
 
+[connection signal="timeout" from="BulletFairyTimer" to="." method="_on_bullet_fairy_timer_timeout"]
 [connection signal="ammo_dropped" from="HUD" to="." method="_on_hud_ammo_dropped"]
 [connection signal="rotation_completed" from="HUD" to="." method="_on_hud_rotation_completed"]
 [connection signal="bullet_fired" from="Player" to="." method="_on_player_bullet_fired"]
