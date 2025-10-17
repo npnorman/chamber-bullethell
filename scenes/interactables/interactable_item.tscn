@@ -1,0 +1,26 @@
+[gd_scene load_steps=4 format=3 uid="uid://csr22g6iy124u"]
+
+[ext_resource type="Texture2D" uid="uid://kjstwmv27w1q" path="res://sprites/BEER.png" id="1_kdhes"]
+[ext_resource type="Script" uid="uid://b82rluk6wfyut" path="res://scripts/interactibles/interactable_item.gd" id="1_t70nu"]
+
+[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_t70nu"]
+radius = 6.0
+height = 34.0
+
+[node name="InteractableItem" type="RigidBody2D"]
+collision_layer = 0
+collision_mask = 3
+gravity_scale = 0.0
+contact_monitor = true
+max_contacts_reported = 5
+linear_damp = 1.0
+script = ExtResource("1_t70nu")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+shape = SubResource("CapsuleShape2D_t70nu")
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+scale = Vector2(0.1, 0.1)
+texture = ExtResource("1_kdhes")
+
+[connection signal="body_entered" from="." to="." method="_on_body_entered"]
