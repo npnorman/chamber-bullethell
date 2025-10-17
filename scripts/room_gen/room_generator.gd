@@ -6,7 +6,7 @@ var two_close_room = preload("res://scenes/RoomGen/room_types/test_two_close.tsc
 var two_apart_room = preload("res://scenes/RoomGen/room_types/test_two_apart.tscn")
 var three_room = preload("res://scenes/RoomGen/room_types/test_three.tscn")
 var four_room = preload("res://rooms/AlgorithmRooms/DesertRooms/DesertRoom4.tscn")
-var start_room = preload("res://scenes/RoomGen/room_types/testStart.tscn")
+var start_room = preload("res://rooms/AlgorithmRooms/DesertRooms/desert_start.tscn")
 
 # map
 # m x m (m = 10) expand to 11 for overflow

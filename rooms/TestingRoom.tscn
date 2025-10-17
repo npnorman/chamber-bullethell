@@ -194,11 +194,12 @@ tile_set = SubResource("TileSet_komxo")
 [node name="HUD" parent="." instance=ExtResource("7_7e8gg")]
 
 [node name="Camera2D" type="Camera2D" parent="."]
-zoom = Vector2(0.795, 0.795)
+zoom = Vector2(1.37, 1.37)
 position_smoothing_enabled = true
 
 [node name="Player" parent="." instance=ExtResource("3_i3fwb")]
 top_level = true
+position = Vector2(280, -280)
 
 [node name="WallTileLayer" type="TileMapLayer" parent="."]
 position = Vector2(-736, -476)

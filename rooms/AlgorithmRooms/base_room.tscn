@@ -11,6 +11,6 @@ script = ExtResource("1_wwbhp")
 [node name="TileMapLayer" type="TileMapLayer" parent="."]
 tile_set = ExtResource("2_715ep")
 
-[node name="Enemies" type="Node" parent="."]
+[node name="Enemies" type="Node2D" parent="."]
 
-[node name="Interactables" type="Node" parent="."]
+[node name="Interactables" type="Node2D" parent="."]

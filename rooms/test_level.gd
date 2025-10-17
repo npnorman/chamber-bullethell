@@ -18,6 +18,8 @@ var bullet_pickup_scene: PackedScene = preload("res://scenes/bullet_pickup.tscn"
 var is_bullet_fairy_spawned = false
 var current_room_center = Vector2.ZERO
 var current_room = null
+var room_change_delta: float = Globals.tile_size * 10
+var is_walls_ready = false
 
 # Connects signals for testing, will work differently in the future
 func _ready():
@@ -36,6 +38,11 @@ func _process(delta: float) -> void:
 	if current_room_center != previous_center_room:
 		#set up walls
 		if current_room != null:
+			is_walls_ready = true
+	
+	if is_walls_ready:
+		if current_room_center.distance_to(player.global_position) < room_change_delta:
+			is_walls_ready = false
 			current_room.set_walls()
 	
 	update_camera_position()
