@@ -1,12 +1,22 @@
 extends Node2D
 
-@export var test_room:PackedScene
+@export var level_scheme = Globals.Level.DESERT
+
 var one_room = preload("res://scenes/RoomGen/room_types/test_one.tscn")
 var two_close_room = preload("res://scenes/RoomGen/room_types/test_two_close.tscn")
 var two_apart_room = preload("res://scenes/RoomGen/room_types/test_two_apart.tscn")
 var three_room = preload("res://scenes/RoomGen/room_types/test_three.tscn")
 var four_room = preload("res://rooms/AlgorithmRooms/DesertRooms/DesertRoom4.tscn")
-var start_room = preload("res://scenes/RoomGen/room_types/testStart.tscn")
+var start_room = preload("res://rooms/AlgorithmRooms/DesertRooms/desert_start.tscn")
+
+var desert_rooms = [
+	[1,preload("res://rooms/AlgorithmRooms/DesertRooms/desert_start.tscn")],
+	[2,preload("res://rooms/AlgorithmRooms/DesertRooms/DesertRoom3.tscn")],
+	[5,preload("res://rooms/AlgorithmRooms/DesertRooms/DesertRoom4.tscn")],
+	[2,preload("res://rooms/AlgorithmRooms/DesertRooms/DesertRoom5.tscn")],
+]
+var saloon_rooms = []
+var hell_rooms = []
 
 # map
 # m x m (m = 10) expand to 11 for overflow
@@ -17,13 +27,14 @@ var roomstack:Array = []
 var starting_room:Vector4 = Vector4(0,0,Globals.ExitType.ONE,Globals.Rotation.NINETY)
 var rooms:Array = []
 var knapsack:Array = []
+var rejected_knapsack = [] #twice around
 var roomsack:Array = []
 
-func generateRooms(exit, rotation, count):
+func generateRooms(exit:int, room_rotation:int, count:int):
 	var rooms:Array = []
 	
 	for i in count:
-		rooms.append(Vector4(0,0,exit,rotation))
+		rooms.append(Vector4(0,0,exit,room_rotation))
 	
 	return rooms
 
@@ -48,15 +59,18 @@ func _ready() -> void:
 	current_location.y = centerN
 	
 	#define rooms in bag to pull
-	#knapsack += generateRooms(Globals.ExitType.FOUR,Globals.Rotation.ZERO,15)
-	roomsack += [one_room,two_close_room,two_apart_room,three_room,four_room,start_room]
-	knapsack += generateRooms(Globals.ExitType.FOUR,Globals.Rotation.ZERO,5)
-	#knapsack += generateRooms(Globals.ExitType.TWO_CLOSE,Globals.Rotation.ZERO,5)
+	var all_rooms = [desert_rooms, saloon_rooms, hell_rooms]
+	roomsack += all_rooms[level_scheme]
+	
+	for room in roomsack:
+		var tempRoom = room[1].instantiate()
+		knapsack += generateRooms(tempRoom.exit_type, tempRoom.room_rotation, room[0])
 	
 	add_room_current_location(starting_room)
 	generateMap(m,n)
 	print("Roomstack")
-	print(roomstack)
+	print("Rooms   ",roomstack)
+	print("Rejected",rejected_knapsack)
 	
 	# after stack is full,
 	display_rooms(center)
@@ -66,8 +80,15 @@ func generateMap(m,n,seed:int = -1):
 	if seed != -1:
 		rng.seed = seed
 	
+	var has_rejected = false
 	while len(knapsack) > 0:
 		pick_room_from_knapsack(rng,m,n)
+		
+		if len(knapsack) == 0 and !has_rejected:
+			has_rejected = true
+			if len(rejected_knapsack) > 0:
+				knapsack = rejected_knapsack.duplicate(true)
+				rejected_knapsack.clear()
 		
 		# if no room can fit, remove the topmost room from stack
 			# try a different room from knapsack
@@ -97,7 +118,7 @@ func place_room_at_xy(coords:Vector4,center:Vector2):
 	var newRoom:Node2D
 	
 	for i in range(0,len(roomsack)):
-		var tempRoom = roomsack[i].instantiate()
+		var tempRoom:Node2D = roomsack[i][1].instantiate()
 		if tempRoom.get_exit_type() == coords.z:
 			if tempRoom.get_room_rotation() == coords.w:
 				newRoom = tempRoom
@@ -107,90 +128,126 @@ func place_room_at_xy(coords:Vector4,center:Vector2):
 	adjusted_coords *= tile_offset
 	adjusted_coords.y *= -1
 	
-	
-	newRoom.global_position = adjusted_coords
-	
 	add_child(newRoom)
+	newRoom.global_position = adjusted_coords
 
 func pick_room_from_knapsack(rng:RandomNumberGenerator,m,n):
+	# if this is true, the room cannot fit
+	var is_blocking = false
+	
 	# pick a random room in the knapsack, and remove it
 	var knapsack_index:int = rng.randi_range(0,len(knapsack)-1)
 	var newRoom:Vector4 = knapsack.pop_at(knapsack_index)
 	
-	# pick a random room in the stack
-	var roomstack_index:int = rng.randi_range(0,len(roomstack)-1)
-	var oldRoom:Vector4 = roomstack[roomstack_index]
+	# for each room
+		# pick and try to make it work
+		# if it does, keepGoing
+		# if it doesn't remove
+	# get list of all rooms in stack (copy)
 	
-	current_location.x = oldRoom.x
-	current_location.y = oldRoom.y
+	var roomstack_copy = roomstack.duplicate(true)
+	# shuffle rooms
+	roomstack_copy.shuffle()
 	
-	# pick a random exit from that room
-	var number_of_exits = get_number_of_exits(oldRoom)
-	var exits:Array = get_exits(oldRoom)
-	var possible_index:Array = [0,1,2,3]
-	var exit_index = possible_index[rng.rand_weighted(exits)]
+	var roomstack_index:int = 0
+	# for each room, pick one and try to make it work
+	while len(roomstack_copy) > 0:
+		var oldRoom:Vector4 = roomstack_copy[roomstack_index]
 	
-	var is_blocking = false
-	
-	var new_exits:Array = get_exits(newRoom)
-	var new_exit_index:int = (exit_index + 2) % 4
-	#check to see if it matches an exit
-	if exits[exit_index] == 1 and new_exits[new_exit_index] == 1:
-		is_blocking = false
-	else:
-		is_blocking = true
-	
-	exits[0] *= -1
-	exits[3] *= -1
-	
-	for i in range(0, len(exits)):
-		if i != exit_index:
-			exits[i] = 0
-	
-	#get the offset
-	var offset:Vector2 = Vector2(0,0)
-	offset.x = exits[0] + exits[2]
-	offset.y = exits[1] + exits[3]
-	
-	var checkingCoordinates:Vector2 = Vector2(0,0)
-	checkingCoordinates = current_location + offset
-	
-	# check if that spot (x,y) is taken
-	if abs(checkingCoordinates.x) > m or abs(checkingCoordinates.y) > n:
-		is_blocking = true
+		current_location.x = oldRoom.x
+		current_location.y = oldRoom.y
 		
-	elif is_room_in_xy(checkingCoordinates):
-		is_blocking = true
+		# pick a random exit from that room
+		var number_of_exits = Globals.get_number_of_exits(oldRoom)
+		var exits:Array = Globals.get_exits(oldRoom)
+		var possible_index:Array = [0,1,2,3]
 		
-	else:
-		var neighbors = [
-			Vector2( 1, 0),
-			Vector2(-1, 0),
-			Vector2( 0, 1),
-			Vector2( 0,-1)
-			]
-		# for each neighbor (if exists)
-		for i in range(0, len(neighbors)):
-			# check if neighbor's exit is being blocked
-			if is_room_in_xy(current_location + neighbors[i]):
-				if is_blocking_exit(current_location, neighbors[i], exits):
-					is_blocking = true
+		for i in range(0,len(exits)):
+			if exits[i] == 0:
+				possible_index.erase(i)
+		
+		#shuffle exits
+		possible_index.shuffle()
+		
+		# while exit is not chosen,
+		var index = 0
+		while len(possible_index) > 0:
+			# choose an exit
+			var exit_index = possible_index[index]
+			
+			var new_exits:Array = Globals.get_exits(newRoom)
+			# new roomexit needs to be opposite of this room
+			var new_exit_index:int = (exit_index + 2) % 4
+			#check to see if it matches an exit
+			if exits[exit_index] == 1 and new_exits[new_exit_index] == 1:
+				is_blocking = false
+			else:
+				is_blocking = true
+			
+			exits[0] *= -1
+			exits[3] *= -1
+			
+			for i in range(0, len(exits)):
+				if i != exit_index:
+					exits[i] = 0
+			
+			#get the offset
+			var offset:Vector2 = Vector2(0,0)
+			offset.x = exits[0] + exits[2]
+			offset.y = exits[1] + exits[3]
+			
+			var checkingCoordinates:Vector2 = Vector2(0,0)
+			checkingCoordinates = current_location + offset
+			
+			# check if that spot (x,y) is taken
+			if abs(checkingCoordinates.x) > m or abs(checkingCoordinates.y) > n:
+				is_blocking = true
+				
+			elif is_room_in_xy(checkingCoordinates):
+				is_blocking = true
+				
+			else:
+				var neighbors = [
+					Vector2( 1, 0),
+					Vector2(-1, 0),
+					Vector2( 0, 1),
+					Vector2( 0,-1)
+					]
+				# for each neighbor (if exists)
+				for i in range(0, len(neighbors)):
+					# check if neighbor's exit is being blocked
+					if is_room_in_xy(current_location + neighbors[i]):
+						if is_blocking_exit(current_location, neighbors[i], exits):
+							is_blocking = true
+					
+					#TODO: Check if we are blocking each neighbor ----------------------------------------------------------------
+			
+			if is_blocking == true:
+				# try next exit
+				possible_index.erase(exit_index)
+				#try again
+			else:
+				# place room
+				possible_index.clear() #stop while
+				newRoom.x = checkingCoordinates.x
+				newRoom.y = checkingCoordinates.y
+				current_location = checkingCoordinates
+				roomstack.append(newRoom)
+		
+		if is_blocking == true:
+			# oldroom cant fit new room
+			roomstack_copy.erase(oldRoom)
 	
 	if is_blocking == true:
-		knapsack.append(newRoom)
-		#try again
-	else:
-		# place room
-		newRoom.x = checkingCoordinates.x
-		newRoom.y = checkingCoordinates.y
-		current_location = checkingCoordinates
-		roomstack.append(newRoom)
+		# room cannot fit anywhere
+		# add to rejected list
+		rejected_knapsack.append(newRoom)
 
 func is_blocking_exit(room_coords:Vector2,neighbor_coords:Vector2, room_exits:Array):
 	#get room at xy
 	var neighbor:Vector4 = get_room_at_xy(room_coords + neighbor_coords)
 	#get exits of room
-	var neighbor_exits:Array = get_exits(neighbor)
+	var neighbor_exits:Array = Globals.get_exits(neighbor)
 	
 	var is_blocking:bool = false
 	
@@ -227,72 +284,6 @@ func get_room_at_xy(coordinates:Vector2):
 			room = roomstack[i]
 	
 	return room
-
-func get_number_of_exits(room:Vector4):
-	var number_of_exits = 0
-	
-	match room.z:
-		Globals.ExitType.ZERO:
-			number_of_exits = 0
-		Globals.ExitType.NONE:
-			number_of_exits = 0
-		Globals.ExitType.ONE:
-			number_of_exits = 1
-		Globals.ExitType.TWO_CLOSE:
-			number_of_exits = 2
-		Globals.ExitType.TWO_APART:
-			number_of_exits = 2
-		Globals.ExitType.THREE:
-			number_of_exits = 3
-		Globals.ExitType.FOUR:
-			number_of_exits = 4
-	
-	return number_of_exits
-
-func get_exits(room:Vector4):
-	var exits:Array = [0,0,0,0]
-	# offset of (x+1,y+1,x-1,y-1)
-		# a 1 if correct, a zero if not
-	
-	match int(room.z):
-		Globals.ExitType.ONE:
-			exits = [0,0,1,0]
-		Globals.ExitType.TWO_CLOSE:
-			exits = [0,1,1,0]
-		Globals.ExitType.TWO_APART:
-			exits = [1,0,1,0]
-		Globals.ExitType.THREE:
-			exits = [1,1,0,1]
-		Globals.ExitType.FOUR:
-			exits = [1,1,1,1]
-	
-	var amount = 0
-	
-	match int(room.w):
-		Globals.Rotation.NINETY:
-			amount = 1
-		Globals.Rotation.ONEEIGHTY:
-			amount = 2
-		Globals.Rotation.TWOSEVENTY:
-			amount = 3
-	
-	exits = rotate_exits(exits,amount)
-	return exits
-
-func rotate_exits(exits:Array, amount:int):
-	for i in range(0,amount):
-		exits = cyclic_shift(exits)
-	
-	return exits
-
-func cyclic_shift(exits:Array):
-	var swap = exits[3]
-	exits[3] = exits[0]
-	exits[0] = exits[1]
-	exits[1] = exits[2]
-	exits[2] = swap
-	
-	return exits
 
 func is_room_in_xy(coordinates:Vector2):
 	var x = coordinates.x

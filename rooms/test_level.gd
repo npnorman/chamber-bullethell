@@ -17,6 +17,9 @@ var bullet_pickup_scene: PackedScene = preload("res://scenes/bullet_pickup.tscn"
 
 var is_bullet_fairy_spawned = false
 var current_room_center = Vector2.ZERO
+var current_room = null
+var room_change_delta: float = Globals.tile_size * 10
+var is_walls_ready = false
 
 # Connects signals for testing, will work differently in the future
 func _ready():
@@ -27,7 +30,21 @@ func _ready():
 
 func _process(delta: float) -> void:
 	check_for_bullet_fairy_spawn()
+	
+	var previous_center_room = current_room_center
 	update_center_room()
+	
+	#in a new room
+	if current_room_center != previous_center_room:
+		#set up walls
+		if current_room != null:
+			is_walls_ready = true
+	
+	if is_walls_ready:
+		if current_room_center.distance_to(player.global_position) < room_change_delta:
+			is_walls_ready = false
+			current_room.set_walls()
+	
 	update_camera_position()
 
 func check_for_bullet_fairy_spawn():
@@ -46,6 +63,7 @@ func update_center_room():
 	var rooms = get_tree().get_nodes_in_group("Rooms")
 	
 	var temp_distance = 10000000000
+	var temp_room = null
 	var temp_closest_room = Vector2.ZERO
 	# for each room, get center
 	for room in rooms:
@@ -57,13 +75,13 @@ func update_center_room():
 			#new closest
 			temp_distance = player_temp_distance
 			temp_closest_room = center
+			temp_room = room
 			# save as var
 	current_room_center = temp_closest_room
+	current_room = temp_room
 
 func update_camera_position():
 	# set the camera position to the room the player is in
-	print("updating")
-	print("CR",current_room_center)
 	camera.position = current_room_center
 
 # Adjust HUD when cylinder changes

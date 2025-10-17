@@ -1,25 +1,46 @@
-[gd_scene load_steps=7 format=3 uid="uid://chqsm4w7oks0t"]
+[gd_scene load_steps=10 format=3 uid="uid://chqsm4w7oks0t"]
 
-[ext_resource type="Texture2D" uid="uid://dj78tha4xkjpf" path="res://sprites/bullet_fairy/miner.png" id="1_wrpmb"]
 [ext_resource type="Script" uid="uid://dk6alrwsdfo0k" path="res://scripts/bullet_fairy/bullet_fairy.gd" id="1_ywtwx"]
 [ext_resource type="PackedScene" uid="uid://b3pyw2ywa2gic" path="res://scenes/bullet_pickup.tscn" id="2_plh5f"]
+[ext_resource type="Texture2D" uid="uid://w14mykkn3kh4" path="res://sprites/bullet_fairy/miner-walk.png" id="3_plh5f"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_ywtwx"]
 size = Vector2(35, 42.5)
 
-[sub_resource type="AtlasTexture" id="AtlasTexture_plh5f"]
-atlas = ExtResource("1_wrpmb")
+[sub_resource type="AtlasTexture" id="AtlasTexture_6a2kq"]
+atlas = ExtResource("3_plh5f")
 region = Rect2(0, 0, 32, 64)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_sjh4x"]
+atlas = ExtResource("3_plh5f")
+region = Rect2(32, 0, 32, 64)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_qnneq"]
+atlas = ExtResource("3_plh5f")
+region = Rect2(64, 0, 32, 64)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_lo8r4"]
+atlas = ExtResource("3_plh5f")
+region = Rect2(96, 0, 32, 64)
 
 [sub_resource type="SpriteFrames" id="SpriteFrames_6a2kq"]
 animations = [{
 "frames": [{
 "duration": 1.0,
-"texture": SubResource("AtlasTexture_plh5f")
+"texture": SubResource("AtlasTexture_6a2kq")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_sjh4x")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_qnneq")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_lo8r4")
 }],
 "loop": true,
 "name": &"default",
-"speed": 5.0
+"speed": 10.0
 }]
 
 [node name="BulletFairy" type="CharacterBody2D"]
@@ -36,6 +57,7 @@ shape = SubResource("RectangleShape2D_ywtwx")
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
 sprite_frames = SubResource("SpriteFrames_6a2kq")
 autoplay = "default"
+frame_progress = 0.5459
 
 [node name="Timer" type="Timer" parent="."]
 wait_time = 0.2
