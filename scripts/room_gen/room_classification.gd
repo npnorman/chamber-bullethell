@@ -41,19 +41,22 @@ func activate_enemies():
 
 func set_walls():
 	
-	activate_enemies()
-	
-	if !is_completed and len(walls) == 0:
-		# set at all four spots (for now)
-		for i in range(0,4):
-			var temp_fire_wall:Node2D = fire_wall.instantiate()
+	if enemies != null:
+		if enemies.get_child_count() > 0:
 			
-			temp_fire_wall.position = coordinates[i]
-			temp_fire_wall.rotation_degrees = 90 * i
+			activate_enemies()
 			
-			walls.append(temp_fire_wall)
-			add_child(temp_fire_wall)
+			if !is_completed and len(walls) == 0:
+				# set at all four spots (for now)
+				for i in range(0,4):
+					var temp_fire_wall:Node2D = fire_wall.instantiate()
+					
+					temp_fire_wall.position = coordinates[i]
+					temp_fire_wall.rotation_degrees = 90 * i
+					
+					walls.append(temp_fire_wall)
+					add_child(temp_fire_wall)
 
 func remove_walls():
 	for i in range(0, len(walls)):
-		walls[i].queue_free()
+		walls[i].put_out()
