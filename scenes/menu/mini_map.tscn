@@ -1,0 +1,15 @@
+[gd_scene load_steps=2 format=3 uid="uid://bejlis2xb16qo"]
+
+[ext_resource type="Script" uid="uid://d15iw5dvln4ak" path="res://scripts/mini-map/mini_map.gd" id="1_o2mu7"]
+
+[node name="MiniMap" type="Control"]
+layout_mode = 3
+anchors_preset = 0
+offset_right = 200.0
+offset_bottom = 179.0
+script = ExtResource("1_o2mu7")
+
+[node name="ColorRect" type="ColorRect" parent="."]
+layout_mode = 0
+offset_right = 50.0
+offset_bottom = 50.0
