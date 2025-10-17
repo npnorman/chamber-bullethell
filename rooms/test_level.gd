@@ -14,6 +14,7 @@ var bullet_pickup_scene: PackedScene = preload("res://scenes/bullet_pickup.tscn"
 @onready var projectiles: Node = $Projectiles
 @onready var bullet_fairy_timer: Timer = $BulletFairyTimer
 @onready var camera: Camera2D = $Camera2D
+@onready var mini_map: CanvasLayer = $MiniMap
 
 var is_bullet_fairy_spawned = false
 var current_room_center = Vector2.ZERO
@@ -36,6 +37,11 @@ func _process(delta: float) -> void:
 	
 	#in a new room
 	if current_room_center != previous_center_room:
+		
+		#add to minimap
+		mini_map.add_room_as_mini(current_room_center)
+		mini_map.set_player_location(current_room_center)
+		
 		#set up walls
 		if current_room != null:
 			is_walls_ready = true
