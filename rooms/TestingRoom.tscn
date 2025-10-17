@@ -153,7 +153,6 @@ one_shot = true
 
 [node name="Enemy1" parent="Enemies" instance=ExtResource("2_ckyam")]
 position = Vector2(2412, 1809)
-is_active = false
 
 [node name="Enemy2" parent="Enemies" instance=ExtResource("2_ckyam")]
 position = Vector2(2207, 1748)
@@ -164,6 +163,7 @@ position = Vector2(2473, 1923)
 [node name="DiagonalEnemy" parent="Enemies" instance=ExtResource("9_ovcuh")]
 position = Vector2(2063, 1785)
 distance_diagonal_from_player = 50.0
+is_active = true
 distance_from_player = 200.0
 
 [node name="Projectiles" type="Node" parent="."]
@@ -194,7 +194,7 @@ tile_set = SubResource("TileSet_komxo")
 [node name="HUD" parent="." instance=ExtResource("7_7e8gg")]
 
 [node name="Camera2D" type="Camera2D" parent="."]
-zoom = Vector2(1.37, 1.37)
+zoom = Vector2(0.06, 0.06)
 position_smoothing_enabled = true
 
 [node name="Player" parent="." instance=ExtResource("3_i3fwb")]

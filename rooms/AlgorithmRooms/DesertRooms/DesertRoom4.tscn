@@ -1,7 +1,8 @@
-[gd_scene load_steps=5 format=4 uid="uid://db1iam78u88ws"]
+[gd_scene load_steps=6 format=4 uid="uid://db1iam78u88ws"]
 
 [ext_resource type="PackedScene" uid="uid://ctxgqeaum4461" path="res://rooms/AlgorithmRooms/base_room.tscn" id="1_b36ho"]
 [ext_resource type="Texture2D" uid="uid://ci6tpq1hugkwi" path="res://sprites/TumbleWEED.png" id="2_sqt7x"]
+[ext_resource type="PackedScene" uid="uid://be3bjg0ua7h2c" path="res://scenes/enemy.tscn" id="3_ekyja"]
 [ext_resource type="Texture2D" uid="uid://c2joxft8stuwm" path="res://sprites/Cactus1.png" id="3_vn0l5"]
 [ext_resource type="Texture2D" uid="uid://dp1dtnta02t6i" path="res://sprites/Cactus2.png" id="4_ekyja"]
 
@@ -19,6 +20,15 @@ texture = ExtResource("2_sqt7x")
 position = Vector2(439, -373)
 scale = Vector2(0.0765625, 0.0765625)
 texture = ExtResource("2_sqt7x")
+
+[node name="Enemy" parent="Enemies" index="0" instance=ExtResource("3_ekyja")]
+position = Vector2(307, -440)
+
+[node name="Enemy2" parent="Enemies" index="1" instance=ExtResource("3_ekyja")]
+position = Vector2(459, -423)
+
+[node name="Enemy3" parent="Enemies" index="2" instance=ExtResource("3_ekyja")]
+position = Vector2(201, -455)
 
 [node name="Cactus1" type="Sprite2D" parent="." index="6"]
 position = Vector2(441, -143)

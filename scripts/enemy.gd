@@ -31,7 +31,6 @@ func _ready() -> void:
 	decide_nav_route()
 
 func _physics_process(delta: float) -> void:
-	
 	if is_active and !is_dead:
 		
 		if !is_target_reached:
@@ -83,12 +82,15 @@ func shoot():
 	
 	get_parent().add_child(newBullet)
 
+func activate():
+	is_active = true
+
 func get_shoot_target():
 	return target.global_position
 
 func _on_reroute_timer_timeout() -> void:
 	# reroute navagent
-	if !is_dead:
+	if !is_dead and is_active:
 		shoot()
 		decide_nav_route()
 		

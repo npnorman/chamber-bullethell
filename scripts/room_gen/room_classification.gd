@@ -5,6 +5,7 @@ extends Node2D
 
 var fire_wall = preload("res://scenes/RoomGen/fire_wall.tscn")
 
+@onready var enemies: Node = $Enemies
 @onready var center: Marker2D = $Center
 
 var is_completed = false
@@ -17,17 +18,32 @@ var coordinates = [
 	Vector2(Globals.tile_size / 2, -room / 2),
 	]
 
+func _process(delta: float) -> void:
+	if enemies != null:
+		if !is_completed and enemies.get_child_count() <= 0:
+			print("removeing walls")
+			is_completed = true
+			remove_walls()
+
 func get_exit_type():
 	return exit_type
 
 func get_room_rotation():
 	return room_rotation
 
+func activate_enemies():
+	await ready
+	print("Activating enemies")
+	for node in enemies.get_children():
+		if node.is_in_group("Enemy"):
+			node.activate()
+
 func set_walls():
+	
+	activate_enemies()
 	
 	if !is_completed and len(walls) == 0:
 		# set at all four spots (for now)
-		print("Placing walls")
 		for i in range(0,4):
 			var temp_fire_wall:Node2D = fire_wall.instantiate()
 			
@@ -36,3 +52,7 @@ func set_walls():
 			
 			walls.append(temp_fire_wall)
 			add_child(temp_fire_wall)
+
+func remove_walls():
+	for i in range(0, len(walls)):
+		walls[i].queue_free()

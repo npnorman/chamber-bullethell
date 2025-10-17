@@ -27,7 +27,7 @@ enum Rotation {
 }
 
 # Ammo array where a given bullet ID's ammo is shown in the index of the ID number
-var ammo: Array[int] = [3, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0]:
+var ammo: Array[int] = [30, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0]:
 	get:
 		return ammo
 

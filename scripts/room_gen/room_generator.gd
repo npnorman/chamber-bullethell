@@ -97,7 +97,7 @@ func place_room_at_xy(coords:Vector4,center:Vector2):
 	var newRoom:Node2D
 	
 	for i in range(0,len(roomsack)):
-		var tempRoom = roomsack[i].instantiate()
+		var tempRoom:Node2D = roomsack[i].instantiate()
 		if tempRoom.get_exit_type() == coords.z:
 			if tempRoom.get_room_rotation() == coords.w:
 				newRoom = tempRoom
@@ -107,10 +107,9 @@ func place_room_at_xy(coords:Vector4,center:Vector2):
 	adjusted_coords *= tile_offset
 	adjusted_coords.y *= -1
 	
-	
+	print(get_tree().root.name)
+	get_parent().add_child(newRoom)
 	newRoom.global_position = adjusted_coords
-	
-	add_child(newRoom)
 
 func pick_room_from_knapsack(rng:RandomNumberGenerator,m,n):
 	# pick a random room in the knapsack, and remove it
