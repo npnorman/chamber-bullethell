@@ -32,11 +32,12 @@ func get_room_rotation():
 	return room_rotation
 
 func activate_enemies():
-	await ready
-	print("Activating enemies")
-	for node in enemies.get_children():
-		if node.is_in_group("Enemy"):
-			node.activate()
+	if enemies != null:
+		print("Activating enemies")
+		for node in enemies.get_children():
+			if node.is_in_group("Enemy"):
+				print("Activating")
+				node.activate()
 
 func set_walls():
 	

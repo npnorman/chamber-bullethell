@@ -107,8 +107,7 @@ func place_room_at_xy(coords:Vector4,center:Vector2):
 	adjusted_coords *= tile_offset
 	adjusted_coords.y *= -1
 	
-	print(get_tree().root.name)
-	get_parent().add_child(newRoom)
+	add_child(newRoom)
 	newRoom.global_position = adjusted_coords
 
 func pick_room_from_knapsack(rng:RandomNumberGenerator,m,n):
