@@ -57,7 +57,7 @@ shape = SubResource("RectangleShape2D_ywtwx")
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
 sprite_frames = SubResource("SpriteFrames_6a2kq")
 autoplay = "default"
-frame_progress = 0.443732
+frame_progress = 0.5459
 
 [node name="Timer" type="Timer" parent="."]
 wait_time = 0.2

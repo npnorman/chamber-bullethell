@@ -8,6 +8,12 @@ var tile_size:int = 16
 # Enums to show what names correspond to what IDs
 enum Bullets {Normal, Ricochet, Shotgun, Explosive, Health, Railgun, Gambler, Empty = -1}
 
+enum Level {
+	DESERT,
+	SALOON,
+	HELL
+}
+
 #RoomGen enums
 enum ExitType {
 	FOUR,
@@ -26,8 +32,74 @@ enum Rotation {
 	TWOSEVENTY
 }
 
+func get_exits(room:Vector4):
+	var exits:Array = [0,0,0,0]
+	# offset of (x+1,y+1,x-1,y-1)
+		# a 1 if correct, a zero if not
+	
+	match int(room.z):
+		Globals.ExitType.ONE:
+			exits = [0,0,1,0]
+		Globals.ExitType.TWO_CLOSE:
+			exits = [0,1,1,0]
+		Globals.ExitType.TWO_APART:
+			exits = [1,0,1,0]
+		Globals.ExitType.THREE:
+			exits = [1,1,0,1]
+		Globals.ExitType.FOUR:
+			exits = [1,1,1,1]
+	
+	var amount = 0
+	
+	match int(room.w):
+		Globals.Rotation.NINETY:
+			amount = 1
+		Globals.Rotation.ONEEIGHTY:
+			amount = 2
+		Globals.Rotation.TWOSEVENTY:
+			amount = 3
+	
+	exits = rotate_exits(exits,amount)
+	return exits
+
+func rotate_exits(exits:Array, amount:int):
+	for i in range(0,amount):
+		exits = cyclic_shift(exits)
+	
+	return exits
+
+func cyclic_shift(exits:Array):
+	var swap = exits[3]
+	exits[3] = exits[0]
+	exits[0] = exits[1]
+	exits[1] = exits[2]
+	exits[2] = swap
+	
+	return exits
+
+func get_number_of_exits(room:Vector4):
+	var number_of_exits = 0
+	
+	match room.z:
+		Globals.ExitType.ZERO:
+			number_of_exits = 0
+		Globals.ExitType.NONE:
+			number_of_exits = 0
+		Globals.ExitType.ONE:
+			number_of_exits = 1
+		Globals.ExitType.TWO_CLOSE:
+			number_of_exits = 2
+		Globals.ExitType.TWO_APART:
+			number_of_exits = 2
+		Globals.ExitType.THREE:
+			number_of_exits = 3
+		Globals.ExitType.FOUR:
+			number_of_exits = 4
+	
+	return number_of_exits
+
 # Ammo array where a given bullet ID's ammo is shown in the index of the ID number
-var ammo: Array[int] = [6, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0]:
+var ammo: Array[int] = [60, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0]:
 	get:
 		return ammo
 
