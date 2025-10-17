@@ -2,10 +2,37 @@ extends Node2D
 
 @export var exit_type = Globals.ExitType.FOUR
 @export var room_rotation = Globals.Rotation.ZERO
+
+var fire_wall = preload("res://scenes/RoomGen/fire_wall.tscn")
+
 @onready var center: Marker2D = $Center
+
+var is_completed = false
+var walls = []
+var room = Globals.tile_size * Globals.room_size
+var coordinates = [
+	Vector2(room / 2, -(room - Globals.tile_size / 2)),
+	Vector2(room - Globals.tile_size / 2, -room / 2),
+	Vector2(room / 2, -Globals.tile_size / 2),
+	Vector2(Globals.tile_size / 2, -room / 2),
+	]
 
 func get_exit_type():
 	return exit_type
 
 func get_room_rotation():
 	return room_rotation
+
+func set_walls():
+	
+	if !is_completed and len(walls) == 0:
+		# set at all four spots (for now)
+		print("Placing walls")
+		for i in range(0,4):
+			var temp_fire_wall:Node2D = fire_wall.instantiate()
+			
+			temp_fire_wall.position = coordinates[i]
+			temp_fire_wall.rotation_degrees = 90 * i
+			
+			walls.append(temp_fire_wall)
+			add_child(temp_fire_wall)

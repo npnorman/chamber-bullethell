@@ -14,6 +14,3 @@ tile_set = ExtResource("2_715ep")
 [node name="Enemies" type="Node" parent="."]
 
 [node name="Interactables" type="Node" parent="."]
-
-[node name="Center" type="Marker2D" parent="."]
-position = Vector2(280, 280)
