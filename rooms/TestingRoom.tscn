@@ -1,8 +1,9 @@
-[gd_scene load_steps=17 format=4 uid="uid://cd0v14frrlgju"]
+[gd_scene load_steps=18 format=4 uid="uid://cd0v14frrlgju"]
 
 [ext_resource type="Script" uid="uid://dhhfbfplukf3b" path="res://rooms/test_level.gd" id="1_u75bg"]
 [ext_resource type="PackedScene" uid="uid://be3bjg0ua7h2c" path="res://scenes/enemy.tscn" id="2_ckyam"]
 [ext_resource type="PackedScene" uid="uid://d1pe7q747exgv" path="res://scenes/RoomGen/floor_generator.tscn" id="2_ovcuh"]
+[ext_resource type="PackedScene" uid="uid://bejlis2xb16qo" path="res://scenes/menu/mini_map.tscn" id="3_ep8cf"]
 [ext_resource type="PackedScene" uid="uid://ckx3iy06eedai" path="res://scenes/player/player.tscn" id="3_i3fwb"]
 [ext_resource type="PackedScene" uid="uid://crwot1rdef6uf" path="res://scenes/interactables/chest.tscn" id="3_ovcuh"]
 [ext_resource type="Texture2D" uid="uid://b5l7w2s3y1apx" path="res://tilesets/hellTiles.png" id="4_w65w3"]
@@ -143,6 +144,8 @@ sources/0 = SubResource("TileSetAtlasSource_gc8kv")
 [node name="Starting Room" type="Node2D"]
 script = ExtResource("1_u75bg")
 bullet_fairy = ExtResource("5_b6v1o")
+
+[node name="MiniMap" parent="." instance=ExtResource("3_ep8cf")]
 
 [node name="BulletFairyTimer" type="Timer" parent="."]
 wait_time = 10.0
