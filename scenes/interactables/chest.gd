@@ -13,5 +13,5 @@ func _ready() -> void:
 func _on_body_entered(body: Node2D) -> void:
 	if not opened:
 		sprite.play("opening")
-		chest_opened.emit(bullet_id, self.global_position)
+		get_tree().current_scene.spawn_pickup(bullet_id, Globals.ammo_max[bullet_id], global_position)
 		opened = true

@@ -20,8 +20,6 @@ var target:CharacterBody2D
 var is_target_reached:bool = false
 var is_dead:bool = false
 
-signal killed(enemy_position: Vector2, ammo_dropped: int)
-
 func _ready() -> void:
 	
 	nav_agent.target_desired_distance = distance_from_player
@@ -64,7 +62,7 @@ func take_damage(damage:int):
 func enemy_die():
 	# or dead body
 	if not is_dead:
-		killed.emit(self.global_position, 5)
+		get_tree().current_scene.spawn_pickup(Globals.Bullets.Normal, 3, global_position)
 	is_dead = true
 	animated_sprite_2d.play("death")
 	animation_player.play("death")
@@ -80,7 +78,7 @@ func shoot():
 	newBullet.direction = global_position.direction_to(shoot_target)
 	newBullet.rotation = global_position.angle_to_point(shoot_target) + deg_to_rad(90.0)
 	
-	get_parent().add_child(newBullet)
+	get_tree().current_scene.add_child(newBullet)
 
 func activate():
 	is_active = true

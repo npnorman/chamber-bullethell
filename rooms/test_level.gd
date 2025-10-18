@@ -22,13 +22,6 @@ var current_room = null
 var room_change_delta: float = Globals.tile_size * 10
 var is_walls_ready = false
 
-# Connects signals for testing, will work differently in the future
-func _ready():
-	for enemy: CharacterBody2D in enemies.get_children():
-		enemy.killed.connect(_on_enemy_killed)
-	for chest: Area2D in chests.get_children():
-		chest.chest_opened.connect(_on_chest_opened)
-
 func _process(delta: float) -> void:
 	check_for_bullet_fairy_spawn()
 	
@@ -100,14 +93,6 @@ func _on_player_cylinder_cycled() -> void:
 func _on_hud_rotation_completed() -> void:
 	player.can_reload = true
 	SfxPlayer.cylinder_click_sound()
-
-# When an enemy dies, spawn an ammo pickup at their location
-func _on_enemy_killed(enemy_position: Vector2, ammo_dropped: int) -> void:
-	spawn_pickup(0, ammo_dropped, enemy_position)
-
-# When a chest is opened, spawn a pickup at its location of the contained type
-func _on_chest_opened(bullet_id: int, chest_position: Vector2):
-	spawn_pickup(bullet_id, Globals.ammo_max[bullet_id], chest_position)
 
 # When an ammo type in the inventory is trashed, a pickup is dropped near the player
 func _on_hud_ammo_dropped(bullet_id: int, amount: int) -> void:
