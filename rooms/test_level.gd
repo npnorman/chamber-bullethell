@@ -17,7 +17,6 @@ var bullet_pickup_scene: PackedScene = preload("res://scenes/bullet_pickup.tscn"
 @onready var mini_map: CanvasLayer = $MiniMap
 
 var is_bullet_fairy_spawned = false
-var current_room_center = Vector2.ZERO
 var current_room = null
 var room_change_delta: float = Globals.tile_size * 10
 var is_walls_ready = false
@@ -25,22 +24,22 @@ var is_walls_ready = false
 func _process(delta: float) -> void:
 	check_for_bullet_fairy_spawn()
 	
-	var previous_center_room = current_room_center
+	var previous_center_room = Globals.current_room_center
 	update_center_room()
 	
 	#in a new room
-	if current_room_center != previous_center_room:
+	if  Globals.current_room_center != previous_center_room:
 		
 		#add to minimap
-		mini_map.add_room_as_mini(current_room_center)
-		mini_map.set_player_location(current_room_center)
+		mini_map.add_room_as_mini(Globals.current_room_center)
+		mini_map.set_player_location(Globals.current_room_center)
 		
 		#set up walls
 		if current_room != null:
 			is_walls_ready = true
 	
 	if is_walls_ready:
-		if current_room_center.distance_to(player.global_position) < room_change_delta:
+		if Globals.current_room_center.distance_to(player.global_position) < room_change_delta:
 			is_walls_ready = false
 			current_room.set_walls()
 	
@@ -76,12 +75,12 @@ func update_center_room():
 			temp_closest_room = center
 			temp_room = room
 			# save as var
-	current_room_center = temp_closest_room
+	Globals.current_room_center = temp_closest_room
 	current_room = temp_room
 
 func update_camera_position():
 	# set the camera position to the room the player is in
-	camera.position = current_room_center
+	camera.position = Globals.current_room_center
 
 # Adjust HUD when cylinder changes
 func _on_player_cylinder_cycled() -> void:
@@ -179,10 +178,10 @@ func _on_player_bullet_fired(pos, dir, id):
 func _on_bullet_fairy_timer_timeout() -> void:
 	#spawn bullet fairy
 	var temp_bullet_fairy = bullet_fairy.instantiate()
-	temp_bullet_fairy.starting_position = current_room_center
+	temp_bullet_fairy.starting_position = Globals.current_room_center
 	temp_bullet_fairy.global_position = Vector2.ZERO
 	add_child(temp_bullet_fairy)
 	print("Spawned bullet fairy")
 	print("PlayerLoc",player.global_position)
-	print("RoomLoc",current_room_center)
-	print("BF:",temp_bullet_fairy.global_position,Vector2(current_room_center.x - room_radius,current_room_center.y + room_radius))
+	print("RoomLoc",Globals.current_room_center)
+	print("BF:",temp_bullet_fairy.global_position,Vector2(Globals.current_room_center.x - room_radius,Globals.current_room_center.y + room_radius))
