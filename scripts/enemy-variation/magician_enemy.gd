@@ -6,6 +6,7 @@ var teleport_distance : float = 100.0
 @onready var smoke_particles: CPUParticles2D = $SmokeParticles
 @onready var collision_shape_2d: CollisionShape2D = $CollisionShape2D
 @onready var teleport_timer: Timer = $TeleportTimer
+@onready var cpu_particles_2d: CPUParticles2D = $CPUParticles2D
 
 func _ready() -> void:
 	target = get_tree().get_nodes_in_group("Player")[0]
@@ -54,9 +55,11 @@ func toggle_invisible(isEnabled:bool):
 	if isEnabled:
 		animated_sprite_2d.play("idle")
 		collision_shape_2d.disabled = false
+		cpu_particles_2d.emitting = true
 		is_active = true
 	else:
 		animated_sprite_2d.play("death")
+		cpu_particles_2d.emitting = false
 		collision_shape_2d.disabled = true
 		is_active = false
 
