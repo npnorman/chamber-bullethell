@@ -200,6 +200,9 @@ wiggle = 0.0
 sprite_frames = SubResource("SpriteFrames_5sstf")
 animation = &"death"
 
+[node name="RerouteTimer" parent="." index="5"]
+wait_time = 1.0
+
 [node name="SmokeParticles" type="CPUParticles2D" parent="." index="7"]
 emitting = false
 amount = 100

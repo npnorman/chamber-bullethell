@@ -75,8 +75,12 @@ func _on_reroute_timer_timeout() -> void:
 		var wiggle = times[rng.randi_range(0,times.size()-1)]
 		reroute_timer.wait_time = wait_time + wiggle
 
+func shoot():
+	super.shoot()
+	
+	can_shoot = false
+	animated_sprite_2d.play("resetHat")
+
 func _on_animated_sprite_2d_animation_finished() -> void:
 	if can_shoot == true:
 		shoot()
-		can_shoot = false
-		animated_sprite_2d.play("resetHat")
