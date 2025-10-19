@@ -1,4 +1,4 @@
-[gd_scene load_steps=19 format=4 uid="uid://cd0v14frrlgju"]
+[gd_scene load_steps=20 format=4 uid="uid://cd0v14frrlgju"]
 
 [ext_resource type="Script" uid="uid://dhhfbfplukf3b" path="res://rooms/test_level.gd" id="1_u75bg"]
 [ext_resource type="PackedScene" uid="uid://be3bjg0ua7h2c" path="res://scenes/enemy.tscn" id="2_ckyam"]
@@ -13,6 +13,7 @@
 [ext_resource type="PackedScene" uid="uid://butq6xoy6daei" path="res://rooms/AlgorithmRooms/HellRooms/HellRoom0.tscn" id="8_rss6x"]
 [ext_resource type="PackedScene" uid="uid://dhsj01pefhfqp" path="res://scenes/diagonal_enemy.tscn" id="9_ovcuh"]
 [ext_resource type="PackedScene" uid="uid://csr22g6iy124u" path="res://scenes/interactables/interactable_item.tscn" id="12_ep8cf"]
+[ext_resource type="PackedScene" uid="uid://c1fsemoplmeeb" path="res://scenes/magician_enemy.tscn" id="14_07cye"]
 
 [sub_resource type="NavigationPolygon" id="NavigationPolygon_02uo2"]
 vertices = PackedVector2Array(161, 17, 161, -51, 269, -3, 269, 65, 337, 65, 347.594, 223.781, -327.063, 210.188, 125, 17, -329.922, -202.828, 125, -51, 331.367, -192.148, 337, -3)
@@ -220,6 +221,9 @@ tile_set = SubResource("TileSet_5vbr4")
 
 [node name="InteractableItem" parent="." instance=ExtResource("12_ep8cf")]
 position = Vector2(204, -272)
+
+[node name="MagicianEnemy" parent="." instance=ExtResource("14_07cye")]
+position = Vector2(416, -379)
 
 [connection signal="timeout" from="BulletFairyTimer" to="." method="_on_bullet_fairy_timer_timeout"]
 [connection signal="ammo_dropped" from="HUD" to="." method="_on_hud_ammo_dropped"]
