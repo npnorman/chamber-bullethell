@@ -16,9 +16,29 @@ func _physics_process(delta: float) -> void:
 		# call timer
 		# shoot
 		if global_position.distance_to(target.global_position) < teleport_distance:
+			
 			if in_teleport == false:
 				in_teleport = true
 				teleport()
+
+func take_damage(damage:int):
+	super.take_damage(damage)
+	
+	if in_teleport == false and health > 0:
+		in_teleport = true
+		set_particle_gradient("#ff7878","#6b0c0c")
+		smoke_particles.color_initial_ramp.remove_point(1)
+		smoke_particles.color_initial_ramp.add_point(1,Color("#ff7878"))
+		smoke_particles.color_initial_ramp.remove_point(0)
+		smoke_particles.color_initial_ramp.add_point(0,Color("#6b0c0c"))
+		teleport()
+
+func set_particle_gradient(color1,color2):
+	#set particles back
+	smoke_particles.color_initial_ramp.remove_point(1)
+	smoke_particles.color_initial_ramp.add_point(1,Color(color1))
+	smoke_particles.color_initial_ramp.remove_point(0)
+	smoke_particles.color_initial_ramp.add_point(0,Color(color2))
 
 func teleport():
 	# spawn smoke
@@ -32,6 +52,7 @@ func teleport():
 
 
 func _on_teleport_timer_timeout() -> void:
+	
 	# get current room center
 	var center:Vector2 = Globals.current_room_center
 	
@@ -42,6 +63,8 @@ func _on_teleport_timer_timeout() -> void:
 	var yr:float = rng.randf_range(-room_radius,room_radius)
 	
 	global_position = center + Vector2(xr,yr)
+	
+	set_particle_gradient("#5d5d5d","#ffffff")
 	
 	# play smoke
 	smoke_particles.emitting = true
