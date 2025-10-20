@@ -227,4 +227,4 @@ position = Vector2(204, -272)
 [connection signal="bullet_fired" from="Player" to="." method="_on_player_bullet_fired"]
 [connection signal="cylinder_cycled" from="Player" to="." method="_on_player_cylinder_cycled"]
 [connection signal="toggle_inventory" from="Player" to="." method="_on_player_toggle_inventory"]
-[connection signal="ui_click" from="Player" to="." method="_on_player_ui_click"]
+[connection signal="update_health" from="Player" to="." method="_on_player_update_health"]

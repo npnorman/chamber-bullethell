@@ -14,12 +14,13 @@ var active_bullet_pos: int = 0
 
 # onready variables
 @onready var animated_sprite_2d: AnimatedSprite2D = $AnimatedSprite2D
+@onready var animations: AnimationPlayer = $AnimationPlayer
 @onready var gun_sprite: Sprite2D = $GunSprite
 
 signal bullet_fired(pos: Vector2, direction: Vector2, id: int)
 signal cylinder_cycled
 signal toggle_inventory
-signal ui_click
+signal update_health(new_health: int)
 
 func _process(_delta):
 	var movement_direction = Input.get_vector("Left", "Right", "Up", "Down")
@@ -137,8 +138,12 @@ func update_bullet_types():
 func take_damage(damage):
 	if not is_invincible:
 		health -= damage
+		update_health.emit(health)
 		is_invincible = true
 		$IFrames.start()
+		animations.play("damage")
+	if health == 0:
+		player_die()
 
 func player_die():
 	# For now may just have a similar particle effect to enemy and a game over text

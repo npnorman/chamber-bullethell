@@ -587,7 +587,7 @@ offset_right = 67.0
 offset_bottom = 92.0
 theme_override_styles/panel = SubResource("StyleBoxEmpty_4h6aq")
 
-[node name="TextureRect" type="TextureRect" parent="HealthStache/StacheFarLeft"]
+[node name="FarLeftTxt" type="TextureRect" parent="HealthStache/StacheFarLeft"]
 modulate = Color(0, 0, 0, 1)
 layout_mode = 2
 texture = ExtResource("14_d15ok")
@@ -601,7 +601,7 @@ offset_right = 106.0
 offset_bottom = 128.0
 theme_override_styles/panel = SubResource("StyleBoxEmpty_4h6aq")
 
-[node name="TextureRect" type="TextureRect" parent="HealthStache/StacheLeft"]
+[node name="LeftTxt" type="TextureRect" parent="HealthStache/StacheLeft"]
 modulate = Color(0, 0, 0, 1)
 layout_mode = 2
 texture = ExtResource("13_d15ok")
@@ -615,7 +615,7 @@ offset_right = 146.0
 offset_bottom = 91.0
 theme_override_styles/panel = SubResource("StyleBoxEmpty_4h6aq")
 
-[node name="TextureRect" type="TextureRect" parent="HealthStache/StacheMiddle"]
+[node name="MiddleTxt" type="TextureRect" parent="HealthStache/StacheMiddle"]
 modulate = Color(0, 0, 0, 1)
 layout_mode = 2
 texture = ExtResource("13_w414h")
@@ -629,7 +629,7 @@ offset_right = 196.0
 offset_bottom = 130.0
 theme_override_styles/panel = SubResource("StyleBoxEmpty_4h6aq")
 
-[node name="TextureRect" type="TextureRect" parent="HealthStache/StacheRight"]
+[node name="RightTxt" type="TextureRect" parent="HealthStache/StacheRight"]
 modulate = Color(0, 0, 0, 1)
 layout_mode = 2
 texture = ExtResource("12_ggbtr")
@@ -643,7 +643,7 @@ offset_right = 241.0
 offset_bottom = 92.0
 theme_override_styles/panel = SubResource("StyleBoxEmpty_4h6aq")
 
-[node name="TextureRect" type="TextureRect" parent="HealthStache/StacheFarRight"]
+[node name="FarRightTxt" type="TextureRect" parent="HealthStache/StacheFarRight"]
 modulate = Color(0, 0, 0, 1)
 layout_mode = 2
 texture = ExtResource("15_4h6aq")

@@ -186,3 +186,7 @@ func _on_bullet_fairy_timer_timeout() -> void:
 	print("PlayerLoc",player.global_position)
 	print("RoomLoc",current_room_center)
 	print("BF:",temp_bullet_fairy.global_position,Vector2(current_room_center.x - room_radius,current_room_center.y + room_radius))
+
+
+func _on_player_update_health(new_health: int) -> void:
+	hud.update_health(new_health)
