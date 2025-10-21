@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://ck311bb4grbyk"
-path="res://.godot/imported/Railgun.png-69589e6d9c279fa3f784a1d28d834188.ctex"
+uid="uid://cc4hc01da2x4y"
+path="res://.godot/imported/BasicBulletDrop.png-e15beab668118971b44839b075f510cf.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://sprites/Railgun.png"
-dest_files=["res://.godot/imported/Railgun.png-69589e6d9c279fa3f784a1d28d834188.ctex"]
+source_file="res://sprites/bullets/BasicBulletDrop.png"
+dest_files=["res://.godot/imported/BasicBulletDrop.png-e15beab668118971b44839b075f510cf.ctex"]
 
 [params]
 

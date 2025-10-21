@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://dx0ucmv3avgjj"
-path="res://.godot/imported/UncommonBulletDrop.png-d4becd286c6f4831dd2271ffdf14a2e4.ctex"
+uid="uid://qeujp77cdf7y"
+path="res://.godot/imported/Gambler.png-db2cf8ec43d29c896d8e056fef175e32.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://sprites/UncommonBulletDrop.png"
-dest_files=["res://.godot/imported/UncommonBulletDrop.png-d4becd286c6f4831dd2271ffdf14a2e4.ctex"]
+source_file="res://sprites/bullets/Gambler.png"
+dest_files=["res://.godot/imported/Gambler.png-db2cf8ec43d29c896d8e056fef175e32.ctex"]
 
 [params]
 

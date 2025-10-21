@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://dpo1j3krvynbe"
-path="res://.godot/imported/ricochet_back.png-8059bd98b549afcc6254001d7cb621d2.ctex"
+uid="uid://dbslxjq1y8lj"
+path="res://.godot/imported/Die Faces.png-42c416551b83bb511442b4f5bfafb68a.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://sprites/ricochet_back.png"
-dest_files=["res://.godot/imported/ricochet_back.png-8059bd98b549afcc6254001d7cb621d2.ctex"]
+source_file="res://sprites/die/Die Faces.png"
+dest_files=["res://.godot/imported/Die Faces.png-42c416551b83bb511442b4f5bfafb68a.ctex"]
 
 [params]
 

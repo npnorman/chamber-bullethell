@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://c5tjkfvcgcb7o"
-path="res://.godot/imported/Health.png-e095747c845a6a276dcad31474826492.ctex"
+uid="uid://bugv1hmlnh0wu"
+path="res://.godot/imported/CommonBulletDrop.png-7ea4bdd515b7de8dfa7edfe8ecee63c9.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://sprites/Health.png"
-dest_files=["res://.godot/imported/Health.png-e095747c845a6a276dcad31474826492.ctex"]
+source_file="res://sprites/bullets/CommonBulletDrop.png"
+dest_files=["res://.godot/imported/CommonBulletDrop.png-7ea4bdd515b7de8dfa7edfe8ecee63c9.ctex"]
 
 [params]
 

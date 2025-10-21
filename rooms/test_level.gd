@@ -123,7 +123,6 @@ func _on_player_bullet_fired(pos, dir, id):
 	
 	match id:
 		
-		# Normal Bullets
 		Globals.Bullets.Normal:
 			var bullet = bullet_scene.instantiate()
 			bullet.position = pos
@@ -131,7 +130,6 @@ func _on_player_bullet_fired(pos, dir, id):
 			bullet.direction = dir
 			projectiles.add_child(bullet)
 			
-		# Ricochet Bullets
 		Globals.Bullets.Ricochet:
 			var bullet = bullet_scene.instantiate()
 			bullet.position = pos
@@ -141,7 +139,6 @@ func _on_player_bullet_fired(pos, dir, id):
 			bullet.bullet_id = Globals.Bullets.Ricochet
 			projectiles.add_child(bullet)
 			
-		# Shotgun Bullets 
 		Globals.Bullets.Shotgun: 
 			for i in range(6):
 				var bullet = bullet_scene.instantiate()
@@ -154,7 +151,27 @@ func _on_player_bullet_fired(pos, dir, id):
 				bullet.direction = Vector2(cos(new_angle), sin(new_angle))
 				projectiles.add_child(bullet)
 		
-	#Gambler Bullets
+		#TODO: Add explosive functionality to this bullet
+		Globals.Bullets.Explosive:
+			var bullet = bullet_scene.instantiate()
+			bullet.position = pos
+			bullet.damage = 5
+			bullet.rotation_degrees = rad_to_deg(dir.angle()) + 90
+			bullet.direction = dir
+			projectiles.add_child(bullet)
+		
+		Globals.Bullets.Health:
+			player.heal()
+		
+		#TODO: Add railgun functionality to this bullet
+		Globals.Bullets.Railgun:
+			var bullet = bullet_scene.instantiate()
+			bullet.position = pos
+			bullet.damage = 10
+			bullet.rotation_degrees = rad_to_deg(dir.angle()) + 90
+			bullet.direction = dir
+			projectiles.add_child(bullet)
+		
 		Globals.Bullets.Gambler:
 			var dice_roll = randi_range(1, 6)
 			var bullet = bullet_scene.instantiate()
@@ -162,18 +179,19 @@ func _on_player_bullet_fired(pos, dir, id):
 				1:
 					bullet.damage = -1
 				2:
-					bullet.damage = 4
+					bullet.damage = 2
 				3:
-					bullet.damage = 8
+					bullet.damage = 6
 				4:
-					bullet.damage = 16
+					bullet.damage = 12
 				5:
-					bullet.damage = 32
+					bullet.damage = 20
 				6:
-					bullet.damage = 100
+					bullet.damage = 50
 			bullet.position = pos
 			bullet.rotation_degrees = rad_to_deg(dir.angle()) + 90
 			bullet.direction = dir
+			player.roll_die(dice_roll)
 			projectiles.add_child(bullet)
 
 func _on_bullet_fairy_timer_timeout() -> void:
@@ -186,7 +204,6 @@ func _on_bullet_fairy_timer_timeout() -> void:
 	print("PlayerLoc",player.global_position)
 	print("RoomLoc",current_room_center)
 	print("BF:",temp_bullet_fairy.global_position,Vector2(current_room_center.x - room_radius,current_room_center.y + room_radius))
-
 
 func _on_player_update_health(new_health: int) -> void:
 	hud.update_health(new_health)

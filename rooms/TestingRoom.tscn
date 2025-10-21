@@ -178,11 +178,11 @@ distance_from_player = 200.0
 
 [node name="Chest" parent="Chests" instance=ExtResource("3_ovcuh")]
 position = Vector2(395, -488)
-bullet_id = 1
+bullet_id = 6
 
 [node name="Chest2" parent="Chests" instance=ExtResource("3_ovcuh")]
-position = Vector2(944, -483)
-bullet_id = 6
+position = Vector2(86, -488)
+bullet_id = 4
 
 [node name="Pickups" type="Node" parent="."]
 

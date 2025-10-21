@@ -8,6 +8,8 @@ var opened: bool = false
 signal chest_opened(bullet_id: int, chest_position: Vector2)
 
 func _ready() -> void:
+	var rand_bullet = randi_range(1, 6)
+	bullet_id = rand_bullet
 	sprite.play("default")
 
 func _on_body_entered(body: Node2D) -> void:

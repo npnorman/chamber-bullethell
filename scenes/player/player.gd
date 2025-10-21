@@ -4,6 +4,7 @@ var can_shoot: bool = true
 var can_blank: bool = true
 var mouse_ui_mode: bool = false
 var is_invincible: bool = false
+var is_dead: bool = false
 var player_knockback: Vector2
 var active_bullet_pos: int = 0
 @export var can_reload: bool = true
@@ -16,6 +17,7 @@ var active_bullet_pos: int = 0
 @onready var animated_sprite_2d: AnimatedSprite2D = $AnimatedSprite2D
 @onready var animations: AnimationPlayer = $AnimationPlayer
 @onready var gun_sprite: Sprite2D = $GunSprite
+@onready var dice: Sprite2D = $Dice
 
 signal bullet_fired(pos: Vector2, direction: Vector2, id: int)
 signal cylinder_cycled
@@ -23,59 +25,63 @@ signal toggle_inventory
 signal update_health(new_health: int)
 
 func _process(_delta):
-	var movement_direction = Input.get_vector("Left", "Right", "Up", "Down")
-	velocity = movement_direction * speed + player_knockback
-	if player_knockback.length() > 0:
-		player_knockback = player_knockback.move_toward(Vector2.ZERO, _delta * 10000)
-	move_and_slide()
-	rotate_gun()
-	player_direction = (get_global_mouse_position() - position).normalized()
-	
-	if not mouse_ui_mode:
-		# Shoot Input
-		if Input.is_action_pressed("Shoot") and can_shoot:
-			print_bullet_name(Globals.magazine[active_bullet_pos])
-			shoot()
+	if not is_dead:
+		var movement_direction = Input.get_vector("Left", "Right", "Up", "Down")
+		velocity = movement_direction * speed + player_knockback
+		if player_knockback.length() > 0:
+			player_knockback = player_knockback.move_toward(Vector2.ZERO, _delta * 10000)
+		move_and_slide()
+		rotate_gun()
+		player_direction = (get_global_mouse_position() - position).normalized()
 		
-		# Blank input, adds knockback for no bullet cost and has a 1.5 second cooldown
-		if Input.is_action_pressed("Blank") and can_blank:
-			add_shot_knockback(Globals.Bullets.Shotgun, 1500)
-			can_blank = false
-			$BlankCooldown.start()
-	
-	# Normal reload and Special reload inputs
-	if Input.is_action_just_pressed("Main Reload") and Globals.magazine[active_bullet_pos] == Globals.Bullets.Empty and Globals.ammo[0] > 0:
-		reload(0)
-	if Input.is_action_just_pressed("Special Reload 1") and Globals.magazine[active_bullet_pos] == Globals.Bullets.Empty and Globals.ammo[bullet_types[1]] > 0:
-		reload(bullet_types[1])
-	if Input.is_action_just_pressed("Special Reload 2") and Globals.magazine[active_bullet_pos] == Globals.Bullets.Empty and Globals.ammo[bullet_types[2]] > 0:
-		reload(bullet_types[2])
-	if Input.is_action_just_pressed("Special Reload 3") and Globals.magazine[active_bullet_pos] == Globals.Bullets.Empty and Globals.ammo[bullet_types[3]] > 0:
-		reload(bullet_types[3])
+		if dice.visible == true:
+			dice.position.y -= 25 * _delta
 		
-	
-	# Menu/Inventory
-	if Input.is_action_just_pressed("Inventory"):
-		toggle_inventory.emit()
-		mouse_ui_mode = not mouse_ui_mode
-	if Input.is_action_just_released("Menu"):
-		pass
-	
-	# Animations
-	if Input.is_action_pressed("Down"):
-		animated_sprite_2d.play("walk")
-	
-	elif Input.is_action_pressed("Up"):
-		animated_sprite_2d.play("walk")
+		if not mouse_ui_mode:
+			# Shoot Input
+			if Input.is_action_pressed("Shoot") and can_shoot:
+				print_bullet_name(Globals.magazine[active_bullet_pos])
+				shoot()
+			
+			# Blank input, adds knockback for no bullet cost and has a 1.5 second cooldown
+			if Input.is_action_pressed("Blank") and can_blank:
+				add_shot_knockback(Globals.Bullets.Shotgun, 1500)
+				can_blank = false
+				$BlankCooldown.start()
 		
-	elif Input.is_action_pressed("Right"):
-		animated_sprite_2d.play("walk")
+		# Normal reload and Special reload inputs
+		if Input.is_action_just_pressed("Main Reload") and Globals.magazine[active_bullet_pos] == Globals.Bullets.Empty and Globals.ammo[0] > 0:
+			reload(0)
+		if Input.is_action_just_pressed("Special Reload 1") and Globals.magazine[active_bullet_pos] == Globals.Bullets.Empty and Globals.ammo[bullet_types[1]] > 0:
+			reload(bullet_types[1])
+		if Input.is_action_just_pressed("Special Reload 2") and Globals.magazine[active_bullet_pos] == Globals.Bullets.Empty and Globals.ammo[bullet_types[2]] > 0:
+			reload(bullet_types[2])
+		if Input.is_action_just_pressed("Special Reload 3") and Globals.magazine[active_bullet_pos] == Globals.Bullets.Empty and Globals.ammo[bullet_types[3]] > 0:
+			reload(bullet_types[3])
+			
 		
-	elif Input.is_action_pressed("Left"):
-		animated_sprite_2d.play("walk")
-	
-	else:
-		animated_sprite_2d.play("idle")
+		# Menu/Inventory
+		if Input.is_action_just_pressed("Inventory"):
+			toggle_inventory.emit()
+			mouse_ui_mode = not mouse_ui_mode
+		if Input.is_action_just_released("Menu"):
+			pass
+		
+		# Animations
+		if Input.is_action_pressed("Down"):
+			animated_sprite_2d.play("walk")
+		
+		elif Input.is_action_pressed("Up"):
+			animated_sprite_2d.play("walk")
+			
+		elif Input.is_action_pressed("Right"):
+			animated_sprite_2d.play("walk")
+			
+		elif Input.is_action_pressed("Left"):
+			animated_sprite_2d.play("walk")
+		
+		else:
+			animated_sprite_2d.play("idle")
 
 # This function will aim the revolver to where the mouse is and can rotate the 
 # sprite vertically depending on which direction it is facing
@@ -109,7 +115,6 @@ func reload(id: int):
 		Globals.ammo[id] -= 1
 		can_reload = false
 		cycle_cylinder()
-		
 
 # Moves every bullet in the cyclinder to the left (or right) once
 func cycle_cylinder():
@@ -136,19 +141,47 @@ func update_bullet_types():
 
 # Takes 1 health from the player, currently starts with 6 total
 func take_damage(damage):
-	if not is_invincible:
+	if not is_invincible and not is_dead:
 		health -= damage
 		update_health.emit(health)
-		is_invincible = true
-		$IFrames.start()
-		animations.play("damage")
-	if health == 0:
-		player_die()
+		if health == 0:
+			player_die()
+		else:
+			is_invincible = true
+			$IFrames.start()
+			animations.play("damage")
 
+# Stops player from moving and plays death animation
 func player_die():
-	# For now may just have a similar particle effect to enemy and a game over text
-	pass
+	is_dead = true
+	animations.play("death")
 
+func heal():
+	health += 1
+	update_health.emit(health)
+	animations.play("heal")
+	
+func roll_die(roll: int) -> void:
+	var dice_atlas: AtlasTexture = dice.texture
+	dice.position = Vector2(0, -35)
+	dice.get_child(0).visible = false
+	match roll:
+		1:
+			dice_atlas.region = Rect2(0,0,16,16)
+		2:
+			dice_atlas.region = Rect2(16,0,16,16)
+		3:
+			dice_atlas.region = Rect2(0,16,16,16)
+		4:
+			dice_atlas.region = Rect2(16,16,16,16)
+		5:
+			dice_atlas.region = Rect2(0,32,16,16)
+		6:
+			dice_atlas.region = Rect2(16,32,16,16)
+			dice.get_child(0).visible = true
+	dice.visible = true
+	$DiceTimer.start()
+	
 # Cooldown between shots
 func _on_shoot_cooldown_timeout() -> void:
 	can_shoot = true
@@ -160,3 +193,7 @@ func _on_i_frames_timeout() -> void:
 # Cooldown between blanks
 func _on_blank_cooldown_timeout() -> void:
 	can_blank = true
+
+func _on_dice_timer_timeout() -> void:
+	dice.visible = false
+	dice.get_child(0).visible = false
