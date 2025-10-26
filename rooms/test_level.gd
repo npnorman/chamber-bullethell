@@ -202,8 +202,8 @@ func _on_bullet_fairy_timer_timeout() -> void:
 	add_child(temp_bullet_fairy)
 	print("Spawned bullet fairy")
 	print("PlayerLoc",player.global_position)
-	print("RoomLoc",current_room_center)
-	print("BF:",temp_bullet_fairy.global_position,Vector2(current_room_center.x - room_radius,current_room_center.y + room_radius))
+	print("RoomLoc",Globals.current_room_center)
+	print("BF:",temp_bullet_fairy.global_position,Vector2(Globals.current_room_center.x - room_radius,Globals.current_room_center.y + room_radius))
 
 func _on_player_update_health(new_health: int) -> void:
 	hud.update_health(new_health)
@@ -219,5 +219,3 @@ func _on_player_game_paused(death: bool) -> void:
 		pause_menu.on_pause()
 	pause_menu.visible = true
 	get_tree().paused = true
-	print("RoomLoc",Globals.current_room_center)
-	print("BF:",temp_bullet_fairy.global_position,Vector2(Globals.current_room_center.x - room_radius,Globals.current_room_center.y + room_radius))
