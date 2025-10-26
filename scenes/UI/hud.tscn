@@ -147,7 +147,6 @@ load_path = "res://.godot/imported/basic_back.png-362d1b077b04b76295f3a4d7084386
 [sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_h03ao"]
 
 [sub_resource type="CompressedTexture2D" id="CompressedTexture2D_syq1e"]
-load_path = "res://.godot/imported/Gamblers.png-0725c9e4b7770d49d933ba480ac695ab.ctex"
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_h03ao"]
 

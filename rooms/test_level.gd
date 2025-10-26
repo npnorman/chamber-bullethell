@@ -7,6 +7,7 @@ var bullet_pickup_scene: PackedScene = preload("res://scenes/bullet_pickup.tscn"
 @export var bullet_fairy:PackedScene
 
 @onready var hud: CanvasLayer = $HUD
+@onready var pause_menu: CanvasLayer = $PauseMenu
 @onready var player: CharacterBody2D = $Player
 @onready var enemies: Node = $Enemies
 @onready var pickups: Node = $Pickups
@@ -207,3 +208,15 @@ func _on_bullet_fairy_timer_timeout() -> void:
 
 func _on_player_update_health(new_health: int) -> void:
 	hud.update_health(new_health)
+
+func _on_pause_menu_game_resumed() -> void:
+	pause_menu.visible = false
+	get_tree().paused = false
+
+func _on_player_game_paused(death: bool) -> void:
+	if death:
+		pause_menu.on_death()
+	else:
+		pause_menu.on_pause()
+	pause_menu.visible = true
+	get_tree().paused = true

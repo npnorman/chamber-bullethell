@@ -442,3 +442,4 @@ linear_accel_max = 5.0
 [connection signal="timeout" from="IFrames" to="." method="_on_i_frames_timeout"]
 [connection signal="timeout" from="BlankCooldown" to="." method="_on_blank_cooldown_timeout"]
 [connection signal="timeout" from="DiceTimer" to="." method="_on_dice_timer_timeout"]
+[connection signal="animation_finished" from="AnimationPlayer" to="." method="_on_animation_player_animation_finished"]

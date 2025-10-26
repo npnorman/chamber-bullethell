@@ -23,6 +23,7 @@ signal bullet_fired(pos: Vector2, direction: Vector2, id: int)
 signal cylinder_cycled
 signal toggle_inventory
 signal update_health(new_health: int)
+signal game_paused(death: bool)
 
 func _process(_delta):
 	if not is_dead:
@@ -40,7 +41,6 @@ func _process(_delta):
 		if not mouse_ui_mode:
 			# Shoot Input
 			if Input.is_action_pressed("Shoot") and can_shoot:
-				print_bullet_name(Globals.magazine[active_bullet_pos])
 				shoot()
 			
 			# Blank input, adds knockback for no bullet cost and has a 1.5 second cooldown
@@ -64,8 +64,8 @@ func _process(_delta):
 		if Input.is_action_just_pressed("Inventory"):
 			toggle_inventory.emit()
 			mouse_ui_mode = not mouse_ui_mode
-		if Input.is_action_just_released("Menu"):
-			pass
+		if Input.is_action_just_pressed("Menu"):
+			game_paused.emit(false)
 		
 		# Animations
 		if Input.is_action_pressed("Down"):
@@ -197,3 +197,7 @@ func _on_blank_cooldown_timeout() -> void:
 func _on_dice_timer_timeout() -> void:
 	dice.visible = false
 	dice.get_child(0).visible = false
+
+func _on_animation_player_animation_finished(anim_name: StringName) -> void:
+	if anim_name == "death":
+		game_paused.emit(true)
