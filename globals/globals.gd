@@ -104,7 +104,7 @@ var ammo: Array[int] = [60, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0]:
 		return ammo
 
 # Gives the maximum ammo that can be held of a given ammo type
-var ammo_max: Array[int] = [999, 30, 30, 30, 6, 15, 20, 30, 30, 30, 30, 30]
+var ammo_max: Array[int] = [999, 30, 30, 30, 3, 12, 18, 30, 30, 30, 30, 30]
 
 # Array of the IDs of ammo the player currently has, with -1 meaning nothing is in the slot
 var ammo_types: Array[int] = [0, -1, -1, -1]

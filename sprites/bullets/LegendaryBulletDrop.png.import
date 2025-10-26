@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://ccprffhrbse44"
-path="res://.godot/imported/shotgun_back.png-6dc6cb3c2b70ccd77e4f55f814ed218c.ctex"
+uid="uid://clldi7xhmpemh"
+path="res://.godot/imported/LegendaryBulletDrop.png-fa5cdc5cd51a678e9a8e68b2771b1724.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://sprites/shotgun_back.png"
-dest_files=["res://.godot/imported/shotgun_back.png-6dc6cb3c2b70ccd77e4f55f814ed218c.ctex"]
+source_file="res://sprites/bullets/LegendaryBulletDrop.png"
+dest_files=["res://.godot/imported/LegendaryBulletDrop.png-fa5cdc5cd51a678e9a8e68b2771b1724.ctex"]
 
 [params]
 

@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://xuro3v25b35w"
-path="res://.godot/imported/Gamblers.png-f0232256ae5e5818efef16b51fbe57e7.ctex"
+uid="uid://bjer451i0okay"
+path="res://.godot/imported/Explosive.png-72a4c458ead517ec24d64b7c94d2b6de.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://sprites/Gamblers.png"
-dest_files=["res://.godot/imported/Gamblers.png-f0232256ae5e5818efef16b51fbe57e7.ctex"]
+source_file="res://sprites/bullets/Explosive.png"
+dest_files=["res://.godot/imported/Explosive.png-72a4c458ead517ec24d64b7c94d2b6de.ctex"]
 
 [params]
 

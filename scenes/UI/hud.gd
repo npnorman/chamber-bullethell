@@ -20,6 +20,7 @@ var selected_box: int
 @onready var held_texture = $HeldItem/HeldTexture
 @onready var text_panel = $TextPanel
 @onready var bullet_text = $TextPanel/TextDescription
+@onready var stache_textures: Array[TextureRect] = [$HealthStache/StacheFarLeft/FarLeftTxt, $HealthStache/StacheLeft/LeftTxt, $HealthStache/StacheMiddle/MiddleTxt, $HealthStache/StacheRight/RightTxt, $HealthStache/StacheFarRight/FarRightTxt]
 signal rotation_completed
 signal ammo_dropped(bullet_id: int, amount: int)
 
@@ -109,6 +110,36 @@ func update_counters():
 # toggles visibility of inventory 
 func display_inventory() -> void:
 	inventory.visible = not inventory.visible
+	
+func update_health(new_health: int) -> void:
+	match new_health:
+		0:
+			stache_textures[2].visible = false
+		1:
+			stache_textures[2].modulate = Color(1, 0, 0, 1)
+			stache_textures[2].visible = true
+		2:
+			stache_textures[2].modulate = Color(0, 0, 0, 1)
+			stache_textures[1].visible = false
+			stache_textures[3].visible = false
+		3:
+			stache_textures[1].modulate = Color(1, 0, 0, 1)
+			stache_textures[3].modulate = Color(1, 0, 0, 1)
+			stache_textures[1].visible = true
+			stache_textures[3].visible = true
+		4:
+			stache_textures[1].modulate = Color(0, 0, 0, 1)
+			stache_textures[3].modulate = Color(0, 0, 0, 1)
+			stache_textures[4].visible = false
+			stache_textures[0].visible = false
+		5:
+			stache_textures[4].modulate = Color(1, 0, 0, 1)
+			stache_textures[0].modulate = Color(1, 0, 0, 1)
+			stache_textures[4].visible = true
+			stache_textures[0].visible = true
+		6:
+			stache_textures[0].modulate = Color(0, 0, 0, 1)
+			stache_textures[4].modulate = Color(0, 0, 0, 1)
 
 # Sets held item texture to that of the box clicked and lets you drag it around. If let go of above the trash icon,
 # drops the item to the left of the player

@@ -1,0 +1,54 @@
+[gd_scene load_steps=2 format=3 uid="uid://bsp2v6s7o2ey2"]
+
+[ext_resource type="Script" uid="uid://bopdsby03kbss" path="res://scenes/UI/pause_menu.gd" id="1_qo2fb"]
+
+[node name="PauseMenu" type="CanvasLayer"]
+script = ExtResource("1_qo2fb")
+
+[node name="Panel" type="Panel" parent="."]
+self_modulate = Color(1, 1, 1, 0.705882)
+offset_right = 1024.0
+offset_bottom = 767.0
+
+[node name="VBoxContainer" type="VBoxContainer" parent="."]
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -75.0
+offset_top = -75.0
+offset_right = 75.0
+offset_bottom = 75.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="Resume" type="Button" parent="VBoxContainer"]
+layout_mode = 2
+text = "Resume"
+
+[node name="GoToMenu" type="Button" parent="VBoxContainer"]
+layout_mode = 2
+text = "Return to Menu"
+
+[node name="Restart" type="Button" parent="VBoxContainer"]
+layout_mode = 2
+text = "Restart"
+
+[node name="DeathText" type="Label" parent="."]
+modulate = Color(0.84956, 3.29696e-06, 1.54018e-06, 1)
+anchors_preset = -1
+anchor_left = 0.5
+anchor_top = 0.275
+anchor_right = 0.5
+anchor_bottom = 0.275
+offset_left = -37.0
+offset_top = -11.2
+offset_right = 37.0
+offset_bottom = 11.8
+grow_horizontal = 2
+text = "You Died!"
+
+[connection signal="pressed" from="VBoxContainer/Resume" to="." method="_on_resume_pressed"]
+[connection signal="pressed" from="VBoxContainer/GoToMenu" to="." method="_on_go_to_menu_pressed"]
+[connection signal="pressed" from="VBoxContainer/Restart" to="." method="_on_restart_pressed"]
