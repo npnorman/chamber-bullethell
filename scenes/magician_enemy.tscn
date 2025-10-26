@@ -1,0 +1,224 @@
+[gd_scene load_steps=29 format=3 uid="uid://c1fsemoplmeeb"]
+
+[ext_resource type="PackedScene" uid="uid://be3bjg0ua7h2c" path="res://scenes/enemy.tscn" id="1_gi53r"]
+[ext_resource type="Script" uid="uid://68uuninm3i8t" path="res://scripts/enemy-variation/magician_enemy.gd" id="2_ay3sq"]
+[ext_resource type="Texture2D" uid="uid://cwlan1a62urcl" path="res://sprites/empty.png" id="2_o01d1"]
+[ext_resource type="Texture2D" uid="uid://cfftr51g2kfes" path="res://sprites/enemy/magician.png" id="3_ay3sq"]
+[ext_resource type="Texture2D" uid="uid://c6mbf3v5odvbx" path="res://sprites/particles/smoke.png" id="5_obl18"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_obl18"]
+atlas = ExtResource("2_o01d1")
+region = Rect2(0, 0, 8, 16)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_dax5w"]
+atlas = ExtResource("3_ay3sq")
+region = Rect2(0, 0, 32, 64)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_o01d1"]
+atlas = ExtResource("3_ay3sq")
+region = Rect2(0, 0, 32, 64)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_ay3sq"]
+atlas = ExtResource("3_ay3sq")
+region = Rect2(96, 0, 32, 64)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_5sstf"]
+atlas = ExtResource("3_ay3sq")
+region = Rect2(128, 0, 32, 64)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_gld1a"]
+atlas = ExtResource("3_ay3sq")
+region = Rect2(160, 0, 32, 64)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_0s8ln"]
+atlas = ExtResource("3_ay3sq")
+region = Rect2(192, 0, 32, 64)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_ywk4t"]
+atlas = ExtResource("3_ay3sq")
+region = Rect2(224, 0, 32, 64)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_q3xtu"]
+atlas = ExtResource("3_ay3sq")
+region = Rect2(256, 0, 32, 64)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_lwsdb"]
+atlas = ExtResource("3_ay3sq")
+region = Rect2(288, 0, 32, 64)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_5osro"]
+atlas = ExtResource("3_ay3sq")
+region = Rect2(320, 0, 32, 64)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_4je2v"]
+atlas = ExtResource("3_ay3sq")
+region = Rect2(352, 0, 32, 64)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_obdfc"]
+atlas = ExtResource("3_ay3sq")
+region = Rect2(384, 0, 32, 64)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_iqbcp"]
+atlas = ExtResource("3_ay3sq")
+region = Rect2(416, 0, 32, 64)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_deb0q"]
+atlas = ExtResource("3_ay3sq")
+region = Rect2(448, 0, 32, 64)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_raanp"]
+atlas = ExtResource("3_ay3sq")
+region = Rect2(480, 0, 32, 64)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_idoke"]
+atlas = ExtResource("3_ay3sq")
+region = Rect2(128, 0, 32, 64)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_fr5ey"]
+atlas = ExtResource("3_ay3sq")
+region = Rect2(96, 0, 32, 64)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_61rah"]
+atlas = ExtResource("3_ay3sq")
+region = Rect2(0, 0, 32, 64)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_t6jov"]
+atlas = ExtResource("3_ay3sq")
+region = Rect2(32, 0, 32, 64)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_sfh6y"]
+atlas = ExtResource("3_ay3sq")
+region = Rect2(64, 0, 32, 64)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_5sstf"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_obl18")
+}],
+"loop": true,
+"name": &"death",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_dax5w")
+}],
+"loop": false,
+"name": &"default",
+"speed": 1.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_o01d1")
+}],
+"loop": true,
+"name": &"idle",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_ay3sq")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_5sstf")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_gld1a")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_0s8ln")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_ywk4t")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_q3xtu")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_lwsdb")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_5osro")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_4je2v")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_obdfc")
+}],
+"loop": false,
+"name": &"intoHat",
+"speed": 10.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_iqbcp")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_deb0q")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_raanp")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_idoke")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_fr5ey")
+}],
+"loop": false,
+"name": &"resetHat",
+"speed": 10.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_61rah")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_t6jov")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_sfh6y")
+}],
+"loop": false,
+"name": &"teleport",
+"speed": 10.0
+}]
+
+[sub_resource type="Gradient" id="Gradient_obl18"]
+colors = PackedColorArray(0.362829, 0.362829, 0.362829, 1, 1, 1, 1, 1)
+
+[node name="MagicianEnemy" instance=ExtResource("1_gi53r")]
+script = ExtResource("2_ay3sq")
+is_active = true
+health = 9
+wait_time = 1.0
+wiggle = 0.0
+
+[node name="AnimatedSprite2D" parent="." index="3"]
+sprite_frames = SubResource("SpriteFrames_5sstf")
+animation = &"death"
+
+[node name="RerouteTimer" parent="." index="5"]
+wait_time = 1.0
+
+[node name="SmokeParticles" type="CPUParticles2D" parent="." index="7"]
+emitting = false
+amount = 100
+texture = ExtResource("5_obl18")
+lifetime = 0.25
+one_shot = true
+randomness = 1.0
+emission_shape = 1
+emission_sphere_radius = 31.22
+direction = Vector2(0, -1)
+gravity = Vector2(0, 0)
+color_initial_ramp = SubResource("Gradient_obl18")
+
+[node name="TeleportTimer" type="Timer" parent="." index="8"]
+wait_time = 2.0
+one_shot = true
+
+[connection signal="animation_finished" from="AnimatedSprite2D" to="." method="_on_animated_sprite_2d_animation_finished"]
+[connection signal="timeout" from="TeleportTimer" to="." method="_on_teleport_timer_timeout"]

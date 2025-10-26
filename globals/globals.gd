@@ -117,5 +117,8 @@ var magazine: Array[int] = [-1, -1, -1, -1, -1, -1]:
 	get:
 		return magazine
 
+# current room
+var current_room_center:Vector2 = Vector2.ZERO
+
 func change_scene(file_name:String):
 	get_tree().change_scene_to_file(file_name)

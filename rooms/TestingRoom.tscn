@@ -14,6 +14,7 @@
 [ext_resource type="PackedScene" uid="uid://dhsj01pefhfqp" path="res://scenes/diagonal_enemy.tscn" id="9_ovcuh"]
 [ext_resource type="PackedScene" uid="uid://csr22g6iy124u" path="res://scenes/interactables/interactable_item.tscn" id="12_ep8cf"]
 [ext_resource type="PackedScene" uid="uid://bsp2v6s7o2ey2" path="res://scenes/UI/pause_menu.tscn" id="14_07cye"]
+[ext_resource type="PackedScene" uid="uid://c1fsemoplmeeb" path="res://scenes/magician_enemy.tscn" id="14_07cye"]
 
 [sub_resource type="NavigationPolygon" id="NavigationPolygon_02uo2"]
 vertices = PackedVector2Array(161, 17, 161, -51, 269, -3, 269, 65, 337, 65, 347.594, 223.781, -327.063, 210.188, 125, 17, -329.922, -202.828, 125, -51, 331.367, -192.148, 337, -3)
@@ -224,6 +225,8 @@ position = Vector2(204, -272)
 
 [node name="PauseMenu" parent="." instance=ExtResource("14_07cye")]
 visible = false
+[node name="MagicianEnemy" parent="." instance=ExtResource("14_07cye")]
+position = Vector2(416, -379)
 
 [connection signal="timeout" from="BulletFairyTimer" to="." method="_on_bullet_fairy_timer_timeout"]
 [connection signal="ammo_dropped" from="HUD" to="." method="_on_hud_ammo_dropped"]
