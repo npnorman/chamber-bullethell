@@ -1,6 +1,7 @@
-[gd_scene load_steps=36 format=3 uid="uid://chtu6kuwhxen6"]
+[gd_scene load_steps=37 format=3 uid="uid://chtu6kuwhxen6"]
 
 [ext_resource type="Script" uid="uid://cxl6hj6ji3sd2" path="res://scenes/UI/hud.gd" id="1_rd3kb"]
+[ext_resource type="Texture2D" uid="uid://w5axh0wgmx1r" path="res://sprites/bullets/BasicBulletFull.png" id="2_d15ok"]
 [ext_resource type="Texture2D" uid="uid://qrarrw5bha70" path="res://sprites/HudNoChamber.png" id="2_xh8q5"]
 [ext_resource type="Texture2D" uid="uid://c0q3kso3x2tj2" path="res://sprites/SingleChamber.png" id="3_cg4gw"]
 [ext_resource type="Texture2D" uid="uid://cai28ou8bk2j1" path="res://sprites/bullets/Ricochet.png" id="3_w414h"]
@@ -164,7 +165,7 @@ load_path = "res://.godot/imported/basic_back.png-362d1b077b04b76295f3a4d7084386
 
 [node name="HUD" type="CanvasLayer"]
 script = ExtResource("1_rd3kb")
-bullet_textures = Array[Resource]([ExtResource("4_h03ao"), ExtResource("3_w414h"), ExtResource("4_d15ok"), ExtResource("5_h03ao"), ExtResource("6_0fcg2"), ExtResource("7_qe851"), ExtResource("8_4h6aq")])
+bullet_textures = Array[Resource]([ExtResource("2_d15ok"), ExtResource("3_w414h"), ExtResource("4_d15ok"), ExtResource("5_h03ao"), ExtResource("6_0fcg2"), ExtResource("7_qe851"), ExtResource("8_4h6aq")])
 
 [node name="CylinderNode" type="Control" parent="."]
 layout_mode = 3

@@ -1,4 +1,4 @@
-[gd_scene load_steps=7 format=3 uid="uid://crwot1rdef6uf"]
+[gd_scene load_steps=8 format=3 uid="uid://crwot1rdef6uf"]
 
 [ext_resource type="Script" uid="uid://cv7fgktk85qwm" path="res://scenes/interactables/chest.gd" id="1_7mhpd"]
 [ext_resource type="Texture2D" uid="uid://cnnyk1ubxirgl" path="res://sprites/treasureChest1.png" id="1_k73g1"]
@@ -32,6 +32,9 @@ animations = [{
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_7fup5"]
 
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_7mhpd"]
+size = Vector2(30, 21)
+
 [node name="Chest" type="Area2D"]
 collision_layer = 8
 collision_mask = 2
@@ -44,6 +47,12 @@ animation = &"opening"
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 scale = Vector2(4, 2.5)
 shape = SubResource("RectangleShape2D_7fup5")
+
+[node name="StaticBody2D" type="StaticBody2D" parent="."]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="StaticBody2D"]
+position = Vector2(0, -0.5)
+shape = SubResource("RectangleShape2D_7mhpd")
 
 [connection signal="body_entered" from="." to="." method="_on_body_entered"]
 [connection signal="animation_finished" from="AnimatedSprite2D" to="." method="_on_animated_sprite_2d_animation_finished"]

@@ -15,5 +15,6 @@ func _ready() -> void:
 func _on_body_entered(body: Node2D) -> void:
 	if not opened:
 		sprite.play("opening")
-		get_tree().current_scene.spawn_pickup(bullet_id, Globals.ammo_max[bullet_id], global_position)
+		var pickup_position: Vector2 = global_position + Vector2(0, 5)
+		get_tree().current_scene.spawn_pickup(bullet_id, Globals.ammo_max[bullet_id], pickup_position)
 		opened = true
