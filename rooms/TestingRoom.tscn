@@ -1,8 +1,9 @@
 [gd_scene load_steps=21 format=4 uid="uid://cd0v14frrlgju"]
 
 [ext_resource type="Script" uid="uid://dhhfbfplukf3b" path="res://rooms/test_level.gd" id="1_u75bg"]
-[ext_resource type="PackedScene" uid="uid://be3bjg0ua7h2c" path="res://scenes/enemy.tscn" id="2_ckyam"]
+[ext_resource type="PackedScene" uid="uid://driwak3eok3gy" path="res://scenes/bullets/player-bullet.tscn" id="2_mj5kq"]
 [ext_resource type="PackedScene" uid="uid://d1pe7q747exgv" path="res://scenes/RoomGen/floor_generator.tscn" id="2_ovcuh"]
+[ext_resource type="PackedScene" uid="uid://b3pyw2ywa2gic" path="res://scenes/bullets/bullet_pickup.tscn" id="3_8hip6"]
 [ext_resource type="PackedScene" uid="uid://bejlis2xb16qo" path="res://scenes/menu/mini_map.tscn" id="3_ep8cf"]
 [ext_resource type="PackedScene" uid="uid://ckx3iy06eedai" path="res://scenes/player/player.tscn" id="3_i3fwb"]
 [ext_resource type="PackedScene" uid="uid://crwot1rdef6uf" path="res://scenes/interactables/chest.tscn" id="3_ovcuh"]
@@ -11,7 +12,6 @@
 [ext_resource type="Texture2D" uid="uid://c8rdbv3u77b5i" path="res://tilesets/HelltileWalls.png" id="7_0yuyw"]
 [ext_resource type="PackedScene" uid="uid://chtu6kuwhxen6" path="res://scenes/UI/hud.tscn" id="7_7e8gg"]
 [ext_resource type="PackedScene" uid="uid://butq6xoy6daei" path="res://rooms/AlgorithmRooms/HellRooms/HellRoom0.tscn" id="8_rss6x"]
-[ext_resource type="PackedScene" uid="uid://dhsj01pefhfqp" path="res://scenes/diagonal_enemy.tscn" id="9_ovcuh"]
 [ext_resource type="PackedScene" uid="uid://csr22g6iy124u" path="res://scenes/interactables/interactable_item.tscn" id="12_ep8cf"]
 [ext_resource type="PackedScene" uid="uid://c1fsemoplmeeb" path="res://scenes/magician_enemy.tscn" id="14_07cye"]
 [ext_resource type="PackedScene" uid="uid://bsp2v6s7o2ey2" path="res://scenes/UI/pause_menu.tscn" id="15_mj5kq"]
@@ -146,6 +146,8 @@ sources/0 = SubResource("TileSetAtlasSource_gc8kv")
 
 [node name="Starting Room" type="Node2D"]
 script = ExtResource("1_u75bg")
+bullet_scene = ExtResource("2_mj5kq")
+bullet_pickup_scene = ExtResource("3_8hip6")
 bullet_fairy = ExtResource("5_b6v1o")
 
 [node name="MiniMap" parent="." instance=ExtResource("3_ep8cf")]
@@ -158,33 +160,17 @@ one_shot = true
 
 [node name="Enemies" type="Node" parent="."]
 
-[node name="Enemy1" parent="Enemies" instance=ExtResource("2_ckyam")]
-position = Vector2(2412, 1809)
-
-[node name="Enemy2" parent="Enemies" instance=ExtResource("2_ckyam")]
-position = Vector2(2207, 1748)
-
-[node name="Enemy3" parent="Enemies" instance=ExtResource("2_ckyam")]
-position = Vector2(2473, 1923)
-
-[node name="DiagonalEnemy" parent="Enemies" instance=ExtResource("9_ovcuh")]
-position = Vector2(2063, 1785)
-distance_diagonal_from_player = 50.0
-is_active = true
-health = 12
-distance_from_player = 200.0
-
 [node name="Projectiles" type="Node" parent="."]
 
 [node name="Chests" type="Node" parent="."]
 
 [node name="Chest" parent="Chests" instance=ExtResource("3_ovcuh")]
 position = Vector2(395, -488)
-bullet_id = 6
+bullet_id = 5
 
 [node name="Chest2" parent="Chests" instance=ExtResource("3_ovcuh")]
 position = Vector2(86, -488)
-bullet_id = 4
+bullet_id = 3
 
 [node name="Pickups" type="Node" parent="."]
 

@@ -1,7 +1,7 @@
 [gd_scene load_steps=19 format=3 uid="uid://be3bjg0ua7h2c"]
 
 [ext_resource type="Script" uid="uid://codcr8smm4onm" path="res://scripts/enemy.gd" id="1_md0e3"]
-[ext_resource type="PackedScene" uid="uid://bivpy44qgcvdq" path="res://scenes/player/bullets/enemy-bullet.tscn" id="2_4ra3w"]
+[ext_resource type="PackedScene" uid="uid://bivpy44qgcvdq" path="res://scenes/bullets/enemy-bullet.tscn" id="2_4ra3w"]
 [ext_resource type="Texture2D" uid="uid://bqonpyxd8or02" path="res://sprites/enemy/bounty-hunter-walk.png" id="3_4ra3w"]
 [ext_resource type="Texture2D" uid="uid://cwlan1a62urcl" path="res://sprites/empty.png" id="3_5uy6h"]
 

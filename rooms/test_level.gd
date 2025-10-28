@@ -1,8 +1,8 @@
 extends Node2D
 class_name LevelContainer
 
-var bullet_scene: PackedScene = preload("res://scenes/player/bullets/player-bullet.tscn")
-var bullet_pickup_scene: PackedScene = preload("res://scenes/bullet_pickup.tscn")
+@export var bullet_scene: PackedScene
+@export var bullet_pickup_scene: PackedScene 
 
 @export var bullet_fairy:PackedScene
 
@@ -155,9 +155,10 @@ func _on_player_bullet_fired(pos, dir, id):
 		Globals.Bullets.Explosive:
 			var bullet = bullet_scene.instantiate()
 			bullet.position = pos
-			bullet.damage = 5
+			bullet.damage = 4
 			bullet.rotation_degrees = rad_to_deg(dir.angle()) + 90
 			bullet.direction = dir
+			bullet.explosive = true
 			projectiles.add_child(bullet)
 		
 		Globals.Bullets.Health:
@@ -166,6 +167,7 @@ func _on_player_bullet_fired(pos, dir, id):
 		#TODO: Add railgun functionality to this bullet
 		Globals.Bullets.Railgun:
 			var bullet = bullet_scene.instantiate()
+			bullet.bullet_id = Globals.Bullets.Railgun
 			bullet.position = pos
 			bullet.damage = 10
 			bullet.rotation_degrees = rad_to_deg(dir.angle()) + 90

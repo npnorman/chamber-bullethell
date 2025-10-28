@@ -1,4 +1,5 @@
 extends Area2D
+class_name Bullet
 
 @export var speed: int = 1000
 @export var damage: int = 4
@@ -6,6 +7,8 @@ extends Area2D
 @export var ricochets: int = 0
 var direction: Vector2 = Vector2.UP
 var collision_normal: Vector2
+var collision_point: Vector2
+var distance_to_point: Vector2
 var can_collide: bool = true
 var found_angle: bool = false
 
@@ -15,11 +18,18 @@ func _ready():
 	$DespawnTimer.start()
 	
 func _process(delta):
-	position += direction * speed * delta
+	var velocity: Vector2 = direction * speed * delta
+	position += velocity
+	raycast.target_position.y = (velocity.length() * -1) * 2
 	if raycast.is_colliding() and not found_angle:
 		collision_normal = raycast.get_collision_normal()
+		collision_point = raycast.get_collision_point()
 		found_angle = true
-
+	if raycast.is_colliding():
+		if ricochets == 0:
+			speed = 0
+			self.position = collision_point
+	
 func _on_despawn_timer_timeout() -> void:
 	self.queue_free()
 
@@ -32,14 +42,13 @@ func _on_body_entered(body: Node2D) -> void:
 			self.queue_free()
 			
 		elif body.is_in_group("Player"):
-			print("Enemy Hit Player")
 			if body.has_method("take_damage"):
 				body.take_damage(damage)
 				
 			self.queue_free()
 			
 		elif ricochets > 0:
-			self.position -= self.direction.normalized() * 3
+			self.position = collision_point
 			self.direction = self.direction.bounce(collision_normal).normalized()
 			self.rotation_degrees = rad_to_deg(self.direction.angle()) + 90
 			ricochets -= 1

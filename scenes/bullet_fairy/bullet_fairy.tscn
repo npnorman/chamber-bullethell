@@ -1,7 +1,7 @@
 [gd_scene load_steps=10 format=3 uid="uid://chqsm4w7oks0t"]
 
 [ext_resource type="Script" uid="uid://dk6alrwsdfo0k" path="res://scripts/bullet_fairy/bullet_fairy.gd" id="1_ywtwx"]
-[ext_resource type="PackedScene" uid="uid://b3pyw2ywa2gic" path="res://scenes/bullet_pickup.tscn" id="2_plh5f"]
+[ext_resource type="PackedScene" uid="uid://b3pyw2ywa2gic" path="res://scenes/bullets/bullet_pickup.tscn" id="2_plh5f"]
 [ext_resource type="Texture2D" uid="uid://w14mykkn3kh4" path="res://sprites/bullet_fairy/miner-walk.png" id="3_plh5f"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_ywtwx"]
