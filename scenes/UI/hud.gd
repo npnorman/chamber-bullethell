@@ -29,6 +29,14 @@ func _ready():
 	update_counters()
 	set_ammo_types()
 
+func toggle_transparency(transparent: bool):
+	if transparent:
+		$CylinderNode.modulate.a = 0.3
+		$SpecialBullets.modulate.a = 0.3
+	else:
+		$CylinderNode.modulate.a = 1
+		$SpecialBullets.modulate.a = 1
+
 func _process(delta: float) -> void:
 	if mouse_over_box and inventory.visible and Globals.ammo_types[active_box] != -1:
 		match active_box:

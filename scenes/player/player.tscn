@@ -1,10 +1,28 @@
-[gd_scene load_steps=21 format=3 uid="uid://ckx3iy06eedai"]
+[gd_scene load_steps=40 format=3 uid="uid://ckx3iy06eedai"]
 
 [ext_resource type="Script" uid="uid://defl6cxtq7gxe" path="res://scenes/player/player.gd" id="1_g2els"]
 [ext_resource type="Texture2D" uid="uid://c6ctxmnkckhvd" path="res://sprites/player/player-sheet.png" id="2_gmlin"]
 [ext_resource type="Texture2D" uid="uid://dbslxjq1y8lj" path="res://sprites/die/Die Faces.png" id="3_lvxji"]
 [ext_resource type="Texture2D" uid="uid://vx50mifkm2vd" path="res://sprites/test_revolver.png" id="3_qhqgy"]
+[ext_resource type="Texture2D" uid="uid://dqw8cdbk8wxlq" path="res://sprites/Animations/MuzzleFlash1.png" id="5_ioxgp"]
 [ext_resource type="Texture2D" uid="uid://c7omhaxueldpi" path="res://sprites/HealthParticle.png" id="5_p47bc"]
+[ext_resource type="Texture2D" uid="uid://bac5toh87ptdo" path="res://sprites/Animations/MuzzleFlash2.png" id="6_cnsyf"]
+[ext_resource type="Texture2D" uid="uid://cheqy26emj20e" path="res://sprites/Animations/MuzzleFlash3.png" id="7_007i1"]
+[ext_resource type="Texture2D" uid="uid://0cwf045wox78" path="res://sprites/Animations/MuzzleFlash4.png" id="8_6cv16"]
+[ext_resource type="Texture2D" uid="uid://cbj1m3ppj1knx" path="res://sprites/Animations/MuzzleFlash5.png" id="9_j4nxn"]
+[ext_resource type="Texture2D" uid="uid://bx5ind1owv1g0" path="res://sprites/Animations/MuzzleFlash6.png" id="10_28m0y"]
+[ext_resource type="Texture2D" uid="uid://clec6gncknw8e" path="res://sprites/Animations/MuzzleFlash7.png" id="11_uniwh"]
+[ext_resource type="Texture2D" uid="uid://dfnxiyyr8eo5" path="res://sprites/Animations/MuzzleFlash8.png" id="12_iqsei"]
+[ext_resource type="Texture2D" uid="uid://cayaexo72k26c" path="res://sprites/Animations/MuzzleFlash9.png" id="13_tffgl"]
+[ext_resource type="Texture2D" uid="uid://dehd38cd3bryt" path="res://sprites/Animations/MuzzleFlash10.png" id="14_pk8ii"]
+[ext_resource type="Texture2D" uid="uid://dsqn87yyo4tpa" path="res://sprites/Animations/MuzzleFlash.png" id="15_5mf0n"]
+[ext_resource type="Texture2D" uid="uid://deduxbviol8kw" path="res://sprites/Animations/GunShootAnim1.png" id="16_4hvnv"]
+[ext_resource type="Texture2D" uid="uid://cfif46wi5ga41" path="res://sprites/Animations/GunShootAnim2.png" id="17_bbmj2"]
+[ext_resource type="Texture2D" uid="uid://g8in7ymrrc8f" path="res://sprites/Animations/GunShootAnim3.png" id="18_kxw46"]
+[ext_resource type="Texture2D" uid="uid://cit8ra3eiw20u" path="res://sprites/Animations/GunShootAnim4.png" id="19_8qxvo"]
+[ext_resource type="Texture2D" uid="uid://d1rwwdhi3qtyr" path="res://sprites/Animations/GunShootAnim5.png" id="20_5q8fn"]
+[ext_resource type="Texture2D" uid="uid://chgqw4xsvhm0x" path="res://sprites/Animations/GunShootAnim6.png" id="21_wva7c"]
+[ext_resource type="Texture2D" uid="uid://bwsnxwqc7iyul" path="res://sprites/Animations/GunShootAnim7.png" id="22_7obkq"]
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_lvxji"]
 atlas = ExtResource("2_gmlin")
@@ -57,6 +75,87 @@ animations = [{
 [sub_resource type="AtlasTexture" id="AtlasTexture_5gtgg"]
 atlas = ExtResource("3_lvxji")
 region = Rect2(16, 32, 16, 16)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_vo27k"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("15_5mf0n")
+}, {
+"duration": 1.0,
+"texture": ExtResource("5_ioxgp")
+}, {
+"duration": 1.0,
+"texture": ExtResource("6_cnsyf")
+}, {
+"duration": 1.0,
+"texture": ExtResource("7_007i1")
+}, {
+"duration": 1.0,
+"texture": ExtResource("8_6cv16")
+}, {
+"duration": 1.0,
+"texture": ExtResource("9_j4nxn")
+}, {
+"duration": 1.0,
+"texture": ExtResource("10_28m0y")
+}, {
+"duration": 1.0,
+"texture": ExtResource("11_uniwh")
+}, {
+"duration": 1.0,
+"texture": ExtResource("12_iqsei")
+}, {
+"duration": 1.0,
+"texture": ExtResource("13_tffgl")
+}, {
+"duration": 1.0,
+"texture": ExtResource("14_pk8ii")
+}, {
+"duration": 1.0,
+"texture": ExtResource("15_5mf0n")
+}],
+"loop": false,
+"name": &"blank",
+"speed": 30.0
+}, {
+"frames": [],
+"loop": false,
+"name": &"default",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("15_5mf0n")
+}, {
+"duration": 1.0,
+"texture": ExtResource("16_4hvnv")
+}, {
+"duration": 1.0,
+"texture": ExtResource("17_bbmj2")
+}, {
+"duration": 1.0,
+"texture": ExtResource("18_kxw46")
+}, {
+"duration": 1.0,
+"texture": ExtResource("19_8qxvo")
+}, {
+"duration": 1.0,
+"texture": ExtResource("20_5q8fn")
+}, {
+"duration": 1.0,
+"texture": ExtResource("21_wva7c")
+}, {
+"duration": 1.0,
+"texture": ExtResource("22_7obkq")
+}, {
+"duration": 1.0,
+"texture": ExtResource("15_5mf0n")
+}],
+"loop": false,
+"name": &"shoot",
+"speed": 30.0
+}]
 
 [sub_resource type="CapsuleShape2D" id="CapsuleShape2D_gmlin"]
 radius = 8.0
@@ -375,6 +474,12 @@ position = Vector2(11, -4)
 
 [node name="BulletOrigin2" type="Marker2D" parent="GunSprite"]
 position = Vector2(11, 4)
+
+[node name="ShotEffects" type="AnimatedSprite2D" parent="GunSprite"]
+position = Vector2(17, -4)
+rotation = 3.14159
+sprite_frames = SubResource("SpriteFrames_vo27k")
+animation = &"shoot"
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 position = Vector2(0, 9)

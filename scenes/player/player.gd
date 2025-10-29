@@ -18,6 +18,7 @@ var active_bullet_pos: int = 0
 @onready var animations: AnimationPlayer = $AnimationPlayer
 @onready var gun_sprite: Sprite2D = $GunSprite
 @onready var dice: Sprite2D = $Dice
+@onready var shot_effects: AnimatedSprite2D = $GunSprite/ShotEffects
 
 signal bullet_fired(pos: Vector2, direction: Vector2, id: int)
 signal cylinder_cycled
@@ -45,9 +46,7 @@ func _process(_delta):
 			
 			# Blank input, adds knockback for no bullet cost and has a 1.5 second cooldown
 			if Input.is_action_pressed("Blank") and can_blank:
-				add_shot_knockback(Globals.Bullets.Shotgun, 1500)
-				can_blank = false
-				$BlankCooldown.start()
+				blank()
 		
 		# Normal reload and Special reload inputs
 		if Input.is_action_just_pressed("Main Reload") and Globals.magazine[active_bullet_pos] == Globals.Bullets.Empty and Globals.ammo[0] > 0:
@@ -100,8 +99,11 @@ func shoot():
 	if Globals.magazine[active_bullet_pos] >= 0:
 		if gun_sprite.flip_v:
 			bullet_fired.emit($GunSprite/BulletOrigin2.global_position, player_direction, Globals.magazine[active_bullet_pos])
+			shot_effects.position = Vector2(17, 4)
 		else:
 			bullet_fired.emit($GunSprite/BulletOrigin1.global_position, player_direction, Globals.magazine[active_bullet_pos])
+			shot_effects.position = Vector2(17, -4)
+		shot_effects.play("shoot")
 		add_shot_knockback(Globals.magazine[active_bullet_pos])
 		SfxPlayer.player_shot_sound()
 		Globals.magazine[active_bullet_pos] = Globals.Bullets.Empty
@@ -123,6 +125,16 @@ func cycle_cylinder():
 	else:
 		active_bullet_pos = 0
 	cylinder_cycled.emit()
+
+func blank():
+	add_shot_knockback(Globals.Bullets.Shotgun, 1500)
+	if gun_sprite.flip_v:
+		shot_effects.position = Vector2(17, 4)
+	else:
+		shot_effects.position = Vector2(17, -4)
+	shot_effects.play("blank")
+	can_blank = false
+	$BlankCooldown.start()
 		
 # Prints the name of the bullet type corresponding to the given ID
 func print_bullet_name(id: int):

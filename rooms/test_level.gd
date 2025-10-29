@@ -21,6 +21,7 @@ var is_bullet_fairy_spawned = false
 var current_room = null
 var room_change_delta: float = Globals.tile_size * 10
 var is_walls_ready = false
+var is_hud_transparent: bool = false
 
 func _process(delta: float) -> void:
 	check_for_bullet_fairy_spawn()
@@ -45,6 +46,15 @@ func _process(delta: float) -> void:
 			current_room.set_walls()
 	
 	update_camera_position()
+	
+	# Make hud see-through if mouse is low enough
+	var mouse_pos = get_viewport().get_mouse_position()
+	if mouse_pos.y > 400 and not is_hud_transparent:
+		hud.toggle_transparency(true)
+		is_hud_transparent = true
+	elif mouse_pos.y < 400 and is_hud_transparent:
+		hud.toggle_transparency(false)
+		is_hud_transparent = false
 
 func check_for_bullet_fairy_spawn():
 	var total_bullets = Globals.ammo.reduce(func(a,b): return a+b)
