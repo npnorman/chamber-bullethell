@@ -1,10 +1,10 @@
 [gd_scene load_steps=7 format=4 uid="uid://dbltie0ce16w7"]
 
 [ext_resource type="PackedScene" uid="uid://ctxgqeaum4461" path="res://rooms/AlgorithmRooms/base_room.tscn" id="1_b4os0"]
-[ext_resource type="Texture2D" uid="uid://c2joxft8stuwm" path="res://sprites/Cactus1.png" id="2_7sjnv"]
 [ext_resource type="PackedScene" uid="uid://dr5sgeuw3erhu" path="res://scenes/interactables/beer.tscn" id="2_q8lgk"]
-[ext_resource type="Texture2D" uid="uid://dp1dtnta02t6i" path="res://sprites/Cactus2.png" id="3_13nh7"]
 [ext_resource type="PackedScene" uid="uid://crwot1rdef6uf" path="res://scenes/interactables/chest.tscn" id="5_7xabf"]
+[ext_resource type="PackedScene" uid="uid://c0hpokmr76hlq" path="res://sprites/Cactus2.tscn" id="5_q8lgk"]
+[ext_resource type="PackedScene" uid="uid://b7g2b431gu6nf" path="res://sprites/Cactus.tscn" id="6_k0cjo"]
 [ext_resource type="Texture2D" uid="uid://ci6tpq1hugkwi" path="res://sprites/TumbleWEED.png" id="6_q8lgk"]
 
 [node name="BaseRoom" instance=ExtResource("1_b4os0")]
@@ -28,23 +28,21 @@ rotation = 1.5708
 [node name="Beer8" parent="Interactables" index="3" instance=ExtResource("2_q8lgk")]
 position = Vector2(434, -46)
 
-[node name="Cactus1" type="Sprite2D" parent="." index="4"]
-position = Vector2(47, -478)
-texture = ExtResource("2_7sjnv")
-
-[node name="Cactus2" type="Sprite2D" parent="." index="5"]
-position = Vector2(486, -48)
-texture = ExtResource("3_13nh7")
-
-[node name="Chest" parent="." index="6" instance=ExtResource("5_7xabf")]
+[node name="Chest" parent="." index="4" instance=ExtResource("5_7xabf")]
 position = Vector2(268, -267)
 
-[node name="TumbleWeed" type="Sprite2D" parent="." index="7"]
+[node name="TumbleWeed" type="Sprite2D" parent="." index="5"]
 position = Vector2(180, -243)
 scale = Vector2(0.071875, 0.071875)
 texture = ExtResource("6_q8lgk")
 
-[node name="TumbleWeed2" type="Sprite2D" parent="." index="8"]
+[node name="TumbleWeed2" type="Sprite2D" parent="." index="6"]
 position = Vector2(318, -358)
 scale = Vector2(0.071875, 0.071875)
 texture = ExtResource("6_q8lgk")
+
+[node name="Cactus3" parent="." index="7" instance=ExtResource("5_q8lgk")]
+position = Vector2(484, -48)
+
+[node name="Cactus" parent="." index="8" instance=ExtResource("6_k0cjo")]
+position = Vector2(45, -479)

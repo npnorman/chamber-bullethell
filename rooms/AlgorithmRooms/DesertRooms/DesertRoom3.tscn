@@ -2,8 +2,8 @@
 
 [ext_resource type="PackedScene" uid="uid://ctxgqeaum4461" path="res://rooms/AlgorithmRooms/base_room.tscn" id="1_u1cv8"]
 [ext_resource type="PackedScene" uid="uid://dr5sgeuw3erhu" path="res://scenes/interactables/beer.tscn" id="2_6vjmg"]
-[ext_resource type="Texture2D" uid="uid://c2joxft8stuwm" path="res://sprites/Cactus1.png" id="3_6vjmg"]
-[ext_resource type="Texture2D" uid="uid://dp1dtnta02t6i" path="res://sprites/Cactus2.png" id="4_fe165"]
+[ext_resource type="PackedScene" uid="uid://b7g2b431gu6nf" path="res://sprites/Cactus.tscn" id="3_6vjmg"]
+[ext_resource type="PackedScene" uid="uid://c0hpokmr76hlq" path="res://sprites/Cactus2.tscn" id="4_fe165"]
 
 [node name="BaseRoom" instance=ExtResource("1_u1cv8")]
 exit_type = 1
@@ -21,17 +21,11 @@ position = Vector2(273, -389)
 position = Vector2(246, -388)
 rotation = 1.5708
 
-[node name="Cactus1" type="Sprite2D" parent="." index="4"]
-position = Vector2(53, -458.25)
-scale = Vector2(0.75, 0.75)
-texture = ExtResource("3_6vjmg")
+[node name="Cactus" parent="." index="4" instance=ExtResource("3_6vjmg")]
+position = Vector2(231, -263)
 
-[node name="Cactus2" type="Sprite2D" parent="." index="5"]
-position = Vector2(456, -426)
-scale = Vector2(0.806122, 0.806122)
-texture = ExtResource("4_fe165")
+[node name="Cactus4" parent="." index="5" instance=ExtResource("4_fe165")]
+position = Vector2(454, -431)
 
-[node name="Cactus3" type="Sprite2D" parent="." index="6"]
-position = Vector2(231.5, -255.839)
-scale = Vector2(0.732143, 0.732143)
-texture = ExtResource("3_6vjmg")
+[node name="Cactus5" parent="." index="6" instance=ExtResource("3_6vjmg")]
+position = Vector2(52, -463)
