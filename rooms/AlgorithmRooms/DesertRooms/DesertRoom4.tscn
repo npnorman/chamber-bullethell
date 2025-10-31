@@ -11,7 +11,7 @@ vertices = PackedVector2Array(542.102, -549.008, 547.891, -9.03125, 14, -10.9609
 polygons = Array[PackedInt32Array]([PackedInt32Array(0, 1, 2, 3)])
 outlines = Array[PackedVector2Array]([PackedVector2Array(4, -560, 552, -559, 558, 1, 4, -1)])
 
-[node name="BaseRoom" instance=ExtResource("1_b36ho")]
+[node name="BaseRoom2" instance=ExtResource("1_b36ho")]
 
 [node name="NavigationRegion2D" parent="." index="0"]
 navigation_polygon = SubResource("NavigationPolygon_ekyja")
