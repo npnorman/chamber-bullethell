@@ -72,13 +72,54 @@ func _ready() -> void:
 	print("Rooms   ",roomstack)
 	print("Rejected",rejected_knapsack)
 	
+	#get dead ends to fill
+	var invalid_exits = get_invalid_exits(roomstack)
+	
 	# after stack is full,
-	display_rooms(center)
+	display_rooms(center, invalid_exits)
 
-func generateMap(m,n,seed:int = -1):
+func get_invalid_exits(roomstack):
+	
+	var invalid_exits = []
+	
+	# for each room
+	for room in roomstack:
+		var temp_invalid_exits = [0,0,0,0]
+		# get exits
+		var currentExits = Globals.get_exits(room)
+		currentExits[2] *= -1
+		currentExits[3] *= -1
+		# for each exit
+		for i in range(0,4):
+			# if in exits
+			if currentExits[i] != 0:
+				# if room at exit
+				var coords = Vector2(room.x, room.y)
+				
+				if i % 2 == 0:
+					# x's
+					coords.x += currentExits[i]
+				else:
+					#y's
+					coords.y += currentExits[i]
+				
+				if is_room_in_xy(coords):
+					# set invalid = 0
+					temp_invalid_exits[i] = 0
+				# otherwise
+				else:
+					# set invalid = 1 // dead end
+					temp_invalid_exits[i] = 1
+				
+		invalid_exits.append(temp_invalid_exits)
+	
+	return invalid_exits
+
+func generateMap(m,n,seed:int):
 	var rng:RandomNumberGenerator = RandomNumberGenerator.new()
 	if seed != -1:
 		rng.seed = seed
+		seed(seed) # global seed for .shuffle()
 	
 	var has_rejected = false
 	while len(knapsack) > 0:
@@ -104,15 +145,15 @@ func generateMap(m,n,seed:int = -1):
 				# get exits
 				# create a room to satisfy all exits
 
-func display_rooms(center:Vector2):
+func display_rooms(center:Vector2, invalid_exits):
 	for i in range(0,len(roomstack)):
 	# for each room in stack
-		place_room_at_xy(roomstack[i],center)
+		place_room_at_xy(roomstack[i],center, invalid_exits[i])
 		# use 32x32 offset to place room scenes
 		# (rooms should have leftmost corner at 0,0)
 		# (rooms should have centered walkways to connect)
 
-func place_room_at_xy(coords:Vector4,center:Vector2):
+func place_room_at_xy(coords:Vector4,center:Vector2, invalid_exit):
 	var tile_offset = Globals.room_size * Globals.tile_size
 	
 	var newRoom:Node2D
@@ -130,7 +171,7 @@ func place_room_at_xy(coords:Vector4,center:Vector2):
 	
 	add_child(newRoom)
 	newRoom.global_position = adjusted_coords
-	newRoom.set_dead_ends([0,0,0,0])
+	newRoom.set_dead_ends(invalid_exit)
 
 func pick_room_from_knapsack(rng:RandomNumberGenerator,m,n):
 	# if this is true, the room cannot fit

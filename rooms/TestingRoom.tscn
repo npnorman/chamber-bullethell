@@ -193,7 +193,6 @@ position = Vector2(550, 425)
 [node name="HUD" parent="." instance=ExtResource("7_7e8gg")]
 
 [node name="Camera2D" type="Camera2D" parent="."]
-zoom = Vector2(1.37, 1.37)
 position_smoothing_enabled = true
 
 [node name="Player" parent="." instance=ExtResource("3_i3fwb")]

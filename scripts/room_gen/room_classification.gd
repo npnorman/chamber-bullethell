@@ -75,10 +75,22 @@ func set_dead_ends(invalid_exits):
 		for i in range(0,4):
 			
 			#only for each exit
-			if exits[i] != 0 and invalid_exits[i] != 1:
+			if exits[i] != 0 and invalid_exits[i] != 0:
 				# set tiles to wall elements
 				
 				if i == 0: #right
 					for k in range(-21,-14):
 						# tile location, tileset id, tile location in atlas
 						tile_map_layer.set_cell(Vector2i(34,k),0,Vector2i(6,6))
+				elif i == 1: #top
+					for k in range(12,22):
+						# tile location, tileset id, tile location in atlas
+						tile_map_layer.set_cell(Vector2i(k,-35),0,Vector2i(6,6))
+				elif i == 2: #left
+					for k in range(-21,-14):
+						# tile location, tileset id, tile location in atlas
+						tile_map_layer.set_cell(Vector2i(0,k),0,Vector2i(6,6))
+				elif i == 3: #bottom
+					for k in range(12,22):
+						# tile location, tileset id, tile location in atlas
+						tile_map_layer.set_cell(Vector2i(-1,k),0,Vector2i(6,6))
