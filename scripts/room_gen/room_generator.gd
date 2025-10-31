@@ -67,7 +67,7 @@ func _ready() -> void:
 		knapsack += generateRooms(tempRoom.exit_type, tempRoom.room_rotation, room[0])
 	
 	add_room_current_location(starting_room)
-	generateMap(m,n,42)
+	generateMap(m,n,-1)
 	print("Roomstack")
 	print("Rooms   ",roomstack)
 	print("Rejected",rejected_knapsack)
