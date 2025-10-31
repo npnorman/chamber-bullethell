@@ -93,4 +93,4 @@ func set_dead_ends(invalid_exits):
 				elif i == 3: #bottom
 					for k in range(12,22):
 						# tile location, tileset id, tile location in atlas
-						tile_map_layer.set_cell(Vector2i(-1,k),0,Vector2i(6,6))
+						tile_map_layer.set_cell(Vector2i(k,-1),0,Vector2i(6,6))
