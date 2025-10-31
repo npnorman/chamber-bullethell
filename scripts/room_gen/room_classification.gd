@@ -7,6 +7,7 @@ var fire_wall = preload("res://scenes/RoomGen/fire_wall.tscn")
 
 @onready var enemies: Node = $Enemies
 @onready var center: Marker2D = $Center
+@onready var tile_map_layer: TileMapLayer = $TileMapLayer
 
 var is_completed = false
 var walls = []
@@ -66,3 +67,18 @@ func set_walls():
 func remove_walls():
 	for i in range(0, len(walls)):
 		walls[i].put_out()
+
+func set_dead_ends(invalid_exits):
+	var exits = Globals.get_exits(Vector4(0,0,exit_type,room_rotation))
+	
+	if !is_completed and len(walls) == 0:
+		for i in range(0,4):
+			
+			#only for each exit
+			if exits[i] != 0 and invalid_exits[i] != 1:
+				# set tiles to wall elements
+				
+				if i == 0: #right
+					for k in range(-21,-14):
+						# tile location, tileset id, tile location in atlas
+						tile_map_layer.set_cell(Vector2i(34,k),0,Vector2i(6,6))

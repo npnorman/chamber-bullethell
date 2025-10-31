@@ -67,7 +67,7 @@ func _ready() -> void:
 		knapsack += generateRooms(tempRoom.exit_type, tempRoom.room_rotation, room[0])
 	
 	add_room_current_location(starting_room)
-	generateMap(m,n)
+	generateMap(m,n,42)
 	print("Roomstack")
 	print("Rooms   ",roomstack)
 	print("Rejected",rejected_knapsack)
@@ -130,6 +130,7 @@ func place_room_at_xy(coords:Vector4,center:Vector2):
 	
 	add_child(newRoom)
 	newRoom.global_position = adjusted_coords
+	newRoom.set_dead_ends([0,0,0,0])
 
 func pick_room_from_knapsack(rng:RandomNumberGenerator,m,n):
 	# if this is true, the room cannot fit
