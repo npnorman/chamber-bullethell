@@ -1,8 +1,9 @@
-[gd_resource type="TileSet" load_steps=9 format=3 uid="uid://b5dr7xs5s30fq"]
+[gd_resource type="TileSet" load_steps=11 format=3 uid="uid://b5dr7xs5s30fq"]
 
 [ext_resource type="Texture2D" uid="uid://8ml14yh2dh84" path="res://tilesets/desertTiles.png" id="1_cvtcu"]
 [ext_resource type="Texture2D" uid="uid://b5l7w2s3y1apx" path="res://tilesets/hellTiles.png" id="2_xvopn"]
 [ext_resource type="Texture2D" uid="uid://c8rdbv3u77b5i" path="res://tilesets/HelltileWalls.png" id="3_ipwr0"]
+[ext_resource type="Texture2D" uid="uid://bdpje1kedxoib" path="res://tilesets/WaterSplashTest1.png" id="3_xvopn"]
 [ext_resource type="Texture2D" uid="uid://bhn4vugxr0riw" path="res://tilesets/tavernTiles.png" id="4_2wukp"]
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_d3dji"]
@@ -196,6 +197,18 @@ texture = ExtResource("2_xvopn")
 6:7/0 = 0
 7:7/0 = 0
 
+[sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_ipwr0"]
+texture = ExtResource("3_xvopn")
+4:3/0 = 0
+5:3/0 = 0
+6:3/0 = 0
+4:4/0 = 0
+5:4/0 = 0
+6:4/0 = 0
+4:5/0 = 0
+5:5/0 = 0
+6:5/0 = 0
+
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_56q60"]
 texture = ExtResource("3_ipwr0")
 0:0/0 = 0
@@ -356,3 +369,4 @@ sources/0 = SubResource("TileSetAtlasSource_d3dji")
 sources/1 = SubResource("TileSetAtlasSource_r37sh")
 sources/2 = SubResource("TileSetAtlasSource_56q60")
 sources/3 = SubResource("TileSetAtlasSource_ke7hm")
+sources/12 = SubResource("TileSetAtlasSource_ipwr0")

@@ -45,8 +45,6 @@ scale = Vector2(3, 3)
 position = Vector2(0, 2)
 shape = SubResource("CircleShape2D_an3kf")
 
-[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
+[node name="Cactus" type="AnimatedSprite2D" parent="."]
 sprite_frames = SubResource("SpriteFrames_4n6f1")
 animation = &"Cactus"
-frame = 5
-frame_progress = 0.330065
