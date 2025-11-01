@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://0cwf045wox78"
-path="res://.godot/imported/MuzzleFlash4.png-4dba47eca5d70e9089fc47c991d148bd.ctex"
+uid="uid://ddwdy4oualv4"
+path="res://.godot/imported/MirrorCactus3.png-84972740da2569bf7705e4ed9f92341a.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://sprites/Animations/MuzzleFlash4.png"
-dest_files=["res://.godot/imported/MuzzleFlash4.png-4dba47eca5d70e9089fc47c991d148bd.ctex"]
+source_file="res://sprites/Animations/CactusAnimations/MirrorCactus3.png"
+dest_files=["res://.godot/imported/MirrorCactus3.png-84972740da2569bf7705e4ed9f92341a.ctex"]
 
 [params]
 

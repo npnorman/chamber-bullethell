@@ -1,9 +1,40 @@
-[gd_scene load_steps=3 format=3 uid="uid://c0hpokmr76hlq"]
+[gd_scene load_steps=9 format=3 uid="uid://c0hpokmr76hlq"]
 
-[ext_resource type="Texture2D" uid="uid://dp1dtnta02t6i" path="res://sprites/Cactus2.png" id="1_uvtht"]
+[ext_resource type="Texture2D" uid="uid://08qjxdqdqfea" path="res://sprites/Animations/CactusAnimations/MirrorCactus1.png" id="1_fiapc"]
+[ext_resource type="Texture2D" uid="uid://bbdu7n374cir2" path="res://sprites/Animations/CactusAnimations/MirrorCactus2.png" id="2_nvrqx"]
+[ext_resource type="Texture2D" uid="uid://ddwdy4oualv4" path="res://sprites/Animations/CactusAnimations/MirrorCactus3.png" id="3_0ko64"]
+[ext_resource type="Texture2D" uid="uid://4hlhxtym7jkv" path="res://sprites/Animations/CactusAnimations/MirrorCactus4.png" id="4_ymxs8"]
+[ext_resource type="Texture2D" uid="uid://cq387sd0vod0e" path="res://sprites/Animations/CactusAnimations/MirrorCactus5.png" id="5_7w8e0"]
+[ext_resource type="Texture2D" uid="uid://dapumrmii6exc" path="res://sprites/Animations/CactusAnimations/MirrorCactus6.png" id="6_4nc46"]
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_8y5jl"]
 radius = 5.0
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_5aqbo"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("1_fiapc")
+}, {
+"duration": 1.0,
+"texture": ExtResource("2_nvrqx")
+}, {
+"duration": 1.0,
+"texture": ExtResource("3_0ko64")
+}, {
+"duration": 1.0,
+"texture": ExtResource("4_ymxs8")
+}, {
+"duration": 1.0,
+"texture": ExtResource("5_7w8e0")
+}, {
+"duration": 1.0,
+"texture": ExtResource("6_4nc46")
+}],
+"loop": true,
+"name": &"MirroredCactus",
+"speed": 5.0
+}]
 
 [node name="Cactus2" type="Node2D"]
 
@@ -14,8 +45,8 @@ scale = Vector2(3, 3)
 position = Vector2(0, 2)
 shape = SubResource("CircleShape2D_8y5jl")
 
-[node name="Cactus2" type="Sprite2D" parent="."]
-position = Vector2(1, 0)
-texture = ExtResource("1_uvtht")
-
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
+sprite_frames = SubResource("SpriteFrames_5aqbo")
+animation = &"MirroredCactus"
+frame = 2
+frame_progress = 0.710715

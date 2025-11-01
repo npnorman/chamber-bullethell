@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://deduxbviol8kw"
-path="res://.godot/imported/GunShootAnim1.png-1c9052c6837175640e641f6cd0cd275e.ctex"
+uid="uid://dsqn87yyo4tpa"
+path="res://.godot/imported/MuzzleFlash.png-39eb6c425293f7c9770a2c22a7eb7ba3.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://sprites/Animations/GunShootAnim1.png"
-dest_files=["res://.godot/imported/GunShootAnim1.png-1c9052c6837175640e641f6cd0cd275e.ctex"]
+source_file="res://sprites/Animations/GunrelatedAnimations/MuzzleFlash.png"
+dest_files=["res://.godot/imported/MuzzleFlash.png-39eb6c425293f7c9770a2c22a7eb7ba3.ctex"]
 
 [params]
 
