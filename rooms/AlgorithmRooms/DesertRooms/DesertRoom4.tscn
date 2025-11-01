@@ -14,6 +14,7 @@ outlines = Array[PackedVector2Array]([PackedVector2Array(4, -560, 552, -559, 558
 [node name="BaseRoom2" instance=ExtResource("1_b36ho")]
 
 [node name="NavigationRegion2D" parent="." index="0"]
+visible = false
 navigation_polygon = SubResource("NavigationPolygon_ekyja")
 
 [node name="TileMapLayer" parent="." index="1"]
