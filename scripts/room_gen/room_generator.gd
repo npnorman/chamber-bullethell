@@ -7,13 +7,15 @@ var two_close_room = preload("res://scenes/RoomGen/room_types/test_two_close.tsc
 var two_apart_room = preload("res://scenes/RoomGen/room_types/test_two_apart.tscn")
 var three_room = preload("res://scenes/RoomGen/room_types/test_three.tscn")
 var four_room = preload("res://rooms/AlgorithmRooms/DesertRooms/DesertRoom4.tscn")
+var shop_room = preload("res://rooms/specialty/shop_room.tscn")
 var start_room = preload("res://rooms/AlgorithmRooms/DesertRooms/desert_start.tscn")
 
 var desert_rooms = [
 	[1,preload("res://rooms/AlgorithmRooms/DesertRooms/desert_start.tscn")],
-	[2,preload("res://rooms/AlgorithmRooms/DesertRooms/DesertRoom3.tscn")],
-	[5,preload("res://rooms/AlgorithmRooms/DesertRooms/DesertRoom4.tscn")],
-	[2,preload("res://rooms/AlgorithmRooms/DesertRooms/DesertRoom5.tscn")],
+	[1, shop_room],
+	[1,preload("res://rooms/AlgorithmRooms/DesertRooms/DesertRoom3.tscn")],
+	[3,preload("res://rooms/AlgorithmRooms/DesertRooms/DesertRoom4.tscn")],
+	[1,preload("res://rooms/AlgorithmRooms/DesertRooms/DesertRoom5.tscn")],
 ]
 var saloon_rooms = []
 var hell_rooms = []
