@@ -251,7 +251,7 @@ func pick_room_from_knapsack(rng:RandomNumberGenerator,m,n):
 					# check if neighbor's exit is being blocked
 					if is_room_in_xy(checkingCoordinates + neighbors[i]):
 						if is_blocking_exit(checkingCoordinates, neighbors[i], new_exits):
-							print("Exit blocked r/n", checkingCoordinates, neighbors[i], " ROOM ",newRoom, "\n")
+							#print("Exit blocked r/n", checkingCoordinates, neighbors[i], " ROOM ",newRoom, "\n")
 							is_blocking = true
 				
 			if is_blocking == true:
@@ -292,15 +292,22 @@ func is_blocking_exit(room_coords:Vector2,neighbor_coords:Vector2, room_exits:Ar
 		if room_exits[2] == 0:
 			is_blocking = true
 		
-	elif neighbor_coords.x == 1 and abs(neighbor_exits[2]) == 1:
-		#check if current room has path to this room
-		if room_exits[0] == 0:
-			is_blocking = true
+	elif neighbor_coords.x == 1:
+		if abs(neighbor_exits[2]) == 1:
+			#if the neighbor has an exit to the current room
+			#make sure the current room has an exit to its neighbor
+			if room_exits[0] == 0:
+				is_blocking = true
+		else:
+			#if there is no exit from the neighbor to us
+			#make sure we do not have an exit going to the neighbor
+			if room_exits[0] != 0:
+				#there is an exit here to the neighbor
+				is_blocking = true
 		
 	elif neighbor_coords.y == -1 and abs(neighbor_exits[1]) == 1:
 		#check if current room has path to this room
 		if room_exits[3] == 0:
-			print("N/E ", neighbor_coords, neighbor_exits, room_exits)
 			is_blocking = true
 		
 	elif neighbor_coords.y == 1 and abs(neighbor_exits[3]) == 1:
@@ -308,12 +315,16 @@ func is_blocking_exit(room_coords:Vector2,neighbor_coords:Vector2, room_exits:Ar
 		if room_exits[1] == 0:
 			is_blocking = true
 	
-	if is_blocking == false:
-		print("Blocking False:")
-		print("neighbor coords: ", neighbor_coords)
-		print("neighbor exists: ", neighbor_exits)
-		print("exits: ", room_exits)
-		print("")
+	if (room_coords == Vector2(4.0,6.0)):
+		print("Neighbor vec4: ", neighbor)
+		print("4,6 Neighbor", neighbor_coords + room_coords, "\nN-exits: " , neighbor_exits, "\nR-exits: ", room_exits, " isBlock: ", is_blocking)
+	
+	#if is_blocking == false:
+		#print("Blocking False:")
+		#print("neighbor coords: ", neighbor_coords)
+		#print("neighbor exists: ", neighbor_exits)
+		#print("exits: ", room_exits)
+		#print("")
 	
 	return is_blocking
 
