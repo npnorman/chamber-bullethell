@@ -8,13 +8,17 @@ var two_close_room = preload("res://scenes/RoomGen/room_types/test_two_close.tsc
 var two_apart_room = preload("res://scenes/RoomGen/room_types/test_two_apart.tscn")
 var three_room = preload("res://scenes/RoomGen/room_types/test_three.tscn")
 var four_room = preload("res://rooms/AlgorithmRooms/DesertRooms/DesertRoom4.tscn")
-var start_room = preload("res://rooms/AlgorithmRooms/DesertRooms/desert_start.tscn")
+var desert_start_room = preload("res://rooms/AlgorithmRooms/DesertRooms/desert_start.tscn")
 
-var desert_rooms = [
-	[1,preload("res://rooms/AlgorithmRooms/DesertRooms/desert_start.tscn")],
+var desert_shop = preload("res://rooms/AlgorithmRooms/SpecialtyRooms/Desert/desert_shop.tscn")
+var desert_boss_tp = preload("res://rooms/AlgorithmRooms/SpecialtyRooms/Desert/desert_boss_tp.tscn")
+
+var desert_rooms = [ #dont include start
 	[2,preload("res://rooms/AlgorithmRooms/DesertRooms/DesertRoom3.tscn")],
 	[5,preload("res://rooms/AlgorithmRooms/DesertRooms/DesertRoom4.tscn")],
 	[2,preload("res://rooms/AlgorithmRooms/DesertRooms/DesertRoom5.tscn")],
+	[1,desert_shop],
+	[1,desert_boss_tp]
 ]
 var saloon_rooms = []
 var hell_rooms = []
@@ -69,8 +73,9 @@ func _ready() -> void:
 	
 	add_room_current_location(starting_room)
 	generateMap(m,n,seed)
-	print("Rooms:    ",roomstack, len(roomstack))
+	print("Rooms:    ",roomstack)
 	print("Rejected: ",rejected_knapsack)
+	print("rooms ",len(roomstack)," rejected ",len(rejected_knapsack))
 	
 	#get dead ends to fill
 	var invalid_exits = get_invalid_exits(roomstack)
@@ -124,12 +129,12 @@ func generateMap(m,n,seed:int):
 		seed(rng.seed)
 		print("Seed: ", rng.seed)
 	
-	var has_rejected = false
+	var has_rejected = 2
 	while len(knapsack) > 0:
 		pick_room_from_knapsack(rng,m,n)
 		
-		if len(knapsack) == 0 and !has_rejected:
-			has_rejected = true
+		if len(knapsack) == 0 and has_rejected > 0:
+			has_rejected -= 1
 			if len(rejected_knapsack) > 0:
 				knapsack = rejected_knapsack.duplicate(true)
 				rejected_knapsack.clear()
@@ -152,11 +157,26 @@ func place_room_at_xy(coords:Vector4,center:Vector2, invalid_exit):
 	
 	var newRoom:Node2D
 	
-	for i in range(0,len(roomsack)):
-		var tempRoom:Node2D = roomsack[i][1].instantiate()
-		if tempRoom.get_exit_type() == coords.z:
-			if tempRoom.get_room_rotation() == coords.w:
-				newRoom = tempRoom
+	if coords.x == center.x and coords.y == center.y:
+		#starting room
+		#use starting room instead of roomsack
+		newRoom = desert_start_room.instantiate()
+	else:
+		#look thru roomsack
+		#shuffle the roomsack
+		roomsack.shuffle()
+		for i in range(0,len(roomsack)):
+			var tempRoom:Node2D = roomsack[i][1].instantiate()
+			#if any allocated
+			if roomsack[i][0] > 0:
+				if tempRoom.get_exit_type() == coords.z:
+					if tempRoom.get_room_rotation() == coords.w:
+						#instantiate room
+						newRoom = tempRoom
+						
+						#remove from sack (subtract 1)
+						roomsack[i][0] -= 1
+						break
 	
 	var adjusted_coords:Vector2 = Vector2(coords.x,coords.y)
 	adjusted_coords -= center

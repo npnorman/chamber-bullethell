@@ -2,6 +2,7 @@ extends Node2D
 
 @export var exit_type = Globals.ExitType.FOUR
 @export var room_rotation = Globals.Rotation.ZERO
+@export var special = Globals.Special.NONE
 
 var fire_wall = preload("res://scenes/RoomGen/fire_wall.tscn")
 var invalid_exits = []
