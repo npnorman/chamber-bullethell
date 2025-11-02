@@ -23,7 +23,6 @@ var coordinates = [
 func _process(delta: float) -> void:
 	if enemies != null:
 		if !is_completed and enemies.get_child_count() <= 0:
-			print("removeing walls")
 			is_completed = true
 			remove_walls()
 
@@ -38,7 +37,6 @@ func activate_enemies():
 		print("Activating enemies")
 		for node in enemies.get_children():
 			if node.is_in_group("Enemy"):
-				print("Activating")
 				node.activate()
 
 func set_walls():
