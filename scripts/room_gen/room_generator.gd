@@ -135,15 +135,6 @@ func generateMap(m,n,seed:int):
 			# try a different room from knapsack
 				# if all rooms cannot fit,
 					# remove rooms from knapsack (ERROR)
-		
-	# after all rooms are placed
-	# for each room
-		# for each exit
-			# if there is no room there
-				# add a dead end (generate one)
-				# shop and treasure room count
-				# get exits
-				# create a room to satisfy all exits
 
 func display_rooms(center:Vector2, invalid_exits):
 	for i in range(0,len(roomstack)):
