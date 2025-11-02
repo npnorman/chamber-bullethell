@@ -129,7 +129,7 @@ func generateMap(m,n,seed:int):
 		seed(rng.seed)
 		print("Seed: ", rng.seed)
 	
-	var has_rejected = 2
+	var has_rejected = 4
 	while len(knapsack) > 0:
 		pick_room_from_knapsack(rng,m,n)
 		
