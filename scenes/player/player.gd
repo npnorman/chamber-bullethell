@@ -95,7 +95,6 @@ func rotate_gun():
 # Starts shot cooldown, sends shoot signal to level manager, rotates cylinder, updates magazine
 func shoot():
 	can_shoot = false
-	$ShootCooldown.start()
 	if Globals.magazine[active_bullet_pos] >= 0:
 		if gun_sprite.flip_v:
 			bullet_fired.emit($GunSprite/BulletOrigin2.global_position, player_direction, Globals.magazine[active_bullet_pos])
@@ -107,6 +106,11 @@ func shoot():
 		add_shot_knockback(Globals.magazine[active_bullet_pos])
 		SfxPlayer.player_shot_sound()
 		Globals.magazine[active_bullet_pos] = Globals.Bullets.Empty
+		if $ShootCooldown.wait_time < 0.33:
+			$ShootCooldown.wait_time = 0.33
+	else:
+		$ShootCooldown.wait_time = 0.15
+	$ShootCooldown.start()
 	can_reload = false
 	cycle_cylinder()
 
@@ -147,9 +151,9 @@ func add_shot_knockback(bullet_id: int = 0, knockback_amount = 750):
 
 # Updates Global script ammo type array to match what the Player has
 func update_bullet_types():
-	Globals.ammo_types[1] = bullet_types[1]
-	Globals.ammo_types[2] = bullet_types[2]
-	Globals.ammo_types[3] = bullet_types[3]
+	bullet_types[1] = Globals.ammo_types[1]
+	bullet_types[2] = Globals.ammo_types[2]
+	bullet_types[3] = Globals.ammo_types[3]
 
 # Takes 1 health from the player, currently starts with 6 total
 func take_damage(damage):

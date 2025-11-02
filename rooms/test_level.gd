@@ -93,6 +93,11 @@ func update_camera_position():
 	# set the camera position to the room the player is in
 	camera.position = Globals.current_room_center
 
+func update_hud():
+	hud.set_ammo_types()
+	hud.update_counters()
+	player.update_bullet_types()
+
 # Adjust HUD when cylinder changes
 func _on_player_cylinder_cycled() -> void:
 	hud.start_rotating()
@@ -121,7 +126,7 @@ func spawn_pickup(bullet_id: int, amount: int, pickup_position: Vector2) -> void
 # Updates HUD when ammo is picked up
 func _on_bullet_pickup_ammo_changed(new_ammo_type: bool, slot: int, bullet_id: int) -> void:
 	if new_ammo_type:
-		player.bullet_types[slot] = bullet_id
+		Globals.ammo_types[slot] = bullet_id
 		player.update_bullet_types()
 		hud.set_ammo_types()
 	hud.update_counters()

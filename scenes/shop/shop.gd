@@ -1,0 +1,88 @@
+extends Node2D
+
+var bullet_ids: Array[int] = [0, 0, 0]
+var bullet_prices: Array[int] = [0, 0, 0]
+var health_count: int = 2
+@export var bullet_textures: Array[Resource]
+
+@onready var bullet_areas: Array[Area2D] = [$BuyArea1, $BuyArea2, $BuyArea3]
+
+signal bullet_purchased(bullet_id: int, price: int)
+
+func _ready() -> void:
+	var i: int = 1
+	bullet_ids[0] = Globals.Bullets.Health
+	bullet_prices[0] = Globals.ammo_prices[4]
+	bullet_areas[0].get_child(0).texture = bullet_textures[4]
+	bullet_areas[0].get_child(2).text = Texts.bullet_names[4]
+	bullet_areas[0].get_child(3).text = Texts.bullet_prices[4]
+	var duplicate: int
+	while i < 3:
+		var rand_int = randi_range(1, 6)
+		while rand_int == duplicate or rand_int == 4:
+			rand_int = randi_range(1, 6)
+		duplicate = rand_int
+		bullet_ids[i] = rand_int
+		bullet_prices[i] = Globals.ammo_prices[rand_int]
+		bullet_areas[i].get_child(0).texture = bullet_textures[rand_int]
+		bullet_areas[i].get_child(2).text = Texts.bullet_names[rand_int]
+		bullet_areas[i].get_child(3).text = Texts.bullet_prices[rand_int]
+		i += 1
+
+func clear_shop(index: int):
+	bullet_areas[index].visible = false
+	
+func update_hud():
+	get_tree().current_scene.update_hud()
+
+func _on_buy_area_1_body_entered(body: Node2D) -> void:
+	var filled_slots: int = Globals.ammo_types.count(-1)
+	var empty_slot: int = Globals.ammo_types.find(-1)
+	if Globals.ammo[0] >= Globals.ammo_prices[bullet_ids[0]]:
+		if not Globals.ammo_types.has(bullet_ids[0]) and filled_slots > 0 and health_count > 0:
+			Globals.ammo[0] -= bullet_prices[0]
+			Globals.ammo[bullet_ids[0]] += 1
+			Globals.ammo_types[empty_slot] = bullet_ids[0]
+			health_count -= 1
+			update_hud()
+		elif Globals.ammo_types.has(bullet_ids[0]) and health_count > 0 and Globals.ammo[bullet_ids[0]] < Globals.ammo_max[bullet_ids[0]]:
+			Globals.ammo[0] -= bullet_prices[0]
+			Globals.ammo[bullet_ids[0]] += 1
+			health_count -= 1
+			update_hud()
+	if health_count < 1:
+		clear_shop(0)
+
+func _on_buy_area_2_body_entered(body: Node2D) -> void:
+	var filled_slots: int = Globals.ammo_types.count(-1)
+	var empty_slot: int = Globals.ammo_types.find(-1)
+	if Globals.ammo[0] >= Globals.ammo_prices[bullet_ids[1]]:
+		if not Globals.ammo_types.has(bullet_ids[1]) and filled_slots > 0:
+			Globals.ammo[0] -= bullet_prices[1]
+			Globals.ammo_types[empty_slot] = bullet_ids[1]
+			Globals.ammo[bullet_ids[1]] = Globals.ammo_max[bullet_ids[1]]
+			update_hud()
+			clear_shop(1)
+		elif Globals.ammo_types.has(bullet_ids[1]) and Globals.ammo[bullet_ids[1]] < Globals.ammo_max[bullet_ids[1]]:
+			Globals.ammo[0] -= bullet_prices[1]
+			Globals.ammo[bullet_ids[1]] += bullet_prices[1]
+			Globals.ammo[bullet_ids[1]] = Globals.ammo_max[bullet_ids[1]]
+			update_hud()
+			clear_shop(1)
+
+func _on_buy_area_3_body_entered(body: Node2D) -> void:
+	var filled_slots: int = Globals.ammo_types.count(-1)
+	var empty_slot: int = Globals.ammo_types.find(-1)
+	if Globals.ammo[0] >= Globals.ammo_prices[bullet_ids[2]]:
+		if not Globals.ammo_types.has(bullet_ids[2]) and filled_slots > 0:
+			Globals.ammo[0] -= bullet_prices[2]
+			Globals.ammo_types[empty_slot] = bullet_ids[2]
+			Globals.ammo[bullet_ids[2]] = Globals.ammo_max[bullet_ids[2]]
+			update_hud()
+			clear_shop(2)
+		elif Globals.ammo_types.has(bullet_ids[2]) and Globals.ammo[bullet_ids[2]] < Globals.ammo_max[bullet_ids[2]]:
+			Globals.ammo[0] -= bullet_prices[2]
+			Globals.ammo[bullet_ids[2]] += bullet_prices[2]
+			Globals.ammo[bullet_ids[2]] = Globals.ammo_max[bullet_ids[2]]
+			update_hud()
+			clear_shop(2)

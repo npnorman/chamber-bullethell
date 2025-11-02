@@ -1,4 +1,4 @@
-[gd_scene load_steps=21 format=4 uid="uid://cd0v14frrlgju"]
+[gd_scene load_steps=22 format=4 uid="uid://cd0v14frrlgju"]
 
 [ext_resource type="Script" uid="uid://dhhfbfplukf3b" path="res://rooms/test_level.gd" id="1_u75bg"]
 [ext_resource type="PackedScene" uid="uid://driwak3eok3gy" path="res://scenes/bullets/player-bullet.tscn" id="2_mj5kq"]
@@ -15,6 +15,7 @@
 [ext_resource type="PackedScene" uid="uid://csr22g6iy124u" path="res://scenes/interactables/interactable_item.tscn" id="12_ep8cf"]
 [ext_resource type="PackedScene" uid="uid://c1fsemoplmeeb" path="res://scenes/magician_enemy.tscn" id="14_07cye"]
 [ext_resource type="PackedScene" uid="uid://bsp2v6s7o2ey2" path="res://scenes/UI/pause_menu.tscn" id="15_mj5kq"]
+[ext_resource type="PackedScene" uid="uid://b83epnlti1mg6" path="res://scenes/shop/shop.tscn" id="16_8hip6"]
 
 [sub_resource type="NavigationPolygon" id="NavigationPolygon_02uo2"]
 vertices = PackedVector2Array(161, 17, 161, -51, 269, -3, 269, 65, 337, 65, 347.594, 223.781, -327.063, 210.188, 125, 17, -329.922, -202.828, 125, -51, 331.367, -192.148, 337, -3)
@@ -221,6 +222,9 @@ offset_top = -9834.0
 offset_right = 11946.0
 offset_bottom = 10000.0
 color = Color(0.5651, 0.442261, 0.279593, 1)
+
+[node name="Shop" parent="." instance=ExtResource("16_8hip6")]
+position = Vector2(283, -179)
 
 [connection signal="timeout" from="BulletFairyTimer" to="." method="_on_bullet_fairy_timer_timeout"]
 [connection signal="ammo_dropped" from="HUD" to="." method="_on_hud_ammo_dropped"]
