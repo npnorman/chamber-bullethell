@@ -1,6 +1,7 @@
 extends Node2D
 
 @export var level_scheme = Globals.Level.DESERT
+@export var seed:int = -1
 
 var one_room = preload("res://scenes/RoomGen/room_types/test_one.tscn")
 var two_close_room = preload("res://scenes/RoomGen/room_types/test_two_close.tscn")
@@ -67,10 +68,9 @@ func _ready() -> void:
 		knapsack += generateRooms(tempRoom.exit_type, tempRoom.room_rotation, room[0])
 	
 	add_room_current_location(starting_room)
-	generateMap(m,n,-1)
-	print("Roomstack")
-	print("Rooms   ",roomstack)
-	print("Rejected",rejected_knapsack)
+	generateMap(m,n,seed)
+	print("Rooms:    ",roomstack, len(roomstack))
+	print("Rejected: ",rejected_knapsack)
 	
 	#get dead ends to fill
 	var invalid_exits = get_invalid_exits(roomstack)
@@ -249,12 +249,11 @@ func pick_room_from_knapsack(rng:RandomNumberGenerator,m,n):
 				# for each neighbor (if exists)
 				for i in range(0, len(neighbors)):
 					# check if neighbor's exit is being blocked
-					if is_room_in_xy(current_location + neighbors[i]):
-						if is_blocking_exit(current_location, neighbors[i], exits):
+					if is_room_in_xy(checkingCoordinates + neighbors[i]):
+						if is_blocking_exit(checkingCoordinates, neighbors[i], new_exits):
+							print("Exit blocked r/n", checkingCoordinates, neighbors[i], " ROOM ",newRoom, "\n")
 							is_blocking = true
-					
-					#TODO: Check if we are blocking each neighbor ----------------------------------------------------------------
-			
+				
 			if is_blocking == true:
 				# try next exit
 				possible_index.erase(exit_index)
@@ -270,6 +269,9 @@ func pick_room_from_knapsack(rng:RandomNumberGenerator,m,n):
 		if is_blocking == true:
 			# oldroom cant fit new room
 			roomstack_copy.erase(oldRoom)
+		else:
+			#stop while loop
+			roomstack_copy.clear()
 	
 	if is_blocking == true:
 		# room cannot fit anywhere
@@ -285,25 +287,33 @@ func is_blocking_exit(room_coords:Vector2,neighbor_coords:Vector2, room_exits:Ar
 	var is_blocking:bool = false
 	
 	#check if blocking neighbor
-	if neighbor_coords.x == -1 and neighbor_exits[0] == 1:
+	if neighbor_coords.x == -1 and abs(neighbor_exits[0]) == 1:
 		#check if current room has path to this room
-		if room_exits[2] != 1:
+		if room_exits[2] == 0:
 			is_blocking = true
 		
-	elif neighbor_coords.x == 1 and neighbor_exits[2] == -1:
+	elif neighbor_coords.x == 1 and abs(neighbor_exits[2]) == 1:
 		#check if current room has path to this room
-		if room_exits[0] != 1:
+		if room_exits[0] == 0:
 			is_blocking = true
 		
-	elif neighbor_coords.y == -1 and neighbor_exits[1] == -1:
+	elif neighbor_coords.y == -1 and abs(neighbor_exits[1]) == 1:
 		#check if current room has path to this room
-		if room_exits[1] != 1:
+		if room_exits[3] == 0:
+			print("N/E ", neighbor_coords, neighbor_exits, room_exits)
 			is_blocking = true
 		
-	elif neighbor_coords.y == 1 and neighbor_exits[3] == 1:
+	elif neighbor_coords.y == 1 and abs(neighbor_exits[3]) == 1:
 		#check if current room has path to this room
-		if room_exits[3] != 1:
+		if room_exits[1] == 0:
 			is_blocking = true
+	
+	if is_blocking == false:
+		print("Blocking False:")
+		print("neighbor coords: ", neighbor_coords)
+		print("neighbor exists: ", neighbor_exits)
+		print("exits: ", room_exits)
+		print("")
 	
 	return is_blocking
 
