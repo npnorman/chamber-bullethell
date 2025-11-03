@@ -36,7 +36,8 @@ enum Special {
 	NONE,
 	START,
 	SHOP,
-	BOSS_TP
+	BOSS_TP,
+	BOSS
 }
 
 func get_exits(room:Vector4):

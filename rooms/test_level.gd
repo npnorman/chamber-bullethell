@@ -6,6 +6,9 @@ class_name LevelContainer
 
 @export var bullet_fairy:PackedScene
 
+# boss room
+@export var boss_room:Node2D
+
 @onready var hud: CanvasLayer = $HUD
 @onready var pause_menu: CanvasLayer = $PauseMenu
 @onready var player: CharacterBody2D = $Player
@@ -22,6 +25,9 @@ var current_room = null
 var room_change_delta: float = Globals.tile_size * 10
 var is_walls_ready = false
 var is_hud_transparent: bool = false
+
+func _ready() -> void:
+	camera.zoom = Vector2.ONE * 1.37
 
 func _process(delta: float) -> void:
 	check_for_bullet_fairy_spawn()
@@ -88,6 +94,10 @@ func update_center_room():
 			# save as var
 	Globals.current_room_center = temp_closest_room
 	current_room = temp_room
+	
+	if current_room.special == Globals.Special.BOSS:
+		#make camera different
+		Globals.current_room_center = Vector2(current_room.global_position.x + room_radius * 2, current_room.global_position.y - room_radius * 2)
 
 func update_camera_position():
 	# set the camera position to the room the player is in
@@ -206,16 +216,17 @@ func _on_player_bullet_fired(pos, dir, id):
 			player.roll_die(dice_roll)
 			projectiles.add_child(bullet)
 
+func spawn_player_in_boss_room():
+	player.position = boss_room.position + Vector2(Globals.tile_size * Globals.room_size, Globals.tile_size * -10)
+	mini_map.visible = false
+	camera.zoom = Vector2.ONE * 0.69
+
 func _on_bullet_fairy_timer_timeout() -> void:
 	#spawn bullet fairy
 	var temp_bullet_fairy = bullet_fairy.instantiate()
 	temp_bullet_fairy.starting_position = Globals.current_room_center
 	temp_bullet_fairy.global_position = Vector2.ZERO
 	add_child(temp_bullet_fairy)
-	print("Spawned bullet fairy")
-	print("PlayerLoc",player.global_position)
-	print("RoomLoc",Globals.current_room_center)
-	print("BF:",temp_bullet_fairy.global_position,Vector2(Globals.current_room_center.x - room_radius,Globals.current_room_center.y + room_radius))
 
 func _on_player_update_health(new_health: int) -> void:
 	hud.update_health(new_health)
