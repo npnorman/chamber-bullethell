@@ -1,0 +1,107 @@
+[gd_scene load_steps=10 format=3 uid="uid://b83epnlti1mg6"]
+
+[ext_resource type="Texture2D" uid="uid://w5axh0wgmx1r" path="res://sprites/bullets/BasicBulletFull.png" id="1_100s2"]
+[ext_resource type="Script" uid="uid://bhqdh6sigtmok" path="res://scenes/shop/shop.gd" id="1_qaxay"]
+[ext_resource type="Texture2D" uid="uid://c5tjkfvcgcb7o" path="res://sprites/bullets/Health.png" id="2_7lxhl"]
+[ext_resource type="Texture2D" uid="uid://cai28ou8bk2j1" path="res://sprites/bullets/Ricochet.png" id="3_xcdpw"]
+[ext_resource type="Texture2D" uid="uid://d4k24ii75gjx3" path="res://sprites/bullets/Shotgun.png" id="4_tp26b"]
+[ext_resource type="Texture2D" uid="uid://bjer451i0okay" path="res://sprites/bullets/Explosive.png" id="5_vk20h"]
+[ext_resource type="Texture2D" uid="uid://d2ol4ewmyfyt4" path="res://sprites/bullets/Railgun.png" id="7_8qn5i"]
+[ext_resource type="Texture2D" uid="uid://qeujp77cdf7y" path="res://sprites/bullets/Gambler.png" id="8_dww4p"]
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_qaxay"]
+radius = 10.0499
+
+[node name="Shop" type="Node2D"]
+script = ExtResource("1_qaxay")
+bullet_textures = Array[Resource]([ExtResource("1_100s2"), ExtResource("3_xcdpw"), ExtResource("4_tp26b"), ExtResource("5_vk20h"), ExtResource("2_7lxhl"), ExtResource("7_8qn5i"), ExtResource("8_dww4p")])
+
+[node name="BuyArea1" type="Area2D" parent="."]
+position = Vector2(-100, 0)
+collision_mask = 2
+
+[node name="BulletSprite" type="Sprite2D" parent="BuyArea1"]
+texture = ExtResource("2_7lxhl")
+
+[node name="CollisionShape" type="CollisionShape2D" parent="BuyArea1"]
+shape = SubResource("CircleShape2D_qaxay")
+
+[node name="NameLabel" type="Label" parent="BuyArea1"]
+offset_left = -40.0
+offset_top = -60.0
+offset_right = 40.0
+offset_bottom = -37.0
+theme_override_font_sizes/font_size = 12
+horizontal_alignment = 1
+vertical_alignment = 1
+autowrap_mode = 3
+
+[node name="PriceLabel" type="Label" parent="BuyArea1"]
+offset_left = -32.0
+offset_top = 22.0
+offset_right = 32.0
+offset_bottom = 45.0
+theme_override_font_sizes/font_size = 12
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="BuyArea2" type="Area2D" parent="."]
+collision_mask = 2
+
+[node name="BulletSprite" type="Sprite2D" parent="BuyArea2"]
+texture = ExtResource("1_100s2")
+
+[node name="CollisionShape" type="CollisionShape2D" parent="BuyArea2"]
+shape = SubResource("CircleShape2D_qaxay")
+
+[node name="NameLabel" type="Label" parent="BuyArea2"]
+offset_left = -40.0
+offset_top = -60.0
+offset_right = 40.0
+offset_bottom = -37.0
+theme_override_font_sizes/font_size = 12
+horizontal_alignment = 1
+vertical_alignment = 1
+autowrap_mode = 3
+
+[node name="PriceLabel" type="Label" parent="BuyArea2"]
+offset_left = -20.0
+offset_top = 22.0
+offset_right = 20.0
+offset_bottom = 45.0
+theme_override_font_sizes/font_size = 12
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="BuyArea3" type="Area2D" parent="."]
+position = Vector2(100, 0)
+collision_mask = 2
+
+[node name="BulletSprite" type="Sprite2D" parent="BuyArea3"]
+texture = ExtResource("1_100s2")
+
+[node name="CollisionShape" type="CollisionShape2D" parent="BuyArea3"]
+shape = SubResource("CircleShape2D_qaxay")
+
+[node name="NameLabel" type="Label" parent="BuyArea3"]
+offset_left = -40.0
+offset_top = -60.0
+offset_right = 40.0
+offset_bottom = -37.0
+theme_override_font_sizes/font_size = 12
+horizontal_alignment = 1
+vertical_alignment = 1
+autowrap_mode = 3
+
+[node name="PriceLabel" type="Label" parent="BuyArea3"]
+offset_left = -20.0
+offset_top = 22.0
+offset_right = 20.0
+offset_bottom = 45.0
+theme_override_font_sizes/font_size = 12
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[connection signal="body_entered" from="BuyArea1" to="." method="_on_buy_area_1_body_entered"]
+[connection signal="body_entered" from="BuyArea2" to="." method="_on_buy_area_2_body_entered"]
+[connection signal="body_entered" from="BuyArea3" to="." method="_on_buy_area_3_body_entered"]
