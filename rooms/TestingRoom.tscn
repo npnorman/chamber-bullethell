@@ -75,12 +75,11 @@ shader_parameter/speed_x = 0.5
 shader_parameter/speed_y = 0.25
 shader_parameter/amplitude = 0.2
 
-[node name="Starting Room" type="Node2D" node_paths=PackedStringArray("boss_room")]
+[node name="Starting Room" type="Node2D"]
 script = ExtResource("1_u75bg")
 bullet_scene = ExtResource("2_mj5kq")
 bullet_pickup_scene = ExtResource("3_8hip6")
 bullet_fairy = ExtResource("5_b6v1o")
-boss_room = NodePath("")
 
 [node name="MiniMap" parent="." instance=ExtResource("3_ep8cf")]
 
