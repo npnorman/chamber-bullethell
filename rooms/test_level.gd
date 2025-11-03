@@ -33,7 +33,7 @@ func _process(delta: float) -> void:
 	if  Globals.current_room_center != previous_center_room:
 		
 		#add to minimap
-		mini_map.add_room_as_mini(Globals.current_room_center)
+		mini_map.add_room_as_mini(Globals.current_room_center, current_room.special)
 		mini_map.set_player_location(Globals.current_room_center)
 		
 		#set up walls

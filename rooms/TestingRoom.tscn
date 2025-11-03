@@ -69,8 +69,8 @@ sources/0 = SubResource("TileSetAtlasSource_gc8kv")
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_07cye"]
 shader = ExtResource("14_8hip6")
-shader_parameter/speed_x = 1.0
-shader_parameter/speed_y = 0.5
+shader_parameter/speed_x = 0.5
+shader_parameter/speed_y = 0.25
 shader_parameter/amplitude = 0.2
 
 [node name="Starting Room" type="Node2D"]
