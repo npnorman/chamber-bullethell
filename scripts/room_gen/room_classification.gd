@@ -2,6 +2,7 @@ extends Node2D
 
 @export var exit_type = Globals.ExitType.FOUR
 @export var room_rotation = Globals.Rotation.ZERO
+@export var special = Globals.Special.NONE
 
 var fire_wall = preload("res://scenes/RoomGen/fire_wall.tscn")
 var invalid_exits = []
@@ -79,7 +80,7 @@ func set_dead_ends(invalid_exits):
 				# set tiles to wall elements
 				
 				if i == 0: #right
-					for k in range(-21,-14):
+					for k in range(-21,-12):
 						# tile location, tileset id, tile location in atlas
 						tile_map_layer.set_cell(Vector2i(34,k),0,Vector2i(6,1))
 				elif i == 1: #top
@@ -87,7 +88,7 @@ func set_dead_ends(invalid_exits):
 						# tile location, tileset id, tile location in atlas
 						tile_map_layer.set_cell(Vector2i(k,-35),0,Vector2i(5,0))
 				elif i == 2: #left
-					for k in range(-21,-14):
+					for k in range(-21,-12):
 						# tile location, tileset id, tile location in atlas
 						tile_map_layer.set_cell(Vector2i(0,k),0,Vector2i(4,1))
 				elif i == 3: #bottom

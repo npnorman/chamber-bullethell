@@ -1,0 +1,20 @@
+[gd_scene load_steps=4 format=3 uid="uid://cotw7cc056obr"]
+
+[ext_resource type="Texture2D" uid="uid://bebvfpth2iag7" path="res://sprites/minimap/skull.png" id="1_2yqen"]
+[ext_resource type="Script" uid="uid://dtv0wukrlk3en" path="res://scripts/mini-map/icon.gd" id="1_sxkbd"]
+[ext_resource type="Texture2D" uid="uid://dk8kv22ot3c1f" path="res://sprites/minimap/dollar.png" id="2_g3wxj"]
+
+[node name="icon" type="Control"]
+layout_mode = 3
+anchors_preset = 0
+script = ExtResource("1_sxkbd")
+dollar = ExtResource("2_g3wxj")
+skull = ExtResource("1_2yqen")
+
+[node name="TextureRect" type="TextureRect" parent="."]
+layout_mode = 0
+offset_left = -8.0
+offset_top = -8.0
+offset_right = 8.0
+offset_bottom = 8.0
+texture = ExtResource("1_2yqen")
