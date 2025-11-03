@@ -22,7 +22,7 @@ class_name LevelContainer
 
 var is_bullet_fairy_spawned = false
 var current_room = null
-var room_change_delta: float = Globals.tile_size * 10
+var room_change_delta: float = Globals.tile_size * 16
 var is_walls_ready = false
 var is_hud_transparent: bool = false
 
