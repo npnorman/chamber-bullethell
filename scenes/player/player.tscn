@@ -445,6 +445,7 @@ collision_mask = 13
 script = ExtResource("1_g2els")
 
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
+y_sort_enabled = true
 sprite_frames = SubResource("SpriteFrames_5gtgg")
 animation = &"idle"
 autoplay = "idle"

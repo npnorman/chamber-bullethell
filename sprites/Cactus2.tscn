@@ -7,9 +7,6 @@
 [ext_resource type="Texture2D" uid="uid://cq387sd0vod0e" path="res://sprites/Animations/CactusAnimations/MirrorCactus5.png" id="5_7w8e0"]
 [ext_resource type="Texture2D" uid="uid://dapumrmii6exc" path="res://sprites/Animations/CactusAnimations/MirrorCactus6.png" id="6_4nc46"]
 
-[sub_resource type="CircleShape2D" id="CircleShape2D_8y5jl"]
-radius = 5.0
-
 [sub_resource type="SpriteFrames" id="SpriteFrames_5aqbo"]
 animations = [{
 "frames": [{
@@ -36,15 +33,21 @@ animations = [{
 "speed": 5.0
 }]
 
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_fiapc"]
+size = Vector2(10, 10)
+
 [node name="Cactus2" type="Node2D"]
+
+[node name="MirroredCactus" type="AnimatedSprite2D" parent="."]
+z_index = 1
+y_sort_enabled = true
+sprite_frames = SubResource("SpriteFrames_5aqbo")
+animation = &"MirroredCactus"
+offset = Vector2(0, -15)
 
 [node name="StaticBody2D" type="StaticBody2D" parent="."]
 scale = Vector2(3, 3)
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="StaticBody2D"]
-position = Vector2(0, 2)
-shape = SubResource("CircleShape2D_8y5jl")
-
-[node name="MirroredCactus" type="AnimatedSprite2D" parent="."]
-sprite_frames = SubResource("SpriteFrames_5aqbo")
-animation = &"MirroredCactus"
+scale = Vector2(0.5, 0.5)
+shape = SubResource("RectangleShape2D_fiapc")
