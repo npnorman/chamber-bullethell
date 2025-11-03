@@ -25,13 +25,13 @@ func take_damage(damage:int):
 	super.take_damage(damage)
 	
 	if in_teleport == false and health > 0:
+		teleport()
 		in_teleport = true
 		set_particle_gradient("#ff7878","#6b0c0c")
 		smoke_particles.color_initial_ramp.remove_point(1)
 		smoke_particles.color_initial_ramp.add_point(1,Color("#ff7878"))
 		smoke_particles.color_initial_ramp.remove_point(0)
 		smoke_particles.color_initial_ramp.add_point(0,Color("#6b0c0c"))
-		teleport()
 
 func set_particle_gradient(color1,color2):
 	#set particles back
@@ -76,15 +76,16 @@ func _on_teleport_timer_timeout() -> void:
 
 func toggle_invisible(isEnabled:bool):
 	if isEnabled:
-		animated_sprite_2d.play("idle")
-		collision_shape_2d.disabled = false
+		collision_shape_2d.set_deferred("disabled", false)
 		cpu_particles_2d.emitting = true
 		is_active = true
+		animated_sprite_2d.play("idle")
 	else:
-		animated_sprite_2d.play("death")
 		cpu_particles_2d.emitting = false
-		collision_shape_2d.disabled = true
+		
+		collision_shape_2d.set_deferred("disabled", true)
 		is_active = false
+		animated_sprite_2d.play("death")
 
 func _on_reroute_timer_timeout() -> void:
 	# reroute navagent
