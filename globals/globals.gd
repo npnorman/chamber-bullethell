@@ -32,6 +32,14 @@ enum Rotation {
 	TWOSEVENTY
 }
 
+enum Special {
+	NONE,
+	START,
+	SHOP,
+	BOSS_TP,
+	BOSS
+}
+
 func get_exits(room:Vector4):
 	var exits:Array = [0,0,0,0]
 	# offset of (x+1,y+1,x-1,y-1)

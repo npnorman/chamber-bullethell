@@ -1,0 +1,28 @@
+[gd_scene load_steps=4 format=3 uid="uid://dix1tk8nv8rjr"]
+
+[ext_resource type="Texture2D" uid="uid://0w7hn8tx8i3d" path="res://sprites/particles/fire_particle.png" id="1_5jl6k"]
+
+[sub_resource type="Curve" id="Curve_ws6ee"]
+_data = [Vector2(0, 1), 0.0, 0.0, 0, 0, Vector2(0.754098, 0.910112), -3.14475, -3.14475, 0, 0, Vector2(1, 0), 0.0, 0.0, 0, 0]
+point_count = 3
+
+[sub_resource type="Gradient" id="Gradient_t5h1h"]
+offsets = PackedFloat32Array(0, 0.625, 1)
+colors = PackedColorArray(1, 0.744808, 0.446026, 1, 0.612667, 0.0357403, 0, 1, 0.467161, 0.473903, 0.492427, 1)
+
+[node name="CPUParticles2D" type="CPUParticles2D"]
+z_index = 5
+amount = 500
+texture = ExtResource("1_5jl6k")
+lifetime = 0.5
+speed_scale = 0.5
+lifetime_randomness = 0.5
+emission_shape = 1
+emission_sphere_radius = 1.0
+direction = Vector2(0, -1)
+spread = 180.0
+gravity = Vector2(0, -980)
+initial_velocity_max = 100.0
+scale_amount_max = 2.0
+scale_amount_curve = SubResource("Curve_ws6ee")
+color_ramp = SubResource("Gradient_t5h1h")
