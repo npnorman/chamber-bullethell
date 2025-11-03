@@ -11,6 +11,7 @@ offsets = PackedFloat32Array(0, 0.625, 1)
 colors = PackedColorArray(1, 0.744808, 0.446026, 1, 0.612667, 0.0357403, 0, 1, 0.467161, 0.473903, 0.492427, 1)
 
 [node name="CPUParticles2D" type="CPUParticles2D"]
+z_index = 5
 amount = 500
 texture = ExtResource("1_5jl6k")
 lifetime = 0.5
