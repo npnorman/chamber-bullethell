@@ -32,6 +32,7 @@ func _on_body_entered(body: Node2D) -> void:
 
 func explode() -> void:
 	speed = 0
+	$PointLight2D.visible = false
 	$Explosion.visible = true
 	$Sprite2D.visible = false
 	$Explosion/ExplosionParticles.emitting = true
@@ -45,6 +46,7 @@ func explode() -> void:
 				body.take_damage(area_damage)
 
 func railgun() -> void:
+	$PointLight2D.visible = false
 	var exceptions: Array[Object]
 	$RailCast.visible = true
 	$RailCast.force_raycast_update()

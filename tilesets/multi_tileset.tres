@@ -1,4 +1,4 @@
-[gd_resource type="TileSet" load_steps=9 format=3 uid="uid://b5dr7xs5s30fq"]
+[gd_resource type="TileSet" load_steps=10 format=3 uid="uid://b5dr7xs5s30fq"]
 
 [ext_resource type="Texture2D" uid="uid://8ml14yh2dh84" path="res://tilesets/desertTiles.png" id="1_cvtcu"]
 [ext_resource type="Texture2D" uid="uid://b5l7w2s3y1apx" path="res://tilesets/hellTiles.png" id="2_xvopn"]
@@ -118,6 +118,7 @@ texture = ExtResource("1_cvtcu")
 4:6/0 = 0
 5:6/0 = 0
 6:6/0 = 0
+6:6/0/physics_layer_1/polygon_0/points = PackedVector2Array(-8, -8, 8, -8, 8, 8, -8, 8)
 7:6/0 = 0
 0:7/0 = 0
 1:7/0 = 0
@@ -194,6 +195,17 @@ texture = ExtResource("2_xvopn")
 5:7/0 = 0
 6:7/0 = 0
 7:7/0 = 0
+
+[sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_ipwr0"]
+4:3/0 = 0
+5:3/0 = 0
+6:3/0 = 0
+4:4/0 = 0
+5:4/0 = 0
+6:4/0 = 0
+4:5/0 = 0
+5:5/0 = 0
+6:5/0 = 0
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_56q60"]
 texture = ExtResource("3_ipwr0")
@@ -348,6 +360,8 @@ texture = ExtResource("4_2wukp")
 
 [resource]
 physics_layer_0/collision_layer = 1
+physics_layer_1/collision_layer = 32
+physics_layer_1/collision_mask = 32
 terrain_set_0/mode = 0
 terrain_set_0/terrain_0/name = "DesertWalls"
 terrain_set_0/terrain_0/color = Color(0.834967, 0.68573, 0.178748, 1)
@@ -355,3 +369,4 @@ sources/0 = SubResource("TileSetAtlasSource_d3dji")
 sources/1 = SubResource("TileSetAtlasSource_r37sh")
 sources/2 = SubResource("TileSetAtlasSource_56q60")
 sources/3 = SubResource("TileSetAtlasSource_ke7hm")
+sources/12 = SubResource("TileSetAtlasSource_ipwr0")

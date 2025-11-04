@@ -37,21 +37,23 @@ func toggle_transparency(transparent: bool):
 		$CylinderNode.modulate.a = 1
 		$SpecialBullets.modulate.a = 1
 
+# Checks every frame to see if the mouse is hovering over a bullet in the inventory menu, displays
+# text box with description if so
 func _process(delta: float) -> void:
 	if mouse_over_box and inventory.visible and Globals.ammo_types[active_box] != -1:
 		match active_box:
 			0:
 				bullet_text.text = Texts.bullet_texts[0]
-				text_panel.position = Vector2(180, 140)
+				text_panel.position = Vector2(215, 140)
 			1:
 				bullet_text.text = Texts.bullet_texts[Globals.ammo_types[1]]
-				text_panel.position = Vector2(303, 140)
+				text_panel.position = Vector2(338, 140)
 			2:
 				bullet_text.text = Texts.bullet_texts[Globals.ammo_types[2]]
-				text_panel.position = Vector2(426, 140)
+				text_panel.position = Vector2(461, 140)
 			3:
 				bullet_text.text = Texts.bullet_texts[Globals.ammo_types[3]]
-				text_panel.position = Vector2(549, 140)
+				text_panel.position = Vector2(584, 140)
 		text_panel.visible = true
 	elif text_panel.visible:
 		text_panel.visible = false
@@ -81,16 +83,22 @@ func _on_cylinder_animation_animation_finished(anim_name: StringName) -> void:
 # Sets textures for HUD ammo counters and makes the key invisible when no ammo type is there
 func set_ammo_types():
 	var index: int = 0
+	for type in Globals.ammo_types:
+		if Globals.ammo[type] < 1:
+			Globals.ammo_types[index] = -1
+		index += 1
+	index = 0
 	while index < 4:
 		if Globals.ammo_types[index] > -1:
 			hud_ammo_textures[index].texture = bullet_textures[Globals.ammo_types[index]]
 			inventory_array[index].texture = bullet_textures[Globals.ammo_types[index]]
 			ammo_keys[index].visible = true
 			ammo_counters[index].visible = true
+			inventory_array[index].modulate.a = 1
 		else: 
 			ammo_keys[index].visible = false
 			hud_ammo_textures[index].texture = null
-			inventory_array[index].texture = null
+			inventory_array[index].modulate.a = 0
 			ammo_counters[index].visible = false
 		index += 1
 
@@ -119,6 +127,7 @@ func update_counters():
 func display_inventory() -> void:
 	inventory.visible = not inventory.visible
 	
+# Sets health function visibility and modulation depending on the new health value
 func update_health(new_health: int) -> void:
 	match new_health:
 		0:
@@ -149,8 +158,8 @@ func update_health(new_health: int) -> void:
 			stache_textures[0].modulate = Color(0, 0, 0, 1)
 			stache_textures[4].modulate = Color(0, 0, 0, 1)
 
-# Sets held item texture to that of the box clicked and lets you drag it around. If let go of above the trash icon,
-# drops the item to the left of the player
+# Sets held item texture to that of the box clicked and lets you drag it around. If let go of above 
+# the trash icon, drops the item to the left of the player
 func _input(event: InputEvent) -> void:
 	if Input.is_action_just_pressed("Shoot") and mouse_over_box:
 		if Globals.ammo_types[active_box] >= 0:

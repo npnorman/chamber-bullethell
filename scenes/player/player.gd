@@ -51,14 +51,13 @@ func _process(_delta):
 		# Normal reload and Special reload inputs
 		if Input.is_action_just_pressed("Main Reload") and Globals.magazine[active_bullet_pos] == Globals.Bullets.Empty and Globals.ammo[0] > 0:
 			reload(0)
-		if Input.is_action_just_pressed("Special Reload 1") and Globals.magazine[active_bullet_pos] == Globals.Bullets.Empty and Globals.ammo[bullet_types[1]] > 0:
-			reload(bullet_types[1])
-		if Input.is_action_just_pressed("Special Reload 2") and Globals.magazine[active_bullet_pos] == Globals.Bullets.Empty and Globals.ammo[bullet_types[2]] > 0:
-			reload(bullet_types[2])
-		if Input.is_action_just_pressed("Special Reload 3") and Globals.magazine[active_bullet_pos] == Globals.Bullets.Empty and Globals.ammo[bullet_types[3]] > 0:
-			reload(bullet_types[3])
-			
-		
+		if Input.is_action_just_pressed("Special Reload 1") and Globals.magazine[active_bullet_pos] == Globals.Bullets.Empty and Globals.ammo[Globals.ammo_types[1]] > 0:
+			reload(Globals.ammo_types[1])
+		if Input.is_action_just_pressed("Special Reload 2") and Globals.magazine[active_bullet_pos] == Globals.Bullets.Empty and Globals.ammo[Globals.ammo_types[2]] > 0:
+			reload(Globals.ammo_types[2])
+		if Input.is_action_just_pressed("Special Reload 3") and Globals.magazine[active_bullet_pos] == Globals.Bullets.Empty and Globals.ammo[Globals.ammo_types[3]] > 0:
+			reload(Globals.ammo_types[3])
+
 		# Menu/Inventory
 		if Input.is_action_just_pressed("Inventory"):
 			toggle_inventory.emit()
@@ -95,7 +94,6 @@ func rotate_gun():
 # Starts shot cooldown, sends shoot signal to level manager, rotates cylinder, updates magazine
 func shoot():
 	can_shoot = false
-	$ShootCooldown.start()
 	if Globals.magazine[active_bullet_pos] >= 0:
 		if gun_sprite.flip_v:
 			bullet_fired.emit($GunSprite/BulletOrigin2.global_position, player_direction, Globals.magazine[active_bullet_pos])
@@ -107,6 +105,11 @@ func shoot():
 		add_shot_knockback(Globals.magazine[active_bullet_pos])
 		SfxPlayer.player_shot_sound()
 		Globals.magazine[active_bullet_pos] = Globals.Bullets.Empty
+		if $ShootCooldown.wait_time < 0.33:
+			$ShootCooldown.wait_time = 0.33
+	else:
+		$ShootCooldown.wait_time = 0.15
+	$ShootCooldown.start()
 	can_reload = false
 	cycle_cylinder()
 
@@ -115,6 +118,8 @@ func reload(id: int):
 	if can_reload and id != -1:
 		Globals.magazine[active_bullet_pos] = id
 		Globals.ammo[id] -= 1
+		if Globals.ammo[id] < 1:
+			get_tree().current_scene.update_hud()
 		can_reload = false
 		cycle_cylinder()
 
@@ -126,6 +131,7 @@ func cycle_cylinder():
 		active_bullet_pos = 0
 	cylinder_cycled.emit()
 
+# Moves player back and plays blank animation at the gun's barrel
 func blank():
 	add_shot_knockback(Globals.Bullets.Shotgun, 1500)
 	if gun_sprite.flip_v:
@@ -145,12 +151,6 @@ func add_shot_knockback(bullet_id: int = 0, knockback_amount = 750):
 	if bullet_id == Globals.Bullets.Shotgun:
 		player_knockback = (player_direction * -1) * knockback_amount
 
-# Updates Global script ammo type array to match what the Player has
-func update_bullet_types():
-	Globals.ammo_types[1] = bullet_types[1]
-	Globals.ammo_types[2] = bullet_types[2]
-	Globals.ammo_types[3] = bullet_types[3]
-
 # Takes 1 health from the player, currently starts with 6 total
 func take_damage(damage):
 	if not is_invincible and not is_dead:
@@ -168,11 +168,13 @@ func player_die():
 	is_dead = true
 	animations.play("death")
 
+# Function call specifically for the health bullet, can also be used for other healing sources
 func heal():
 	health += 1
 	update_health.emit(health)
 	animations.play("heal")
-	
+
+# Temporarily displays a die sprite over the player showing what their gambler round roll was
 func roll_die(roll: int) -> void:
 	var dice_atlas: AtlasTexture = dice.texture
 	dice.position = Vector2(0, -35)

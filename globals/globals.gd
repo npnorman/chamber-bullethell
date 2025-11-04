@@ -32,6 +32,14 @@ enum Rotation {
 	TWOSEVENTY
 }
 
+enum Special {
+	NONE,
+	START,
+	SHOP,
+	BOSS_TP,
+	BOSS
+}
+
 func get_exits(room:Vector4):
 	var exits:Array = [0,0,0,0]
 	# offset of (x+1,y+1,x-1,y-1)
@@ -104,13 +112,16 @@ var ammo: Array[int] = [60, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0]:
 		return ammo
 
 # Gives the maximum ammo that can be held of a given ammo type
-var ammo_max: Array[int] = [999, 30, 30, 30, 3, 12, 18, 30, 30, 30, 30, 30]
+var ammo_max: Array[int] = [999, 18, 18, 18, 3, 12, 18, 30, 30, 30, 30, 30]
 
 # Array of the IDs of ammo the player currently has, with -1 meaning nothing is in the slot
 var ammo_types: Array[int] = [0, -1, -1, -1]
 
 # Shows the rarity of each bullet to be used to determine pickup texture
 var ammo_rarities: Array[int] = [0, 1, 1, 1, 1, 2, 2, 0, 0, 0, 0, 0]
+
+# Array of the shop prices for each bullet (health bullets are bought 1 at a time)
+var ammo_prices: Array[int] = [0, 15, 15, 15, 10, 20, 20, 0, 0, 0, 0, 0]
 
 # 6 cylinder magazine represented by a size 6 array that is frequently being changed
 var magazine: Array[int] = [-1, -1, -1, -1, -1, -1]:
@@ -122,3 +133,9 @@ var current_room_center:Vector2 = Vector2.ZERO
 
 func change_scene(file_name:String):
 	get_tree().change_scene_to_file(file_name)
+	reset_ammo()
+	
+func reset_ammo():
+	ammo = [60, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0]
+	ammo_types = [0, -1, -1, -1]
+	magazine = [-1, -1, -1, -1, -1, -1]
