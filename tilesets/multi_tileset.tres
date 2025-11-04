@@ -118,7 +118,7 @@ texture = ExtResource("1_cvtcu")
 4:6/0 = 0
 5:6/0 = 0
 6:6/0 = 0
-6:6/0/physics_layer_0/polygon_0/points = PackedVector2Array(-8, -8, 8, -8, 8, 8, -8, 8)
+6:6/0/physics_layer_1/polygon_0/points = PackedVector2Array(-8, -8, 8, -8, 8, 8, -8, 8)
 7:6/0 = 0
 0:7/0 = 0
 1:7/0 = 0
@@ -360,6 +360,8 @@ texture = ExtResource("4_2wukp")
 
 [resource]
 physics_layer_0/collision_layer = 1
+physics_layer_1/collision_layer = 32
+physics_layer_1/collision_mask = 32
 terrain_set_0/mode = 0
 terrain_set_0/terrain_0/name = "DesertWalls"
 terrain_set_0/terrain_0/color = Color(0.834967, 0.68573, 0.178748, 1)

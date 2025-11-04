@@ -51,14 +51,13 @@ func _process(_delta):
 		# Normal reload and Special reload inputs
 		if Input.is_action_just_pressed("Main Reload") and Globals.magazine[active_bullet_pos] == Globals.Bullets.Empty and Globals.ammo[0] > 0:
 			reload(0)
-		if Input.is_action_just_pressed("Special Reload 1") and Globals.magazine[active_bullet_pos] == Globals.Bullets.Empty and Globals.ammo[bullet_types[1]] > 0:
-			reload(bullet_types[1])
-		if Input.is_action_just_pressed("Special Reload 2") and Globals.magazine[active_bullet_pos] == Globals.Bullets.Empty and Globals.ammo[bullet_types[2]] > 0:
-			reload(bullet_types[2])
-		if Input.is_action_just_pressed("Special Reload 3") and Globals.magazine[active_bullet_pos] == Globals.Bullets.Empty and Globals.ammo[bullet_types[3]] > 0:
-			reload(bullet_types[3])
-			
-		
+		if Input.is_action_just_pressed("Special Reload 1") and Globals.magazine[active_bullet_pos] == Globals.Bullets.Empty and Globals.ammo[Globals.ammo_types[1]] > 0:
+			reload(Globals.ammo_types[1])
+		if Input.is_action_just_pressed("Special Reload 2") and Globals.magazine[active_bullet_pos] == Globals.Bullets.Empty and Globals.ammo[Globals.ammo_types[2]] > 0:
+			reload(Globals.ammo_types[2])
+		if Input.is_action_just_pressed("Special Reload 3") and Globals.magazine[active_bullet_pos] == Globals.Bullets.Empty and Globals.ammo[Globals.ammo_types[3]] > 0:
+			reload(Globals.ammo_types[3])
+
 		# Menu/Inventory
 		if Input.is_action_just_pressed("Inventory"):
 			toggle_inventory.emit()
@@ -119,6 +118,8 @@ func reload(id: int):
 	if can_reload and id != -1:
 		Globals.magazine[active_bullet_pos] = id
 		Globals.ammo[id] -= 1
+		if Globals.ammo[id] < 1:
+			get_tree().current_scene.update_hud()
 		can_reload = false
 		cycle_cylinder()
 
@@ -148,12 +149,6 @@ func print_bullet_name(id: int):
 func add_shot_knockback(bullet_id: int = 0, knockback_amount = 750):
 	if bullet_id == Globals.Bullets.Shotgun:
 		player_knockback = (player_direction * -1) * knockback_amount
-
-# Updates Global script ammo type array to match what the Player has
-func update_bullet_types():
-	bullet_types[1] = Globals.ammo_types[1]
-	bullet_types[2] = Globals.ammo_types[2]
-	bullet_types[3] = Globals.ammo_types[3]
 
 # Takes 1 health from the player, currently starts with 6 total
 func take_damage(damage):

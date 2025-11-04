@@ -133,3 +133,9 @@ var current_room_center:Vector2 = Vector2.ZERO
 
 func change_scene(file_name:String):
 	get_tree().change_scene_to_file(file_name)
+	reset_ammo()
+	
+func reset_ammo():
+	ammo = [60, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0]
+	ammo_types = [0, -1, -1, -1]
+	magazine = [-1, -1, -1, -1, -1, -1]

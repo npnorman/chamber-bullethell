@@ -190,6 +190,7 @@ animations = [{
 colors = PackedColorArray(0.362829, 0.362829, 0.362829, 1, 1, 1, 1, 1)
 
 [node name="MagicianEnemy" instance=ExtResource("1_gi53r")]
+collision_mask = 43
 script = ExtResource("2_ay3sq")
 is_active = true
 health = 9

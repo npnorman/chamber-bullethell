@@ -1,4 +1,4 @@
-[gd_scene load_steps=37 format=3 uid="uid://chtu6kuwhxen6"]
+[gd_scene load_steps=42 format=3 uid="uid://chtu6kuwhxen6"]
 
 [ext_resource type="Script" uid="uid://cxl6hj6ji3sd2" path="res://scenes/UI/hud.gd" id="1_rd3kb"]
 [ext_resource type="Texture2D" uid="uid://w5axh0wgmx1r" path="res://sprites/bullets/BasicBulletFull.png" id="2_d15ok"]
@@ -16,7 +16,12 @@
 [ext_resource type="Texture2D" uid="uid://fphwjfvedkgc" path="res://sprites/HealthBar/MidLStacheFull.png" id="13_d15ok"]
 [ext_resource type="Texture2D" uid="uid://cbu4ma00375qo" path="res://sprites/HealthBar/MiddleStacheFull.png" id="13_w414h"]
 [ext_resource type="Texture2D" uid="uid://u6demqhecs3y" path="res://sprites/HealthBar/FarLStacheFull.png" id="14_d15ok"]
+[ext_resource type="Texture2D" uid="uid://cgg6v2tthi6uv" path="res://sprites/HealthBar/FarLStacheOut.png" id="14_riety"]
 [ext_resource type="Texture2D" uid="uid://cm60fn0q0jhw5" path="res://sprites/HealthBar/FarRStacheFull.png" id="15_4h6aq"]
+[ext_resource type="Texture2D" uid="uid://bxkda1h6i44pp" path="res://sprites/HealthBar/MidLStacheOut.png" id="16_r44e2"]
+[ext_resource type="Texture2D" uid="uid://1mh6e4ebpc7i" path="res://sprites/HealthBar/MidStacheOut.png" id="18_7frj2"]
+[ext_resource type="Texture2D" uid="uid://cg5de0vgrikyo" path="res://sprites/HealthBar/MidRStacheOut.png" id="20_dm2wl"]
+[ext_resource type="Texture2D" uid="uid://diiquvshof8t4" path="res://sprites/HealthBar/FarRStacheOut.png" id="22_vatau"]
 
 [sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_rd3kb"]
 
@@ -596,6 +601,11 @@ layout_mode = 2
 texture = ExtResource("14_d15ok")
 stretch_mode = 4
 
+[node name="OutlineFL" type="TextureRect" parent="HealthStache/StacheFarLeft"]
+layout_mode = 2
+texture = ExtResource("14_riety")
+stretch_mode = 4
+
 [node name="StacheLeft" type="PanelContainer" parent="HealthStache"]
 layout_mode = 0
 offset_left = 50.0
@@ -608,6 +618,11 @@ theme_override_styles/panel = SubResource("StyleBoxEmpty_4h6aq")
 modulate = Color(0, 0, 0, 1)
 layout_mode = 2
 texture = ExtResource("13_d15ok")
+stretch_mode = 4
+
+[node name="OutlineL" type="TextureRect" parent="HealthStache/StacheLeft"]
+layout_mode = 2
+texture = ExtResource("16_r44e2")
 stretch_mode = 4
 
 [node name="StacheMiddle" type="PanelContainer" parent="HealthStache"]
@@ -624,6 +639,11 @@ layout_mode = 2
 texture = ExtResource("13_w414h")
 stretch_mode = 4
 
+[node name="OutlineMid" type="TextureRect" parent="HealthStache/StacheMiddle"]
+layout_mode = 2
+texture = ExtResource("18_7frj2")
+stretch_mode = 4
+
 [node name="StacheRight" type="PanelContainer" parent="HealthStache"]
 layout_mode = 0
 offset_left = 140.0
@@ -638,6 +658,11 @@ layout_mode = 2
 texture = ExtResource("12_ggbtr")
 stretch_mode = 4
 
+[node name="OutlineR" type="TextureRect" parent="HealthStache/StacheRight"]
+layout_mode = 2
+texture = ExtResource("20_dm2wl")
+stretch_mode = 4
+
 [node name="StacheFarRight" type="PanelContainer" parent="HealthStache"]
 layout_mode = 0
 offset_left = 184.0
@@ -650,6 +675,11 @@ theme_override_styles/panel = SubResource("StyleBoxEmpty_4h6aq")
 modulate = Color(0, 0, 0, 1)
 layout_mode = 2
 texture = ExtResource("15_4h6aq")
+stretch_mode = 4
+
+[node name="OutlineFR" type="TextureRect" parent="HealthStache/StacheFarRight"]
+layout_mode = 2
+texture = ExtResource("22_vatau")
 stretch_mode = 4
 
 [connection signal="animation_finished" from="CylinderNode/CylinderAnimation" to="." method="_on_cylinder_animation_animation_finished"]

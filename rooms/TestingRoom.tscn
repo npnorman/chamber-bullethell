@@ -1,4 +1,4 @@
-[gd_scene load_steps=21 format=4 uid="uid://cd0v14frrlgju"]
+[gd_scene load_steps=20 format=4 uid="uid://cd0v14frrlgju"]
 
 [ext_resource type="Script" uid="uid://dhhfbfplukf3b" path="res://rooms/test_level.gd" id="1_u75bg"]
 [ext_resource type="PackedScene" uid="uid://driwak3eok3gy" path="res://scenes/bullets/player-bullet.tscn" id="2_mj5kq"]
@@ -6,7 +6,6 @@
 [ext_resource type="PackedScene" uid="uid://b3pyw2ywa2gic" path="res://scenes/bullets/bullet_pickup.tscn" id="3_8hip6"]
 [ext_resource type="PackedScene" uid="uid://bejlis2xb16qo" path="res://scenes/menu/mini_map.tscn" id="3_ep8cf"]
 [ext_resource type="PackedScene" uid="uid://ckx3iy06eedai" path="res://scenes/player/player.tscn" id="3_i3fwb"]
-[ext_resource type="PackedScene" uid="uid://crwot1rdef6uf" path="res://scenes/interactables/chest.tscn" id="3_ovcuh"]
 [ext_resource type="PackedScene" uid="uid://chqsm4w7oks0t" path="res://scenes/bullet_fairy/bullet_fairy.tscn" id="5_b6v1o"]
 [ext_resource type="Texture2D" uid="uid://c8rdbv3u77b5i" path="res://tilesets/HelltileWalls.png" id="7_0yuyw"]
 [ext_resource type="PackedScene" uid="uid://chtu6kuwhxen6" path="res://scenes/UI/hud.tscn" id="7_7e8gg"]
@@ -95,14 +94,6 @@ one_shot = true
 
 [node name="Chests" type="Node" parent="."]
 
-[node name="Chest" parent="Chests" instance=ExtResource("3_ovcuh")]
-position = Vector2(395, -488)
-bullet_id = 5
-
-[node name="Chest2" parent="Chests" instance=ExtResource("3_ovcuh")]
-position = Vector2(86, -488)
-bullet_id = 3
-
 [node name="Pickups" type="Node" parent="."]
 
 [node name="HUD" parent="." instance=ExtResource("7_7e8gg")]
@@ -125,6 +116,7 @@ position = Vector2(204, -272)
 
 [node name="MagicianEnemy" parent="." instance=ExtResource("14_07cye")]
 position = Vector2(416, -379)
+collision_mask = 11
 
 [node name="PauseMenu" parent="." instance=ExtResource("15_mj5kq")]
 visible = false

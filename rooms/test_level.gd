@@ -106,7 +106,6 @@ func update_camera_position():
 func update_hud():
 	hud.set_ammo_types()
 	hud.update_counters()
-	player.update_bullet_types()
 
 # Adjust HUD when cylinder changes
 func _on_player_cylinder_cycled() -> void:
@@ -137,7 +136,6 @@ func spawn_pickup(bullet_id: int, amount: int, pickup_position: Vector2) -> void
 func _on_bullet_pickup_ammo_changed(new_ammo_type: bool, slot: int, bullet_id: int) -> void:
 	if new_ammo_type:
 		Globals.ammo_types[slot] = bullet_id
-		player.update_bullet_types()
 		hud.set_ammo_types()
 	hud.update_counters()
 
