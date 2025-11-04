@@ -1,4 +1,4 @@
-[gd_scene load_steps=7 format=4 uid="uid://dbltie0ce16w7"]
+[gd_scene load_steps=10 format=4 uid="uid://dbltie0ce16w7"]
 
 [ext_resource type="PackedScene" uid="uid://ctxgqeaum4461" path="res://rooms/AlgorithmRooms/base_room.tscn" id="1_b4os0"]
 [ext_resource type="PackedScene" uid="uid://dr5sgeuw3erhu" path="res://scenes/interactables/beer.tscn" id="2_q8lgk"]
@@ -6,6 +6,9 @@
 [ext_resource type="PackedScene" uid="uid://c0hpokmr76hlq" path="res://sprites/Cactus2.tscn" id="5_q8lgk"]
 [ext_resource type="PackedScene" uid="uid://b7g2b431gu6nf" path="res://sprites/Cactus.tscn" id="6_k0cjo"]
 [ext_resource type="Texture2D" uid="uid://ci6tpq1hugkwi" path="res://sprites/TumbleWEED.png" id="6_q8lgk"]
+[ext_resource type="PackedScene" uid="uid://c1fsemoplmeeb" path="res://scenes/magician_enemy.tscn" id="7_xfu16"]
+[ext_resource type="PackedScene" uid="uid://dhsj01pefhfqp" path="res://scenes/diagonal_enemy.tscn" id="8_ank6f"]
+[ext_resource type="PackedScene" uid="uid://be3bjg0ua7h2c" path="res://scenes/enemy.tscn" id="9_rpy8a"]
 
 [node name="BaseRoom" instance=ExtResource("1_b4os0")]
 exit_type = 3
@@ -46,3 +49,18 @@ position = Vector2(484, -48)
 
 [node name="Cactus" parent="." index="8" instance=ExtResource("6_k0cjo")]
 position = Vector2(45, -479)
+
+[node name="MagicianEnemy" parent="." index="9" instance=ExtResource("7_xfu16")]
+position = Vector2(56, -75)
+
+[node name="DiagonalEnemy" parent="." index="10" instance=ExtResource("8_ank6f")]
+position = Vector2(450, -258)
+
+[node name="Enemy" parent="." index="11" instance=ExtResource("9_rpy8a")]
+position = Vector2(137, -289)
+
+[node name="Enemy2" parent="." index="12" instance=ExtResource("9_rpy8a")]
+position = Vector2(443, -452)
+
+[node name="Enemy3" parent="." index="13" instance=ExtResource("9_rpy8a")]
+position = Vector2(340, -147)
