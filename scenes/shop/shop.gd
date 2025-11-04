@@ -9,7 +9,10 @@ var health_count: int = 2
 
 signal bullet_purchased(bullet_id: int, price: int)
 
+# Always sets the first item to health, then randomly generated numbers decide the other 2 items to add
 func _ready() -> void:
+	var rng = RandomNumberGenerator.new()
+	rng.randomize()
 	var i: int = 1
 	bullet_ids[0] = Globals.Bullets.Health
 	bullet_prices[0] = Globals.ammo_prices[4]
@@ -18,9 +21,9 @@ func _ready() -> void:
 	bullet_areas[0].get_child(3).text = Texts.bullet_prices[4]
 	var duplicate: int
 	while i < 3:
-		var rand_int = randi_range(1, 6)
+		var rand_int = rng.randi_range(1, 6)
 		while rand_int == duplicate or rand_int == 4:
-			rand_int = randi_range(1, 6)
+			rand_int = rng.randi_range(1, 6)
 		duplicate = rand_int
 		bullet_ids[i] = rand_int
 		bullet_prices[i] = Globals.ammo_prices[rand_int]
@@ -35,6 +38,7 @@ func clear_shop(index: int):
 func update_hud():
 	get_tree().current_scene.update_hud()
 
+# Below are 3 similar functions that are called depending on which item's area was entered to purchase that item (if possible)
 func _on_buy_area_1_body_entered(body: Node2D) -> void:
 	var filled_slots: int = Globals.ammo_types.count(-1)
 	var empty_slot: int = Globals.ammo_types.find(-1)

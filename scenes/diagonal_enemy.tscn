@@ -38,7 +38,6 @@ animations = [{
 }]
 
 [node name="DiagonalEnemy" instance=ExtResource("1_nbc8c")]
-collision_mask = 43
 script = ExtResource("2_vllhx")
 distance_diagonal_from_player = 100.0
 wait_time = 0.1

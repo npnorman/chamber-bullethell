@@ -131,6 +131,7 @@ func cycle_cylinder():
 		active_bullet_pos = 0
 	cylinder_cycled.emit()
 
+# Moves player back and plays blank animation at the gun's barrel
 func blank():
 	add_shot_knockback(Globals.Bullets.Shotgun, 1500)
 	if gun_sprite.flip_v:
@@ -167,11 +168,13 @@ func player_die():
 	is_dead = true
 	animations.play("death")
 
+# Function call specifically for the health bullet, can also be used for other healing sources
 func heal():
 	health += 1
 	update_health.emit(health)
 	animations.play("heal")
-	
+
+# Temporarily displays a die sprite over the player showing what their gambler round roll was
 func roll_die(roll: int) -> void:
 	var dice_atlas: AtlasTexture = dice.texture
 	dice.position = Vector2(0, -35)

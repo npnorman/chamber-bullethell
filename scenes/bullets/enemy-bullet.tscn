@@ -1,4 +1,4 @@
-[gd_scene load_steps=4 format=3 uid="uid://bivpy44qgcvdq"]
+[gd_scene load_steps=6 format=3 uid="uid://bivpy44qgcvdq"]
 
 [ext_resource type="Script" uid="uid://bm3e88vnqx2pw" path="res://scenes/bullets/generic-bullet.gd" id="1_wvn5r"]
 [ext_resource type="Texture2D" uid="uid://lj0q8273oj2b" path="res://sprites/bullets/test_bullet.png" id="2_wld71"]
@@ -6,6 +6,17 @@
 [sub_resource type="CapsuleShape2D" id="CapsuleShape2D_d1cmj"]
 radius = 3.0
 height = 8.0
+
+[sub_resource type="Gradient" id="Gradient_h1xss"]
+offsets = PackedFloat32Array(0, 0.162338, 0.311688, 0.428571, 0.62987, 0.805195, 1)
+colors = PackedColorArray(1, 1, 1, 1, 0.837662, 0.837662, 0.837662, 1, 0.623377, 0.623377, 0.623377, 1, 0.571429, 0.571429, 0.571429, 1, 0.37013, 0.37013, 0.37013, 1, 0.194805, 0.194805, 0.194805, 1, 0, 0, 0, 1)
+
+[sub_resource type="GradientTexture2D" id="GradientTexture2D_cms2m"]
+gradient = SubResource("Gradient_h1xss")
+fill = 2
+fill_from = Vector2(1, 0)
+fill_to = Vector2(0, 1)
+repeat = 2
 
 [node name="Enemy-bullet" type="Area2D"]
 collision_layer = 0
@@ -26,6 +37,15 @@ wait_time = 2.5
 [node name="RayCast2D" type="RayCast2D" parent="."]
 target_position = Vector2(0, -25)
 collision_mask = 13
+
+[node name="PointLight2D" type="PointLight2D" parent="."]
+position = Vector2(1.19209e-07, 14.4407)
+rotation = -1.1779
+scale = Vector2(0.406025, 0.405934)
+skew = 0.785398
+color = Color(0, 1, 0, 1)
+energy = 0.5
+texture = SubResource("GradientTexture2D_cms2m")
 
 [connection signal="body_entered" from="." to="." method="_on_body_entered"]
 [connection signal="timeout" from="DespawnTimer" to="." method="_on_despawn_timer_timeout"]
