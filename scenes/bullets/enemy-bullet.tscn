@@ -39,12 +39,11 @@ target_position = Vector2(0, -25)
 collision_mask = 13
 
 [node name="PointLight2D" type="PointLight2D" parent="."]
-position = Vector2(1.19209e-07, 14.4407)
+position = Vector2(1.19209e-07, 7)
 rotation = -1.1779
-scale = Vector2(0.406025, 0.405934)
+scale = Vector2(0.246704, 0.248697)
 skew = 0.785398
 color = Color(0, 1, 0, 1)
-energy = 0.5
 texture = SubResource("GradientTexture2D_cms2m")
 
 [connection signal="body_entered" from="." to="." method="_on_body_entered"]
