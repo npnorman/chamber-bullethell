@@ -34,20 +34,22 @@ animations = [{
 }]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_fiapc"]
-size = Vector2(10, 10)
+size = Vector2(8, 9)
 
 [node name="Cactus2" type="Node2D"]
+z_index = 1
+y_sort_enabled = true
 
 [node name="MirroredCactus" type="AnimatedSprite2D" parent="."]
-z_index = 1
 y_sort_enabled = true
 sprite_frames = SubResource("SpriteFrames_5aqbo")
 animation = &"MirroredCactus"
-offset = Vector2(0, -15)
+offset = Vector2(0, -6)
 
 [node name="StaticBody2D" type="StaticBody2D" parent="."]
 scale = Vector2(3, 3)
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="StaticBody2D"]
+position = Vector2(0, 5)
 scale = Vector2(0.5, 0.5)
 shape = SubResource("RectangleShape2D_fiapc")

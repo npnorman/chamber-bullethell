@@ -34,20 +34,22 @@ animations = [{
 }]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_6mucy"]
-size = Vector2(10, 10)
+size = Vector2(10, 9)
 
 [node name="Cactus" type="Node2D"]
+z_index = 1
+y_sort_enabled = true
 
 [node name="Cactus" type="AnimatedSprite2D" parent="."]
-z_index = 1
 y_sort_enabled = true
 sprite_frames = SubResource("SpriteFrames_4n6f1")
 animation = &"Cactus"
-offset = Vector2(0, -15)
+offset = Vector2(0, -6)
 
 [node name="StaticBody2D" type="StaticBody2D" parent="."]
 scale = Vector2(3, 3)
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="StaticBody2D"]
+position = Vector2(0, 5.125)
 scale = Vector2(0.5, 0.5)
 shape = SubResource("RectangleShape2D_6mucy")
