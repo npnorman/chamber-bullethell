@@ -11,6 +11,11 @@ func _ready() -> void:
 	animated_sprite_2d.play("eyes")
 	animation_player.play("locked")
 
+func _process(delta: float) -> void:
+	if locked and Globals.isBossTPUnlocked:
+		locked = false
+		unlock()
+
 func unlock():
 	animated_sprite_2d.play("skull")
 	skull_animation_player.play("skull")

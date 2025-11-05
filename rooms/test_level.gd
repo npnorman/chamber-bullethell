@@ -19,6 +19,7 @@ class_name LevelContainer
 @onready var bullet_fairy_timer: Timer = $BulletFairyTimer
 @onready var camera: Camera2D = $Camera2D
 @onready var mini_map: CanvasLayer = $MiniMap
+@onready var enemy_count: RichTextLabel = $HUD/EnemyCount
 
 var is_bullet_fairy_spawned = false
 var current_room = null
@@ -30,6 +31,12 @@ func _ready() -> void:
 	camera.zoom = Vector2.ONE * 1.37
 
 func _process(delta: float) -> void:
+	
+	print(player)
+	
+	# check number of enemeies
+	check_number_of_enemies()
+	
 	check_for_bullet_fairy_spawn()
 	
 	var previous_center_room = Globals.current_room_center
@@ -61,6 +68,19 @@ func _process(delta: float) -> void:
 	elif mouse_pos.y < 400 and is_hud_transparent:
 		hud.toggle_transparency(false)
 		is_hud_transparent = false
+
+func check_number_of_enemies():
+	var numEnemies = len(get_tree().get_nodes_in_group("Enemy"))
+	var enemyDelta = 5
+	
+	# get label
+	# label shows: Enemies to kill = len - 5, clamp at 0
+	enemy_count.text = "Unlock Boss In: " + str( maxi(numEnemies - enemyDelta, 0) )
+	
+	# if enemy count is <= 5
+	if numEnemies <= enemyDelta:
+		#unlock boss room
+		Globals.isBossTPUnlocked = true
 
 func check_for_bullet_fairy_spawn():
 	var total_bullets = Globals.ammo.reduce(func(a,b): return a+b)
