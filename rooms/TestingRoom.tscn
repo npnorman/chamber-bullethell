@@ -74,11 +74,12 @@ shader_parameter/speed_x = 0.5
 shader_parameter/speed_y = 0.25
 shader_parameter/amplitude = 0.2
 
-[node name="Starting Room" type="Node2D"]
+[node name="Starting Room" type="Node2D" node_paths=PackedStringArray("boss_room")]
 script = ExtResource("1_u75bg")
 bullet_scene = ExtResource("2_mj5kq")
 bullet_pickup_scene = ExtResource("3_8hip6")
 bullet_fairy = ExtResource("5_b6v1o")
+boss_room = NodePath("Boss Room")
 
 [node name="MiniMap" parent="." instance=ExtResource("3_ep8cf")]
 
@@ -97,6 +98,19 @@ one_shot = true
 [node name="Pickups" type="Node" parent="."]
 
 [node name="HUD" parent="." instance=ExtResource("7_7e8gg")]
+
+[node name="EnemyCount" type="RichTextLabel" parent="HUD"]
+anchors_preset = -1
+anchor_left = 0.331
+anchor_top = 0.005
+anchor_right = 0.331
+anchor_bottom = 0.005
+offset_left = 0.0559692
+offset_top = 0.16
+offset_right = 170.056
+offset_bottom = 42.16
+theme_override_font_sizes/normal_font_size = 19
+text = "Unlock Boss: "
 
 [node name="Camera2D" type="Camera2D" parent="."]
 position_smoothing_enabled = true
