@@ -32,8 +32,6 @@ func _ready() -> void:
 
 func _process(delta: float) -> void:
 	
-	print(player)
-	
 	# check number of enemeies
 	check_number_of_enemies()
 	

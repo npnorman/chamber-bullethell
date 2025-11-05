@@ -36,7 +36,7 @@ wait_time = 2.5
 
 [node name="RayCast2D" type="RayCast2D" parent="."]
 target_position = Vector2(0, -25)
-collision_mask = 13
+collision_mask = 9
 
 [node name="PointLight2D" type="PointLight2D" parent="."]
 position = Vector2(1.19209e-07, 7)

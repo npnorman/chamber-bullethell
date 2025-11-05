@@ -84,7 +84,7 @@ func _on_cylinder_animation_animation_finished(anim_name: StringName) -> void:
 func set_ammo_types():
 	var index: int = 0
 	for type in Globals.ammo_types:
-		if Globals.ammo[type] < 1:
+		if Globals.ammo[type] < 1 and type != 0:
 			Globals.ammo_types[index] = -1
 		index += 1
 	index = 0

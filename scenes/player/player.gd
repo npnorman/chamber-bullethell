@@ -98,9 +98,11 @@ func shoot():
 		if gun_sprite.flip_v:
 			bullet_fired.emit($GunSprite/BulletOrigin2.global_position, player_direction, Globals.magazine[active_bullet_pos])
 			shot_effects.position = Vector2(17, 4)
+			#animations.play("Flash2")
 		else:
 			bullet_fired.emit($GunSprite/BulletOrigin1.global_position, player_direction, Globals.magazine[active_bullet_pos])
 			shot_effects.position = Vector2(17, -4)
+			#animations.play("Flash1")
 		shot_effects.play("shoot")
 		add_shot_knockback(Globals.magazine[active_bullet_pos])
 		SfxPlayer.player_shot_sound()

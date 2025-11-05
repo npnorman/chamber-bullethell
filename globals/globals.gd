@@ -107,7 +107,7 @@ func get_number_of_exits(room:Vector4):
 	return number_of_exits
 
 # Ammo array where a given bullet ID's ammo is shown in the index of the ID number
-var ammo: Array[int] = [60, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0]:
+var ammo: Array[int] = [30, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0]:
 	get:
 		return ammo
 

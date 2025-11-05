@@ -52,12 +52,13 @@ func move_to_target(delta):
 	velocity = velocity.lerp(direction * speed, delta)
 
 func take_damage(damage:int):
-	health -= damage
-	if health <= 0:
-		enemy_die()
-	else:
-		animation_player.stop()
-		animation_player.play("color_red")
+	if is_active:
+		health -= damage
+		if health <= 0:
+			enemy_die()
+		else:
+			animation_player.stop()
+			animation_player.play("color_red")
 
 func enemy_die():
 	# or dead body

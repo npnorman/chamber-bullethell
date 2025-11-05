@@ -1,4 +1,4 @@
-[gd_scene load_steps=20 format=4 uid="uid://cd0v14frrlgju"]
+[gd_scene load_steps=18 format=4 uid="uid://cd0v14frrlgju"]
 
 [ext_resource type="Script" uid="uid://dhhfbfplukf3b" path="res://rooms/test_level.gd" id="1_u75bg"]
 [ext_resource type="PackedScene" uid="uid://driwak3eok3gy" path="res://scenes/bullets/player-bullet.tscn" id="2_mj5kq"]
@@ -10,12 +10,10 @@
 [ext_resource type="Texture2D" uid="uid://c8rdbv3u77b5i" path="res://tilesets/HelltileWalls.png" id="7_0yuyw"]
 [ext_resource type="PackedScene" uid="uid://chtu6kuwhxen6" path="res://scenes/UI/hud.tscn" id="7_7e8gg"]
 [ext_resource type="PackedScene" uid="uid://csr22g6iy124u" path="res://scenes/interactables/interactable_item.tscn" id="12_ep8cf"]
-[ext_resource type="PackedScene" uid="uid://c1fsemoplmeeb" path="res://scenes/magician_enemy.tscn" id="14_07cye"]
 [ext_resource type="Shader" uid="uid://c8627l0fjhsx4" path="res://shaders/scroll.gdshader" id="14_8hip6"]
 [ext_resource type="Texture2D" uid="uid://dr5j25xvk3een" path="res://sprites/background/wind.png" id="14_mj5kq"]
 [ext_resource type="PackedScene" uid="uid://bsp2v6s7o2ey2" path="res://scenes/UI/pause_menu.tscn" id="15_mj5kq"]
 [ext_resource type="PackedScene" uid="uid://cvevnrc2m5fig" path="res://rooms/AlgorithmRooms/SpecialtyRooms/Desert/desert_boss.tscn" id="16_8hip6"]
-[ext_resource type="PackedScene" uid="uid://b83epnlti1mg6" path="res://scenes/shop/shop.tscn" id="17_g5xp7"]
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_gc8kv"]
 texture = ExtResource("7_0yuyw")
@@ -128,10 +126,6 @@ tile_set = SubResource("TileSet_5vbr4")
 [node name="InteractableItem" parent="." instance=ExtResource("12_ep8cf")]
 position = Vector2(204, -272)
 
-[node name="MagicianEnemy" parent="." instance=ExtResource("14_07cye")]
-position = Vector2(416, -379)
-collision_mask = 11
-
 [node name="PauseMenu" parent="." instance=ExtResource("15_mj5kq")]
 visible = false
 
@@ -167,9 +161,6 @@ color = Color(0.384314, 0.341176, 0.286275, 1)
 
 [node name="Boss Room" parent="." instance=ExtResource("16_8hip6")]
 position = Vector2(-509, -6236)
-
-[node name="Shop" parent="." instance=ExtResource("17_g5xp7")]
-position = Vector2(286, -171)
 
 [connection signal="timeout" from="BulletFairyTimer" to="." method="_on_bullet_fairy_timer_timeout"]
 [connection signal="ammo_dropped" from="HUD" to="." method="_on_hud_ammo_dropped"]
