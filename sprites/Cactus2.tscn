@@ -1,6 +1,7 @@
-[gd_scene load_steps=9 format=3 uid="uid://c0hpokmr76hlq"]
+[gd_scene load_steps=12 format=3 uid="uid://c0hpokmr76hlq"]
 
 [ext_resource type="Texture2D" uid="uid://08qjxdqdqfea" path="res://sprites/Animations/CactusAnimations/MirrorCactus1.png" id="1_fiapc"]
+[ext_resource type="Script" uid="uid://y8dfim6ppjla" path="res://sprites/cactus.gd" id="1_nvrqx"]
 [ext_resource type="Texture2D" uid="uid://bbdu7n374cir2" path="res://sprites/Animations/CactusAnimations/MirrorCactus2.png" id="2_nvrqx"]
 [ext_resource type="Texture2D" uid="uid://ddwdy4oualv4" path="res://sprites/Animations/CactusAnimations/MirrorCactus3.png" id="3_0ko64"]
 [ext_resource type="Texture2D" uid="uid://4hlhxtym7jkv" path="res://sprites/Animations/CactusAnimations/MirrorCactus4.png" id="4_ymxs8"]
@@ -36,14 +37,24 @@ animations = [{
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_fiapc"]
 size = Vector2(8, 9)
 
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_nvrqx"]
+resource_local_to_scene = true
+size = Vector2(25, 56)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_0ko64"]
+resource_local_to_scene = true
+size = Vector2(25, 56)
+
 [node name="Cactus2" type="Node2D"]
 z_index = 1
 y_sort_enabled = true
+script = ExtResource("1_nvrqx")
 
 [node name="MirroredCactus" type="AnimatedSprite2D" parent="."]
 y_sort_enabled = true
 sprite_frames = SubResource("SpriteFrames_5aqbo")
 animation = &"MirroredCactus"
+frame_progress = 0.813043
 offset = Vector2(0, -6)
 
 [node name="StaticBody2D" type="StaticBody2D" parent="."]
@@ -53,3 +64,21 @@ scale = Vector2(3, 3)
 position = Vector2(0, 5)
 scale = Vector2(0.5, 0.5)
 shape = SubResource("RectangleShape2D_fiapc")
+
+[node name="BulletCollider" type="StaticBody2D" parent="."]
+collision_layer = 64
+collision_mask = 64
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="BulletCollider"]
+position = Vector2(0.5, -6)
+shape = SubResource("RectangleShape2D_nvrqx")
+
+[node name="Area2D" type="Area2D" parent="."]
+collision_layer = 64
+collision_mask = 16
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Area2D"]
+position = Vector2(0.5, -6)
+shape = SubResource("RectangleShape2D_0ko64")
+
+[connection signal="area_entered" from="Area2D" to="." method="_on_area_2d_area_entered"]

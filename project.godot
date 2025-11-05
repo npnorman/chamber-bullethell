@@ -132,6 +132,7 @@ Inventory={
 2d_physics/layer_4="Destructibles"
 2d_physics/layer_5="Bullet"
 2d_physics/layer_6="Shoot-through obstacle"
+2d_physics/layer_7="Bullet-Blocker"
 
 [rendering]
 

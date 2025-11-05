@@ -37,7 +37,7 @@ func explode() -> void:
 	$Sprite2D.visible = false
 	$Explosion/ExplosionParticles.emitting = true
 	$DespawnTimer.stop()
-	$DespawnTimer.wait_time = 1
+	$DespawnTimer.wait_time = 0.5
 	$DespawnTimer.start()
 	var bodies_hit = $Explosion.get_overlapping_bodies()
 	for body in bodies_hit:
