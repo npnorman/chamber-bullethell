@@ -15,7 +15,7 @@ warnings/check_invalid_track_paths=false
 [application]
 
 config/name="chamber-bullethell"
-run/main_scene="uid://cd0v14frrlgju"
+run/main_scene="uid://ijmepe8hwj4y"
 config/features=PackedStringArray("4.4", "Forward Plus")
 config/icon="res://icon.svg"
 

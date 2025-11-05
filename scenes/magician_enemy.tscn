@@ -191,7 +191,6 @@ colors = PackedColorArray(0.362829, 0.362829, 0.362829, 1, 1, 1, 1, 1)
 
 [node name="MagicianEnemy" instance=ExtResource("1_gi53r")]
 script = ExtResource("2_ay3sq")
-is_active = true
 health = 9
 wait_time = 1.0
 wiggle = 0.0

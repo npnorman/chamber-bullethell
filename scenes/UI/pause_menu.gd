@@ -1,9 +1,13 @@
 extends CanvasLayer
 
+@onready var menu_container: VBoxContainer= $VBoxContainer
+@onready var controls: Button = $VBoxContainer/Controls
 @onready var resume: Button = $VBoxContainer/Resume
 @onready var main_menu: Button = $VBoxContainer/GoToMenu
 @onready var restart: Button = $VBoxContainer/Restart
 @onready var death_text: Label = $DeathText
+@onready var controls_container: Control = $ControlScreen
+@onready var exit_controls: Button = $ControlScreen/ExitControls
 
 signal game_resumed
 
@@ -29,3 +33,11 @@ func on_death() -> void:
 func on_pause() -> void:
 	resume.visible = true
 	death_text.visible = false
+
+func _on_controls_pressed() -> void:
+	menu_container.visible = false
+	controls_container.visible = true
+
+func _on_exit_controls_pressed() -> void:
+	menu_container.visible = true
+	controls_container.visible = false
