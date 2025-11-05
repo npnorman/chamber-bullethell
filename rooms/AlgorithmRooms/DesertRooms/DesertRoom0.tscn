@@ -1,8 +1,7 @@
-[gd_scene load_steps=9 format=4 uid="uid://cp45xwpg5bv41"]
+[gd_scene load_steps=8 format=4 uid="uid://cp45xwpg5bv41"]
 
 [ext_resource type="PackedScene" uid="uid://ctxgqeaum4461" path="res://rooms/AlgorithmRooms/base_room.tscn" id="1_33vsf"]
 [ext_resource type="PackedScene" uid="uid://c0hpokmr76hlq" path="res://sprites/Cactus2.tscn" id="4_33vsf"]
-[ext_resource type="PackedScene" uid="uid://crwot1rdef6uf" path="res://scenes/interactables/chest.tscn" id="4_eocq4"]
 [ext_resource type="PackedScene" uid="uid://b7g2b431gu6nf" path="res://sprites/Cactus.tscn" id="5_2etfl"]
 [ext_resource type="PackedScene" uid="uid://dhsj01pefhfqp" path="res://scenes/diagonal_enemy.tscn" id="5_5xqr0"]
 [ext_resource type="PackedScene" uid="uid://c1fsemoplmeeb" path="res://scenes/magician_enemy.tscn" id="6_cl2o6"]
@@ -32,17 +31,14 @@ position = Vector2(374, -496)
 [node name="Interactables" parent="." index="3"]
 y_sort_enabled = true
 
-[node name="Chest" parent="." index="4" instance=ExtResource("4_eocq4")]
-position = Vector2(272, -278)
-
-[node name="StaticBody2D" type="StaticBody2D" parent="." index="5"]
+[node name="StaticBody2D" type="StaticBody2D" parent="." index="4"]
 position = Vector2(277, -426)
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="StaticBody2D" index="0"]
 position = Vector2(105.5, 17)
 shape = SubResource("RectangleShape2D_3dqxr")
 
-[node name="StaticBody2D2" type="StaticBody2D" parent="." index="6"]
+[node name="StaticBody2D2" type="StaticBody2D" parent="." index="5"]
 position = Vector2(183, -138)
 scale = Vector2(0.76, 1)
 
@@ -50,11 +46,11 @@ scale = Vector2(0.76, 1)
 position = Vector2(105.5, 17)
 shape = SubResource("RectangleShape2D_3dqxr")
 
-[node name="Cactus4" parent="." index="7" instance=ExtResource("4_33vsf")]
+[node name="Cactus4" parent="." index="6" instance=ExtResource("4_33vsf")]
 position = Vector2(396, -283)
 
-[node name="Cactus" parent="." index="8" instance=ExtResource("5_2etfl")]
+[node name="Cactus" parent="." index="7" instance=ExtResource("5_2etfl")]
 position = Vector2(123, -121)
 
-[node name="Cactus5" parent="." index="9" instance=ExtResource("5_2etfl")]
+[node name="Cactus5" parent="." index="8" instance=ExtResource("5_2etfl")]
 position = Vector2(99, -356)

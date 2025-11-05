@@ -136,7 +136,7 @@ func change_scene(file_name:String):
 	reset_ammo()
 	
 func reset_ammo():
-	ammo = [60, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0]
+	ammo = [30, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0]
 	ammo_types = [0, -1, -1, -1]
 	magazine = [-1, -1, -1, -1, -1, -1]
 
