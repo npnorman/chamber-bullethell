@@ -18,7 +18,14 @@ var desert_rooms = [ #dont include start
 	[5,preload("res://rooms/AlgorithmRooms/DesertRooms/DesertRoom4.tscn")],
 	[2,preload("res://rooms/AlgorithmRooms/DesertRooms/DesertRoom5.tscn")],
 	[1,desert_shop],
-	[1,desert_boss_tp]
+	[1,desert_boss_tp],
+	[1,preload("res://rooms/AlgorithmRooms/DesertRooms/DesertRoom0.tscn")],
+	[1,preload("res://rooms/AlgorithmRooms/DesertRooms/DesertRoom1.tscn")],
+	[1,preload("res://rooms/AlgorithmRooms/DesertRooms/DesertRoom2.tscn")],
+	[1,preload("res://rooms/AlgorithmRooms/DesertRooms/DesertRoom6.tscn")],
+	[1,preload("res://rooms/AlgorithmRooms/DesertRooms/DesertRoom7.tscn")],
+	[1,preload("res://rooms/AlgorithmRooms/DesertRooms/DesertRoom8.tscn")],
+	[1,preload("res://rooms/AlgorithmRooms/DesertRooms/DesertRoom9.tscn")],
 ]
 var saloon_rooms = []
 var hell_rooms = []
@@ -129,7 +136,7 @@ func generateMap(m,n,seed:int):
 		seed(rng.seed)
 		print("Seed: ", rng.seed)
 	
-	var has_rejected = 4
+	var has_rejected = 5
 	while len(knapsack) > 0:
 		pick_room_from_knapsack(rng,m,n)
 		
