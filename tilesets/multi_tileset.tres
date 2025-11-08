@@ -2,10 +2,10 @@
 
 [ext_resource type="Texture2D" uid="uid://8ml14yh2dh84" path="res://tilesets/desertTiles.png" id="1_cvtcu"]
 [ext_resource type="Texture2D" uid="uid://b5l7w2s3y1apx" path="res://tilesets/hellTiles.png" id="2_xvopn"]
+[ext_resource type="Texture2D" uid="uid://djspvxoewmsum" path="res://SlowerWater.tres" id="3_2wukp"]
 [ext_resource type="Texture2D" uid="uid://c8rdbv3u77b5i" path="res://tilesets/HelltileWalls.png" id="3_ipwr0"]
-[ext_resource type="Texture2D" uid="uid://djspvxoewmsum" path="res://Water.tres" id="3_xvopn"]
 [ext_resource type="Texture2D" uid="uid://bhn4vugxr0riw" path="res://tilesets/tavernTiles.png" id="4_2wukp"]
-[ext_resource type="Texture2D" uid="uid://cms7i467mpior" path="res://Water2.tres" id="6_ipwr0"]
+[ext_resource type="Texture2D" uid="uid://cms7i467mpior" path="res://FasterWater.tres" id="6_d3dji"]
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_d3dji"]
 texture = ExtResource("1_cvtcu")
@@ -199,7 +199,7 @@ texture = ExtResource("2_xvopn")
 7:7/0 = 0
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_xvopn"]
-texture = ExtResource("3_xvopn")
+texture = ExtResource("3_2wukp")
 use_texture_padding = false
 4:3/0 = 0
 5:3/0 = 0
@@ -403,7 +403,7 @@ texture = ExtResource("4_2wukp")
 7:7/0 = 0
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_2wukp"]
-texture = ExtResource("6_ipwr0")
+texture = ExtResource("6_d3dji")
 use_texture_padding = false
 0:0/0 = 0
 1:0/0 = 0
