@@ -60,7 +60,7 @@ scale = Vector2(0.071875, 0.071875)
 texture = ExtResource("6_q8lgk")
 
 [node name="Cactus3" parent="." index="7" instance=ExtResource("5_q8lgk")]
-position = Vector2(484, -48)
+position = Vector2(479, -88)
 
 [node name="Cactus" parent="." index="8" instance=ExtResource("6_k0cjo")]
 position = Vector2(45, -479)

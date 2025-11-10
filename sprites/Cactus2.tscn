@@ -1,4 +1,4 @@
-[gd_scene load_steps=12 format=3 uid="uid://c0hpokmr76hlq"]
+[gd_scene load_steps=13 format=3 uid="uid://c0hpokmr76hlq"]
 
 [ext_resource type="Texture2D" uid="uid://08qjxdqdqfea" path="res://sprites/Animations/CactusAnimations/MirrorCactus1.png" id="1_fiapc"]
 [ext_resource type="Script" uid="uid://y8dfim6ppjla" path="res://sprites/cactus.gd" id="1_nvrqx"]
@@ -35,7 +35,7 @@ animations = [{
 }]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_fiapc"]
-size = Vector2(8, 9)
+size = Vector2(8.66667, 9.16667)
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_nvrqx"]
 resource_local_to_scene = true
@@ -44,6 +44,9 @@ size = Vector2(25, 56)
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_0ko64"]
 resource_local_to_scene = true
 size = Vector2(25, 56)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_ymxs8"]
+size = Vector2(6.33333, 1)
 
 [node name="Cactus2" type="Node2D"]
 z_index = 1
@@ -57,15 +60,16 @@ animation = &"MirroredCactus"
 frame_progress = 0.813043
 offset = Vector2(0, -6)
 
-[node name="StaticBody2D" type="StaticBody2D" parent="."]
+[node name="Top" type="StaticBody2D" parent="."]
 scale = Vector2(3, 3)
 
-[node name="CollisionShape2D" type="CollisionShape2D" parent="StaticBody2D"]
-position = Vector2(0, 5)
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Top"]
+position = Vector2(0, 3)
 scale = Vector2(0.5, 0.5)
 shape = SubResource("RectangleShape2D_fiapc")
 
 [node name="BulletCollider" type="StaticBody2D" parent="."]
+visible = false
 collision_layer = 64
 collision_mask = 64
 
@@ -74,11 +78,22 @@ position = Vector2(0.5, -6)
 shape = SubResource("RectangleShape2D_nvrqx")
 
 [node name="Area2D" type="Area2D" parent="."]
+visible = false
 collision_layer = 64
 collision_mask = 16
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Area2D"]
 position = Vector2(0.5, -6)
 shape = SubResource("RectangleShape2D_0ko64")
+
+[node name="Bottom" type="StaticBody2D" parent="."]
+z_index = 1
+y_sort_enabled = true
+scale = Vector2(3, 3)
+
+[node name="CollisionShape2D2" type="CollisionShape2D" parent="Bottom"]
+y_sort_enabled = true
+position = Vector2(0, 7)
+shape = SubResource("RectangleShape2D_ymxs8")
 
 [connection signal="area_entered" from="Area2D" to="." method="_on_area_2d_area_entered"]
