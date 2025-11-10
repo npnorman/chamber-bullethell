@@ -1,4 +1,4 @@
-[gd_scene load_steps=7 format=4 uid="uid://0has8mokxua2"]
+[gd_scene load_steps=8 format=4 uid="uid://0has8mokxua2"]
 
 [ext_resource type="PackedScene" uid="uid://ctxgqeaum4461" path="res://rooms/AlgorithmRooms/base_room.tscn" id="1_30sor"]
 [ext_resource type="PackedScene" uid="uid://db72yr73ei6ps" path="res://sprites/Bar.tscn" id="2_273tv"]
@@ -6,6 +6,7 @@
 [ext_resource type="Texture2D" uid="uid://kjstwmv27w1q" path="res://sprites/BEER.png" id="4_uyucl"]
 [ext_resource type="PackedScene" uid="uid://b83epnlti1mg6" path="res://scenes/shop/shop.tscn" id="5_xlxvj"]
 [ext_resource type="Texture2D" uid="uid://hwfpsrceal7p" path="res://sprites/Barrel.png" id="6_uyucl"]
+[ext_resource type="Texture2D" uid="uid://dkx3wqps60r1x" path="res://sprites/Bartender/Bartender.png" id="7_sney3"]
 
 [node name="DesertShop" instance=ExtResource("1_30sor")]
 special = 2
@@ -64,3 +65,7 @@ texture = ExtResource("6_uyucl")
 
 [node name="Shop" parent="." index="15" instance=ExtResource("5_xlxvj")]
 position = Vector2(281, -262)
+
+[node name="Bartender" type="Sprite2D" parent="." index="16"]
+position = Vector2(279, -373)
+texture = ExtResource("7_sney3")
