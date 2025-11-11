@@ -1,4 +1,4 @@
-[gd_scene load_steps=13 format=3 uid="uid://b7g2b431gu6nf"]
+[gd_scene load_steps=14 format=3 uid="uid://b7g2b431gu6nf"]
 
 [ext_resource type="Texture2D" uid="uid://c2joxft8stuwm" path="res://sprites/Animations/CactusAnimations/Cactus1.png" id="1_6mucy"]
 [ext_resource type="Script" uid="uid://y8dfim6ppjla" path="res://sprites/cactus.gd" id="1_o6mam"]
@@ -7,6 +7,7 @@
 [ext_resource type="Texture2D" uid="uid://c8w76oy3w3ldl" path="res://sprites/Animations/CactusAnimations/Cactus4.png" id="4_05akr"]
 [ext_resource type="Texture2D" uid="uid://ck8b635pnwi7c" path="res://sprites/Animations/CactusAnimations/Cactus5.png" id="5_s7ev2"]
 [ext_resource type="Texture2D" uid="uid://wuvi7ectb55y" path="res://sprites/Animations/CactusAnimations/Cactus6.png" id="6_7s3t3"]
+[ext_resource type="PackedScene" uid="uid://7fb8w38j2ark" path="res://CactusBottom.tscn" id="8_qac30"]
 
 [sub_resource type="SpriteFrames" id="SpriteFrames_4n6f1"]
 animations = [{
@@ -46,15 +47,14 @@ resource_local_to_scene = true
 size = Vector2(25, 56)
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_s7ev2"]
-size = Vector2(6.33333, 1)
+size = Vector2(6, 2.83333)
 
 [node name="Cactus" type="Node2D"]
 z_index = 1
 y_sort_enabled = true
 script = ExtResource("1_o6mam")
 
-[node name="Cactus" type="AnimatedSprite2D" parent="."]
-y_sort_enabled = true
+[node name="CactusTop" type="AnimatedSprite2D" parent="."]
 sprite_frames = SubResource("SpriteFrames_4n6f1")
 animation = &"Cactus"
 offset = Vector2(0, -6)
@@ -94,7 +94,9 @@ scale = Vector2(3, 3)
 
 [node name="CollisionShape2D2" type="CollisionShape2D" parent="Bottom"]
 y_sort_enabled = true
-position = Vector2(0, 7)
+position = Vector2(0, 7.25)
 shape = SubResource("RectangleShape2D_s7ev2")
+
+[node name="CactusBottom" parent="." instance=ExtResource("8_qac30")]
 
 [connection signal="area_entered" from="Area2D" to="." method="_on_area_2d_area_entered"]

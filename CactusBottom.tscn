@@ -1,0 +1,11 @@
+[gd_scene load_steps=2 format=3 uid="uid://7fb8w38j2ark"]
+
+[ext_resource type="Texture2D" uid="uid://b01851ept2je8" path="res://sprites/CactusBottom.png" id="1_2r04g"]
+
+[node name="CactusBottom" type="Node2D"]
+y_sort_enabled = true
+
+[node name="CactusBottom" type="Sprite2D" parent="."]
+y_sort_enabled = true
+position = Vector2(0, 15)
+texture = ExtResource("1_2r04g")
