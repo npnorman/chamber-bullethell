@@ -3,3 +3,7 @@
 [ext_resource type="PackedScene" uid="uid://csr22g6iy124u" path="res://scenes/interactables/interactable_item.tscn" id="1_5n4q3"]
 
 [node name="Beer" instance=ExtResource("1_5n4q3")]
+
+[node name="Timer" type="Timer" parent="." index="2"]
+
+[connection signal="timeout" from="Timer" to="." method="_on_timer_timeout"]

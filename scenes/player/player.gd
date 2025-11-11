@@ -105,7 +105,10 @@ func shoot():
 			#animations.play("Flash1")
 		shot_effects.play("shoot")
 		add_shot_knockback(Globals.magazine[active_bullet_pos])
-		SfxPlayer.player_shot_sound()
+		if Globals.magazine[active_bullet_pos] != Globals.Bullets.Railgun:
+			SfxPlayer.player_shot_sound()
+		else:
+			SfxPlayer.railgun_sound()
 		Globals.magazine[active_bullet_pos] = Globals.Bullets.Empty
 		if $ShootCooldown.wait_time < 0.33:
 			$ShootCooldown.wait_time = 0.33
@@ -141,6 +144,7 @@ func blank():
 	else:
 		shot_effects.position = Vector2(17, -4)
 	shot_effects.play("blank")
+	SfxPlayer.blank_sound()
 	can_blank = false
 	$BlankCooldown.start()
 		
@@ -162,6 +166,7 @@ func take_damage(damage):
 			player_die()
 		else:
 			is_invincible = true
+			SfxPlayer.player_damage_sound()
 			$IFrames.start()
 			animations.play("damage")
 
@@ -173,6 +178,7 @@ func player_die():
 # Function call specifically for the health bullet, can also be used for other healing sources
 func heal():
 	health += 1
+	SfxPlayer.heal_sound()
 	update_health.emit(health)
 	animations.play("heal")
 

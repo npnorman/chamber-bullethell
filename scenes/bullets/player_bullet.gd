@@ -4,7 +4,7 @@ var area_damage: int = 4
 var explosive: bool
 
 func _ready():
-	$DespawnTimer.start()
+	super._ready()
 	if bullet_id == Globals.Bullets.Railgun:
 		$Sprite2D.visible = false
 		speed = 0
@@ -32,6 +32,7 @@ func _on_body_entered(body: Node2D) -> void:
 
 func explode() -> void:
 	speed = 0
+	SfxPlayer.explosion_sound()
 	$PointLight2D.visible = false
 	$Explosion.visible = true
 	$Sprite2D.visible = false

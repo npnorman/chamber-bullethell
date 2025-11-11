@@ -59,6 +59,7 @@ func take_damage(damage:int):
 		else:
 			animation_player.stop()
 			animation_player.play("color_red")
+			SfxPlayer.enemy_damage_sound()
 
 func enemy_die():
 	# or dead body
@@ -79,6 +80,7 @@ func shoot():
 	newBullet.direction = global_position.direction_to(shoot_target)
 	newBullet.rotation = global_position.angle_to_point(shoot_target) + deg_to_rad(90.0)
 	
+	SfxPlayer.enemy_shot_sound()
 	get_tree().current_scene.add_child(newBullet)
 
 func activate():

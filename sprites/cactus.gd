@@ -6,6 +6,7 @@ func _on_area_2d_area_entered(area: Area2D) -> void:
 	var bullet_collider: CollisionShape2D = get_child(2).get_child(0)
 	if sprite.frame < 5:
 		sprite.frame += 1
+		SfxPlayer.other_hit_sound()
 		area_collider.shape.size.y -= 6
 		area_collider.position.y += 3
 		bullet_collider.shape.size.y -= 6
