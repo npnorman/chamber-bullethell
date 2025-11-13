@@ -2,6 +2,7 @@ extends CharacterBody2D
 
 # arms
 @onready var right_arm: Node2D = $RightArm
+@onready var left_arm: Node2D = $LeftArm
 
 var target:Vector2 = Vector2.ZERO
 var origin:Vector2 = Vector2.ZERO
@@ -39,7 +40,8 @@ func _physics_process(delta: float) -> void:
 		movementOffset = (movementOffset + 1) % len(phase2)
 		set_target(origin + (phase2[movementOffset] * movementSize))
 		
-		shoot_arm()
+		shoot_arm(right_arm)
+		shoot_arm(left_arm)
 	
 	move_to_target(delta)
 	move_and_slide()
@@ -62,7 +64,14 @@ func shoot(shoot_from_position:Vector2):
 	var newBullet:Area2D = bulletScene.instantiate()
 	var shoot_target:Vector2 = get_shoot_target()
 	
-	newBullet.get_node("Sprite2D").modulate = Color("Yellow")
+	var rng:RandomNumberGenerator = RandomNumberGenerator.new()
+	var colors = [Color("Yellow"), Color("8c6e00"), Color("ffc64a")]
+	var color_index:int = rng.randi_range(0, len(colors) - 1)
+	print(color_index)
+	
+	var color:Color = colors[color_index]
+	
+	newBullet.get_node("Sprite2D").modulate = color
 	newBullet.damage = bulletDamage
 	newBullet.speed = bulletSpeed
 	newBullet.global_position = shoot_from_position
@@ -74,6 +83,6 @@ func shoot(shoot_from_position:Vector2):
 	
 	newBullet.set_despawn_timer(despawnTime)
 
-func shoot_arm():
-	for marker:Marker2D in right_arm.get_children():
+func shoot_arm(arm):
+	for marker:Marker2D in arm.get_children():
 		shoot(marker.global_position)
