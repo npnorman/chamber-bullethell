@@ -13,6 +13,7 @@ var can_collide: bool = true
 var found_angle: bool = false
 
 @onready var raycast: RayCast2D = $RayCast2D
+@onready var despawn_timer: Timer = $DespawnTimer
 
 func _ready():
 	$DespawnTimer.start()
@@ -62,3 +63,7 @@ func _on_body_entered(body: Node2D) -> void:
 
 func _on_collision_timer_timeout() -> void:
 	can_collide = true
+
+func set_despawn_timer(seconds:float):
+	despawn_timer.wait_time = seconds
+	despawn_timer.start()

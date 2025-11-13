@@ -1,0 +1,64 @@
+[gd_scene load_steps=6 format=3 uid="uid://chduydg4lqsr1"]
+
+[ext_resource type="Texture2D" uid="uid://da8lsa02a21a8" path="res://sprites/boss/cactus-placement.png" id="1_2a7uq"]
+[ext_resource type="Script" uid="uid://cfty4lsemf01n" path="res://scripts/boss/cactus_boss.gd" id="1_vsy1h"]
+[ext_resource type="PackedScene" uid="uid://bivpy44qgcvdq" path="res://scenes/bullets/enemy-bullet.tscn" id="2_31ex3"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_vsy1h"]
+atlas = ExtResource("1_2a7uq")
+region = Rect2(0, 0, 400, 400)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_31ex3"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_vsy1h")
+}],
+"loop": true,
+"name": &"default",
+"speed": 5.0
+}]
+
+[node name="CactusBoss" type="CharacterBody2D"]
+script = ExtResource("1_vsy1h")
+bulletScene = ExtResource("2_31ex3")
+
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
+sprite_frames = SubResource("SpriteFrames_31ex3")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+
+[node name="RightArm" type="Node2D" parent="."]
+
+[node name="Right Arm" type="Marker2D" parent="RightArm"]
+position = Vector2(-141, -86)
+
+[node name="Right Arm2" type="Marker2D" parent="RightArm"]
+position = Vector2(-125, -95)
+
+[node name="Right Arm3" type="Marker2D" parent="RightArm"]
+position = Vector2(-141, -54)
+
+[node name="Right Arm4" type="Marker2D" parent="RightArm"]
+position = Vector2(-120, -71)
+
+[node name="Right Arm5" type="Marker2D" parent="RightArm"]
+position = Vector2(-139, -23)
+
+[node name="Right Arm6" type="Marker2D" parent="RightArm"]
+position = Vector2(-114, -38)
+
+[node name="Right Arm7" type="Marker2D" parent="RightArm"]
+position = Vector2(-126, 6)
+
+[node name="Right Arm8" type="Marker2D" parent="RightArm"]
+position = Vector2(-139, 16)
+
+[node name="Right Arm9" type="Marker2D" parent="RightArm"]
+position = Vector2(-98, -17)
+
+[node name="Right Arm10" type="Marker2D" parent="RightArm"]
+position = Vector2(-99, 14)
+
+[node name="Right Arm11" type="Marker2D" parent="RightArm"]
+position = Vector2(-72, -19)
