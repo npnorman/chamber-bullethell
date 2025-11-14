@@ -64,7 +64,7 @@ position = Vector2(-99, 14)
 position = Vector2(-72, -19)
 
 [node name="LeftArm" type="Node2D" parent="."]
-position = Vector2(232, 4)
+position = Vector2(236, 8)
 
 [node name="LeftArm" type="Marker2D" parent="LeftArm"]
 position = Vector2(-104, -105)
