@@ -1,0 +1,39 @@
+[gd_scene load_steps=6 format=3 uid="uid://pjau4bfls4e6"]
+
+[ext_resource type="Texture2D" uid="uid://budua4pmisoso" path="res://sprites/enemy/HellflySpriteSheet.png" id="1_epjah"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_oj0bo"]
+atlas = ExtResource("1_epjah")
+region = Rect2(0, 0, 32, 64)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_j6plu"]
+atlas = ExtResource("1_epjah")
+region = Rect2(32, 0, 32, 64)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_hyany"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_oj0bo")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_j6plu")
+}],
+"loop": true,
+"name": &"default",
+"speed": 5.0
+}]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_qkwaw"]
+size = Vector2(35, 49)
+
+[node name="HellFly" type="CharacterBody2D"]
+
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
+sprite_frames = SubResource("SpriteFrames_hyany")
+frame = 1
+frame_progress = 0.749263
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+position = Vector2(0, -4.5)
+shape = SubResource("RectangleShape2D_qkwaw")
