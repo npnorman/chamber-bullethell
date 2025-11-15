@@ -9,7 +9,8 @@
 size = Vector2(35, 69)
 
 [sub_resource type="Gradient" id="Gradient_lgt6d"]
-colors = PackedColorArray(0, 0, 0, 1, 1, 0, 0.0166664, 1)
+offsets = PackedFloat32Array(0, 0.52, 1)
+colors = PackedColorArray(0.861784, 0.462666, 0.121296, 1, 0.890196, 0.235294, 0.0196078, 1, 1, 0, 0.0166664, 1)
 
 [sub_resource type="Gradient" id="Gradient_md0e3"]
 colors = PackedColorArray(0.734561, 3.66756e-05, 0.152641, 1, 0.265568, 0, 0.0435677, 1)

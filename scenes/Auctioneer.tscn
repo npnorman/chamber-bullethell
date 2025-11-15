@@ -1,0 +1,79 @@
+[gd_scene load_steps=12 format=3 uid="uid://y0qyttkaoqy"]
+
+[ext_resource type="PackedScene" uid="uid://be3bjg0ua7h2c" path="res://scenes/enemy.tscn" id="1_i6l0q"]
+[ext_resource type="Texture2D" uid="uid://b48usnhkkklh6" path="res://sprites/enemy/AuctioneerSpriteSheet.png" id="2_m5grl"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_mi4lv"]
+atlas = ExtResource("2_m5grl")
+region = Rect2(0, 0, 64, 64)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_oqt6n"]
+atlas = ExtResource("2_m5grl")
+region = Rect2(64, 0, 64, 64)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_hnmi4"]
+atlas = ExtResource("2_m5grl")
+region = Rect2(128, 0, 64, 64)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_an41v"]
+atlas = ExtResource("2_m5grl")
+region = Rect2(192, 0, 64, 64)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_o5pp8"]
+atlas = ExtResource("2_m5grl")
+region = Rect2(256, 0, 64, 64)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_ao3r3"]
+atlas = ExtResource("2_m5grl")
+region = Rect2(320, 0, 64, 64)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_60rme"]
+atlas = ExtResource("2_m5grl")
+region = Rect2(384, 0, 64, 64)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_vq1gk"]
+atlas = ExtResource("2_m5grl")
+region = Rect2(448, 0, 64, 64)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_7in2y"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_mi4lv")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_oqt6n")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_hnmi4")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_an41v")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_o5pp8")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_ao3r3")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_60rme")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_vq1gk")
+}],
+"loop": true,
+"name": &"default",
+"speed": 5.0
+}]
+
+[node name="Enemy" instance=ExtResource("1_i6l0q")]
+
+[node name="CPUParticles2D" parent="." index="1"]
+lifetime = 0.5
+
+[node name="AnimatedSprite2D" parent="." index="3"]
+sprite_frames = SubResource("SpriteFrames_7in2y")
+frame = 3
+frame_progress = 0.83547
+speed_scale = 2.0

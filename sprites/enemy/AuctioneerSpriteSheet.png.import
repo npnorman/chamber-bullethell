@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://py8iaxmn0s53"
-path="res://.godot/imported/auctioneer.png-fe1a8e8741c1ae30fe2ca6af4b1bd391.ctex"
+uid="uid://b48usnhkkklh6"
+path="res://.godot/imported/AuctioneerSpriteSheet.png-43f5522bc7ea8abb2fa61e008a984bb8.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://sprites/enemy/auctioneer.png"
-dest_files=["res://.godot/imported/auctioneer.png-fe1a8e8741c1ae30fe2ca6af4b1bd391.ctex"]
+source_file="res://sprites/enemy/AuctioneerSpriteSheet.png"
+dest_files=["res://.godot/imported/AuctioneerSpriteSheet.png-43f5522bc7ea8abb2fa61e008a984bb8.ctex"]
 
 [params]
 
