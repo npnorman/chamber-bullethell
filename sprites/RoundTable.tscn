@@ -1,0 +1,20 @@
+[gd_scene load_steps=3 format=3 uid="uid://dr7vgp2y75n6u"]
+
+[ext_resource type="Texture2D" uid="uid://crn1b20nn0a7" path="res://sprites/RoundTable.png" id="1_uwll7"]
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_uflk2"]
+radius = 4.65356
+
+[node name="RoundTable" type="Node2D"]
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+scale = Vector2(1.66253, 1.40043)
+texture = ExtResource("1_uwll7")
+
+[node name="StaticBody2D" type="StaticBody2D" parent="Sprite2D"]
+scale = Vector2(1.40596, 1.29364)
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Sprite2D/StaticBody2D"]
+position = Vector2(0, 1.65595)
+scale = Vector2(1.47532, 2.01823)
+shape = SubResource("CircleShape2D_uflk2")
