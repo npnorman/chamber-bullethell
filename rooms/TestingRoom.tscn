@@ -116,7 +116,7 @@ position_smoothing_enabled = true
 
 [node name="Player" parent="." instance=ExtResource("3_i3fwb")]
 top_level = true
-position = Vector2(188, -174)
+position = Vector2(9, -6420)
 
 [node name="WallTileLayer" type="TileMapLayer" parent="."]
 position = Vector2(-736, -476)

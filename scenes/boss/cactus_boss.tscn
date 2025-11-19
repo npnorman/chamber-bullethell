@@ -1,4 +1,4 @@
-[gd_scene load_steps=6 format=3 uid="uid://chduydg4lqsr1"]
+[gd_scene load_steps=7 format=3 uid="uid://chduydg4lqsr1"]
 
 [ext_resource type="Texture2D" uid="uid://da8lsa02a21a8" path="res://sprites/boss/cactus-placement.png" id="1_2a7uq"]
 [ext_resource type="Script" uid="uid://cfty4lsemf01n" path="res://scripts/boss/cactus_boss.gd" id="1_vsy1h"]
@@ -19,14 +19,22 @@ animations = [{
 "speed": 5.0
 }]
 
+[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_31ex3"]
+radius = 72.0
+height = 396.0
+
 [node name="CactusBoss" type="CharacterBody2D"]
+collision_layer = 4
+collision_mask = 0
 script = ExtResource("1_vsy1h")
 bulletScene = ExtResource("2_31ex3")
 
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
 sprite_frames = SubResource("SpriteFrames_31ex3")
 
-[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+[node name="CollisionShape2D" type="CollisionShape2D" parent="." groups=["Enemy"]]
+position = Vector2(3, 13)
+shape = SubResource("CapsuleShape2D_31ex3")
 
 [node name="RightArm" type="Node2D" parent="."]
 
@@ -98,3 +106,12 @@ position = Vector2(-115, -18)
 
 [node name="LeftArm11" type="Marker2D" parent="LeftArm"]
 position = Vector2(-89, -8)
+
+[node name="Phase1Timer" type="Timer" parent="." groups=["Enemy"]]
+wait_time = 2.5
+one_shot = true
+
+[node name="StateMachineTimer" type="Timer" parent="."]
+
+[connection signal="timeout" from="Phase1Timer" to="." method="_on_phase_1_timer_timeout"]
+[connection signal="timeout" from="StateMachineTimer" to="." method="_on_state_machine_timer_timeout"]
