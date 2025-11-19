@@ -6,8 +6,8 @@
 [ext_resource type="PackedScene" uid="uid://b83epnlti1mg6" path="res://scenes/shop/shop.tscn" id="4_82hpk"]
 [ext_resource type="PackedScene" uid="uid://cjdsk5ojqm3xo" path="res://sprites/Bartender/BartenderAnim.tscn" id="5_htnyq"]
 [ext_resource type="PackedScene" uid="uid://dji6t13e6rqr3" path="res://sprites/Barrel.tscn" id="8_habrb"]
-[ext_resource type="Texture2D" uid="uid://c8kyeg6jqro5r" path="res://sprites/SquareTable.png" id="8_htnyq"]
 [ext_resource type="Texture2D" uid="uid://bo5chptmg0doy" path="res://sprites/Chair.png" id="9_habrb"]
+[ext_resource type="PackedScene" uid="uid://hu0dgs87hr4k" path="res://sprites/SquareTable.tscn" id="9_htnyq"]
 [ext_resource type="PackedScene" uid="uid://cuxt1u8vdf1vl" path="res://sprites/Barstool.tscn" id="9_wy152"]
 
 [node name="TavernShop" type="Node2D"]
@@ -64,16 +64,6 @@ position = Vector2(281, -262)
 
 [node name="BartenderAnim" parent="." instance=ExtResource("5_htnyq")]
 position = Vector2(279, -373)
-
-[node name="SquareTable" type="Sprite2D" parent="."]
-position = Vector2(458, -102)
-scale = Vector2(2.71875, 2.375)
-texture = ExtResource("8_htnyq")
-
-[node name="SquareTable2" type="Sprite2D" parent="."]
-position = Vector2(117, -100)
-scale = Vector2(2.71875, 2.375)
-texture = ExtResource("8_htnyq")
 
 [node name="Chair2" type="Sprite2D" parent="."]
 position = Vector2(118, -146)
@@ -136,3 +126,9 @@ scale = Vector2(1.62933, 1.6304)
 [node name="Barstool13" parent="." instance=ExtResource("9_wy152")]
 position = Vector2(509, -100)
 scale = Vector2(1.62933, 1.6304)
+
+[node name="SquareTable3" parent="." instance=ExtResource("9_htnyq")]
+position = Vector2(117, -99)
+
+[node name="SquareTable4" parent="." instance=ExtResource("9_htnyq")]
+position = Vector2(459, -100)
