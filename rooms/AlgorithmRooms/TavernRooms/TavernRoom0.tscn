@@ -2,9 +2,9 @@
 
 [ext_resource type="PackedScene" uid="uid://ctxgqeaum4461" path="res://rooms/AlgorithmRooms/base_room.tscn" id="1_60818"]
 [ext_resource type="PackedScene" uid="uid://crwot1rdef6uf" path="res://scenes/interactables/chest.tscn" id="2_h11ju"]
-[ext_resource type="Texture2D" uid="uid://c8kyeg6jqro5r" path="res://sprites/SquareTable.png" id="3_s61tf"]
-[ext_resource type="Texture2D" uid="uid://crn1b20nn0a7" path="res://sprites/RoundTable.png" id="4_7rego"]
+[ext_resource type="PackedScene" uid="uid://dr7vgp2y75n6u" path="res://sprites/RoundTable.tscn" id="3_wrtg1"]
 [ext_resource type="Texture2D" uid="uid://kjstwmv27w1q" path="res://sprites/BEER.png" id="5_wrtg1"]
+[ext_resource type="PackedScene" uid="uid://hu0dgs87hr4k" path="res://sprites/SquareTable.tscn" id="6_21c4c"]
 [ext_resource type="Texture2D" uid="uid://qor0ikpx0c6b" path="res://sprites/BarStool.png" id="6_wrtg1"]
 [ext_resource type="Texture2D" uid="uid://bo5chptmg0doy" path="res://sprites/Chair.png" id="7_21c4c"]
 
@@ -17,36 +17,35 @@ tile_map_data = PackedByteArray("AAAAAN3/AwAFAAMAAAAAAN7/AwAFAAQAAAAAAN//AwAFAAQ
 [node name="Chest" parent="TileMapLayer" index="0" instance=ExtResource("2_h11ju")]
 position = Vector2(268, -428)
 
-[node name="SquareTable" type="Sprite2D" parent="TileMapLayer" index="1"]
-position = Vector2(191, -418)
-texture = ExtResource("3_s61tf")
+[node name="RoundTable4" parent="TileMapLayer" index="1" instance=ExtResource("3_wrtg1")]
+position = Vector2(61, -436)
 
-[node name="RoundTable" type="Sprite2D" parent="TileMapLayer" index="2"]
-position = Vector2(456, -215)
-texture = ExtResource("4_7rego")
-
-[node name="RoundTable2" type="Sprite2D" parent="TileMapLayer" index="3"]
-position = Vector2(61, -437)
-texture = ExtResource("4_7rego")
-
-[node name="Beer" type="Sprite2D" parent="TileMapLayer" index="4"]
+[node name="Beer" type="Sprite2D" parent="TileMapLayer" index="2"]
 position = Vector2(61, -444)
 scale = Vector2(0.059375, 0.059375)
 texture = ExtResource("5_wrtg1")
 
-[node name="Beer2" type="Sprite2D" parent="TileMapLayer" index="5"]
+[node name="Chair" type="Sprite2D" parent="TileMapLayer" index="3"]
+position = Vector2(96, -182)
+texture = ExtResource("7_21c4c")
+
+[node name="Chair2" type="Sprite2D" parent="TileMapLayer" index="4"]
+position = Vector2(444, -421)
+texture = ExtResource("7_21c4c")
+
+[node name="RoundTable3" parent="TileMapLayer" index="5" instance=ExtResource("3_wrtg1")]
+position = Vector2(456, -215)
+
+[node name="Beer2" type="Sprite2D" parent="." index="2"]
 position = Vector2(456, -223)
 scale = Vector2(0.059375, 0.059375)
 texture = ExtResource("5_wrtg1")
 
-[node name="BarStool" type="Sprite2D" parent="TileMapLayer" index="6"]
-position = Vector2(191, -406)
+[node name="SquareTable" parent="." index="5" instance=ExtResource("6_21c4c")]
+position = Vector2(191, -420)
+scale = Vector2(0.44, 0.441826)
+
+[node name="BarStool" type="Sprite2D" parent="SquareTable" index="1"]
+position = Vector2(0, 31.6866)
+scale = Vector2(2.27273, 2.26333)
 texture = ExtResource("6_wrtg1")
-
-[node name="Chair" type="Sprite2D" parent="TileMapLayer" index="7"]
-position = Vector2(96, -182)
-texture = ExtResource("7_21c4c")
-
-[node name="Chair2" type="Sprite2D" parent="TileMapLayer" index="8"]
-position = Vector2(444, -421)
-texture = ExtResource("7_21c4c")

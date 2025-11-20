@@ -2,8 +2,8 @@
 
 [ext_resource type="PackedScene" uid="uid://ctxgqeaum4461" path="res://rooms/AlgorithmRooms/base_room.tscn" id="1_c5346"]
 [ext_resource type="PackedScene" uid="uid://be3bjg0ua7h2c" path="res://scenes/enemy.tscn" id="2_fujx0"]
-[ext_resource type="Texture2D" uid="uid://hwfpsrceal7p" path="res://sprites/Barrel.png" id="2_taa4v"]
-[ext_resource type="Texture2D" uid="uid://c8kyeg6jqro5r" path="res://sprites/SquareTable.png" id="3_fujx0"]
+[ext_resource type="PackedScene" uid="uid://hu0dgs87hr4k" path="res://sprites/SquareTable.tscn" id="4_mbl6s"]
+[ext_resource type="PackedScene" uid="uid://dji6t13e6rqr3" path="res://sprites/Barrel.tscn" id="5_qmpfa"]
 
 [node name="BaseRoom2" instance=ExtResource("1_c5346")]
 exit_type = 3
@@ -14,82 +14,58 @@ tile_map_data = PackedByteArray("AAABAP7/AwACAAYAAAACAP7/AwADAAYAAAADAP7/AwAEAAY
 [node name="Enemy" parent="Enemies" index="0" instance=ExtResource("2_fujx0")]
 position = Vector2(243, -193)
 
-[node name="Barrel" type="Sprite2D" parent="." index="4"]
-position = Vector2(127, -132)
-scale = Vector2(1.2, 1.2)
-texture = ExtResource("2_taa4v")
+[node name="SquareTable9" parent="." index="4" instance=ExtResource("4_mbl6s")]
+position = Vector2(110, -204)
+scale = Vector2(0.52, 0.522158)
 
-[node name="Barrel2" type="Sprite2D" parent="." index="5"]
-position = Vector2(471, -288)
-scale = Vector2(1.2, 1.2)
-texture = ExtResource("2_taa4v")
+[node name="SquareTable10" parent="." index="5" instance=ExtResource("4_mbl6s")]
+position = Vector2(207, -304)
+scale = Vector2(0.465179, 0.469048)
 
-[node name="Barrel3" type="Sprite2D" parent="." index="6"]
-position = Vector2(123, -422)
-scale = Vector2(1.2, 1.2)
-texture = ExtResource("2_taa4v")
+[node name="SquareTable11" parent="." index="6" instance=ExtResource("4_mbl6s")]
+position = Vector2(282, -166)
+scale = Vector2(0.465179, 0.469048)
 
-[node name="Barrel4" type="Sprite2D" parent="." index="7"]
-position = Vector2(455, -405)
-scale = Vector2(1.2, 1.2)
-texture = ExtResource("2_taa4v")
+[node name="SquareTable12" parent="." index="7" instance=ExtResource("4_mbl6s")]
+position = Vector2(430, -203)
+scale = Vector2(0.465179, 0.469048)
 
-[node name="Barrel5" type="Sprite2D" parent="." index="8"]
-position = Vector2(310, -257)
-scale = Vector2(1.2, 1.2)
-texture = ExtResource("2_taa4v")
+[node name="SquareTable13" parent="." index="8" instance=ExtResource("4_mbl6s")]
+position = Vector2(426, -332)
+scale = Vector2(0.465179, 0.469048)
 
-[node name="Barrel6" type="Sprite2D" parent="." index="9"]
-position = Vector2(112, -288)
-scale = Vector2(1.2, 1.2)
-texture = ExtResource("2_taa4v")
+[node name="SquareTable14" parent="." index="9" instance=ExtResource("4_mbl6s")]
+position = Vector2(335, -439)
+scale = Vector2(0.465179, 0.469048)
 
-[node name="Barrel7" type="Sprite2D" parent="." index="10"]
-position = Vector2(360, -133)
-scale = Vector2(1.2, 1.2)
-texture = ExtResource("2_taa4v")
+[node name="SquareTable15" parent="." index="10" instance=ExtResource("4_mbl6s")]
+position = Vector2(192, -411)
+scale = Vector2(0.465179, 0.469048)
 
-[node name="Barrel8" type="Sprite2D" parent="." index="11"]
-position = Vector2(189, -199)
-scale = Vector2(1.2, 1.2)
-texture = ExtResource("2_taa4v")
+[node name="SquareTable16" parent="." index="11" instance=ExtResource("4_mbl6s")]
+position = Vector2(64, -356)
+scale = Vector2(0.465179, 0.469048)
 
-[node name="SquareTable" type="Sprite2D" parent="." index="12"]
-position = Vector2(105, -207)
-scale = Vector2(1.2, 1.2)
-texture = ExtResource("3_fujx0")
+[node name="Barrel9" parent="." index="12" instance=ExtResource("5_qmpfa")]
+position = Vector2(112, -282)
 
-[node name="SquareTable2" type="Sprite2D" parent="." index="13"]
-position = Vector2(207, -302)
-scale = Vector2(1.2, 1.2)
-texture = ExtResource("3_fujx0")
+[node name="Barrel10" parent="." index="13" instance=ExtResource("5_qmpfa")]
+position = Vector2(188, -203)
 
-[node name="SquareTable3" type="Sprite2D" parent="." index="14"]
-position = Vector2(85, -366)
-scale = Vector2(1.2, 1.2)
-texture = ExtResource("3_fujx0")
+[node name="Barrel11" parent="." index="14" instance=ExtResource("5_qmpfa")]
+position = Vector2(97, -134)
 
-[node name="SquareTable4" type="Sprite2D" parent="." index="15"]
-position = Vector2(350, -429)
-scale = Vector2(1.2, 1.2)
-texture = ExtResource("3_fujx0")
+[node name="Barrel12" parent="." index="15" instance=ExtResource("5_qmpfa")]
+position = Vector2(336, -118)
 
-[node name="SquareTable5" type="Sprite2D" parent="." index="16"]
-position = Vector2(200, -418)
-scale = Vector2(1.2, 1.2)
-texture = ExtResource("3_fujx0")
+[node name="Barrel13" parent="." index="16" instance=ExtResource("5_qmpfa")]
+position = Vector2(315, -252)
 
-[node name="SquareTable6" type="Sprite2D" parent="." index="17"]
-position = Vector2(424, -331)
-scale = Vector2(1.2, 1.2)
-texture = ExtResource("3_fujx0")
+[node name="Barrel14" parent="." index="17" instance=ExtResource("5_qmpfa")]
+position = Vector2(474, -269)
 
-[node name="SquareTable7" type="Sprite2D" parent="." index="18"]
-position = Vector2(281, -172)
-scale = Vector2(1.2, 1.2)
-texture = ExtResource("3_fujx0")
+[node name="Barrel15" parent="." index="18" instance=ExtResource("5_qmpfa")]
+position = Vector2(410, -408)
 
-[node name="SquareTable8" type="Sprite2D" parent="." index="19"]
-position = Vector2(433, -205)
-scale = Vector2(1.2, 1.2)
-texture = ExtResource("3_fujx0")
+[node name="Barrel16" parent="." index="19" instance=ExtResource("5_qmpfa")]
+position = Vector2(116, -432)

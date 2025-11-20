@@ -3,7 +3,7 @@
 [ext_resource type="PackedScene" uid="uid://ctxgqeaum4461" path="res://rooms/AlgorithmRooms/base_room.tscn" id="1_s2bak"]
 [ext_resource type="PackedScene" uid="uid://be3bjg0ua7h2c" path="res://scenes/enemy.tscn" id="2_idwlu"]
 [ext_resource type="Texture2D" uid="uid://bo5chptmg0doy" path="res://sprites/Chair.png" id="2_wv40b"]
-[ext_resource type="Texture2D" uid="uid://crn1b20nn0a7" path="res://sprites/RoundTable.png" id="3_idwlu"]
+[ext_resource type="PackedScene" uid="uid://dr7vgp2y75n6u" path="res://sprites/RoundTable.tscn" id="4_idwlu"]
 
 [node name="BaseRoom2" instance=ExtResource("1_s2bak")]
 exit_type = 4
@@ -16,61 +16,53 @@ tile_map_data = PackedByteArray("AAABAP7/AwACAAYAAAACAP7/AwADAAYAAAADAP7/AwAEAAY
 position = Vector2(160, -216)
 
 [node name="Chair3" type="Sprite2D" parent="." index="4"]
-position = Vector2(58, -495.6)
+position = Vector2(56, -496)
 scale = Vector2(1.5, 1.5)
 texture = ExtResource("2_wv40b")
 
 [node name="Chair4" type="Sprite2D" parent="." index="5"]
-position = Vector2(115, -496.6)
+position = Vector2(115, -495)
 scale = Vector2(1.5, 1.5)
 texture = ExtResource("2_wv40b")
 
-[node name="RoundTable3" type="Sprite2D" parent="." index="6"]
-position = Vector2(88, -496.6)
-scale = Vector2(1.5, 1.5)
-texture = ExtResource("3_idwlu")
-
-[node name="Chair5" type="Sprite2D" parent="." index="7"]
+[node name="Chair5" type="Sprite2D" parent="." index="6"]
 position = Vector2(403, -306.6)
 scale = Vector2(1.5, 1.5)
 texture = ExtResource("2_wv40b")
 
-[node name="Chair6" type="Sprite2D" parent="." index="8"]
+[node name="Chair6" type="Sprite2D" parent="." index="7"]
 position = Vector2(460, -307.6)
 scale = Vector2(1.5, 1.5)
 texture = ExtResource("2_wv40b")
 
-[node name="RoundTable4" type="Sprite2D" parent="." index="9"]
-position = Vector2(433, -307.6)
-scale = Vector2(1.5, 1.5)
-texture = ExtResource("3_idwlu")
-
-[node name="Chair7" type="Sprite2D" parent="." index="10"]
+[node name="Chair7" type="Sprite2D" parent="." index="8"]
 position = Vector2(66, -182.6)
 scale = Vector2(1.5, 1.5)
 texture = ExtResource("2_wv40b")
 
-[node name="Chair8" type="Sprite2D" parent="." index="11"]
+[node name="Chair8" type="Sprite2D" parent="." index="9"]
 position = Vector2(123, -183.6)
 scale = Vector2(1.5, 1.5)
 texture = ExtResource("2_wv40b")
 
-[node name="RoundTable5" type="Sprite2D" parent="." index="12"]
-position = Vector2(96, -183.6)
-scale = Vector2(1.5, 1.5)
-texture = ExtResource("3_idwlu")
-
-[node name="Chair9" type="Sprite2D" parent="." index="13"]
+[node name="Chair9" type="Sprite2D" parent="." index="10"]
 position = Vector2(405, -123.6)
 scale = Vector2(1.5, 1.5)
 texture = ExtResource("2_wv40b")
 
-[node name="Chair10" type="Sprite2D" parent="." index="14"]
+[node name="Chair10" type="Sprite2D" parent="." index="11"]
 position = Vector2(462, -124.6)
 scale = Vector2(1.5, 1.5)
 texture = ExtResource("2_wv40b")
 
-[node name="RoundTable6" type="Sprite2D" parent="." index="15"]
-position = Vector2(435, -124.6)
-scale = Vector2(1.5, 1.5)
-texture = ExtResource("3_idwlu")
+[node name="RoundTable7" parent="." index="12" instance=ExtResource("4_idwlu")]
+position = Vector2(94, -183)
+
+[node name="RoundTable8" parent="." index="13" instance=ExtResource("4_idwlu")]
+position = Vector2(434, -127)
+
+[node name="RoundTable6" parent="." index="14" instance=ExtResource("4_idwlu")]
+position = Vector2(432, -311)
+
+[node name="RoundTable9" parent="." index="15" instance=ExtResource("4_idwlu")]
+position = Vector2(86, -499)
