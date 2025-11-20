@@ -1,0 +1,28 @@
+[gd_scene load_steps=5 format=3 uid="uid://dvj3i8d0shu4t"]
+
+[ext_resource type="Texture2D" uid="uid://b6aeivbligojl" path="res://sprites/boss/cactus-fruit.png" id="1_euyhb"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_euyhb"]
+atlas = ExtResource("1_euyhb")
+region = Rect2(0, 0, 128, 128)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_b6cq1"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_euyhb")
+}],
+"loop": true,
+"name": &"default",
+"speed": 5.0
+}]
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_2spu5"]
+
+[node name="CactusBody" type="RigidBody2D"]
+
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
+sprite_frames = SubResource("SpriteFrames_b6cq1")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+shape = SubResource("CircleShape2D_2spu5")

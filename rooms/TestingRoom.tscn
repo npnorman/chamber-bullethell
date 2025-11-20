@@ -1,4 +1,4 @@
-[gd_scene load_steps=19 format=4 uid="uid://cd0v14frrlgju"]
+[gd_scene load_steps=20 format=4 uid="uid://cd0v14frrlgju"]
 
 [ext_resource type="Script" uid="uid://dhhfbfplukf3b" path="res://rooms/test_level.gd" id="1_u75bg"]
 [ext_resource type="PackedScene" uid="uid://driwak3eok3gy" path="res://scenes/bullets/player-bullet.tscn" id="2_mj5kq"]
@@ -15,6 +15,7 @@
 [ext_resource type="PackedScene" uid="uid://chduydg4lqsr1" path="res://scenes/boss/cactus_boss.tscn" id="15_8hip6"]
 [ext_resource type="PackedScene" uid="uid://bsp2v6s7o2ey2" path="res://scenes/UI/pause_menu.tscn" id="15_mj5kq"]
 [ext_resource type="PackedScene" uid="uid://cvevnrc2m5fig" path="res://rooms/AlgorithmRooms/SpecialtyRooms/Desert/desert_boss.tscn" id="16_8hip6"]
+[ext_resource type="PackedScene" uid="uid://dvj3i8d0shu4t" path="res://scenes/boss/cactus_body.tscn" id="16_g5xp7"]
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_gc8kv"]
 texture = ExtResource("7_0yuyw")
@@ -167,7 +168,10 @@ position = Vector2(-509, -6236)
 metadata/_edit_lock_ = true
 
 [node name="CactusBoss" parent="." instance=ExtResource("15_8hip6")]
-position = Vector2(52, -6837)
+position = Vector2(56, -6837)
+
+[node name="CactusBody" parent="." instance=ExtResource("16_g5xp7")]
+position = Vector2(-90, -6712)
 
 [connection signal="timeout" from="BulletFairyTimer" to="." method="_on_bullet_fairy_timer_timeout"]
 [connection signal="ammo_dropped" from="HUD" to="." method="_on_hud_ammo_dropped"]
