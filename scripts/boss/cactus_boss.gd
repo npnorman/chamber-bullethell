@@ -167,6 +167,7 @@ func phase2_pattern(delta):
 		movementOffset = (movementOffset + 1) % len(phase2)
 		set_target(origin + (phase2[movementOffset] * movementSize))
 		
+		animation_player.play("shoot")
 		shoot_arm(right_arm)
 		shoot_arm(left_arm)
 		
@@ -213,7 +214,7 @@ func move_to_target(delta):
 func get_shoot_target():
 	return player.global_position
 
-func shoot(shoot_from_position:Vector2):
+func shoot(shoot_from_position:Vector2, pos:Vector2):
 	var newBullet:Area2D = bulletScene.instantiate()
 	var shoot_target:Vector2 = get_shoot_target()
 	
@@ -223,12 +224,17 @@ func shoot(shoot_from_position:Vector2):
 	
 	var color:Color = colors[color_index]
 	
+	# speed variartion
+	
+	var bulletSpeedIncrease = rng.randi_range(0,100)
+	var bulletSpreadOffset = Vector2(1,0) * pos.distance_squared_to(shoot_from_position) * 0.5 * sign(pos.x - shoot_target.x)
+	
 	newBullet.get_node("Sprite2D").modulate = color
 	newBullet.damage = bulletDamage
-	newBullet.speed = bulletSpeed
+	newBullet.speed = bulletSpeed + bulletSpeedIncrease
 	newBullet.global_position = shoot_from_position
-	newBullet.direction = shoot_from_position.direction_to(shoot_target)
-	newBullet.rotation = shoot_from_position.angle_to_point(shoot_target) + deg_to_rad(90.0)
+	newBullet.direction = shoot_from_position.direction_to(shoot_target + bulletSpreadOffset)
+	newBullet.rotation = shoot_from_position.angle_to_point(shoot_target + bulletSpreadOffset) + deg_to_rad(90.0)
 	
 	SfxPlayer.enemy_shot_sound()
 	get_tree().current_scene.add_child(newBullet)
@@ -236,8 +242,15 @@ func shoot(shoot_from_position:Vector2):
 	newBullet.set_despawn_timer(despawnTime)
 
 func shoot_arm(arm):
+	var pos:Vector2
+	
+	if arm.name == "RightArm":
+		pos = right_arm.global_position
+	else:
+		pos = left_arm.global_position
+	
 	for marker:Marker2D in arm.get_children():
-		shoot(marker.global_position)
+		shoot(marker.global_position, pos)
 
 func _on_phase_1_timer_timeout() -> void:
 	isReadyPhase1 = true
