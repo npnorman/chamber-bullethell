@@ -1,5 +1,8 @@
 extends CharacterBody2D
 
+# fruit
+@export var cactus_fruit:PackedScene
+
 # arms
 @onready var right_arm: Node2D = $RightArm
 @onready var left_arm: Node2D = $LeftArm
@@ -33,6 +36,10 @@ var phase2 = [
 	Vector2(1,0),
 	Vector2(0,1),
 	Vector2(-1,0),
+	Vector2(0,-1)
+]
+var phase3 = [
+	Vector2(0,1),
 	Vector2(0,-1)
 ]
 
@@ -130,6 +137,7 @@ func checkState():
 		
 		elif currentState == States.PHASE3:
 			
+			velocity = Vector2.ZERO
 			currentState = States.REST
 			animation_player.play("rest")
 			moveTime = 5
@@ -165,7 +173,22 @@ func phase2_pattern(delta):
 	move_to_target(delta)
 
 func phase3_pattern(delta):
-	pass
+	if global_position.distance_to(target) < targetDelta:
+		# set new target
+		movementOffset = (movementOffset + 1) % len(phase3)
+		set_target(origin + (phase3[movementOffset] * movementSize))
+		
+		# spawn in fruit
+		var fruit = cactus_fruit.instantiate()
+		
+		# spawn above player
+		
+		# pick spot in radius of origin
+		fruit.global_position = global_position + Vector2(0,-1) * 100
+		
+		get_parent().add_child(fruit)
+	
+	move_to_target(delta)
 
 func take_damage(damage:int):
 	hp -= damage
