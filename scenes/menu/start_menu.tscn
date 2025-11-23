@@ -1,8 +1,10 @@
-[gd_scene load_steps=4 format=3 uid="uid://ijmepe8hwj4y"]
+[gd_scene load_steps=6 format=3 uid="uid://ijmepe8hwj4y"]
 
 [ext_resource type="Script" uid="uid://cj3cew0uk5lr" path="res://scripts/start_menu/start_menu.gd" id="1_r0pvr"]
 [ext_resource type="Texture2D" uid="uid://bud0r74u02hmg" path="res://sprites/menu_sprites/StartScreen.png" id="2_r0pvr"]
 [ext_resource type="Texture2D" uid="uid://fnkbu64ch1uu" path="res://scenes/menu/TitleSign.png" id="3_j28ev"]
+[ext_resource type="Texture2D" uid="uid://dv3hma5x2s5am" path="res://scenes/menu/Wanted.png" id="4_ougr1"]
+[ext_resource type="Texture2D" uid="uid://dwx2j2nbah64w" path="res://scenes/menu/Hanging Signs.png" id="4_r03tk"]
 
 [node name="StartMenu" type="Node2D"]
 script = ExtResource("1_r0pvr")
@@ -14,41 +16,67 @@ offset_right = 40.0
 offset_bottom = 40.0
 texture = ExtResource("2_r0pvr")
 
+[node name="TitleSign" type="Sprite2D" parent="CanvasLayer"]
+position = Vector2(385, 58)
+scale = Vector2(1.025, 1.13158)
+texture = ExtResource("3_j28ev")
+
+[node name="Wanted" type="Sprite2D" parent="CanvasLayer/TitleSign"]
+position = Vector2(403.902, 491.348)
+scale = Vector2(0.579601, 0.454564)
+texture = ExtResource("4_ougr1")
+
+[node name="HangingSigns" type="Sprite2D" parent="CanvasLayer/TitleSign"]
+position = Vector2(-222.439, 82.186)
+scale = Vector2(0.97561, 0.88372)
+texture = ExtResource("4_r03tk")
+
+[node name="HangingSigns2" type="Sprite2D" parent="CanvasLayer/TitleSign/HangingSigns"]
+show_behind_parent = true
+position = Vector2(0, 88)
+texture = ExtResource("4_r03tk")
+
+[node name="HangingSigns3" type="Sprite2D" parent="CanvasLayer/TitleSign/HangingSigns/HangingSigns2"]
+show_behind_parent = true
+position = Vector2(0, 88)
+texture = ExtResource("4_r03tk")
+
 [node name="VBoxContainer" type="VBoxContainer" parent="CanvasLayer"]
 anchors_preset = -1
 anchor_left = 0.966
 anchor_top = 0.943
 anchor_right = 0.977
 anchor_bottom = 1.0
-offset_left = -948.184
-offset_top = -575.224
-offset_right = -686.448
-offset_bottom = -380.0
+offset_left = -964.184
+offset_top = -602.224
+offset_right = -692.448
+offset_bottom = -329.0
 grow_horizontal = 0
 grow_vertical = 0
-scale = Vector2(0.790584, 0.896519)
+scale = Vector2(0.922188, 1.03003)
+theme_override_constants/separation = 9
 
 [node name="StartButton" type="Button" parent="CanvasLayer/VBoxContainer"]
 layout_mode = 2
 theme_override_font_sizes/font_size = 50
 text = "Start"
+flat = true
 icon_alignment = 1
-expand_icon = true
 
 [node name="SettingsButton" type="Button" parent="CanvasLayer/VBoxContainer"]
 layout_mode = 2
 theme_override_font_sizes/font_size = 50
 text = "Settings"
+flat = true
+icon_alignment = 1
 
 [node name="ExitButton" type="Button" parent="CanvasLayer/VBoxContainer"]
 layout_mode = 2
-theme_override_font_sizes/font_size = 50
-text = "Exit Game"
-
-[node name="TitleSign" type="Sprite2D" parent="CanvasLayer"]
-position = Vector2(385, 58)
-scale = Vector2(1.025, 1.13158)
-texture = ExtResource("3_j28ev")
+size_flags_stretch_ratio = 5.52
+theme_override_font_sizes/font_size = 43
+text = "Exit "
+flat = true
+icon_alignment = 1
 
 [connection signal="pressed" from="CanvasLayer/VBoxContainer/StartButton" to="." method="_on_start_button_pressed"]
 [connection signal="pressed" from="CanvasLayer/VBoxContainer/SettingsButton" to="." method="_on_settings_button_pressed"]
