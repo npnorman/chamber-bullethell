@@ -105,8 +105,8 @@ animations = [{
 
 [node name="Auctioneer" instance=ExtResource("1_i6l0q")]
 script = ExtResource("2_oqt6n")
-is_active = true
-health = 20
+health = 15
+bulletSpeed = 200.0
 
 [node name="CPUParticles2D" parent="." index="1"]
 amount = 250
@@ -117,5 +117,19 @@ frame_progress = 0.839558
 
 [node name="CountTimer" type="Timer" parent="." index="7"]
 wait_time = 0.5
+
+[node name="CountLabel" type="RichTextLabel" parent="." index="8"]
+visible = false
+z_index = 1
+anchors_preset = -1
+anchor_right = 0.545
+offset_left = -23.0
+offset_top = -48.0
+offset_right = 23.0
+offset_bottom = -31.0
+grow_horizontal = 2
+text = "1"
+scroll_active = false
+horizontal_alignment = 1
 
 [connection signal="timeout" from="CountTimer" to="." method="_on_count_timer_timeout"]
