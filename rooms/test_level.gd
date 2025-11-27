@@ -71,7 +71,7 @@ func _process(delta: float) -> void:
 
 func check_number_of_enemies():
 	var numEnemies = len(get_tree().get_nodes_in_group("Enemy"))
-	var enemyDelta = 100
+	var enemyDelta = 20
 	
 	# get label
 	# label shows: Enemies to kill = len - 5, clamp at 0

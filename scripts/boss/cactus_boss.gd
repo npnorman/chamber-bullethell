@@ -85,6 +85,10 @@ func _physics_process(delta: float) -> void:
 	elif currentState == States.PHASE3:
 		phase3_pattern(delta)
 	
+	# death
+	if hp <= 0:
+		self.queue_free()
+	
 	move_and_slide()
 
 func checkHealth():

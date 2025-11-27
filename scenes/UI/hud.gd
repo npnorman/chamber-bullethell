@@ -32,10 +32,10 @@ func _ready():
 func toggle_transparency(transparent: bool):
 	if transparent:
 		$CylinderNode.modulate.a = 0.3
-		$SpecialBullets.modulate.a = 0.3
+		#$SpecialBullets.modulate.a = 0.3
 	else:
 		$CylinderNode.modulate.a = 1
-		$SpecialBullets.modulate.a = 1
+		#$SpecialBullets.modulate.a = 1
 
 # Checks every frame to see if the mouse is hovering over a bullet in the inventory menu, displays
 # text box with description if so
@@ -132,29 +132,29 @@ func update_health(new_health: int) -> void:
 	match new_health:
 		0:
 			stache_textures[2].visible = false
-		1:
+		2:
 			stache_textures[2].modulate = Color(1, 0, 0, 1)
 			stache_textures[2].visible = true
-		2:
+		3:
 			stache_textures[2].modulate = Color(0, 0, 0, 1)
 			stache_textures[1].visible = false
 			stache_textures[3].visible = false
-		3:
+		4:
 			stache_textures[1].modulate = Color(1, 0, 0, 1)
 			stache_textures[3].modulate = Color(1, 0, 0, 1)
 			stache_textures[1].visible = true
 			stache_textures[3].visible = true
-		4:
+		6:
 			stache_textures[1].modulate = Color(0, 0, 0, 1)
 			stache_textures[3].modulate = Color(0, 0, 0, 1)
 			stache_textures[4].visible = false
 			stache_textures[0].visible = false
-		5:
+		8:
 			stache_textures[4].modulate = Color(1, 0, 0, 1)
 			stache_textures[0].modulate = Color(1, 0, 0, 1)
 			stache_textures[4].visible = true
 			stache_textures[0].visible = true
-		6:
+		10:
 			stache_textures[0].modulate = Color(0, 0, 0, 1)
 			stache_textures[4].modulate = Color(0, 0, 0, 1)
 

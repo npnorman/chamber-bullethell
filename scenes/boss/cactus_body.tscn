@@ -50,3 +50,8 @@ gravity = Vector2(0, 700)
 initial_velocity_min = 347.22
 initial_velocity_max = 347.22
 color_ramp = SubResource("Gradient_b6cq1")
+
+[node name="Timer" type="Timer" parent="."]
+wait_time = 1.5
+
+[connection signal="timeout" from="Timer" to="." method="_on_timer_timeout"]
