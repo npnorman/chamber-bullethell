@@ -1,5 +1,6 @@
-[gd_scene load_steps=29 format=3 uid="uid://jx5joqn5m0l0"]
+[gd_scene load_steps=30 format=3 uid="uid://jx5joqn5m0l0"]
 
+[ext_resource type="Script" uid="uid://bgq1f3qsapg3c" path="res://scripts/intro_cutscene/intro_cutscene.gd" id="1_fupjs"]
 [ext_resource type="Texture2D" uid="uid://c2k26fcsce88i" path="res://sprites/intro_cutscene/1_BACK_saloonDrunk1.png" id="1_tojiq"]
 [ext_resource type="Texture2D" uid="uid://iyx4jr38g0fk" path="res://sprites/intro_cutscene/2_BACK_saloonDrunk2.png" id="2_42t1c"]
 [ext_resource type="Texture2D" uid="uid://cj7n71rs5qkki" path="res://sprites/intro_cutscene/3_BACK_togun.png" id="3_3b08h"]
@@ -225,6 +226,20 @@ tracks/4/keys = {
 "update": 0,
 "values": [Color(5.5952e-07, 0.302211, 0.0613275, 1), Color(5.86594e-07, 0.216483, 0.033656, 1), Color(0.436036, 0, 0.00335556, 1), Color(0.0855358, 4.281e-07, 0.000166871, 1)]
 }
+tracks/5/type = "method"
+tracks/5/imported = false
+tracks/5/enabled = true
+tracks/5/path = NodePath(".")
+tracks/5/interp = 1
+tracks/5/loop_wrap = true
+tracks/5/keys = {
+"times": PackedFloat32Array(65.1333),
+"transitions": PackedFloat32Array(1),
+"values": [{
+"args": [],
+"method": &"move_to_starting_scene"
+}]
+}
 
 [sub_resource type="Animation" id="Animation_d8ksr"]
 length = 0.001
@@ -302,6 +317,7 @@ anchor_right = 1.0
 anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
+script = ExtResource("1_fupjs")
 
 [node name="ColorRect" type="ColorRect" parent="."]
 layout_mode = 0
@@ -328,6 +344,15 @@ offset_top = -580.0
 offset_right = 772.0
 offset_bottom = 547.0
 color = Color(0.196085, 0.762199, 0.431854, 1)
+
+[node name="RichTextLabel" type="RichTextLabel" parent="."]
+layout_mode = 0
+offset_left = 62.0
+offset_top = 370.0
+offset_right = 588.0
+offset_bottom = 439.0
+theme_override_font_sizes/normal_font_size = 45
+text = "Press TAB twice to skip"
 
 [node name="Parallax" type="AnimationPlayer" parent="."]
 libraries = {

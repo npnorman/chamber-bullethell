@@ -1,7 +1,7 @@
 extends Node2D
 
 func start_button():
-	Globals.change_scene("res://rooms/TestingRoom.tscn")
+	Globals.change_scene("res://scenes/menu/intro_cutscene.tscn")
 
 func settings_button():
 	pass
