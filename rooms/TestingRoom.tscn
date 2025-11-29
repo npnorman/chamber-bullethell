@@ -89,6 +89,8 @@ wait_time = 10.0
 one_shot = true
 
 [node name="FloorGenerator" parent="." instance=ExtResource("2_ovcuh")]
+z_index = -5
+z_as_relative = false
 
 [node name="Enemies" type="Node" parent="."]
 
@@ -119,6 +121,7 @@ position_smoothing_enabled = true
 
 [node name="Player" parent="." instance=ExtResource("3_i3fwb")]
 top_level = true
+z_as_relative = false
 position = Vector2(253, -194)
 health = 10
 
