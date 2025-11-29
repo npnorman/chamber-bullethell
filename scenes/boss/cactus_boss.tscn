@@ -2,7 +2,7 @@
 
 [ext_resource type="Script" uid="uid://cfty4lsemf01n" path="res://scripts/boss/cactus_boss.gd" id="1_vsy1h"]
 [ext_resource type="PackedScene" uid="uid://bivpy44qgcvdq" path="res://scenes/bullets/enemy-bullet.tscn" id="2_31ex3"]
-[ext_resource type="PackedScene" uid="uid://dvj3i8d0shu4t" path="res://scenes/boss/cactus_body.tscn" id="2_ot8wp"]
+[ext_resource type="PackedScene" uid="uid://dvj3i8d0shu4t" path="res://scenes/boss/cactus_fruit.tscn" id="2_ot8wp"]
 [ext_resource type="Texture2D" uid="uid://d22rtmcpyiaet" path="res://sprites/boss/cactus-boss-body.png" id="4_ot8wp"]
 [ext_resource type="Texture2D" uid="uid://b2py1rbyy1e0" path="res://sprites/boss/cactus-boss-arms.png" id="5_h4lv2"]
 

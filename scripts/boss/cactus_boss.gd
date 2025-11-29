@@ -56,10 +56,13 @@ var hpStates = [90, 70]
 var currentState = States.REST
 var isReadyPhase1 = false
 @onready var state_machine_timer: Timer = $StateMachineTimer
-var moveToNextState = true
+var moveToNextState = false
 
 # Health info
-var hp = 100
+var hp = 10
+
+func activate():
+	moveToNextState = true
 
 func _ready() -> void:
 	#get player
@@ -181,17 +184,22 @@ func phase3_pattern(delta):
 		movementOffset = (movementOffset + 1) % len(phase3)
 		set_target(origin + (phase3[movementOffset] * movementSize))
 		
-		# spawn in fruit
-		var fruit = cactus_fruit.instantiate()
-		
-		# spawn above player
-		
-		# pick spot in radius of origin
-		fruit.global_position = global_position + Vector2(0,-1) * 100
-		
-		get_parent().add_child(fruit)
+		for i in range(0,3):
+			spawn_fruit()
 	
 	move_to_target(delta)
+
+func spawn_fruit():
+	# spawn in fruit
+	var fruit = cactus_fruit.instantiate()
+	
+	# spawn above player
+	
+	# pick spot in radius of origin
+	var rand = RandomNumberGenerator.new().randi_range(-5,5)
+	fruit.global_position = global_position + Vector2(rand,-10 + rand) * 100
+	
+	get_parent().add_child(fruit)
 
 func take_damage(damage:int):
 	hp -= damage
