@@ -162,3 +162,9 @@ var isBossTPUnlocked = false
 
 # seed for regen purposes
 var current_seed = -1
+
+# cheat codes
+func _input(event: InputEvent) -> void:
+	
+	if event.is_action("BulletGain") and event.is_pressed() == false and event.is_echo() == false:
+		ammo[0] = 999
