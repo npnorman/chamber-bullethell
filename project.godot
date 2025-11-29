@@ -33,6 +33,7 @@ Texts="*res://globals/texts.gd"
 window/size/viewport_width=1024
 window/size/viewport_height=768
 window/stretch/mode="viewport"
+mouse_cursor/custom_image="uid://dxbnq133jy6gq"
 
 [global_group]
 

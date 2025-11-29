@@ -1,4 +1,4 @@
-[gd_scene load_steps=21 format=3 uid="uid://chduydg4lqsr1"]
+[gd_scene load_steps=21 format=3 uid="uid://6nyc8dqkm6qm"]
 
 [ext_resource type="Script" uid="uid://cfty4lsemf01n" path="res://scripts/boss/cactus_boss.gd" id="1_vsy1h"]
 [ext_resource type="PackedScene" uid="uid://bivpy44qgcvdq" path="res://scenes/bullets/enemy-bullet.tscn" id="2_31ex3"]

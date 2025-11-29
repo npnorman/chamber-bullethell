@@ -12,7 +12,7 @@
 [ext_resource type="PackedScene" uid="uid://csr22g6iy124u" path="res://scenes/interactables/interactable_item.tscn" id="12_ep8cf"]
 [ext_resource type="Shader" uid="uid://c8627l0fjhsx4" path="res://shaders/scroll.gdshader" id="14_8hip6"]
 [ext_resource type="Texture2D" uid="uid://dr5j25xvk3een" path="res://sprites/background/wind.png" id="14_mj5kq"]
-[ext_resource type="PackedScene" uid="uid://chduydg4lqsr1" path="res://scenes/boss/cactus_boss.tscn" id="15_8hip6"]
+[ext_resource type="PackedScene" uid="uid://6nyc8dqkm6qm" path="res://scenes/boss/cactus_boss.tscn" id="15_8hip6"]
 [ext_resource type="PackedScene" uid="uid://bsp2v6s7o2ey2" path="res://scenes/UI/pause_menu.tscn" id="15_mj5kq"]
 [ext_resource type="PackedScene" uid="uid://cvevnrc2m5fig" path="res://rooms/AlgorithmRooms/SpecialtyRooms/Desert/desert_boss.tscn" id="16_8hip6"]
 

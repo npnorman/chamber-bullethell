@@ -85,10 +85,6 @@ func _physics_process(delta: float) -> void:
 	elif currentState == States.PHASE3:
 		phase3_pattern(delta)
 	
-	# death
-	if hp <= 0:
-		self.queue_free()
-	
 	move_and_slide()
 
 func checkHealth():
@@ -96,8 +92,10 @@ func checkHealth():
 		body.play("hp1")
 	elif hp > hpStates[1]:
 		body.play("hp2")
-	else:
+	elif hp > 0:
 		body.play("hp3")
+	elif hp <= 0:
+		on_death()
 
 var moveTime = 10
 func checkState():
@@ -255,6 +253,10 @@ func shoot_arm(arm):
 	
 	for marker:Marker2D in arm.get_children():
 		shoot(marker.global_position, pos)
+
+func on_death():
+	self.queue_free()
+	Globals.change_scene("res://scenes/menu/win_room.tscn")
 
 func _on_phase_1_timer_timeout() -> void:
 	isReadyPhase1 = true
