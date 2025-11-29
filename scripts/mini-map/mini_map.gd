@@ -1,6 +1,6 @@
-extends CanvasLayer
+extends Node2D
 
-@onready var control: Control = $Control
+@onready var control: Control = $CanvasLayer/Control
 
 var icon_scene:PackedScene = preload("res://scenes/menu/icon.tscn")
 

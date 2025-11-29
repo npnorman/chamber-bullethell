@@ -19,7 +19,7 @@ class_name LevelContainer
 @onready var projectiles: Node = $Projectiles
 @onready var bullet_fairy_timer: Timer = $BulletFairyTimer
 @onready var camera: Camera2D = $Camera2D
-@onready var mini_map: CanvasLayer = $MiniMap
+@onready var mini_map: Node2D = $MiniMap
 @onready var enemy_count: RichTextLabel = $HUD/EnemyCount
 
 var is_bullet_fairy_spawned = false
@@ -243,6 +243,7 @@ func spawn_player_in_boss_room():
 	mini_map.visible = false
 	camera.zoom = Vector2.ONE * 0.69
 	cactus_boss.activate()
+	Globals.ammo[0] += 50
 
 func _on_bullet_fairy_timer_timeout() -> void:
 	#spawn bullet fairy

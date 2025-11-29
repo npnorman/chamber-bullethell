@@ -81,6 +81,7 @@ bullet_fairy = ExtResource("5_b6v1o")
 boss_room = NodePath("Boss Room")
 
 [node name="MiniMap" parent="." instance=ExtResource("3_ep8cf")]
+position = Vector2(120, 250)
 
 [node name="BulletFairyTimer" type="Timer" parent="."]
 wait_time = 10.0
@@ -104,12 +105,13 @@ anchor_left = 0.331
 anchor_top = 0.005
 anchor_right = 0.331
 anchor_bottom = 0.005
-offset_left = 0.0559692
-offset_top = 0.16
-offset_right = 170.056
-offset_bottom = 42.16
+offset_left = -291.944
+offset_top = 99.16
+offset_right = -121.944
+offset_bottom = 141.16
 theme_override_font_sizes/normal_font_size = 19
-text = "Unlock Boss: "
+bbcode_enabled = true
+text = "[center]Unlock Boss: "
 
 [node name="Camera2D" type="Camera2D" parent="."]
 position_smoothing_enabled = true

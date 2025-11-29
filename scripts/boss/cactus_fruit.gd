@@ -51,6 +51,20 @@ func shoot(shoot_target):
 	get_tree().current_scene.add_child(newBullet)
 
 func explode():
+	#drop bullets
+	var rng = RandomNumberGenerator.new()
+	var bullets = [
+		Globals.Bullets.Normal,
+		Globals.Bullets.Shotgun,
+		Globals.Bullets.Health,
+		Globals.Bullets.Railgun,
+		Globals.Bullets.Gambler
+	]
+	var rand = rng.rand_weighted([10,2,1,2,2])
+	var drop_change = randf_range(0,100)
+	
+	if drop_change > 10:
+		get_tree().current_scene.spawn_pickup(bullets[rand], 3, global_position)
 	animation_player.play("explode")
 
 func _on_second_wind_timer_timeout() -> void:

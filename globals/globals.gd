@@ -112,7 +112,10 @@ var ammo: Array[int] = [30, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0]:
 		return ammo
 
 # Gives the maximum ammo that can be held of a given ammo type
-var ammo_max: Array[int] = [999, 18, 18, 18, 3, 12, 18, 30, 30, 30, 30, 30]
+#var ammo_max: Array[int] = [999, 18, 18, 18, 3, 12, 18, 30, 30, 30, 30, 30]
+var ammo_max: Array[int] = [999, 999, 999, 999, 999, 999, 999, 999, 999, 999, 999, 999]
+
+var ammo_shop_amount = [999, 18, 18, 18, 3, 12, 18, 30, 30, 30, 30, 30]
 
 # Array of the IDs of ammo the player currently has, with -1 meaning nothing is in the slot
 var ammo_types: Array[int] = [0, -1, -1, -1]

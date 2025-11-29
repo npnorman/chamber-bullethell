@@ -2,12 +2,16 @@
 
 [ext_resource type="Script" uid="uid://d15iw5dvln4ak" path="res://scripts/mini-map/mini_map.gd" id="1_o2mu7"]
 
-[node name="MiniMap" type="CanvasLayer"]
+[node name="MiniMap" type="Node2D"]
 script = ExtResource("1_o2mu7")
 
-[node name="Control" type="Control" parent="."]
+[node name="CanvasLayer" type="CanvasLayer" parent="."]
+
+[node name="Control" type="Control" parent="CanvasLayer"]
 layout_mode = 3
 anchors_preset = 0
-offset_left = 474.0
-offset_right = 1024.0
-offset_bottom = 550.0
+offset_left = 725.0
+offset_top = 7.0
+offset_right = 1275.0
+offset_bottom = 557.0
+metadata/_edit_use_anchors_ = true

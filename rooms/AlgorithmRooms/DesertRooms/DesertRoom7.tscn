@@ -1,4 +1,4 @@
-[gd_scene load_steps=9 format=4 uid="uid://cureq2w0utaqp"]
+[gd_scene load_steps=10 format=4 uid="uid://cureq2w0utaqp"]
 
 [ext_resource type="PackedScene" uid="uid://ctxgqeaum4461" path="res://rooms/AlgorithmRooms/base_room.tscn" id="1_0dwio"]
 [ext_resource type="Texture2D" uid="uid://hwfpsrceal7p" path="res://sprites/Barrel.png" id="2_4amfq"]
@@ -8,6 +8,7 @@
 [ext_resource type="PackedScene" uid="uid://b7g2b431gu6nf" path="res://sprites/Cactus.tscn" id="5_moq01"]
 [ext_resource type="PackedScene" uid="uid://c0hpokmr76hlq" path="res://sprites/Cactus2.tscn" id="6_q2n0e"]
 [ext_resource type="PackedScene" uid="uid://be3bjg0ua7h2c" path="res://scenes/enemy.tscn" id="7_0dwio"]
+[ext_resource type="PackedScene" uid="uid://crwot1rdef6uf" path="res://scenes/interactables/chest.tscn" id="9_mxlas"]
 
 [node name="BaseRoom" instance=ExtResource("1_0dwio")]
 exit_type = 4
@@ -60,3 +61,6 @@ position = Vector2(409, -135)
 
 [node name="Cactus3" parent="." index="10" instance=ExtResource("6_q2n0e")]
 position = Vector2(119, -406)
+
+[node name="Chest" parent="." index="11" instance=ExtResource("9_mxlas")]
+position = Vector2(293, -64)
