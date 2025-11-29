@@ -1,0 +1,9 @@
+[gd_scene load_steps=3 format=3 uid="uid://c536f41rlon10"]
+
+[ext_resource type="PackedScene" uid="uid://csr22g6iy124u" path="res://scenes/interactables/interactable_item.tscn" id="1_hvxyi"]
+[ext_resource type="Texture2D" uid="uid://ci6tpq1hugkwi" path="res://sprites/TumbleWEED.png" id="2_4mriw"]
+
+[node name="TumbleWeed" instance=ExtResource("1_hvxyi")]
+
+[node name="Sprite2D" parent="." index="1"]
+texture = ExtResource("2_4mriw")

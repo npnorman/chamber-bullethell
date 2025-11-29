@@ -1,0 +1,11 @@
+[gd_scene load_steps=3 format=3 uid="uid://40wmqfnn0y2j"]
+
+[ext_resource type="PackedScene" uid="uid://csr22g6iy124u" path="res://scenes/interactables/interactable_item.tscn" id="1_hrc3o"]
+[ext_resource type="Texture2D" uid="uid://hwfpsrceal7p" path="res://sprites/Barrel.png" id="2_dfoq3"]
+
+[node name="Barrell" instance=ExtResource("1_hrc3o")]
+mass = 10.0
+
+[node name="Sprite2D" parent="." index="1"]
+scale = Vector2(1, 1)
+texture = ExtResource("2_dfoq3")
