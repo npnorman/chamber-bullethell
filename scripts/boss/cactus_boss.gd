@@ -48,10 +48,9 @@ enum States {
 	REST,
 	PHASE1,
 	PHASE2,
-	PHASE3
+	PHASE3,
+	DEATH
 }
-
-var hpStates = [90, 70]
 
 var currentState = States.REST
 var isReadyPhase1 = false
@@ -59,7 +58,8 @@ var isReadyPhase1 = false
 var moveToNextState = false
 
 # Health info
-var hp = 10
+@export var hp = 600
+var hpStates = [500, 300]
 
 func activate():
 	moveToNextState = true
@@ -87,6 +87,9 @@ func _physics_process(delta: float) -> void:
 		phase2_pattern(delta)
 	elif currentState == States.PHASE3:
 		phase3_pattern(delta)
+	elif currentState == States.DEATH:
+		velocity = Vector2.ZERO
+		#do nothing
 	
 	move_and_slide()
 
@@ -115,37 +118,40 @@ func checkState():
 				set_target(origin)
 				currentState = States.PHASE1
 				animation_player.play("RESET")
-				moveTime = 10
+				moveTime = 15
 			else:
 				currentState = States.PHASE2
-				moveTime = 20
+				moveTime = 10
 			
 		elif currentState == States.PHASE1:
 			# move to rest if hp is good
 			if hp > hpStates[0]:
 				currentState = States.REST
 				animation_player.play("rest")
-				moveTime = 5
+				moveTime = 15
 			else:
 				currentState = States.PHASE2
-				moveTime = 20
+				moveTime = 10
 			
 		elif currentState == States.PHASE2:
 			
 			if hp > hpStates[1]:
 				currentState = States.REST
 				animation_player.play("rest")
-				moveTime = 5
+				moveTime = 15
 			else:
 				currentState = States.PHASE3
-				moveTime = 20
+				moveTime = 10
 		
 		elif currentState == States.PHASE3:
 			
 			velocity = Vector2.ZERO
 			currentState = States.REST
 			animation_player.play("rest")
-			moveTime = 5
+			moveTime = 15
+		
+		elif currentState == States.DEATH:
+			velocity = Vector2.ZERO
 		
 		state_machine_timer.wait_time = moveTime
 		state_machine_timer.start()
@@ -263,8 +269,9 @@ func shoot_arm(arm):
 		shoot(marker.global_position, pos)
 
 func on_death():
-	self.queue_free()
-	Globals.change_scene("res://scenes/menu/win_room.tscn")
+	currentState = States.DEATH
+	animation_player.play("death")
+	#Globals.change_scene(Globals.Scenes.WIN)
 
 func _on_phase_1_timer_timeout() -> void:
 	isReadyPhase1 = true

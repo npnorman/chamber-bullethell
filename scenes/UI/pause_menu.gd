@@ -8,11 +8,33 @@ extends CanvasLayer
 @onready var death_text: RichTextLabel = $DeathText
 @onready var controls_container: Control = $ControlScreen
 @onready var exit_controls: Button = $ControlScreen/ExitControls
+@onready var seed_text: RichTextLabel = $SeedText
+@onready var animation_player: AnimationPlayer = $AnimationPlayer
 
 signal game_resumed
 
+# for easter egg
+var current_key_index = 0
+
 func _ready() -> void:
 	process_mode = Node.PROCESS_MODE_ALWAYS
+	seed_text.text = "[right]  seed: " + str(Globals.current_seed) + "   [/right]"
+
+func _input(event: InputEvent) -> void:
+	# check for code
+	var code = ["Up","Up","Down","Down","Left","Right","Left","Right","B","A","Start"]
+	
+	if event.is_action(code[current_key_index]) and event.is_echo() == false and event.is_pressed() == false:
+		current_key_index += 1
+		if current_key_index >= len(code):
+			current_key_index = 0
+			animation_player.play("easter_egg")
+			
+	elif event.is_action(code[current_key_index]) and event.is_echo() == false and event.is_pressed():
+		pass
+		
+	else:
+		current_key_index = 0
 
 func _on_resume_pressed() -> void:
 	game_resumed.emit()
@@ -20,11 +42,11 @@ func _on_resume_pressed() -> void:
 
 func _on_go_to_menu_pressed() -> void:
 	game_resumed.emit()
-	Globals.change_scene("res://scenes/menu/start_menu.tscn")
+	Globals.change_scene_and_reset(Globals.Scenes.START)
 
 func _on_restart_pressed() -> void:
 	game_resumed.emit()
-	Globals.change_scene("res://rooms/TestingRoom.tscn")
+	Globals.change_level_and_reset()
 
 func on_death() -> void:
 	resume.visible = false
@@ -41,3 +63,8 @@ func _on_controls_pressed() -> void:
 func _on_exit_controls_pressed() -> void:
 	menu_container.visible = true
 	controls_container.visible = false
+
+func _on_restart_same_seed_pressed() -> void:
+	game_resumed.emit()
+	# save the seed
+	Globals.change_level_and_reset(Globals.current_level,true,true,false)

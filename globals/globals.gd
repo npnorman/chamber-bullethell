@@ -14,6 +14,8 @@ enum Level {
 	HELL
 }
 
+var current_level:int = Level.DESERT
+
 #RoomGen enums
 enum ExitType {
 	FOUR,
@@ -39,6 +41,27 @@ enum Special {
 	BOSS_TP,
 	BOSS
 }
+
+enum Scenes {
+	START,
+	SETTINGS,
+	CREDITS,
+	WIN,
+	CUSTOM,
+}
+
+func get_scene_string(scene_enum:int):
+	match scene_enum:
+		Scenes.START:
+			return "res://scenes/menu/start_menu.tscn"
+		Scenes.SETTINGS:
+			return "res://scenes/menu/settings.tscn"
+		Scenes.CREDITS:
+			return "res://scenes/menu/credits.tscn"
+		Scenes.WIN:
+			return "res://scenes/menu/win_room.tscn"
+	
+	return ""
 
 func get_exits(room:Vector4):
 	var exits:Array = [0,0,0,0]
@@ -112,7 +135,10 @@ var ammo: Array[int] = [30, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0]:
 		return ammo
 
 # Gives the maximum ammo that can be held of a given ammo type
-var ammo_max: Array[int] = [999, 18, 18, 18, 3, 12, 18, 30, 30, 30, 30, 30]
+#var ammo_max: Array[int] = [999, 18, 18, 18, 3, 12, 18, 30, 30, 30, 30, 30]
+var ammo_max: Array[int] = [999, 999, 999, 999, 999, 999, 999, 999, 999, 999, 999, 999]
+
+var ammo_shop_amount = [999, 18, 18, 18, 3, 12, 18, 30, 30, 30, 30, 30]
 
 # Array of the IDs of ammo the player currently has, with -1 meaning nothing is in the slot
 var ammo_types: Array[int] = [0, -1, -1, -1]
@@ -131,14 +157,50 @@ var magazine: Array[int] = [-1, -1, -1, -1, -1, -1]:
 # current room
 var current_room_center:Vector2 = Vector2.ZERO
 
-func change_scene(file_name:String):
-	get_tree().change_scene_to_file(file_name)
-	reset_ammo()
+func change_level(level_scheme:int = current_level):
+	# load level scheme
+	current_level = level_scheme
+	get_tree().change_scene_to_file("res://rooms/TestingRoom.tscn")
+
+func change_level_and_reset(level_scheme:int=current_level,ammo=true,boss=true,seed=true):
+	change_level(level_scheme)
+	reset_player_stats(ammo,boss,seed)
+
+func change_scene(scene_enum:int, file_name:String = ""):
+	if scene_enum != Scenes.CUSTOM:
+		file_name = get_scene_string(scene_enum)
 	
+	get_tree().change_scene_to_file(file_name)
+
 func reset_ammo():
+	print("RESETING AMM0")
 	ammo = [30, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0]
 	ammo_types = [0, -1, -1, -1]
 	magazine = [-1, -1, -1, -1, -1, -1]
 
+func reset_player_stats(ammo = true, boss = true, seed = true):
+	if ammo:
+		reset_ammo()
+	
+	if boss:
+		isBossTPUnlocked = false
+	
+	if seed:
+		current_seed = -1
+
+func change_scene_and_reset(scene_enum:int, file_name:String = "", ammo = true, boss = true, seed = true):
+	
+	change_scene(scene_enum, file_name)
+	reset_player_stats(ammo, boss, seed)
+
 #flag for boss TP
 var isBossTPUnlocked = false
+
+# seed for regen purposes
+var current_seed = -1
+
+# cheat codes
+func _input(event: InputEvent) -> void:
+	
+	if event.is_action("BulletGain") and event.is_pressed() == false and event.is_echo() == false:
+		ammo[0] = 999

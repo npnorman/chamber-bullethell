@@ -5,7 +5,7 @@
 [ext_resource type="PackedScene" uid="uid://b7g2b431gu6nf" path="res://sprites/Cactus.tscn" id="3_xlxvj"]
 [ext_resource type="Texture2D" uid="uid://kjstwmv27w1q" path="res://sprites/BEER.png" id="4_uyucl"]
 [ext_resource type="PackedScene" uid="uid://b83epnlti1mg6" path="res://scenes/shop/shop.tscn" id="5_xlxvj"]
-[ext_resource type="Texture2D" uid="uid://hwfpsrceal7p" path="res://sprites/Barrel.png" id="6_uyucl"]
+[ext_resource type="PackedScene" uid="uid://40wmqfnn0y2j" path="res://scenes/interactables/barrell.tscn" id="7_k6bsx"]
 [ext_resource type="PackedScene" uid="uid://cjdsk5ojqm3xo" path="res://sprites/Bartender/BartenderAnim.tscn" id="7_sney3"]
 
 [node name="DesertShop" instance=ExtResource("1_30sor")]
@@ -46,20 +46,17 @@ position = Vector2(72, -487)
 [node name="Cactus2" parent="." index="10" instance=ExtResource("3_xlxvj")]
 position = Vector2(473, -492)
 
-[node name="Barrel" type="Sprite2D" parent="." index="11"]
-position = Vector2(61, -76)
-texture = ExtResource("6_uyucl")
-
-[node name="Barrel3" type="Sprite2D" parent="." index="12"]
-position = Vector2(76, -57)
-texture = ExtResource("6_uyucl")
-
-[node name="Barrel2" type="Sprite2D" parent="." index="13"]
-position = Vector2(46, -58)
-texture = ExtResource("6_uyucl")
-
-[node name="Shop" parent="." index="14" instance=ExtResource("5_xlxvj")]
+[node name="Shop" parent="." index="11" instance=ExtResource("5_xlxvj")]
 position = Vector2(281, -262)
 
-[node name="BartenderAnim" parent="." index="15" instance=ExtResource("7_sney3")]
+[node name="BartenderAnim" parent="." index="12" instance=ExtResource("7_sney3")]
 position = Vector2(279, -373)
+
+[node name="Barrell" parent="." index="13" instance=ExtResource("7_k6bsx")]
+position = Vector2(57, -51)
+
+[node name="Barrell2" parent="." index="14" instance=ExtResource("7_k6bsx")]
+position = Vector2(86, -51)
+
+[node name="Barrell3" parent="." index="15" instance=ExtResource("7_k6bsx")]
+position = Vector2(71, -77)

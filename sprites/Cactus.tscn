@@ -1,7 +1,7 @@
-[gd_scene load_steps=14 format=3 uid="uid://b7g2b431gu6nf"]
+[gd_scene load_steps=13 format=3 uid="uid://b7g2b431gu6nf"]
 
 [ext_resource type="Texture2D" uid="uid://c2joxft8stuwm" path="res://sprites/Animations/CactusAnimations/Cactus1.png" id="1_6mucy"]
-[ext_resource type="Script" uid="uid://y8dfim6ppjla" path="res://sprites/cactus.gd" id="1_o6mam"]
+[ext_resource type="Script" path="res://sprites/cactus.gd" id="1_o6mam"]
 [ext_resource type="Texture2D" uid="uid://dp1dtnta02t6i" path="res://sprites/Animations/CactusAnimations/Cactus2.png" id="2_o6mam"]
 [ext_resource type="Texture2D" uid="uid://blsqrnn3mk0pn" path="res://sprites/Animations/CactusAnimations/Cactus3.png" id="3_qac30"]
 [ext_resource type="Texture2D" uid="uid://c8w76oy3w3ldl" path="res://sprites/Animations/CactusAnimations/Cactus4.png" id="4_05akr"]
@@ -36,7 +36,7 @@ animations = [{
 }]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_o6mam"]
-size = Vector2(8.66667, 7.33333)
+size = Vector2(19.3333, 12)
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_qac30"]
 resource_local_to_scene = true
@@ -46,15 +46,14 @@ size = Vector2(25, 56)
 resource_local_to_scene = true
 size = Vector2(25, 56)
 
-[sub_resource type="RectangleShape2D" id="RectangleShape2D_s7ev2"]
-size = Vector2(6, 2.83333)
-
 [node name="Cactus" type="Node2D"]
 z_index = 1
 y_sort_enabled = true
 script = ExtResource("1_o6mam")
 
 [node name="CactusTop" type="AnimatedSprite2D" parent="."]
+z_index = 1
+z_as_relative = false
 sprite_frames = SubResource("SpriteFrames_4n6f1")
 animation = &"Cactus"
 offset = Vector2(0, -6)
@@ -65,7 +64,7 @@ y_sort_enabled = true
 scale = Vector2(3, 3)
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Top"]
-position = Vector2(-0.166667, 3.5)
+position = Vector2(-0.166666, 3)
 scale = Vector2(0.5, 0.5)
 shape = SubResource("RectangleShape2D_o6mam")
 
@@ -87,16 +86,8 @@ collision_mask = 16
 position = Vector2(0, -11)
 shape = SubResource("RectangleShape2D_05akr")
 
-[node name="Bottom" type="StaticBody2D" parent="."]
-z_index = 1
-y_sort_enabled = true
-scale = Vector2(3, 3)
-
-[node name="CollisionShape2D2" type="CollisionShape2D" parent="Bottom"]
-y_sort_enabled = true
-position = Vector2(0, 7.25)
-shape = SubResource("RectangleShape2D_s7ev2")
-
 [node name="CactusBottom" parent="." instance=ExtResource("8_qac30")]
+z_index = -1
+z_as_relative = false
 
 [connection signal="area_entered" from="Area2D" to="." method="_on_area_2d_area_entered"]

@@ -1,0 +1,45 @@
+[gd_scene load_steps=3 format=3 uid="uid://btoxytfxcylwm"]
+
+[ext_resource type="Script" uid="uid://cbhkf0eoh2er1" path="res://scripts/menu/settings.gd" id="1_dxr1k"]
+[ext_resource type="Texture2D" uid="uid://dcl6cqvobfbhe" path="res://sprites/menu_sprites/win-sprite.png" id="2_37860"]
+
+[node name="Settings" type="Control"]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("1_dxr1k")
+
+[node name="TextureRect" type="TextureRect" parent="."]
+offset_left = -11.0
+offset_top = -5.0
+offset_right = 1029.0
+offset_bottom = 783.0
+texture = ExtResource("2_37860")
+
+[node name="Camera2D" type="Camera2D" parent="."]
+position = Vector2(512, 384)
+
+[node name="Header" type="RichTextLabel" parent="."]
+offset_left = 2.0
+offset_top = 1.0
+offset_right = 1024.0
+offset_bottom = 128.0
+theme_override_font_sizes/normal_font_size = 61
+bbcode_enabled = true
+text = "[center][u]Settings[/u][/center]"
+vertical_alignment = 1
+
+[node name="CenterContainer" type="CenterContainer" parent="."]
+offset_top = 633.0
+offset_right = 1024.0
+offset_bottom = 768.0
+
+[node name="Button" type="Button" parent="CenterContainer"]
+layout_mode = 2
+theme_override_font_sizes/font_size = 56
+text = "Back To Menu"
+
+[connection signal="pressed" from="CenterContainer/Button" to="." method="_on_button_pressed"]

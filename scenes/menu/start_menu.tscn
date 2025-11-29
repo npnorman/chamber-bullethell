@@ -42,6 +42,11 @@ show_behind_parent = true
 position = Vector2(0, 88)
 texture = ExtResource("4_r03tk")
 
+[node name="HangingSigns4" type="Sprite2D" parent="CanvasLayer/TitleSign/HangingSigns/HangingSigns2/HangingSigns3"]
+show_behind_parent = true
+position = Vector2(-3.05176e-05, 94)
+texture = ExtResource("4_r03tk")
+
 [node name="StartButton" type="Button" parent="CanvasLayer"]
 offset_left = 29.0
 offset_top = 124.0
@@ -98,6 +103,24 @@ Exit"
 flat = true
 icon_alignment = 1
 
+[node name="CreditsButton" type="Button" parent="CanvasLayer"]
+offset_left = 21.0
+offset_top = 393.0
+offset_right = 76.0
+offset_bottom = 413.0
+scale = Vector2(4.95, 3.72)
+theme_override_fonts/font = ExtResource("6_hqr2w")
+theme_override_font_sizes/font_size = 8
+text = "
+
+
+
+
+Credits"
+flat = true
+icon_alignment = 1
+
 [connection signal="pressed" from="CanvasLayer/StartButton" to="." method="_on_start_button_pressed"]
 [connection signal="pressed" from="CanvasLayer/SettingsButton" to="." method="_on_settings_button_pressed"]
 [connection signal="pressed" from="CanvasLayer/ExitButton" to="." method="_on_exit_button_pressed"]
+[connection signal="pressed" from="CanvasLayer/CreditsButton" to="." method="_on_credits_button_pressed"]
