@@ -8,6 +8,7 @@ class_name LevelContainer
 
 # boss room
 @export var boss_room:Node2D
+@onready var cactus_boss: CharacterBody2D = $CactusBoss
 
 @onready var hud: CanvasLayer = $HUD
 @onready var pause_menu: CanvasLayer = $PauseMenu
@@ -69,7 +70,7 @@ func _process(delta: float) -> void:
 
 func check_number_of_enemies():
 	var numEnemies = len(get_tree().get_nodes_in_group("Enemy"))
-	var enemyDelta = 5
+	var enemyDelta = 25
 	
 	# get label
 	# label shows: Enemies to kill = len - 5, clamp at 0
@@ -241,6 +242,7 @@ func spawn_player_in_boss_room():
 	player.position = boss_room.position + Vector2(Globals.tile_size * Globals.room_size, Globals.tile_size * -10)
 	mini_map.visible = false
 	camera.zoom = Vector2.ONE * 0.69
+	cactus_boss.activate()
 
 func _on_bullet_fairy_timer_timeout() -> void:
 	#spawn bullet fairy

@@ -39,19 +39,14 @@ text = "Restart"
 layout_mode = 2
 text = "View Controls"
 
-[node name="DeathText" type="Label" parent="."]
-modulate = Color(0.84956, 3.29696e-06, 1.54018e-06, 1)
-anchors_preset = -1
-anchor_left = 0.5
-anchor_top = 0.275
-anchor_right = 0.5
-anchor_bottom = 0.275
-offset_left = -37.0
-offset_top = -11.2
-offset_right = 37.0
-offset_bottom = 11.8
-grow_horizontal = 2
-text = "You Died!"
+[node name="DeathText" type="RichTextLabel" parent="."]
+offset_left = 249.0
+offset_top = 192.0
+offset_right = 774.0
+offset_bottom = 298.0
+theme_override_font_sizes/normal_font_size = 76
+bbcode_enabled = true
+text = "[center][color=\"red\"]YOU DIED![/color][/center]"
 
 [node name="ControlScreen" type="Control" parent="."]
 visible = false

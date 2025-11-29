@@ -177,7 +177,7 @@ func player_die():
 
 # Function call specifically for the health bullet, can also be used for other healing sources
 func heal():
-	health += 1
+	health += 4
 	SfxPlayer.heal_sound()
 	update_health.emit(health)
 	animations.play("heal")

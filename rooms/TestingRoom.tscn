@@ -1,4 +1,4 @@
-[gd_scene load_steps=18 format=4 uid="uid://cd0v14frrlgju"]
+[gd_scene load_steps=19 format=4 uid="uid://cd0v14frrlgju"]
 
 [ext_resource type="Script" uid="uid://dhhfbfplukf3b" path="res://rooms/test_level.gd" id="1_u75bg"]
 [ext_resource type="PackedScene" uid="uid://driwak3eok3gy" path="res://scenes/bullets/player-bullet.tscn" id="2_mj5kq"]
@@ -12,6 +12,7 @@
 [ext_resource type="PackedScene" uid="uid://csr22g6iy124u" path="res://scenes/interactables/interactable_item.tscn" id="12_ep8cf"]
 [ext_resource type="Shader" uid="uid://c8627l0fjhsx4" path="res://shaders/scroll.gdshader" id="14_8hip6"]
 [ext_resource type="Texture2D" uid="uid://dr5j25xvk3een" path="res://sprites/background/wind.png" id="14_mj5kq"]
+[ext_resource type="PackedScene" uid="uid://6nyc8dqkm6qm" path="res://scenes/boss/cactus_boss.tscn" id="15_8hip6"]
 [ext_resource type="PackedScene" uid="uid://bsp2v6s7o2ey2" path="res://scenes/UI/pause_menu.tscn" id="15_mj5kq"]
 [ext_resource type="PackedScene" uid="uid://cvevnrc2m5fig" path="res://rooms/AlgorithmRooms/SpecialtyRooms/Desert/desert_boss.tscn" id="16_8hip6"]
 
@@ -115,7 +116,8 @@ position_smoothing_enabled = true
 
 [node name="Player" parent="." instance=ExtResource("3_i3fwb")]
 top_level = true
-position = Vector2(253, -210)
+position = Vector2(253, -194)
+health = 10
 
 [node name="WallTileLayer" type="TileMapLayer" parent="."]
 position = Vector2(-736, -476)
@@ -139,6 +141,7 @@ offset_right = 7206.0
 offset_bottom = 5706.0
 texture = ExtResource("14_mj5kq")
 stretch_mode = 1
+metadata/_edit_lock_ = true
 
 [node name="TextureRect" type="TextureRect" parent="TextureRect"]
 z_index = -100
@@ -151,6 +154,7 @@ offset_right = 10725.0
 offset_bottom = 109.0
 texture = ExtResource("14_mj5kq")
 stretch_mode = 1
+metadata/_edit_lock_ = true
 
 [node name="ColorRect" type="ColorRect" parent="."]
 offset_left = -3577.0
@@ -161,6 +165,10 @@ color = Color(0.384314, 0.341176, 0.286275, 1)
 
 [node name="Boss Room" parent="." instance=ExtResource("16_8hip6")]
 position = Vector2(-509, -6236)
+metadata/_edit_lock_ = true
+
+[node name="CactusBoss" parent="." instance=ExtResource("15_8hip6")]
+position = Vector2(56, -6837)
 
 [connection signal="timeout" from="BulletFairyTimer" to="." method="_on_bullet_fairy_timer_timeout"]
 [connection signal="ammo_dropped" from="HUD" to="." method="_on_hud_ammo_dropped"]

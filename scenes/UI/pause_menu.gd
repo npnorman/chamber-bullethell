@@ -5,7 +5,7 @@ extends CanvasLayer
 @onready var resume: Button = $VBoxContainer/Resume
 @onready var main_menu: Button = $VBoxContainer/GoToMenu
 @onready var restart: Button = $VBoxContainer/Restart
-@onready var death_text: Label = $DeathText
+@onready var death_text: RichTextLabel = $DeathText
 @onready var controls_container: Control = $ControlScreen
 @onready var exit_controls: Button = $ControlScreen/ExitControls
 

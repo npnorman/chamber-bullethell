@@ -1,0 +1,336 @@
+[gd_scene load_steps=21 format=3 uid="uid://6nyc8dqkm6qm"]
+
+[ext_resource type="Script" uid="uid://cfty4lsemf01n" path="res://scripts/boss/cactus_boss.gd" id="1_vsy1h"]
+[ext_resource type="PackedScene" uid="uid://bivpy44qgcvdq" path="res://scenes/bullets/enemy-bullet.tscn" id="2_31ex3"]
+[ext_resource type="PackedScene" uid="uid://dvj3i8d0shu4t" path="res://scenes/boss/cactus_fruit.tscn" id="2_ot8wp"]
+[ext_resource type="Texture2D" uid="uid://d22rtmcpyiaet" path="res://sprites/boss/cactus-boss-body.png" id="4_ot8wp"]
+[ext_resource type="Texture2D" uid="uid://b2py1rbyy1e0" path="res://sprites/boss/cactus-boss-arms.png" id="5_h4lv2"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_u4h6y"]
+atlas = ExtResource("5_h4lv2")
+region = Rect2(0, 0, 256, 256)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_a70pa"]
+atlas = ExtResource("5_h4lv2")
+region = Rect2(256, 0, 256, 256)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_7dvcw"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_u4h6y")
+}],
+"loop": false,
+"name": &"default",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_a70pa")
+}],
+"loop": false,
+"name": &"shoot",
+"speed": 5.0
+}]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_nplle"]
+atlas = ExtResource("4_ot8wp")
+region = Rect2(0, 0, 256, 256)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_ot8wp"]
+atlas = ExtResource("4_ot8wp")
+region = Rect2(512, 0, 256, 256)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_h4lv2"]
+atlas = ExtResource("4_ot8wp")
+region = Rect2(768, 0, 256, 256)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_lnpyb"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_nplle")
+}],
+"loop": true,
+"name": &"hp1",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_ot8wp")
+}],
+"loop": true,
+"name": &"hp2",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_h4lv2")
+}],
+"loop": true,
+"name": &"hp3",
+"speed": 5.0
+}]
+
+[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_31ex3"]
+radius = 31.0
+height = 212.0
+
+[sub_resource type="Animation" id="Animation_ot8wp"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("arms:animation")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [&"shoot"]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("body:scale")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector2(1, 1)]
+}
+
+[sub_resource type="Animation" id="Animation_nplle"]
+resource_name = "rest"
+length = 2.0
+loop_mode = 1
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("body:scale")
+tracks/0/interp = 2
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 1, 2),
+"transitions": PackedFloat32Array(1, 1, 1),
+"update": 0,
+"values": [Vector2(1, 1), Vector2(1.08, 1.08), Vector2(1, 1)]
+}
+
+[sub_resource type="Animation" id="Animation_h4lv2"]
+resource_name = "shoot"
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("arms:animation")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 1),
+"transitions": PackedFloat32Array(1, 1),
+"update": 1,
+"values": [&"shoot", &"default"]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_h4lv2"]
+_data = {
+&"RESET": SubResource("Animation_ot8wp"),
+&"rest": SubResource("Animation_nplle"),
+&"shoot": SubResource("Animation_h4lv2")
+}
+
+[sub_resource type="Animation" id="Animation_u4h6y"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("body:modulate")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Color(1, 1, 1, 1)]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("arms:modulate")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Color(1, 1, 1, 1)]
+}
+
+[sub_resource type="Animation" id="Animation_lnpyb"]
+resource_name = "damage"
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("body:modulate")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.133333),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [Color(0.791123, 0, 0.0021216, 1), Color(1, 1, 1, 1)]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("arms:modulate")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0, 0.12),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [Color(0.759582, 0.15522, 0, 1), Color(1, 1, 1, 1)]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_u4h6y"]
+_data = {
+&"RESET": SubResource("Animation_u4h6y"),
+&"damage": SubResource("Animation_lnpyb")
+}
+
+[node name="CactusBoss" type="CharacterBody2D"]
+collision_layer = 4
+collision_mask = 0
+script = ExtResource("1_vsy1h")
+cactus_fruit = ExtResource("2_ot8wp")
+bulletScene = ExtResource("2_31ex3")
+
+[node name="arms" type="AnimatedSprite2D" parent="."]
+sprite_frames = SubResource("SpriteFrames_7dvcw")
+animation = &"shoot"
+autoplay = "default"
+
+[node name="body" type="AnimatedSprite2D" parent="."]
+sprite_frames = SubResource("SpriteFrames_lnpyb")
+animation = &"hp1"
+autoplay = "hp1"
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="." groups=["Enemy"]]
+position = Vector2(-1, 18)
+shape = SubResource("CapsuleShape2D_31ex3")
+
+[node name="RightArm" type="Node2D" parent="."]
+position = Vector2(-63, 19)
+
+[node name="Right Arm2" type="Marker2D" parent="RightArm"]
+position = Vector2(-8, -54)
+
+[node name="Right Arm3" type="Marker2D" parent="RightArm"]
+position = Vector2(-16, -27)
+
+[node name="Right Arm4" type="Marker2D" parent="RightArm"]
+position = Vector2(8, -47)
+
+[node name="Right Arm5" type="Marker2D" parent="RightArm"]
+position = Vector2(17, -5)
+
+[node name="Right Arm6" type="Marker2D" parent="RightArm"]
+position = Vector2(12, -26)
+
+[node name="Right Arm7" type="Marker2D" parent="RightArm"]
+position = Vector2(-14, 9)
+
+[node name="Right Arm8" type="Marker2D" parent="RightArm"]
+position = Vector2(5, 6)
+
+[node name="Right Arm9" type="Marker2D" parent="RightArm"]
+position = Vector2(-16, -12)
+
+[node name="Right Arm10" type="Marker2D" parent="RightArm"]
+position = Vector2(1, -12)
+
+[node name="Right Arm11" type="Marker2D" parent="RightArm"]
+position = Vector2(-7, -36)
+
+[node name="Right Arm12" type="Marker2D" parent="RightArm"]
+position = Vector2(30, -2)
+
+[node name="Right Arm13" type="Marker2D" parent="RightArm"]
+position = Vector2(17, 14)
+
+[node name="Right Arm14" type="Marker2D" parent="RightArm"]
+position = Vector2(1, 25)
+
+[node name="Right Arm15" type="Marker2D" parent="RightArm"]
+position = Vector2(25, 28)
+
+[node name="LeftArm" type="Node2D" parent="."]
+position = Vector2(74, 13)
+
+[node name="LeftArm" type="Marker2D" parent="LeftArm"]
+position = Vector2(0, -45)
+
+[node name="LeftArm2" type="Marker2D" parent="LeftArm"]
+position = Vector2(11, -29)
+
+[node name="LeftArm3" type="Marker2D" parent="LeftArm"]
+position = Vector2(1, -15)
+
+[node name="LeftArm4" type="Marker2D" parent="LeftArm"]
+position = Vector2(-15, -35)
+
+[node name="LeftArm5" type="Marker2D" parent="LeftArm"]
+position = Vector2(-16, 4)
+
+[node name="LeftArm6" type="Marker2D" parent="LeftArm"]
+position = Vector2(-14, -15)
+
+[node name="LeftArm7" type="Marker2D" parent="LeftArm"]
+position = Vector2(2, 14)
+
+[node name="LeftArm8" type="Marker2D" parent="LeftArm"]
+position = Vector2(12, 28)
+
+[node name="LeftArm9" type="Marker2D" parent="LeftArm"]
+position = Vector2(15, -16)
+
+[node name="LeftArm10" type="Marker2D" parent="LeftArm"]
+position = Vector2(17, 8)
+
+[node name="LeftArm11" type="Marker2D" parent="LeftArm"]
+position = Vector2(-16, 17)
+
+[node name="LeftArm12" type="Marker2D" parent="LeftArm"]
+position = Vector2(-35, 7)
+
+[node name="LeftArm13" type="Marker2D" parent="LeftArm"]
+position = Vector2(-38, 20)
+
+[node name="LeftArm14" type="Marker2D" parent="LeftArm"]
+position = Vector2(-28, 35)
+
+[node name="LeftArm15" type="Marker2D" parent="LeftArm"]
+position = Vector2(-9, 34)
+
+[node name="Phase1Timer" type="Timer" parent="." groups=["Enemy"]]
+wait_time = 2.5
+one_shot = true
+
+[node name="StateMachineTimer" type="Timer" parent="."]
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="."]
+libraries = {
+&"": SubResource("AnimationLibrary_h4lv2")
+}
+
+[node name="DamagePlayer" type="AnimationPlayer" parent="."]
+libraries = {
+&"": SubResource("AnimationLibrary_u4h6y")
+}
+
+[connection signal="timeout" from="Phase1Timer" to="." method="_on_phase_1_timer_timeout"]
+[connection signal="timeout" from="StateMachineTimer" to="." method="_on_state_machine_timer_timeout"]

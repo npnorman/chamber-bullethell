@@ -1,0 +1,61 @@
+[gd_scene load_steps=3 format=3 uid="uid://dgs0htcr1748k"]
+
+[ext_resource type="Script" uid="uid://bir4g6hxrcon5" path="res://scripts/menu/win_room.gd" id="1_d1u5h"]
+[ext_resource type="Texture2D" uid="uid://c0g2exqhgir2c" path="res://sprites/menu_sprites/end-screen.png" id="1_q202m"]
+
+[node name="WinRoom" type="Control"]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("1_d1u5h")
+
+[node name="ColorRect" type="ColorRect" parent="."]
+layout_mode = 0
+offset_left = -534.0
+offset_top = -401.0
+offset_right = 533.0
+offset_bottom = 395.0
+color = Color(4.81307e-07, 0.325694, 0.507438, 1)
+
+[node name="TextureRect2" type="TextureRect" parent="."]
+offset_left = -512.0
+offset_top = -387.0
+offset_right = 515.0
+offset_bottom = 385.0
+texture = ExtResource("1_q202m")
+
+[node name="Camera2D" type="Camera2D" parent="."]
+
+[node name="VBoxContainer" type="VBoxContainer" parent="."]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -455.0
+offset_top = -669.0
+offset_right = -59.0
+offset_bottom = -364.0
+grow_horizontal = 2
+grow_vertical = 2
+alignment = 1
+
+[node name="GoToMenu" type="Button" parent="VBoxContainer"]
+layout_mode = 2
+theme_override_font_sizes/font_size = 41
+text = "Return to Menu"
+
+[node name="RichTextLabel" type="RichTextLabel" parent="."]
+offset_left = -426.0
+offset_top = -285.0
+offset_right = -173.0
+offset_bottom = -68.0
+theme_override_font_sizes/normal_font_size = 76
+bbcode_enabled = true
+text = "[center][color=\"GREEN\"]YOU WIN[/color][/center]"
+
+[connection signal="pressed" from="VBoxContainer/GoToMenu" to="." method="_on_go_to_menu_pressed"]
