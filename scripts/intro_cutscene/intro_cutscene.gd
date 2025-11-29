@@ -9,7 +9,7 @@ func _ready() -> void:
 
 func move_to_starting_scene():
 	MusicPlayer.stop_cutscene_music()
-	Globals.change_scene("res://rooms/TestingRoom.tscn")
+	Globals.change_level_and_reset(Globals.Level.DESERT)
 
 func _process(delta: float) -> void:
 	if Input.is_action_just_pressed("Inventory"):

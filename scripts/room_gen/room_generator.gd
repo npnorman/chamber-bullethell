@@ -1,6 +1,6 @@
 extends Node2D
 
-@export var level_scheme = Globals.Level.DESERT
+var level_scheme = Globals.Level.DESERT
 @export var seed:int = -1
 
 var one_room = preload("res://scenes/RoomGen/room_types/test_one.tscn")
@@ -71,6 +71,9 @@ func generateDeadEnd(exit, rotation):
 	return Vector4(0,0,exit,rotation)
 
 func _ready() -> void:
+	
+	# get level scheme
+	level_scheme = Globals.current_level
 	
 	# check seed from global
 	if Globals.current_seed != -1:

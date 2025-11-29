@@ -1,0 +1,191 @@
+[gd_scene load_steps=20 format=4 uid="uid://cd0v14frrlgju"]
+
+[ext_resource type="Script" uid="uid://dhhfbfplukf3b" path="res://rooms/test_level.gd" id="1_u75bg"]
+[ext_resource type="PackedScene" uid="uid://driwak3eok3gy" path="res://scenes/bullets/player-bullet.tscn" id="2_mj5kq"]
+[ext_resource type="PackedScene" uid="uid://d1pe7q747exgv" path="res://scenes/RoomGen/floor_generator.tscn" id="2_ovcuh"]
+[ext_resource type="PackedScene" uid="uid://b3pyw2ywa2gic" path="res://scenes/bullets/bullet_pickup.tscn" id="3_8hip6"]
+[ext_resource type="PackedScene" uid="uid://bejlis2xb16qo" path="res://scenes/menu/mini_map.tscn" id="3_ep8cf"]
+[ext_resource type="PackedScene" uid="uid://ckx3iy06eedai" path="res://scenes/player/player.tscn" id="3_i3fwb"]
+[ext_resource type="PackedScene" uid="uid://chqsm4w7oks0t" path="res://scenes/bullet_fairy/bullet_fairy.tscn" id="5_b6v1o"]
+[ext_resource type="Texture2D" uid="uid://c8rdbv3u77b5i" path="res://tilesets/HelltileWalls.png" id="7_0yuyw"]
+[ext_resource type="PackedScene" uid="uid://chtu6kuwhxen6" path="res://scenes/UI/hud.tscn" id="7_7e8gg"]
+[ext_resource type="PackedScene" uid="uid://csr22g6iy124u" path="res://scenes/interactables/interactable_item.tscn" id="12_ep8cf"]
+[ext_resource type="Shader" uid="uid://c8627l0fjhsx4" path="res://shaders/scroll.gdshader" id="14_8hip6"]
+[ext_resource type="Texture2D" uid="uid://dr5j25xvk3een" path="res://sprites/background/wind.png" id="14_mj5kq"]
+[ext_resource type="PackedScene" uid="uid://6nyc8dqkm6qm" path="res://scenes/boss/cactus_boss.tscn" id="15_8hip6"]
+[ext_resource type="PackedScene" uid="uid://bsp2v6s7o2ey2" path="res://scenes/UI/pause_menu.tscn" id="15_mj5kq"]
+[ext_resource type="PackedScene" uid="uid://cvevnrc2m5fig" path="res://rooms/AlgorithmRooms/SpecialtyRooms/Desert/desert_boss.tscn" id="16_8hip6"]
+[ext_resource type="PackedScene" uid="uid://40wmqfnn0y2j" path="res://scenes/interactables/barrell.tscn" id="16_g5xp7"]
+
+[sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_gc8kv"]
+texture = ExtResource("7_0yuyw")
+3:1/0 = 0
+3:1/0/physics_layer_0/polygon_0/points = PackedVector2Array(-8, -8, 8, -8, 8, 8, -8, 8)
+4:2/0 = 0
+5:2/0 = 0
+5:2/0/physics_layer_0/polygon_0/points = PackedVector2Array(-8, -8, 8, -8, 8, 8, -8, 8)
+6:2/0 = 0
+1:1/0 = 0
+1:2/0 = 0
+2:2/0 = 0
+2:3/0 = 0
+2:4/0 = 0
+1:4/0 = 0
+1:5/0 = 0
+2:5/0 = 0
+3:5/0 = 0
+4:5/0 = 0
+4:5/0/physics_layer_0/polygon_0/points = PackedVector2Array(-8, -8, 8, -8, 8, 8, -8, 8)
+5:5/0 = 0
+4:4/0 = 0
+3:4/0 = 0
+4:3/0 = 0
+5:3/0 = 0
+5:3/0/physics_layer_0/polygon_0/points = PackedVector2Array(-8, -8, 8, -8, 8, 8, -8, 8)
+6:3/0 = 0
+6:3/0/physics_layer_0/polygon_0/points = PackedVector2Array(-8, -8, 8, -8, 8, 8, -8, 8)
+4:1/0 = 0
+5:1/0 = 0
+5:1/0/physics_layer_0/polygon_0/points = PackedVector2Array(-8, -8, 8, -8, 8, 8, -8, 8)
+6:1/0 = 0
+6:1/0/physics_layer_0/polygon_0/points = PackedVector2Array(-8, -8, 8, -8, 8, 8, -8, 8)
+2:1/0 = 0
+1:3/0 = 0
+3:2/0 = 0
+5:4/0 = 0
+6:5/0 = 0
+6:5/0/physics_layer_0/polygon_0/points = PackedVector2Array(-8, -8, 8, -8, 8, 8, -8, 8)
+6:4/0 = 0
+7:3/0 = 0
+7:3/0/physics_layer_0/polygon_0/points = PackedVector2Array(-8, -8, 8, -8, 8, 8, -8, 8)
+7:2/0 = 0
+7:2/0/physics_layer_0/polygon_0/points = PackedVector2Array(-8, -8, 8, -8, 8, 8, -8, 8)
+7:1/0 = 0
+7:1/0/physics_layer_0/polygon_0/points = PackedVector2Array(-8, -8, 8, -8, 8, 8, -8, 8)
+3:3/0 = 0
+
+[sub_resource type="TileSet" id="TileSet_5vbr4"]
+physics_layer_0/collision_layer = 1
+sources/0 = SubResource("TileSetAtlasSource_gc8kv")
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_07cye"]
+shader = ExtResource("14_8hip6")
+shader_parameter/speed_x = 0.5
+shader_parameter/speed_y = 0.25
+shader_parameter/amplitude = 0.2
+
+[node name="Starting Room" type="Node2D" node_paths=PackedStringArray("boss_room")]
+script = ExtResource("1_u75bg")
+bullet_scene = ExtResource("2_mj5kq")
+bullet_pickup_scene = ExtResource("3_8hip6")
+bullet_fairy = ExtResource("5_b6v1o")
+boss_room = NodePath("Boss Room")
+
+[node name="MiniMap" parent="." instance=ExtResource("3_ep8cf")]
+position = Vector2(120, 250)
+
+[node name="BulletFairyTimer" type="Timer" parent="."]
+wait_time = 10.0
+one_shot = true
+
+[node name="FloorGenerator" parent="." instance=ExtResource("2_ovcuh")]
+z_index = -5
+z_as_relative = false
+
+[node name="Enemies" type="Node" parent="."]
+
+[node name="Projectiles" type="Node" parent="."]
+
+[node name="Chests" type="Node" parent="."]
+
+[node name="Pickups" type="Node" parent="."]
+
+[node name="HUD" parent="." instance=ExtResource("7_7e8gg")]
+
+[node name="EnemyCount" type="RichTextLabel" parent="HUD"]
+anchors_preset = -1
+anchor_left = 0.331
+anchor_top = 0.005
+anchor_right = 0.331
+anchor_bottom = 0.005
+offset_left = -291.944
+offset_top = 99.16
+offset_right = -121.944
+offset_bottom = 141.16
+theme_override_font_sizes/normal_font_size = 19
+bbcode_enabled = true
+text = "[center]Unlock Boss: "
+
+[node name="Camera2D" type="Camera2D" parent="."]
+position_smoothing_enabled = true
+
+[node name="Player" parent="." instance=ExtResource("3_i3fwb")]
+top_level = true
+z_as_relative = false
+position = Vector2(253, -194)
+health = 10
+
+[node name="WallTileLayer" type="TileMapLayer" parent="."]
+position = Vector2(-736, -476)
+tile_map_data = PackedByteArray("AADq//D/AAAGAAUAAADr//D/AAAGAAUAAADs//D/AAAGAAUAAADt//D/AAAGAAUAAADu//D/AAAGAAUAAADv//D/AAAGAAUAAADw//D/AAAGAAUAAADx//D/AAAGAAUAAADy//D/AAAGAAUAAADy/+//AAAGAAUAAADz/+//AAAGAAUAAAD0/+//AAAGAAUAAAD1/+//AAAGAAUAAAD2/+//AAAGAAUAAAD3/+//AAAGAAUAAAD4/+//AAAGAAUAAAD5/+//AAAGAAUAAAD6/+//AAAGAAUAAAD7/+//AAAGAAUAAAD8/+//AAAGAAUAAAD9/+//AAAGAAUAAAD+/+//AAAGAAUAAAD//+//AAAGAAUAAAAAAO//AAAGAAUAAAABAO//AAAGAAUAAAACAO//AAAGAAUAAADq//H/AAAGAAUAAADr//H/AAAGAAUAAADs//H/AAAGAAUAAADz//D/AAAGAAUAAAD0//D/AAAGAAUAAAD1//D/AAAGAAUAAAD2//D/AAAGAAUAAAD3//D/AAAGAAUAAAD4//D/AAAGAAUAAAD5//D/AAAGAAUAAAD6//D/AAAGAAUAAAD7//D/AAAGAAUAAAD8//D/AAAGAAUAAAD9//D/AAAGAAUAAAD+//D/AAAGAAUAAAD///D/AAAGAAUAAAAAAPD/AAAGAAUAAAABAPD/AAAGAAUAAAACAPD/AAAGAAUAAAADAPD/AAAGAAUAAAAEAPD/AAAGAAUAAAAFAPD/AAAGAAUAAAAGAPD/AAAGAAUAAAAHAPD/AAAGAAUAAAAIAPD/AAAGAAUAAAAJAPD/AAAGAAUAAAAKAPD/AAAGAAUAAAALAPD/AAAGAAUAAAAMAPD/AAAGAAUAAAANAPD/AAAGAAUAAAAOAPD/AAAGAAUAAAAPAPD/AAAGAAUAAAAQAPD/AAAGAAUAAAARAPD/AAAGAAUAAAASAPD/AAAGAAUAAAATAPD/AAAGAAUAAAAUAPD/AAAGAAUAAAAUAPH/AAAGAAUAAAATAPH/AAAGAAUAAAASAPH/AAAGAAUAAAD8//H/AAAGAAUAAAD7//H/AAAGAAUAAAD6//H/AAAGAAUAAAD5//H/AAAGAAUAAAD4//H/AAAGAAUAAAD3//H/AAAGAAUAAAD2//H/AAAGAAUAAADt//H/AAAGAAUAAADu//H/AAAGAAUAAADv//H/AAAGAAUAAADw//H/AAAGAAUAAADx//H/AAAGAAUAAADy//H/AAAGAAUAAAD9//H/AAAGAAUAAAD+//H/AAAGAAUAAAD///H/AAAGAAUAAAAAAPH/AAAGAAUAAAABAPH/AAAGAAUAAAACAPH/AAAGAAUAAAADAPH/AAAGAAUAAAAEAPH/AAAGAAUAAAAFAPH/AAAGAAUAAAAGAPH/AAAGAAUAAAAHAPH/AAAGAAUAAAAIAPH/AAAGAAUAAAAJAPH/AAAGAAUAAAAKAPH/AAAGAAUAAAALAPH/AAAGAAUAAAAMAPH/AAAGAAUAAAANAPH/AAAGAAUAAAAOAPH/AAAGAAUAAAAPAPH/AAAGAAUAAAAQAPH/AAAGAAUAAAARAPH/AAAGAAUAAAD1//H/AAAGAAUAAAD0//H/AAAGAAUAAADz//H/AAAGAAUAAADq/+//AAAGAAUAAADr/+//AAAGAAUAAADs/+//AAAGAAUAAADt/+//AAAGAAUAAADu/+//AAAGAAUAAADv/+//AAAGAAUAAADw/+//AAAGAAUAAADx/+//AAAGAAUAAAADAO//AAAGAAUAAAAEAO//AAAGAAUAAAAFAO//AAAGAAUAAAAGAO//AAAGAAUAAAAHAO//AAAGAAUAAAAIAO//AAAGAAUAAAAJAO//AAAGAAUAAAAKAO//AAAGAAUAAAALAO//AAAGAAUAAAAMAO//AAAGAAUAAAANAO//AAAGAAUAAAAOAO//AAAGAAUAAAAPAO//AAAGAAUAAAAQAO//AAAGAAUAAAARAO//AAAGAAUAAAASAO//AAAGAAUAAAATAO//AAAGAAUAAAAUAO//AAAGAAUAAAAVAO//AAAGAAUAAAAVAPD/AAAGAAUAAAAVAPH/AAAGAAUAAADq/+7/AAAGAAUAAADr/+7/AAAGAAUAAADs/+7/AAAGAAUAAADt/+7/AAAGAAUAAADu/+7/AAAGAAUAAADv/+7/AAAGAAUAAADw/+7/AAAGAAUAAADx/+7/AAAGAAUAAADy/+7/AAAGAAUAAADz/+7/AAAGAAUAAAD0/+7/AAAGAAUAAAAAAO7/AAAGAAUAAAABAO7/AAAGAAUAAAACAO7/AAAGAAUAAAADAO7/AAAGAAUAAAD//+7/AAAGAAUAAAD+/+7/AAAGAAUAAAD9/+7/AAAGAAUAAAD8/+7/AAAGAAUAAAD7/+7/AAAGAAUAAAD6/+7/AAAGAAUAAAD5/+7/AAAGAAUAAAD4/+7/AAAGAAUAAAD3/+7/AAAGAAUAAAD2/+7/AAAGAAUAAAD1/+7/AAAGAAUAAAAEAO7/AAAGAAUAAAAFAO7/AAAGAAUAAAAGAO7/AAAGAAUAAAAHAO7/AAAGAAUAAAAIAO7/AAAGAAUAAAAJAO7/AAAGAAUAAAAKAO7/AAAGAAUAAAALAO7/AAAGAAUAAAAMAO7/AAAGAAUAAAANAO7/AAAGAAUAAAAOAO7/AAAGAAUAAAAPAO7/AAAGAAUAAAAQAO7/AAAGAAUAAAARAO7/AAAGAAUAAAASAO7/AAAGAAUAAAATAO7/AAAGAAUAAAAUAO7/AAAGAAUAAAAVAO7/AAAGAAUAAADr/+3/AAADAAEAAADs/+3/AAADAAEAAADt/+3/AAADAAEAAADu/+3/AAADAAEAAADv/+3/AAADAAEAAADw/+3/AAADAAEAAADx/+3/AAADAAEAAADy/+3/AAADAAEAAADz/+3/AAADAAEAAAD0/+3/AAADAAEAAAD1/+3/AAADAAEAAAD2/+3/AAADAAEAAAD3/+3/AAADAAEAAAD4/+3/AAADAAEAAAD5/+3/AAADAAEAAAD6/+3/AAADAAEAAAD7/+3/AAADAAEAAADq/+3/AAADAAEAAAD8/+3/AAADAAEAAAD9/+3/AAADAAEAAAADAO3/AAADAAEAAAAEAO3/AAADAAEAAAAFAO3/AAADAAEAAAAGAO3/AAADAAEAAAAHAO3/AAADAAEAAAAIAO3/AAADAAEAAAAJAO3/AAADAAEAAAAKAO3/AAADAAEAAAALAO3/AAADAAEAAAAMAO3/AAADAAEAAAACAO3/AAADAAEAAAABAO3/AAADAAEAAAAAAO3/AAADAAEAAAD//+3/AAADAAEAAAD+/+3/AAADAAEAAAAOAO3/AAADAAEAAAAPAO3/AAADAAEAAAAQAO3/AAADAAEAAAARAO3/AAADAAEAAAASAO3/AAADAAEAAAATAO3/AAADAAEAAAAUAO3/AAADAAEAAAAVAO3/AAADAAEAAAANAO3/AAADAAEAAADq//L/AAABAAIAAADq//P/AAABAAMAAADq//T/AAABAAMAAADq//X/AAABAAMAAADq//b/AAABAAMAAADq//f/AAABAAMAAADq//j/AAABAAMAAADq//n/AAABAAMAAADq//r/AAABAAMAAADq//v/AAABAAMAAADq//z/AAABAAMAAADq//3/AAABAAMAAADq//7/AAABAAMAAADq////AAABAAMAAADq/wAAAAABAAMAAADq/wEAAAABAAMAAADq/wIAAAABAAMAAADq/wMAAAABAAMAAADq/wQAAAABAAMAAADq/wUAAAABAAMAAADq/wYAAAABAAMAAADq/wcAAAABAAMAAADq/wgAAAABAAMAAADq/wkAAAABAAMAAADq/woAAAABAAMAAADq/wsAAAABAAMAAADq/wwAAAABAAMAAADq/w0AAAABAAQAAADr/w0AAAACAAQAAADs/w0AAAACAAQAAADt/w0AAAACAAQAAADu/w0AAAACAAQAAADv/w0AAAACAAQAAADw/w0AAAACAAQAAADx/w0AAAACAAQAAADy/w0AAAACAAQAAADz/w0AAAACAAQAAAD0/w0AAAACAAQAAAD1/w0AAAACAAQAAAD2/w0AAAACAAQAAAD3/w0AAAACAAQAAAD4/w0AAAACAAQAAAD5/w0AAAACAAQAAAD6/w0AAAACAAQAAAD7/w0AAAACAAQAAAD8/w0AAAACAAQAAAD9/w0AAAACAAQAAAD+/w0AAAACAAQAAAD//w0AAAACAAQAAAAAAA0AAAACAAQAAAABAA0AAAACAAQAAAACAA0AAAACAAQAAAADAA0AAAACAAQAAAAEAA0AAAACAAQAAAAFAA0AAAACAAQAAAAGAA0AAAACAAQAAAAHAA0AAAACAAQAAAAIAA0AAAACAAQAAAAJAA0AAAACAAQAAAAKAA0AAAACAAQAAAALAA0AAAACAAQAAAAMAA0AAAACAAQAAAANAA0AAAACAAQAAAAOAA0AAAACAAQAAAAPAA0AAAACAAQAAAAQAA0AAAACAAQAAAARAA0AAAACAAQAAAASAA0AAAACAAQAAAATAA0AAAACAAQAAAAUAA0AAAACAAQAAAAVAA0AAAADAAQAAAAVAAwAAAADAAMAAAAVAAsAAAADAAMAAAAVAAoAAAADAAMAAAAVAAkAAAADAAMAAAAVAAgAAAADAAMAAAAVAAcAAAADAAMAAAAVAAYAAAADAAMAAAAVAAUAAAADAAMAAAAVAAQAAAADAAMAAAAVAAMAAAADAAMAAAAVAAIAAAADAAMAAAAVAAEAAAADAAMAAAAVAAAAAAADAAMAAAAVAP7/AAADAAMAAAAVAP3/AAADAAMAAAAVAPz/AAADAAMAAAAVAPv/AAADAAMAAAAVAPr/AAADAAMAAAAVAP//AAADAAMAAAAVAPn/AAADAAMAAAAVAPj/AAADAAMAAAAVAPf/AAADAAMAAAAVAPb/AAADAAMAAAAVAPX/AAADAAMAAAAVAPT/AAADAAMAAAAVAPP/AAADAAMAAAAVAPL/AAADAAIAAADp//L/AAAFAAIAAADp//P/AAAFAAIAAADp//T/AAAFAAIAAADp//X/AAAFAAIAAADp//b/AAAFAAIAAADp//f/AAAFAAIAAADp//j/AAAFAAIAAADp//n/AAAFAAIAAADp//r/AAAFAAIAAADp//v/AAAFAAIAAADp//z/AAAFAAIAAADp//3/AAAFAAIAAADp//7/AAAFAAIAAADp////AAAFAAIAAADp/wAAAAAFAAIAAADp/wEAAAAFAAIAAADp/wIAAAAFAAIAAADp/wMAAAAFAAIAAADp/wQAAAAFAAIAAADp/wUAAAAFAAIAAADp/wYAAAAFAAIAAADp/wcAAAAFAAIAAADp/wgAAAAFAAIAAADp/wkAAAAFAAIAAADp/woAAAAFAAIAAADp/wsAAAAFAAIAAADp/wwAAAAFAAIAAADp/w0AAAAFAAIAAADp/w4AAAAFAAMAAADq/w4AAAAGAAMAAADr/w4AAAAGAAMAAADs/w4AAAAGAAMAAADt/w4AAAAGAAMAAADu/w4AAAAGAAMAAADv/w4AAAAGAAMAAADw/w4AAAAGAAMAAADx/w4AAAAGAAMAAADy/w4AAAAGAAMAAADz/w4AAAAGAAMAAAD0/w4AAAAGAAMAAAD1/w4AAAAGAAMAAAD2/w4AAAAGAAMAAAD3/w4AAAAGAAMAAAD4/w4AAAAGAAMAAAD5/w4AAAAGAAMAAAD6/w4AAAAGAAMAAAD7/w4AAAAGAAMAAAD8/w4AAAAGAAMAAAD9/w4AAAAGAAMAAAD+/w4AAAAGAAMAAAD//w4AAAAGAAMAAAAAAA4AAAAGAAMAAAABAA4AAAAGAAMAAAACAA4AAAAGAAMAAAADAA4AAAAGAAMAAAAEAA4AAAAGAAMAAAAFAA4AAAAGAAMAAAAGAA4AAAAGAAMAAAAHAA4AAAAGAAMAAAAIAA4AAAAGAAMAAAAJAA4AAAAGAAMAAAAKAA4AAAAGAAMAAAALAA4AAAAGAAMAAAAMAA4AAAAGAAMAAAANAA4AAAAGAAMAAAAOAA4AAAAGAAMAAAAPAA4AAAAGAAMAAAAQAA4AAAAGAAMAAAARAA4AAAAGAAMAAAASAA4AAAAGAAMAAAATAA4AAAAGAAMAAAAUAA4AAAAGAAMAAAAVAA4AAAAGAAMAAAAWAA0AAAAHAAIAAAAWAA4AAAAHAAMAAAAWAAwAAAAHAAIAAAAWAAsAAAAHAAIAAAAWAAoAAAAHAAIAAAAWAAkAAAAHAAIAAAAWAAgAAAAHAAIAAAAWAAcAAAAHAAIAAAAWAAYAAAAHAAIAAAAWAAUAAAAHAAIAAAAWAAQAAAAHAAIAAAAWAAMAAAAHAAIAAAAWAAIAAAAHAAIAAAAWAAEAAAAHAAIAAAAWAAAAAAAHAAIAAAAWAP//AAAHAAIAAAAWAP7/AAAHAAIAAAAWAP3/AAAHAAIAAAAWAPz/AAAHAAIAAAAWAPv/AAAHAAIAAAAWAPr/AAAHAAIAAAAWAPj/AAAHAAIAAAAWAPn/AAAHAAIAAAAWAPb/AAAHAAIAAAAWAPX/AAAHAAIAAAAWAPT/AAAHAAIAAAAWAPP/AAAHAAIAAAAWAPf/AAAHAAIAAAAWAPH/AAAHAAEAAAAWAPL/AAAHAAIAAADp//H/AAAFAAEAAAA=")
+enabled = false
+tile_set = SubResource("TileSet_5vbr4")
+
+[node name="InteractableItem" parent="." instance=ExtResource("12_ep8cf")]
+position = Vector2(204, -272)
+
+[node name="PauseMenu" parent="." instance=ExtResource("15_mj5kq")]
+visible = false
+
+[node name="TextureRect" type="TextureRect" parent="."]
+z_index = -100
+z_as_relative = false
+material = SubResource("ShaderMaterial_07cye")
+offset_left = -8655.0
+offset_top = -5500.0
+offset_right = 7206.0
+offset_bottom = 5706.0
+texture = ExtResource("14_mj5kq")
+stretch_mode = 1
+metadata/_edit_lock_ = true
+
+[node name="TextureRect" type="TextureRect" parent="TextureRect"]
+z_index = -100
+z_as_relative = false
+material = SubResource("ShaderMaterial_07cye")
+layout_mode = 0
+offset_left = 6739.0
+offset_top = -2128.0
+offset_right = 10725.0
+offset_bottom = 109.0
+texture = ExtResource("14_mj5kq")
+stretch_mode = 1
+metadata/_edit_lock_ = true
+
+[node name="ColorRect" type="ColorRect" parent="."]
+offset_left = -3577.0
+offset_top = -3260.0
+offset_right = -3537.0
+offset_bottom = -3220.0
+color = Color(0.384314, 0.341176, 0.286275, 1)
+
+[node name="Boss Room" parent="." instance=ExtResource("16_8hip6")]
+position = Vector2(-509, -6236)
+metadata/_edit_lock_ = true
+
+[node name="CactusBoss" parent="." instance=ExtResource("15_8hip6")]
+position = Vector2(56, -6837)
+
+[node name="Barrell" parent="." instance=ExtResource("16_g5xp7")]
+position = Vector2(256, -270)
+mass = 100.0
+
+[connection signal="timeout" from="BulletFairyTimer" to="." method="_on_bullet_fairy_timer_timeout"]
+[connection signal="ammo_dropped" from="HUD" to="." method="_on_hud_ammo_dropped"]
+[connection signal="rotation_completed" from="HUD" to="." method="_on_hud_rotation_completed"]
+[connection signal="bullet_fired" from="Player" to="." method="_on_player_bullet_fired"]
+[connection signal="cylinder_cycled" from="Player" to="." method="_on_player_cylinder_cycled"]
+[connection signal="game_paused" from="Player" to="." method="_on_player_game_paused"]
+[connection signal="toggle_inventory" from="Player" to="." method="_on_player_toggle_inventory"]
+[connection signal="update_health" from="Player" to="." method="_on_player_update_health"]
+[connection signal="game_resumed" from="PauseMenu" to="." method="_on_pause_menu_game_resumed"]

@@ -42,11 +42,11 @@ func _on_resume_pressed() -> void:
 
 func _on_go_to_menu_pressed() -> void:
 	game_resumed.emit()
-	Globals.change_scene_and_reset("res://scenes/menu/start_menu.tscn")
+	Globals.change_scene_and_reset(Globals.Scenes.START)
 
 func _on_restart_pressed() -> void:
 	game_resumed.emit()
-	Globals.change_scene_and_reset("res://rooms/TestingRoom.tscn")
+	Globals.change_level_and_reset()
 
 func on_death() -> void:
 	resume.visible = false
@@ -67,4 +67,4 @@ func _on_exit_controls_pressed() -> void:
 func _on_restart_same_seed_pressed() -> void:
 	game_resumed.emit()
 	# save the seed
-	Globals.change_scene_and_reset("res://rooms/TestingRoom.tscn", true, true, false)
+	Globals.change_level_and_reset(Globals.current_level,true,true,false)

@@ -263,7 +263,7 @@ func shoot_arm(arm):
 
 func on_death():
 	self.queue_free()
-	Globals.change_scene("res://scenes/menu/win_room.tscn")
+	Globals.change_scene(Globals.Scenes.WIN)
 
 func _on_phase_1_timer_timeout() -> void:
 	isReadyPhase1 = true
