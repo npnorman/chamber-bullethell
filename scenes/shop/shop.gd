@@ -42,7 +42,6 @@ func update_bartender():
 	var children = get_parent().get_children()
 	for child in children:
 		if child.has_method("play_saying"):
-			print("Playing")
 			child.play_saying()
 
 # Below are 3 similar functions that are called depending on which item's area was entered to purchase that item (if possible)

@@ -1,4 +1,4 @@
-[gd_scene load_steps=42 format=3 uid="uid://chtu6kuwhxen6"]
+[gd_scene load_steps=43 format=3 uid="uid://chtu6kuwhxen6"]
 
 [ext_resource type="Script" uid="uid://cxl6hj6ji3sd2" path="res://scenes/UI/hud.gd" id="1_rd3kb"]
 [ext_resource type="Texture2D" uid="uid://w5axh0wgmx1r" path="res://sprites/bullets/BasicBulletFull.png" id="2_d15ok"]
@@ -22,6 +22,7 @@
 [ext_resource type="Texture2D" uid="uid://1mh6e4ebpc7i" path="res://sprites/HealthBar/MidStacheOut.png" id="18_7frj2"]
 [ext_resource type="Texture2D" uid="uid://cg5de0vgrikyo" path="res://sprites/HealthBar/MidRStacheOut.png" id="20_dm2wl"]
 [ext_resource type="Texture2D" uid="uid://diiquvshof8t4" path="res://sprites/HealthBar/FarRStacheOut.png" id="22_vatau"]
+[ext_resource type="Texture2D" uid="uid://ddr1tfh3nmxl0" path="res://scenes/menu/arrow.png" id="23_r44e2"]
 
 [sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_rd3kb"]
 
@@ -681,6 +682,15 @@ stretch_mode = 4
 layout_mode = 2
 texture = ExtResource("22_vatau")
 stretch_mode = 4
+
+[node name="TextureRect" type="TextureRect" parent="."]
+offset_left = 492.0
+offset_top = 515.0
+offset_right = 532.0
+offset_bottom = 555.0
+scale = Vector2(1.75, 1.75)
+pivot_offset = Vector2(20, 20)
+texture = ExtResource("23_r44e2")
 
 [connection signal="animation_finished" from="CylinderNode/CylinderAnimation" to="." method="_on_cylinder_animation_animation_finished"]
 [connection signal="mouse_entered" from="InventoryAreas/InventoryView/Ammo1/Area1" to="." method="_on_area_1_mouse_entered"]
