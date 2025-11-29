@@ -9,12 +9,32 @@ extends CanvasLayer
 @onready var controls_container: Control = $ControlScreen
 @onready var exit_controls: Button = $ControlScreen/ExitControls
 @onready var seed_text: RichTextLabel = $SeedText
+@onready var animation_player: AnimationPlayer = $AnimationPlayer
 
 signal game_resumed
+
+# for easter egg
+var current_key_index = 0
 
 func _ready() -> void:
 	process_mode = Node.PROCESS_MODE_ALWAYS
 	seed_text.text = "[right]  seed: " + str(Globals.current_seed) + "   [/right]"
+
+func _input(event: InputEvent) -> void:
+	# check for code
+	var code = ["Up","Up","Down","Down","Left","Right","Left","Right","B","A","Start"]
+	
+	if event.is_action(code[current_key_index]) and event.is_echo() == false and event.is_pressed() == false:
+		current_key_index += 1
+		if current_key_index >= len(code):
+			current_key_index = 0
+			animation_player.play("easter_egg")
+			
+	elif event.is_action(code[current_key_index]) and event.is_echo() == false and event.is_pressed():
+		pass
+		
+	else:
+		current_key_index = 0
 
 func _on_resume_pressed() -> void:
 	game_resumed.emit()
