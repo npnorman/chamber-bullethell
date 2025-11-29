@@ -27,7 +27,18 @@ var desert_rooms = [ #dont include start
 	[1,preload("res://rooms/AlgorithmRooms/DesertRooms/DesertRoom8.tscn")],
 	[1,preload("res://rooms/AlgorithmRooms/DesertRooms/DesertRoom9.tscn")],
 ]
-var saloon_rooms = []
+var saloon_rooms = [
+	[5,preload("res://rooms/AlgorithmRooms/TavernRooms/TavernRoom6.tscn")],
+	[1,preload("res://rooms/AlgorithmRooms/TavernRooms/TavernRoom0.tscn")],
+	[1,preload("res://rooms/AlgorithmRooms/TavernRooms/TavernRoom1.tscn")],
+	[1,preload("res://rooms/AlgorithmRooms/TavernRooms/TavernRoom2.tscn")],
+	[1,preload("res://rooms/AlgorithmRooms/TavernRooms/TavernRoom3.tscn")],
+	[1,preload("res://rooms/AlgorithmRooms/TavernRooms/TavernRoom4.tscn")],
+	[1,preload("res://rooms/AlgorithmRooms/TavernRooms/TavernRoom5.tscn")],
+	[1,preload("res://rooms/AlgorithmRooms/TavernRooms/TavernRoom7.tscn")],
+	[1,preload("res://rooms/AlgorithmRooms/TavernRooms/TavernRoom8.tscn")],
+	[1,preload("res://rooms/AlgorithmRooms/TavernRooms/TavernRoom9.tscn")],
+]
 var hell_rooms = []
 
 # map
@@ -60,6 +71,11 @@ func generateDeadEnd(exit, rotation):
 	return Vector4(0,0,exit,rotation)
 
 func _ready() -> void:
+	
+	# check seed from global
+	if Globals.current_seed != -1:
+		seed = Globals.current_seed
+	
 	var m = 11
 	var n = 11
 	
@@ -132,9 +148,11 @@ func generateMap(m,n,seed:int):
 	if seed != -1:
 		rng.seed = seed
 		seed(seed) # global seed for .shuffle()
+		Globals.current_seed = seed
 	else:
 		seed(rng.seed)
 		print("Seed: ", rng.seed)
+		Globals.current_seed = rng.seed
 	
 	var has_rejected = 5
 	while len(knapsack) > 0:

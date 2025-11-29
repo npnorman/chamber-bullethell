@@ -136,12 +136,29 @@ var current_room_center:Vector2 = Vector2.ZERO
 
 func change_scene(file_name:String):
 	get_tree().change_scene_to_file(file_name)
-	reset_ammo()
-	
+
 func reset_ammo():
+	print("RESETING AMM0")
 	ammo = [30, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0]
 	ammo_types = [0, -1, -1, -1]
 	magazine = [-1, -1, -1, -1, -1, -1]
 
+func reset_player_stats(ammo = true, boss = true, seed = true):
+	if ammo:
+		reset_ammo()
+	
+	if boss:
+		isBossTPUnlocked = false
+	
+	if seed:
+		current_seed = -1
+
+func change_scene_and_reset(file_name:String, ammo = true, boss = true, seed = true):
+	get_tree().change_scene_to_file(file_name)
+	reset_player_stats(ammo, boss, seed)
+
 #flag for boss TP
 var isBossTPUnlocked = false
+
+# seed for regen purposes
+var current_seed = -1

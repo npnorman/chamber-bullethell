@@ -8,11 +8,13 @@ extends CanvasLayer
 @onready var death_text: RichTextLabel = $DeathText
 @onready var controls_container: Control = $ControlScreen
 @onready var exit_controls: Button = $ControlScreen/ExitControls
+@onready var seed_text: RichTextLabel = $SeedText
 
 signal game_resumed
 
 func _ready() -> void:
 	process_mode = Node.PROCESS_MODE_ALWAYS
+	seed_text.text = "[right]  seed: " + str(Globals.current_seed) + "   [/right]"
 
 func _on_resume_pressed() -> void:
 	game_resumed.emit()
@@ -20,11 +22,11 @@ func _on_resume_pressed() -> void:
 
 func _on_go_to_menu_pressed() -> void:
 	game_resumed.emit()
-	Globals.change_scene("res://scenes/menu/start_menu.tscn")
+	Globals.change_scene_and_reset("res://scenes/menu/start_menu.tscn")
 
 func _on_restart_pressed() -> void:
 	game_resumed.emit()
-	Globals.change_scene("res://rooms/TestingRoom.tscn")
+	Globals.change_scene_and_reset("res://rooms/TestingRoom.tscn")
 
 func on_death() -> void:
 	resume.visible = false
@@ -41,3 +43,8 @@ func _on_controls_pressed() -> void:
 func _on_exit_controls_pressed() -> void:
 	menu_container.visible = true
 	controls_container.visible = false
+
+func _on_restart_same_seed_pressed() -> void:
+	game_resumed.emit()
+	# save the seed
+	Globals.change_scene_and_reset("res://rooms/TestingRoom.tscn", true, true, false)
