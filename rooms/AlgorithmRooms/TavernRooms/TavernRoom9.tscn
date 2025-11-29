@@ -1,0 +1,80 @@
+[gd_scene load_steps=9 format=3 uid="uid://bpqvxgk3844lx"]
+
+[ext_resource type="PackedScene" uid="uid://cuk5py63ydbdx" path="res://rooms/AlgorithmRooms/TavernRooms/TavernRoomBase.tscn" id="1_n45jp"]
+[ext_resource type="PackedScene" uid="uid://be3bjg0ua7h2c" path="res://scenes/enemy.tscn" id="2_10get"]
+[ext_resource type="PackedScene" uid="uid://c1fsemoplmeeb" path="res://scenes/magician_enemy.tscn" id="3_4m84t"]
+[ext_resource type="PackedScene" uid="uid://db72yr73ei6ps" path="res://sprites/Bar.tscn" id="4_jl6w0"]
+[ext_resource type="Texture2D" uid="uid://bo5chptmg0doy" path="res://sprites/Chair.png" id="5_0as81"]
+[ext_resource type="PackedScene" uid="uid://hu0dgs87hr4k" path="res://sprites/SquareTable.tscn" id="6_r6tq4"]
+[ext_resource type="PackedScene" uid="uid://dr7vgp2y75n6u" path="res://sprites/RoundTable.tscn" id="7_ph5p6"]
+[ext_resource type="PackedScene" uid="uid://cuxt1u8vdf1vl" path="res://sprites/Barstool.tscn" id="8_tk50w"]
+
+[node name="BaseRoom2" instance=ExtResource("1_n45jp")]
+
+[node name="Enemy" parent="Enemies" index="0" instance=ExtResource("2_10get")]
+position = Vector2(223, -289)
+
+[node name="Enemy2" parent="Enemies" index="1" instance=ExtResource("2_10get")]
+position = Vector2(335, -287)
+
+[node name="MagicianEnemy" parent="Enemies" index="2" instance=ExtResource("3_4m84t")]
+position = Vector2(111, -429)
+
+[node name="MagicianEnemy2" parent="Enemies" index="3" instance=ExtResource("3_4m84t")]
+position = Vector2(413, -139)
+
+[node name="Bar" parent="." index="4" instance=ExtResource("4_jl6w0")]
+position = Vector2(324, -291)
+rotation = 1.5708
+scale = Vector2(0.88579, 0.971149)
+
+[node name="Bar2" parent="." index="5" instance=ExtResource("4_jl6w0")]
+position = Vector2(231, -291)
+rotation = 4.71239
+scale = Vector2(0.88579, 0.971149)
+
+[node name="Chair3" type="Sprite2D" parent="." index="6"]
+position = Vector2(434, -492)
+scale = Vector2(1.5, 1.4375)
+texture = ExtResource("5_0as81")
+
+[node name="Chair4" type="Sprite2D" parent="." index="7"]
+position = Vector2(462, -491)
+scale = Vector2(1.5, 1.4375)
+texture = ExtResource("5_0as81")
+
+[node name="SquareTable3" parent="." index="8" instance=ExtResource("6_r6tq4")]
+position = Vector2(449, -464)
+
+[node name="Chair5" type="Sprite2D" parent="." index="9"]
+position = Vector2(93, -126)
+scale = Vector2(1.5, 1.4375)
+texture = ExtResource("5_0as81")
+
+[node name="Chair6" type="Sprite2D" parent="." index="10"]
+position = Vector2(121, -125)
+scale = Vector2(1.5, 1.4375)
+texture = ExtResource("5_0as81")
+
+[node name="SquareTable4" parent="." index="11" instance=ExtResource("6_r6tq4")]
+position = Vector2(108, -98)
+
+[node name="RoundTable3" parent="." index="12" instance=ExtResource("7_ph5p6")]
+position = Vector2(90.1384, -504)
+scale = Vector2(1.31848, 1.38791)
+
+[node name="Barstool16" parent="." index="13" instance=ExtResource("8_tk50w")]
+position = Vector2(60.1384, -493)
+
+[node name="Barstool17" parent="." index="14" instance=ExtResource("8_tk50w")]
+position = Vector2(120.138, -492)
+
+[node name="RoundTable4" parent="." index="15" instance=ExtResource("7_ph5p6")]
+position = Vector2(470.138, -98.8272)
+scale = Vector2(1.31848, 1.38791)
+
+[node name="Barstool18" parent="." index="16" instance=ExtResource("8_tk50w")]
+position = Vector2(440.138, -87.8272)
+
+[node name="Barstool19" parent="." index="17" instance=ExtResource("8_tk50w")]
+position = Vector2(500.138, -86.8272)

@@ -1,7 +1,11 @@
-[gd_scene load_steps=3 format=3 uid="uid://ijmepe8hwj4y"]
+[gd_scene load_steps=7 format=3 uid="uid://ijmepe8hwj4y"]
 
 [ext_resource type="Script" uid="uid://cj3cew0uk5lr" path="res://scripts/start_menu/start_menu.gd" id="1_r0pvr"]
 [ext_resource type="Texture2D" uid="uid://bud0r74u02hmg" path="res://sprites/menu_sprites/StartScreen.png" id="2_r0pvr"]
+[ext_resource type="Texture2D" uid="uid://fnkbu64ch1uu" path="res://scenes/menu/TitleSign.png" id="3_j28ev"]
+[ext_resource type="Texture2D" uid="uid://dv3hma5x2s5am" path="res://scenes/menu/Wanted.png" id="4_ougr1"]
+[ext_resource type="Texture2D" uid="uid://dwx2j2nbah64w" path="res://scenes/menu/Hanging Signs.png" id="4_r03tk"]
+[ext_resource type="FontFile" uid="uid://dyb483t2gk0t" path="res://Pixel-Western.ttf" id="6_hqr2w"]
 
 [node name="StartMenu" type="Node2D"]
 script = ExtResource("1_r0pvr")
@@ -13,45 +17,87 @@ offset_right = 40.0
 offset_bottom = 40.0
 texture = ExtResource("2_r0pvr")
 
-[node name="RichTextLabel" type="RichTextLabel" parent="CanvasLayer"]
+[node name="TitleSign" type="Sprite2D" parent="CanvasLayer"]
+position = Vector2(385, 58)
+scale = Vector2(1.025, 1.13158)
+texture = ExtResource("3_j28ev")
+
+[node name="Wanted" type="Sprite2D" parent="CanvasLayer/TitleSign"]
+position = Vector2(403.902, 491.348)
+scale = Vector2(0.579601, 0.454564)
+texture = ExtResource("4_ougr1")
+
+[node name="HangingSigns" type="Sprite2D" parent="CanvasLayer/TitleSign"]
+position = Vector2(-222.439, 82.186)
+scale = Vector2(0.97561, 0.88372)
+texture = ExtResource("4_r03tk")
+
+[node name="HangingSigns2" type="Sprite2D" parent="CanvasLayer/TitleSign/HangingSigns"]
+show_behind_parent = true
+position = Vector2(0, 88)
+texture = ExtResource("4_r03tk")
+
+[node name="HangingSigns3" type="Sprite2D" parent="CanvasLayer/TitleSign/HangingSigns/HangingSigns2"]
+show_behind_parent = true
+position = Vector2(0, 88)
+texture = ExtResource("4_r03tk")
+
+[node name="StartButton" type="Button" parent="CanvasLayer"]
 offset_left = 29.0
-offset_top = 29.0
-offset_right = 747.0
-offset_bottom = 141.0
-theme_override_colors/default_color = Color(0, 0, 0, 1)
-theme_override_colors/font_outline_color = Color(0.332881, 0.332881, 0.332881, 1)
-theme_override_font_sizes/normal_font_size = 72
-bbcode_enabled = true
-text = "[center]The Devil's Chamber"
+offset_top = 124.0
+offset_right = 72.0
+offset_bottom = 142.0
+scale = Vector2(6.13491, 4.05959)
+size_flags_horizontal = 3
+size_flags_vertical = 3
+theme_override_fonts/font = ExtResource("6_hqr2w")
+theme_override_font_sizes/font_size = 8
+text = "
 
-[node name="VBoxContainer" type="VBoxContainer" parent="CanvasLayer"]
-anchors_preset = -1
-anchor_left = 0.966
-anchor_top = 0.943
-anchor_right = 0.977
-anchor_bottom = 1.0
-offset_left = -396.0
-offset_top = -239.0
-grow_horizontal = 0
-grow_vertical = 0
 
-[node name="StartButton" type="Button" parent="CanvasLayer/VBoxContainer"]
-layout_mode = 2
-theme_override_font_sizes/font_size = 50
-text = "Start"
+
+       Start
+"
+flat = true
 icon_alignment = 1
-expand_icon = true
 
-[node name="SettingsButton" type="Button" parent="CanvasLayer/VBoxContainer"]
-layout_mode = 2
-theme_override_font_sizes/font_size = 50
-text = "Settings"
+[node name="SettingsButton" type="Button" parent="CanvasLayer"]
+offset_left = 25.0
+offset_top = 211.0
+offset_right = 87.0
+offset_bottom = 231.0
+scale = Vector2(4.40986, 3.77969)
+theme_override_fonts/font = ExtResource("6_hqr2w")
+theme_override_font_sizes/font_size = 8
+text = "
 
-[node name="ExitButton" type="Button" parent="CanvasLayer/VBoxContainer"]
-layout_mode = 2
-theme_override_font_sizes/font_size = 50
-text = "Exit Game"
 
-[connection signal="pressed" from="CanvasLayer/VBoxContainer/StartButton" to="." method="_on_start_button_pressed"]
-[connection signal="pressed" from="CanvasLayer/VBoxContainer/SettingsButton" to="." method="_on_settings_button_pressed"]
-[connection signal="pressed" from="CanvasLayer/VBoxContainer/ExitButton" to="." method="_on_exit_button_pressed"]
+
+
+Settings
+"
+flat = true
+alignment = 2
+icon_alignment = 1
+
+[node name="ExitButton" type="Button" parent="CanvasLayer"]
+offset_left = 22.0
+offset_top = 299.0
+offset_right = 57.0
+offset_bottom = 315.0
+scale = Vector2(7.70377, 3.69417)
+size_flags_stretch_ratio = 5.52
+theme_override_fonts/font = ExtResource("6_hqr2w")
+theme_override_font_sizes/font_size = 8
+text = "
+
+
+
+
+Exit"
+flat = true
+icon_alignment = 1
+
+[connection signal="pressed" from="CanvasLayer/StartButton" to="." method="_on_start_button_pressed"]
+[connection signal="pressed" from="CanvasLayer/SettingsButton" to="." method="_on_settings_button_pressed"]
+[connection signal="pressed" from="CanvasLayer/ExitButton" to="." method="_on_exit_button_pressed"]

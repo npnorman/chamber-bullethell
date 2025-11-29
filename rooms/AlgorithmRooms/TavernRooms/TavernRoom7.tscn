@@ -1,0 +1,94 @@
+[gd_scene load_steps=6 format=3 uid="uid://x1rs76i3og16"]
+
+[ext_resource type="PackedScene" uid="uid://cuk5py63ydbdx" path="res://rooms/AlgorithmRooms/TavernRooms/TavernRoomBase.tscn" id="1_qlucr"]
+[ext_resource type="PackedScene" uid="uid://cuxt1u8vdf1vl" path="res://sprites/Barstool.tscn" id="2_dioxf"]
+[ext_resource type="PackedScene" uid="uid://c1fsemoplmeeb" path="res://scenes/magician_enemy.tscn" id="2_fh6tq"]
+[ext_resource type="PackedScene" uid="uid://dr7vgp2y75n6u" path="res://sprites/RoundTable.tscn" id="3_fh6tq"]
+[ext_resource type="PackedScene" uid="uid://crwot1rdef6uf" path="res://scenes/interactables/chest.tscn" id="3_shebr"]
+
+[node name="BaseRoom2" instance=ExtResource("1_qlucr")]
+
+[node name="MagicianEnemy" parent="Enemies" index="0" instance=ExtResource("2_fh6tq")]
+position = Vector2(88, -426)
+
+[node name="MagicianEnemy2" parent="Enemies" index="1" instance=ExtResource("2_fh6tq")]
+position = Vector2(477, -432)
+
+[node name="MagicianEnemy3" parent="Enemies" index="2" instance=ExtResource("2_fh6tq")]
+position = Vector2(474, -141)
+
+[node name="MagicianEnemy4" parent="Enemies" index="3" instance=ExtResource("2_fh6tq")]
+position = Vector2(83, -141)
+
+[node name="Chest" parent="Enemies" index="4" instance=ExtResource("3_shebr")]
+position = Vector2(284, -290)
+
+[node name="Barstool2" parent="." index="4" instance=ExtResource("2_dioxf")]
+position = Vector2(231, -181)
+
+[node name="Barstool3" parent="." index="5" instance=ExtResource("2_dioxf")]
+position = Vector2(190, -222)
+
+[node name="Barstool4" parent="." index="6" instance=ExtResource("2_dioxf")]
+position = Vector2(396, -252)
+
+[node name="Barstool5" parent="." index="7" instance=ExtResource("2_dioxf")]
+position = Vector2(362, -194)
+
+[node name="Barstool6" parent="." index="8" instance=ExtResource("2_dioxf")]
+position = Vector2(300, -177)
+
+[node name="Barstool7" parent="." index="9" instance=ExtResource("2_dioxf")]
+position = Vector2(242, -377)
+
+[node name="Barstool8" parent="." index="10" instance=ExtResource("2_dioxf")]
+position = Vector2(195, -343)
+
+[node name="Barstool9" parent="." index="11" instance=ExtResource("2_dioxf")]
+position = Vector2(391, -316)
+
+[node name="Barstool10" parent="." index="12" instance=ExtResource("2_dioxf")]
+position = Vector2(350, -366)
+
+[node name="Barstool11" parent="." index="13" instance=ExtResource("2_dioxf")]
+position = Vector2(298, -382)
+
+[node name="RoundTable" parent="." index="14" instance=ExtResource("3_fh6tq")]
+position = Vector2(85, -80)
+scale = Vector2(1.31848, 1.38791)
+
+[node name="Barstool12" parent="." index="15" instance=ExtResource("2_dioxf")]
+position = Vector2(55, -69)
+
+[node name="Barstool13" parent="." index="16" instance=ExtResource("2_dioxf")]
+position = Vector2(115, -68)
+
+[node name="RoundTable2" parent="." index="17" instance=ExtResource("3_fh6tq")]
+position = Vector2(472.138, -80.8272)
+scale = Vector2(1.31848, 1.38791)
+
+[node name="Barstool14" parent="." index="18" instance=ExtResource("2_dioxf")]
+position = Vector2(442.138, -69.8272)
+
+[node name="Barstool15" parent="." index="19" instance=ExtResource("2_dioxf")]
+position = Vector2(502.138, -68.8272)
+
+[node name="RoundTable3" parent="." index="20" instance=ExtResource("3_fh6tq")]
+position = Vector2(90.1384, -504)
+scale = Vector2(1.31848, 1.38791)
+
+[node name="Barstool16" parent="." index="21" instance=ExtResource("2_dioxf")]
+position = Vector2(60.1384, -493)
+
+[node name="Barstool17" parent="." index="22" instance=ExtResource("2_dioxf")]
+position = Vector2(120.138, -492)
+
+[node name="RoundTable4" parent="." index="23" instance=ExtResource("3_fh6tq")]
+position = Vector2(477.277, -504.827)
+scale = Vector2(1.31848, 1.38791)
+
+[node name="Barstool18" parent="." index="24" instance=ExtResource("2_dioxf")]
+position = Vector2(447.277, -493.827)
+
+[node name="Barstool19" parent="." index="25" instance=ExtResource("2_dioxf")]
+position = Vector2(507.277, -492.827)

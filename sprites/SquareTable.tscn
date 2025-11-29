@@ -1,0 +1,21 @@
+[gd_scene load_steps=3 format=3 uid="uid://hu0dgs87hr4k"]
+
+[ext_resource type="Texture2D" uid="uid://c8kyeg6jqro5r" path="res://sprites/SquareTable.png" id="1_c1ylb"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_k6ijk"]
+size = Vector2(8.35805, 5.01682)
+
+[node name="SquareTable" type="Node2D"]
+scale = Vector2(1, 1.00415)
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+scale = Vector2(2.69249, 2.39494)
+texture = ExtResource("1_c1ylb")
+
+[node name="StaticBody2D" type="StaticBody2D" parent="Sprite2D"]
+scale = Vector2(0.371404, 0.718181)
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Sprite2D/StaticBody2D"]
+position = Vector2(1.09217, 2.32558)
+scale = Vector2(8.15792, 6.48979)
+shape = SubResource("RectangleShape2D_k6ijk")

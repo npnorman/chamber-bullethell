@@ -1,0 +1,18 @@
+[gd_scene load_steps=3 format=3 uid="uid://cuxt1u8vdf1vl"]
+
+[ext_resource type="Texture2D" uid="uid://qor0ikpx0c6b" path="res://sprites/BarStool.png" id="1_i216c"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_i216c"]
+size = Vector2(15.8843, 21.1305)
+
+[node name="Barstool" type="Sprite2D"]
+scale = Vector2(1.19615, 1.1358)
+texture = ExtResource("1_i216c")
+
+[node name="StaticBody2D" type="StaticBody2D" parent="."]
+scale = Vector2(1.40596, 1.29364)
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="StaticBody2D"]
+position = Vector2(0.297312, 0.680588)
+scale = Vector2(0.711258, 0.773013)
+shape = SubResource("RectangleShape2D_i216c")
