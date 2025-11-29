@@ -30,6 +30,7 @@ var is_hud_transparent: bool = false
 
 func _ready() -> void:
 	camera.zoom = Vector2.ONE * 1.37
+	spawn_player_in_boss_room()
 
 func _process(delta: float) -> void:
 	

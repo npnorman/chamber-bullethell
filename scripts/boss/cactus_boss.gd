@@ -48,7 +48,8 @@ enum States {
 	REST,
 	PHASE1,
 	PHASE2,
-	PHASE3
+	PHASE3,
+	DEATH
 }
 
 var currentState = States.REST
@@ -57,7 +58,7 @@ var isReadyPhase1 = false
 var moveToNextState = false
 
 # Health info
-var hp = 600
+@export var hp = 600
 var hpStates = [500, 300]
 
 func activate():
@@ -86,6 +87,9 @@ func _physics_process(delta: float) -> void:
 		phase2_pattern(delta)
 	elif currentState == States.PHASE3:
 		phase3_pattern(delta)
+	elif currentState == States.DEATH:
+		velocity = Vector2.ZERO
+		#do nothing
 	
 	move_and_slide()
 
@@ -145,6 +149,9 @@ func checkState():
 			currentState = States.REST
 			animation_player.play("rest")
 			moveTime = 15
+		
+		elif currentState == States.DEATH:
+			velocity = Vector2.ZERO
 		
 		state_machine_timer.wait_time = moveTime
 		state_machine_timer.start()
@@ -262,8 +269,9 @@ func shoot_arm(arm):
 		shoot(marker.global_position, pos)
 
 func on_death():
-	self.queue_free()
-	Globals.change_scene(Globals.Scenes.WIN)
+	currentState = States.DEATH
+	animation_player.play("death")
+	#Globals.change_scene(Globals.Scenes.WIN)
 
 func _on_phase_1_timer_timeout() -> void:
 	isReadyPhase1 = true
