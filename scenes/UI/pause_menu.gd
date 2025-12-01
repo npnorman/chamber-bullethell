@@ -1,5 +1,7 @@
 extends CanvasLayer
 
+var can_exit = false
+
 @onready var menu_container: VBoxContainer= $VBoxContainer
 @onready var controls: Button = $VBoxContainer/Controls
 @onready var resume: Button = $VBoxContainer/Resume
@@ -36,9 +38,16 @@ func _input(event: InputEvent) -> void:
 	else:
 		current_key_index = 0
 
+func set_focus():
+	resume.grab_focus()
+
 func _on_resume_pressed() -> void:
+	resume_game()
+
+func resume_game():
 	game_resumed.emit()
 	get_tree().paused = false
+	can_exit = false
 
 func _on_go_to_menu_pressed() -> void:
 	game_resumed.emit()
@@ -59,10 +68,12 @@ func on_pause() -> void:
 func _on_controls_pressed() -> void:
 	menu_container.visible = false
 	controls_container.visible = true
+	exit_controls.grab_focus()
 
 func _on_exit_controls_pressed() -> void:
 	menu_container.visible = true
 	controls_container.visible = false
+	controls.grab_focus()
 
 func _on_restart_same_seed_pressed() -> void:
 	game_resumed.emit()

@@ -309,3 +309,5 @@ func _on_player_game_paused(death: bool) -> void:
 		pause_menu.on_pause()
 	pause_menu.visible = true
 	get_tree().paused = true
+	pause_menu.set_focus()
+	pause_menu.can_exit = true
