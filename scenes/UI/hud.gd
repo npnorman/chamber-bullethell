@@ -41,7 +41,7 @@ func _ready():
 		special_key_2.text = "[ E ]"
 		special_key_3.text = "[ R ]"
 	else:
-		basic_key.text = "[ R ]"
+		basic_key.text = "[ L ]"
 		special_key_1.text = "[ Y ]"
 		special_key_2.text = "[ X ]"
 		special_key_3.text = "[ A ]"

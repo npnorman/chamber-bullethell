@@ -30,6 +30,9 @@ signal update_health(new_health: int)
 signal game_paused(death: bool)
 
 func _ready() -> void:
+	
+	player_direction = Vector2.RIGHT
+	
 	if !Settings.isMouse:
 		controller_crosshair.visible = true
 	else:
@@ -48,13 +51,18 @@ func _process(_delta):
 			player_direction = (get_global_mouse_position() - position).normalized()
 		else:
 			#controller
+			var last_direction = player_direction
+			
 			joy_stick_direction.x = Input.get_joy_axis(0,JOY_AXIS_RIGHT_X)
 			joy_stick_direction.y = Input.get_joy_axis(0,JOY_AXIS_RIGHT_Y)
 			
 			joy_stick_direction = joy_stick_direction.normalized()
 			
 			player_direction = joy_stick_direction
-		
+			
+			if player_direction == Vector2.ZERO:
+				player_direction = Vector2.RIGHT
+			
 		if dice.visible == true:
 			dice.position.y -= 25 * _delta
 		

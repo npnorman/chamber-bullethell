@@ -38,8 +38,11 @@ func _input(event: InputEvent) -> void:
 	else:
 		current_key_index = 0
 
-func set_focus():
-	resume.grab_focus()
+func set_focus(death:bool):
+	if death:
+		restart.grab_focus()
+	else:
+		resume.grab_focus()
 
 func _on_resume_pressed() -> void:
 	resume_game()
