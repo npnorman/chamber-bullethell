@@ -273,6 +273,9 @@ func on_death():
 	animation_player.play("death")
 	#Globals.change_scene(Globals.Scenes.WIN)
 
+func to_win_room():
+	Globals.change_scene_and_reset(Globals.Scenes.WIN)
+
 func _on_phase_1_timer_timeout() -> void:
 	isReadyPhase1 = true
 

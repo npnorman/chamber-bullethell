@@ -21,12 +21,14 @@ class_name LevelContainer
 @onready var camera: Camera2D = $Camera2D
 @onready var mini_map: Node2D = $MiniMap
 @onready var enemy_count: RichTextLabel = $HUD/EnemyCount
+@onready var chamber_center: Marker2D = $HUD/ChamberCenter
 
 var is_bullet_fairy_spawned = false
 var current_room = null
 var room_change_delta: float = Globals.tile_size * 16
 var is_walls_ready = false
 var is_hud_transparent: bool = false
+var chamber_center_world_coordinates
 
 func _ready() -> void:
 	camera.zoom = Vector2.ONE * 1.37
@@ -59,6 +61,47 @@ func _process(delta: float) -> void:
 	
 	update_camera_position()
 	
+	update_hud_transparency()
+
+func update_hud_transparency():
+	
+	chamber_center_world_coordinates = get_canvas_transform().affine_inverse() * chamber_center.global_position
+	
+	if update_hud_on_player():
+		# updated by player position
+		pass
+	else:
+		if Settings.isMouse:
+			update_hud_transparency_mouse()
+		else:
+			update_hud_transparency_controller()
+
+func update_hud_on_player():
+	var distance = 120
+		
+	if player.global_position.distance_to(chamber_center_world_coordinates) < distance:
+		hud.toggle_transparency(true)
+		is_hud_transparent = true
+		return true
+	else:
+		return false
+
+func update_hud_transparency_controller():
+	var joystick = Vector2.ZERO
+	
+	joystick.x = Input.get_joy_axis(0,JOY_AXIS_RIGHT_X)
+	joystick.y = Input.get_joy_axis(0,JOY_AXIS_RIGHT_Y)
+	
+	var joystick_angle_degrees:float = rad_to_deg(joystick.angle())
+	
+	if joystick_angle_degrees > 0 and joystick_angle_degrees < 180:
+		hud.toggle_transparency(true)
+		is_hud_transparent = true
+	else:
+		hud.toggle_transparency(false)
+		is_hud_transparent = false
+
+func update_hud_transparency_mouse():
 	# Make hud see-through if mouse is low enough
 	var mouse_pos = get_viewport().get_mouse_position()
 	if mouse_pos.y > 400 and not is_hud_transparent:

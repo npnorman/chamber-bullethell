@@ -24,18 +24,33 @@ var selected_box: int
 signal rotation_completed
 signal ammo_dropped(bullet_id: int, amount: int)
 
+@onready var basic_key: Label = $SpecialBullets/NormalAmmoBox/BasicKey
+@onready var special_key_1: Label = $SpecialBullets/SpecialAmmoBox1/SpecialKey1
+@onready var special_key_2: Label = $SpecialBullets/SpecialAmmoBox2/SpecialKey2
+@onready var special_key_3: Label = $SpecialBullets/SpecialAmmoBox3/SpecialKey3
+
+
 func _ready():
 	update_chamber_textures()
 	update_counters()
 	set_ammo_types()
+	
+	if Settings.isMouse:
+		basic_key.text = "[ F ]"
+		special_key_1.text = "[ Q ]"
+		special_key_2.text = "[ E ]"
+		special_key_3.text = "[ R ]"
+	else:
+		basic_key.text = "[ R ]"
+		special_key_1.text = "[ Y ]"
+		special_key_2.text = "[ X ]"
+		special_key_3.text = "[ A ]"
 
 func toggle_transparency(transparent: bool):
 	if transparent:
 		$CylinderNode.modulate.a = 0.3
-		#$SpecialBullets.modulate.a = 0.3
 	else:
 		$CylinderNode.modulate.a = 1
-		#$SpecialBullets.modulate.a = 1
 
 # Checks every frame to see if the mouse is hovering over a bullet in the inventory menu, displays
 # text box with description if so
