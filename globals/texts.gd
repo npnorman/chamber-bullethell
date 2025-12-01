@@ -11,7 +11,7 @@ func _ready() -> void:
 	bullet_texts[Globals.Bullets.Explosive] = "[color=blue]Dynamite Shot[/color] \nThis shot packs a punch to all enemies near the point of impact! Its patented accident-proof technology also prevents the blast from damaging you!"
 	bullet_texts[Globals.Bullets.Health] = "[color=blue]Healing Bullet[/color] \nThis bullet contains a syringe with a potent facial hair regrowth serum that will make your moustache look nice and full"
 	bullet_texts[Globals.Bullets.Railgun] = "[color=purple]Railgun Round[/color] \nThese rounds act as energy cells that are capable of emitting a powerful laser that will pierce through all opponents it comes across!"
-	bullet_texts[Globals.Bullets.Gambler] = "[color=purple]Gambler's Round[/color] \nWhat's better than gambling? That's right, nothing! Try your luck now with the Gambler's Round! (Warning: results may vary)"
+	bullet_texts[Globals.Bullets.Gambler] = "[color=purple]Gambler's Round[/color] \nWhat's better than gambling? That's right, nothing! Try your luck now with the Gambler's Round that does varying amounts of damaged based on the result of a d6 roll!"
 	
 	bullet_names[Globals.Bullets.Normal] = "Basic Bullet"
 	bullet_names[Globals.Bullets.Ricochet] = "Rick O'Shay Round"
