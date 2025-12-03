@@ -21,6 +21,7 @@ offset_bottom = 395.0
 color = Color(4.81307e-07, 0.325694, 0.507438, 1)
 
 [node name="TextureRect2" type="TextureRect" parent="."]
+layout_mode = 0
 offset_left = -512.0
 offset_top = -387.0
 offset_right = 515.0
@@ -50,6 +51,7 @@ theme_override_font_sizes/font_size = 41
 text = "Return to Menu"
 
 [node name="RichTextLabel" type="RichTextLabel" parent="."]
+layout_mode = 0
 offset_left = -426.0
 offset_top = -285.0
 offset_right = -173.0

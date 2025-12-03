@@ -21,15 +21,19 @@ class_name LevelContainer
 @onready var camera: Camera2D = $Camera2D
 @onready var mini_map: Node2D = $MiniMap
 @onready var enemy_count: RichTextLabel = $HUD/EnemyCount
+@onready var chamber_center: Marker2D = $HUD/ChamberCenter
 
 var is_bullet_fairy_spawned = false
 var current_room = null
 var room_change_delta: float = Globals.tile_size * 16
 var is_walls_ready = false
 var is_hud_transparent: bool = false
+var chamber_center_world_coordinates
+var hud_distance = 120
 
 func _ready() -> void:
 	camera.zoom = Vector2.ONE * 1.37
+	#spawn_player_in_boss_room()
 
 func _process(delta: float) -> void:
 	
@@ -59,6 +63,45 @@ func _process(delta: float) -> void:
 	
 	update_camera_position()
 	
+	update_hud_transparency()
+
+func update_hud_transparency():
+	
+	chamber_center_world_coordinates = get_canvas_transform().affine_inverse() * chamber_center.global_position
+	
+	if update_hud_on_player():
+		# updated by player position
+		pass
+	else:
+		if Settings.isMouse:
+			update_hud_transparency_mouse()
+		else:
+			update_hud_transparency_controller()
+
+func update_hud_on_player():
+	if player.global_position.distance_to(chamber_center_world_coordinates) < hud_distance:
+		hud.toggle_transparency(true)
+		is_hud_transparent = true
+		return true
+	else:
+		return false
+
+func update_hud_transparency_controller():
+	var joystick = Vector2.ZERO
+	
+	joystick.x = Input.get_joy_axis(0,JOY_AXIS_RIGHT_X)
+	joystick.y = Input.get_joy_axis(0,JOY_AXIS_RIGHT_Y)
+	
+	var joystick_angle_degrees:float = rad_to_deg(joystick.angle())
+	
+	if joystick_angle_degrees > 0 and joystick_angle_degrees < 180:
+		hud.toggle_transparency(true)
+		is_hud_transparent = true
+	else:
+		hud.toggle_transparency(false)
+		is_hud_transparent = false
+
+func update_hud_transparency_mouse():
 	# Make hud see-through if mouse is low enough
 	var mouse_pos = get_viewport().get_mouse_position()
 	if mouse_pos.y > 400 and not is_hud_transparent:
@@ -243,7 +286,8 @@ func spawn_player_in_boss_room():
 	mini_map.visible = false
 	camera.zoom = Vector2.ONE * 0.69
 	cactus_boss.activate()
-	Globals.ammo[0] += 50
+	Globals.ammo[0] += 500
+	hud_distance = 200
 
 func _on_bullet_fairy_timer_timeout() -> void:
 	#spawn bullet fairy
@@ -266,3 +310,5 @@ func _on_player_game_paused(death: bool) -> void:
 		pause_menu.on_pause()
 	pause_menu.visible = true
 	get_tree().paused = true
+	pause_menu.can_exit = true
+	pause_menu.set_focus(death)

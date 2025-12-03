@@ -2,6 +2,10 @@ extends Control
 
 @onready var names: RichTextLabel = $Names
 @export var scroll_speed = 1.0
+@onready var button: Button = $CenterContainer/Button
+
+func _ready() -> void:
+	button.grab_focus()
 
 # scroll credits
 func _process(delta: float) -> void:
