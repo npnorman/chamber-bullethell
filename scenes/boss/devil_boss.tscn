@@ -1,0 +1,255 @@
+[gd_scene load_steps=17 format=3 uid="uid://pa70mm6xmlpf"]
+
+[ext_resource type="Script" uid="uid://cvrh8ukynj0fo" path="res://scripts/boss/devil_boss.gd" id="1_753d0"]
+[ext_resource type="Texture2D" uid="uid://gtowqdhyi5xf" path="res://sprites/boss/devil/devil-body-tommy.png" id="1_fnf0g"]
+[ext_resource type="Texture2D" uid="uid://kkhh00ehxb0n" path="res://sprites/boss/devil/devil-body-trident.png" id="2_753d0"]
+[ext_resource type="Texture2D" uid="uid://boi3qnrm0xnsh" path="res://scenes/menu/circle.png" id="3_753d0"]
+[ext_resource type="Texture2D" uid="uid://cjmopjnsalbjw" path="res://sprites/boss/devil/devil-body.png" id="3_abgqm"]
+[ext_resource type="Texture2D" uid="uid://ddltwvfhbvhb8" path="res://sprites/boss/devil/devil-throne.png" id="5_abgqm"]
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_akxiw"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("1_fnf0g")
+}],
+"loop": true,
+"name": &"default",
+"speed": 5.0
+}]
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_p8ynt"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("2_753d0")
+}],
+"loop": true,
+"name": &"default",
+"speed": 5.0
+}]
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_64bom"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("3_abgqm")
+}],
+"loop": true,
+"name": &"default",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("5_abgqm")
+}],
+"loop": true,
+"name": &"throne",
+"speed": 5.0
+}]
+
+[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_p8ynt"]
+radius = 75.0
+height = 366.0
+
+[sub_resource type="Animation" id="Animation_p8ynt"]
+resource_name = "damage"
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("../body:modulate")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.3),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [Color(0.873785, 0, 0.0178209, 1), Color(1, 1, 1, 1)]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("../tommyArm:modulate")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0, 0.3),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [Color(0.873785, 0, 0.0178209, 1), Color(1, 1, 1, 1)]
+}
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("../tridentArm:modulate")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0, 0.3),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [Color(0.873785, 0, 0.0178209, 1), Color(1, 1, 1, 1)]
+}
+
+[sub_resource type="Animation" id="Animation_64bom"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("../body:modulate")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Color(1, 1, 1, 1)]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("../tommyArm:modulate")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Color(1, 1, 1, 1)]
+}
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("../tridentArm:modulate")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Color(1, 1, 1, 1)]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_t5h3u"]
+_data = {
+&"RESET": SubResource("Animation_64bom"),
+&"damage": SubResource("Animation_p8ynt")
+}
+
+[sub_resource type="Animation" id="Animation_abgqm"]
+resource_name = "rest"
+length = 2.0
+loop_mode = 1
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("body:scale")
+tracks/0/interp = 2
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 1.03333),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [Vector2(1, 1), Vector2(1.125, 1.125)]
+}
+
+[sub_resource type="Animation" id="Animation_akxiw"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("body:scale")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector2(1, 1)]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_akxiw"]
+_data = {
+&"RESET": SubResource("Animation_akxiw"),
+&"rest": SubResource("Animation_abgqm")
+}
+
+[node name="DevilBoss" type="CharacterBody2D"]
+collision_layer = 4
+collision_mask = 0
+script = ExtResource("1_753d0")
+
+[node name="tommyArm" type="AnimatedSprite2D" parent="."]
+sprite_frames = SubResource("SpriteFrames_akxiw")
+autoplay = "default"
+
+[node name="tridentArm" type="AnimatedSprite2D" parent="."]
+sprite_frames = SubResource("SpriteFrames_p8ynt")
+autoplay = "default"
+
+[node name="body" type="AnimatedSprite2D" parent="."]
+sprite_frames = SubResource("SpriteFrames_64bom")
+autoplay = "default"
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="." groups=["Enemy"]]
+position = Vector2(8, 11)
+shape = SubResource("CapsuleShape2D_p8ynt")
+
+[node name="Tommy" type="Node2D" parent="."]
+position = Vector2(-63, 19)
+
+[node name="Right Arm2" type="Marker2D" parent="Tommy"]
+position = Vector2(-90, 47)
+
+[node name="Trident" type="Node2D" parent="."]
+position = Vector2(74, 13)
+
+[node name="LeftArm" type="Marker2D" parent="Trident"]
+position = Vector2(76, 104)
+
+[node name="LeftArm2" type="Marker2D" parent="Trident"]
+position = Vector2(61, 125)
+
+[node name="LeftArm3" type="Marker2D" parent="Trident"]
+position = Vector2(43, 110)
+
+[node name="Phase1Timer" type="Timer" parent="." groups=["Enemy"]]
+
+[node name="StateMachineTimer" type="Timer" parent="."]
+
+[node name="Lights" type="Node2D" parent="."]
+position = Vector2(-14.6571, -50.4695)
+
+[node name="PointLight2D" type="PointLight2D" parent="Lights"]
+position = Vector2(-58.8617, 76.1597)
+enabled = false
+texture = ExtResource("3_753d0")
+
+[node name="PointLight2D2" type="PointLight2D" parent="Lights"]
+position = Vector2(31.4546, -15.3168)
+enabled = false
+texture = ExtResource("3_753d0")
+
+[node name="PointLight2D3" type="PointLight2D" parent="Lights"]
+position = Vector2(87.4917, 89.9678)
+enabled = false
+texture = ExtResource("3_753d0")
+
+[node name="PointLight2D4" type="PointLight2D" parent="Lights"]
+position = Vector2(-7.22083, 139.903)
+enabled = false
+texture = ExtResource("3_753d0")
+
+[node name="CPUParticles2D" type="CPUParticles2D" parent="."]
+emitting = false
+
+[node name="DamagePlayer" type="AnimationPlayer" parent="."]
+root_node = NodePath("../AnimationPlayer")
+libraries = {
+&"": SubResource("AnimationLibrary_t5h3u")
+}
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="."]
+libraries = {
+&"": SubResource("AnimationLibrary_akxiw")
+}

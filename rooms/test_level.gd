@@ -8,7 +8,9 @@ class_name LevelContainer
 
 # boss room
 @export var boss_room:Node2D
-@onready var cactus_boss: CharacterBody2D = $CactusBoss
+#@onready var current_boss: CharacterBody2D = $CactusBoss
+@onready var current_boss: CharacterBody2D = $DevilBoss
+
 
 @onready var hud: CanvasLayer = $HUD
 @onready var pause_menu: CanvasLayer = $PauseMenu
@@ -33,7 +35,7 @@ var hud_distance = 120
 
 func _ready() -> void:
 	camera.zoom = Vector2.ONE * 1.37
-	#spawn_player_in_boss_room()
+	spawn_player_in_boss_room()
 
 func _process(delta: float) -> void:
 	
@@ -285,7 +287,7 @@ func spawn_player_in_boss_room():
 	player.position = boss_room.position + Vector2(Globals.tile_size * Globals.room_size, Globals.tile_size * -10)
 	mini_map.visible = false
 	camera.zoom = Vector2.ONE * 0.69
-	cactus_boss.activate()
+	current_boss.activate()
 	Globals.ammo[0] += 500
 	hud_distance = 200
 
