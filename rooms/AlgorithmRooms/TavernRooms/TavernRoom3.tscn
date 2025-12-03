@@ -1,8 +1,9 @@
-[gd_scene load_steps=6 format=4 uid="uid://byxr3osoqswno"]
+[gd_scene load_steps=7 format=4 uid="uid://byxr3osoqswno"]
 
 [ext_resource type="PackedScene" uid="uid://ctxgqeaum4461" path="res://rooms/AlgorithmRooms/base_room.tscn" id="1_uu0jn"]
 [ext_resource type="PackedScene" uid="uid://be3bjg0ua7h2c" path="res://scenes/enemy.tscn" id="2_300ym"]
 [ext_resource type="Texture2D" uid="uid://bo5chptmg0doy" path="res://sprites/Chair.png" id="2_ddy1g"]
+[ext_resource type="PackedScene" uid="uid://c1fsemoplmeeb" path="res://scenes/magician_enemy.tscn" id="3_ankdu"]
 [ext_resource type="PackedScene" uid="uid://dji6t13e6rqr3" path="res://sprites/Barrel.tscn" id="5_300ym"]
 [ext_resource type="PackedScene" uid="uid://dr7vgp2y75n6u" path="res://sprites/RoundTable.tscn" id="5_ankdu"]
 
@@ -14,6 +15,9 @@ tile_map_data = PackedByteArray("AAABAP7/AwACAAYAAAACAP7/AwADAAYAAAADAP7/AwAEAAY
 
 [node name="Enemy" parent="Enemies" index="0" instance=ExtResource("2_300ym")]
 position = Vector2(199, -129)
+
+[node name="MagicianEnemy" parent="Enemies" index="1" instance=ExtResource("3_ankdu")]
+position = Vector2(269, -252)
 
 [node name="Chair" type="Sprite2D" parent="." index="4"]
 position = Vector2(90, -260)
