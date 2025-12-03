@@ -84,6 +84,8 @@ func _physics_process(delta: float) -> void:
 	if currentState == States.REST:
 		velocity = Vector2.ZERO
 		body_sprite.play("throne")
+		tommy_arm_sprite.visible = false
+		trident_arm_sprite.visible = false
 	elif currentState == States.PHASE1:
 		phase1_pattern(delta)
 	elif currentState == States.PHASE2:
@@ -118,6 +120,8 @@ func checkState():
 			# can move to phase 1
 			animation_player.play("RESET")
 			body_sprite.play("default")
+			tommy_arm_sprite.visible = true
+			trident_arm_sprite.visible = true
 			
 			if hp > hpStates[1]:
 				currentState = States.PHASE1
@@ -251,7 +255,7 @@ func shoot_arm(arm):
 func on_death():
 	currentState = States.DEATH
 	#animation_player.play("death")
-	#Globals.change_scene(Globals.Scenes.WIN)
+	Globals.change_scene(Globals.Scenes.WIN)
 
 func to_win_room():
 	Globals.change_scene_and_reset(Globals.Scenes.WIN)

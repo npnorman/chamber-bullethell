@@ -194,7 +194,7 @@ func take_damage(damage):
 	if not is_invincible and not is_dead:
 		health -= damage
 		update_health.emit(health)
-		if health == 0:
+		if health <= 0:
 			player_die()
 		else:
 			is_invincible = true
