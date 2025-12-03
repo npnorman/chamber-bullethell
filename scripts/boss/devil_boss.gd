@@ -5,9 +5,11 @@ extends CharacterBody2D
 @onready var trident_arm: Node2D = $Trident
 
 @onready var phase_1_timer: Timer = $Phase1Timer
+@onready var phase_2_timer: Timer = $Phase2Timer
 @onready var animation_player: AnimationPlayer = $AnimationPlayer
 @onready var damage_player: AnimationPlayer = $DamagePlayer
 @onready var trident_animation: AnimationPlayer = $TridentAnimation
+@onready var tommy_animation: AnimationPlayer = $TommyAnimation
 
 @onready var tommy_arm_sprite: AnimatedSprite2D = $tommyArm
 @onready var trident_arm_sprite: AnimatedSprite2D = $tridentArm
@@ -20,7 +22,7 @@ var speed : float = 500
 
 # Bullets
 var bulletDamage = 1
-var bulletSpeed = 300
+var bulletSpeed = 500
 var despawnTime = 10
 @export var bulletScene:PackedScene
 var player
@@ -176,9 +178,9 @@ func phase2_pattern(delta):
 		# set new target
 		movementOffset = (movementOffset + 1) % len(phase2)
 		set_target(origin + (phase2[movementOffset] * movementSize))
-		
-		animation_player.play("shoot")
-		shoot_arm(tommy_arm)
+	
+	if phase_2_timer.is_stopped():
+		phase_2_timer.start()
 	
 	move_to_target(delta)
 
@@ -254,6 +256,12 @@ func to_win_room():
 
 func _on_phase_1_timer_timeout() -> void:
 	isReadyPhase1 = true
+
+func _on_phase_2_timer_timeout() -> void:
+	animation_player.play("shoot")
+	tommy_animation.stop()
+	tommy_animation.play("shoot")
+	shoot_arm(tommy_arm)
 
 func _on_state_machine_timer_timeout() -> void:
 	moveToNextState = true
