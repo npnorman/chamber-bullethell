@@ -52,7 +52,7 @@ func _ready() -> void:
 	add_child(current_boss)
 	
 	camera.zoom = Vector2.ONE * 1.37
-	spawn_player_in_boss_room()
+	#spawn_player_in_boss_room()
 
 func _process(delta: float) -> void:
 	
