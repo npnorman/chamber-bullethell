@@ -1,33 +1,53 @@
-[gd_scene load_steps=13 format=3 uid="uid://c0hpokmr76hlq"]
+[gd_scene load_steps=14 format=3 uid="uid://c0hpokmr76hlq"]
 
-[ext_resource type="Texture2D" uid="uid://08qjxdqdqfea" path="res://sprites/Animations/CactusAnimations/MirrorCactus1.png" id="1_fiapc"]
 [ext_resource type="Script" uid="uid://y8dfim6ppjla" path="res://sprites/cactus.gd" id="1_nvrqx"]
-[ext_resource type="Texture2D" uid="uid://bbdu7n374cir2" path="res://sprites/Animations/CactusAnimations/MirrorCactus2.png" id="2_nvrqx"]
-[ext_resource type="Texture2D" uid="uid://ddwdy4oualv4" path="res://sprites/Animations/CactusAnimations/MirrorCactus3.png" id="3_0ko64"]
-[ext_resource type="Texture2D" uid="uid://4hlhxtym7jkv" path="res://sprites/Animations/CactusAnimations/MirrorCactus4.png" id="4_ymxs8"]
-[ext_resource type="Texture2D" uid="uid://cq387sd0vod0e" path="res://sprites/Animations/CactusAnimations/MirrorCactus5.png" id="5_7w8e0"]
-[ext_resource type="Texture2D" uid="uid://dapumrmii6exc" path="res://sprites/Animations/CactusAnimations/MirrorCactus6.png" id="6_4nc46"]
+[ext_resource type="Texture2D" uid="uid://dryfi5ux7gnu4" path="res://sprites/Animations/CactusAnimations/MirrorCactus1-Sheet.png" id="2_8s86e"]
+[ext_resource type="PackedScene" uid="uid://cpcikkxs5fa13" path="res://MirrorCactusBottom.tscn" id="3_8s86e"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_8s86e"]
+atlas = ExtResource("2_8s86e")
+region = Rect2(0, 0, 56, 66)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_qtix0"]
+atlas = ExtResource("2_8s86e")
+region = Rect2(56, 0, 56, 66)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_vs8kg"]
+atlas = ExtResource("2_8s86e")
+region = Rect2(112, 0, 56, 66)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_fiapc"]
+atlas = ExtResource("2_8s86e")
+region = Rect2(168, 0, 56, 66)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_nvrqx"]
+atlas = ExtResource("2_8s86e")
+region = Rect2(224, 0, 56, 66)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_0ko64"]
+atlas = ExtResource("2_8s86e")
+region = Rect2(280, 0, 56, 66)
 
 [sub_resource type="SpriteFrames" id="SpriteFrames_5aqbo"]
 animations = [{
 "frames": [{
 "duration": 1.0,
-"texture": ExtResource("1_fiapc")
+"texture": SubResource("AtlasTexture_8s86e")
 }, {
 "duration": 1.0,
-"texture": ExtResource("2_nvrqx")
+"texture": SubResource("AtlasTexture_qtix0")
 }, {
 "duration": 1.0,
-"texture": ExtResource("3_0ko64")
+"texture": SubResource("AtlasTexture_vs8kg")
 }, {
 "duration": 1.0,
-"texture": ExtResource("4_ymxs8")
+"texture": SubResource("AtlasTexture_fiapc")
 }, {
 "duration": 1.0,
-"texture": ExtResource("5_7w8e0")
+"texture": SubResource("AtlasTexture_nvrqx")
 }, {
 "duration": 1.0,
-"texture": ExtResource("6_4nc46")
+"texture": SubResource("AtlasTexture_0ko64")
 }],
 "loop": true,
 "name": &"MirroredCactus",
@@ -35,7 +55,7 @@ animations = [{
 }]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_fiapc"]
-size = Vector2(8.66667, 9.16667)
+size = Vector2(19.1667, 14.2917)
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_nvrqx"]
 resource_local_to_scene = true
@@ -45,26 +65,25 @@ size = Vector2(25, 56)
 resource_local_to_scene = true
 size = Vector2(25, 56)
 
-[sub_resource type="RectangleShape2D" id="RectangleShape2D_ymxs8"]
-size = Vector2(6.33333, 1)
-
 [node name="Cactus2" type="Node2D"]
 z_index = 1
 y_sort_enabled = true
 script = ExtResource("1_nvrqx")
 
 [node name="MirroredCactus" type="AnimatedSprite2D" parent="."]
-y_sort_enabled = true
+z_index = 1
+z_as_relative = false
 sprite_frames = SubResource("SpriteFrames_5aqbo")
 animation = &"MirroredCactus"
 frame_progress = 0.813043
-offset = Vector2(0, -6)
 
 [node name="Top" type="StaticBody2D" parent="."]
+z_index = 1
+y_sort_enabled = true
 scale = Vector2(3, 3)
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Top"]
-position = Vector2(0, 3)
+position = Vector2(0.333333, 5.23958)
 scale = Vector2(0.5, 0.5)
 shape = SubResource("RectangleShape2D_fiapc")
 
@@ -86,14 +105,7 @@ collision_mask = 16
 position = Vector2(0.5, -6)
 shape = SubResource("RectangleShape2D_0ko64")
 
-[node name="Bottom" type="StaticBody2D" parent="."]
-z_index = 1
-y_sort_enabled = true
-scale = Vector2(3, 3)
-
-[node name="CollisionShape2D2" type="CollisionShape2D" parent="Bottom"]
-y_sort_enabled = true
-position = Vector2(0, 7)
-shape = SubResource("RectangleShape2D_ymxs8")
+[node name="CactusBottom" parent="." instance=ExtResource("3_8s86e")]
+position = Vector2(1, 6)
 
 [connection signal="area_entered" from="Area2D" to="." method="_on_area_2d_area_entered"]
