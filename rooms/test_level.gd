@@ -33,7 +33,7 @@ var hud_distance = 120
 
 func _ready() -> void:
 	camera.zoom = Vector2.ONE * 1.37
-	spawn_player_in_boss_room()
+	#spawn_player_in_boss_room()
 
 func _process(delta: float) -> void:
 	
