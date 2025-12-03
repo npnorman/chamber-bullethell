@@ -4,6 +4,7 @@ var opened: bool = false
 @export var bullet_id: = Globals.Bullets.Normal
 
 @onready var sprite: AnimatedSprite2D = $AnimatedSprite2D
+@onready var particles: CPUParticles2D = $CPUParticles2D
 
 signal chest_opened(bullet_id: int, chest_position: Vector2)
 
@@ -16,6 +17,7 @@ func _ready() -> void:
 func _on_body_entered(body: Node2D) -> void:
 	if not opened:
 		sprite.play("opening")
-		var pickup_position: Vector2 = global_position + Vector2(0, 5)
+		particles.emitting = true
+		var pickup_position: Vector2 = global_position + Vector2(0, 10)
 		get_tree().current_scene.spawn_pickup(bullet_id, Globals.ammo_shop_amount[bullet_id], pickup_position)
 		opened = true
