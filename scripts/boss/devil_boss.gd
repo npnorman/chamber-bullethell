@@ -21,7 +21,7 @@ var direction:Vector2 = Vector2.ZERO
 var speed : float = 500
 
 # Bullets
-var bulletDamage = 1
+var bulletDamage = 3
 var bulletSpeed = 500
 var despawnTime = 10
 @export var bulletScene:PackedScene
@@ -83,6 +83,7 @@ func _physics_process(delta: float) -> void:
 	
 	if currentState == States.REST:
 		velocity = Vector2.ZERO
+		body_sprite.play("throne")
 	elif currentState == States.PHASE1:
 		phase1_pattern(delta)
 	elif currentState == States.PHASE2:
@@ -116,6 +117,7 @@ func checkState():
 		if currentState == States.REST:
 			# can move to phase 1
 			animation_player.play("RESET")
+			body_sprite.play("default")
 			
 			if hp > hpStates[1]:
 				currentState = States.PHASE1

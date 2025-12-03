@@ -14,9 +14,7 @@
 [ext_resource type="Texture2D" uid="uid://dr5j25xvk3een" path="res://sprites/background/wind.png" id="14_mj5kq"]
 [ext_resource type="PackedScene" uid="uid://bsp2v6s7o2ey2" path="res://scenes/UI/pause_menu.tscn" id="15_mj5kq"]
 [ext_resource type="PackedScene" uid="uid://cvevnrc2m5fig" path="res://rooms/AlgorithmRooms/SpecialtyRooms/Desert/desert_boss.tscn" id="16_8hip6"]
-[ext_resource type="PackedScene" uid="uid://pa70mm6xmlpf" path="res://scenes/boss/devil_boss.tscn" id="16_ctax3"]
 [ext_resource type="PackedScene" uid="uid://40wmqfnn0y2j" path="res://scenes/interactables/barrell.tscn" id="16_g5xp7"]
-[ext_resource type="PackedScene" uid="uid://bivpy44qgcvdq" path="res://scenes/bullets/enemy-bullet.tscn" id="17_ctax3"]
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_gc8kv"]
 texture = ExtResource("7_0yuyw")
@@ -75,12 +73,27 @@ shader_parameter/speed_x = 0.5
 shader_parameter/speed_y = 0.25
 shader_parameter/amplitude = 0.2
 
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_8hip6"]
+bg_color = Color(1, 1, 1, 1)
+corner_radius_top_left = 10
+corner_radius_top_right = 10
+corner_radius_bottom_right = 10
+corner_radius_bottom_left = 10
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_g5xp7"]
+bg_color = Color(0.559292, 0, 0.0126894, 1)
+corner_radius_top_left = 10
+corner_radius_top_right = 10
+corner_radius_bottom_right = 10
+corner_radius_bottom_left = 10
+
 [node name="Starting Room" type="Node2D" node_paths=PackedStringArray("boss_room")]
 script = ExtResource("1_u75bg")
 bullet_scene = ExtResource("2_mj5kq")
 bullet_pickup_scene = ExtResource("3_8hip6")
 bullet_fairy = ExtResource("5_b6v1o")
 boss_room = NodePath("Boss Room")
+boss_override = true
 
 [node name="MiniMap" parent="." instance=ExtResource("3_ep8cf")]
 position = Vector2(120, 250)
@@ -174,9 +187,19 @@ color = Color(0.384314, 0.341176, 0.286275, 1)
 position = Vector2(-509, -6236)
 metadata/_edit_lock_ = true
 
-[node name="DevilBoss" parent="." instance=ExtResource("16_ctax3")]
-position = Vector2(54, -6820)
-bulletScene = ExtResource("17_ctax3")
+[node name="BossHPBar" type="ProgressBar" parent="Boss Room"]
+offset_left = 1151.0
+offset_top = -1077.0
+offset_right = 1231.0
+offset_bottom = -39.0
+theme_override_styles/background = SubResource("StyleBoxFlat_8hip6")
+theme_override_styles/fill = SubResource("StyleBoxFlat_g5xp7")
+value = 77.0
+fill_mode = 3
+show_percentage = false
+
+[node name="BossOrigin" type="Marker2D" parent="Boss Room"]
+position = Vector2(575, -581)
 
 [node name="Barrell" parent="." instance=ExtResource("16_g5xp7")]
 position = Vector2(256, -270)

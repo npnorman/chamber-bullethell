@@ -8,8 +8,7 @@ class_name LevelContainer
 
 # boss room
 @export var boss_room:Node2D
-#@onready var current_boss: CharacterBody2D = $CactusBoss
-@onready var current_boss: CharacterBody2D = $DevilBoss
+@onready var current_boss: CharacterBody2D
 
 
 @onready var hud: CanvasLayer = $HUD
@@ -24,6 +23,7 @@ class_name LevelContainer
 @onready var mini_map: Node2D = $MiniMap
 @onready var enemy_count: RichTextLabel = $HUD/EnemyCount
 @onready var chamber_center: Marker2D = $HUD/ChamberCenter
+@onready var boss_hp_bar: ProgressBar = $"Boss Room/BossHPBar"
 
 var is_bullet_fairy_spawned = false
 var current_room = null
@@ -33,7 +33,24 @@ var is_hud_transparent: bool = false
 var chamber_center_world_coordinates
 var hud_distance = 120
 
+# bosses:
+const CACTUS_BOSS = preload("res://scenes/boss/cactus_boss.tscn")
+const DEVIL_BOSS = preload("res://scenes/boss/devil_boss.tscn")
+@onready var boss_origin: Marker2D = $"Boss Room/BossOrigin"
+
+@export var boss_override = false
+
 func _ready() -> void:
+	
+	if boss_override:
+		current_boss = DEVIL_BOSS.instantiate()
+	else:
+		current_boss = CACTUS_BOSS.instantiate()
+	
+	#spawn in boss (not activated)
+	current_boss.global_position = boss_origin.global_position
+	add_child(current_boss)
+	
 	camera.zoom = Vector2.ONE * 1.37
 	spawn_player_in_boss_room()
 
@@ -66,6 +83,11 @@ func _process(delta: float) -> void:
 	update_camera_position()
 	
 	update_hud_transparency()
+	
+	update_boss_hp_bar()
+
+func update_boss_hp_bar():
+	boss_hp_bar.value = current_boss.hp
 
 func update_hud_transparency():
 	
@@ -284,6 +306,10 @@ func _on_player_bullet_fired(pos, dir, id):
 			projectiles.add_child(bullet)
 
 func spawn_player_in_boss_room():
+	
+	#hp bar load
+	boss_hp_bar.max_value = current_boss.hp
+	
 	player.position = boss_room.position + Vector2(Globals.tile_size * Globals.room_size, Globals.tile_size * -10)
 	mini_map.visible = false
 	camera.zoom = Vector2.ONE * 0.69

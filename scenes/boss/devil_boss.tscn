@@ -397,7 +397,6 @@ collision_layer = 4
 collision_mask = 0
 script = ExtResource("1_753d0")
 bulletScene = ExtResource("2_p8ynt")
-hp = 550
 
 [node name="tommyArm" type="AnimatedSprite2D" parent="."]
 sprite_frames = SubResource("SpriteFrames_akxiw")
