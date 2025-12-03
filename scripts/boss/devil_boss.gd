@@ -7,6 +7,7 @@ extends CharacterBody2D
 @onready var phase_1_timer: Timer = $Phase1Timer
 @onready var animation_player: AnimationPlayer = $AnimationPlayer
 @onready var damage_player: AnimationPlayer = $DamagePlayer
+@onready var trident_animation: AnimationPlayer = $TridentAnimation
 
 @onready var tommy_arm_sprite: AnimatedSprite2D = $tommyArm
 @onready var trident_arm_sprite: AnimatedSprite2D = $tridentArm
@@ -68,6 +69,7 @@ func _ready() -> void:
 	#get player
 	player = get_tree().get_first_node_in_group("Player")
 	origin = global_position
+	set_target(origin)
 
 func _physics_process(delta: float) -> void:
 	
@@ -156,6 +158,8 @@ func checkState():
 func phase1_pattern(delta):
 	if isReadyPhase1:
 		isReadyPhase1 = false
+		trident_animation.stop()
+		trident_animation.play("shoot")
 		shoot_arm(trident_arm)
 		animation_player.play("shoot")
 		phase_1_timer.start()

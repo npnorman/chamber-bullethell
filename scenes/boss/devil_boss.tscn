@@ -1,10 +1,11 @@
-[gd_scene load_steps=17 format=3 uid="uid://pa70mm6xmlpf"]
+[gd_scene load_steps=23 format=3 uid="uid://pa70mm6xmlpf"]
 
 [ext_resource type="Script" uid="uid://cvrh8ukynj0fo" path="res://scripts/boss/devil_boss.gd" id="1_753d0"]
 [ext_resource type="Texture2D" uid="uid://gtowqdhyi5xf" path="res://sprites/boss/devil/devil-body-tommy.png" id="1_fnf0g"]
 [ext_resource type="Texture2D" uid="uid://kkhh00ehxb0n" path="res://sprites/boss/devil/devil-body-trident.png" id="2_753d0"]
 [ext_resource type="Texture2D" uid="uid://boi3qnrm0xnsh" path="res://scenes/menu/circle.png" id="3_753d0"]
 [ext_resource type="Texture2D" uid="uid://cjmopjnsalbjw" path="res://sprites/boss/devil/devil-body.png" id="3_abgqm"]
+[ext_resource type="Texture2D" uid="uid://cbkhhq7it75g8" path="res://sprites/boss/devil/sparkle.png" id="4_akxiw"]
 [ext_resource type="Texture2D" uid="uid://ddltwvfhbvhb8" path="res://sprites/boss/devil/devil-throne.png" id="5_abgqm"]
 
 [sub_resource type="SpriteFrames" id="SpriteFrames_akxiw"]
@@ -52,45 +53,6 @@ animations = [{
 radius = 75.0
 height = 366.0
 
-[sub_resource type="Animation" id="Animation_p8ynt"]
-resource_name = "damage"
-tracks/0/type = "value"
-tracks/0/imported = false
-tracks/0/enabled = true
-tracks/0/path = NodePath("../body:modulate")
-tracks/0/interp = 1
-tracks/0/loop_wrap = true
-tracks/0/keys = {
-"times": PackedFloat32Array(0, 0.3),
-"transitions": PackedFloat32Array(1, 1),
-"update": 0,
-"values": [Color(0.873785, 0, 0.0178209, 1), Color(1, 1, 1, 1)]
-}
-tracks/1/type = "value"
-tracks/1/imported = false
-tracks/1/enabled = true
-tracks/1/path = NodePath("../tommyArm:modulate")
-tracks/1/interp = 1
-tracks/1/loop_wrap = true
-tracks/1/keys = {
-"times": PackedFloat32Array(0, 0.3),
-"transitions": PackedFloat32Array(1, 1),
-"update": 0,
-"values": [Color(0.873785, 0, 0.0178209, 1), Color(1, 1, 1, 1)]
-}
-tracks/2/type = "value"
-tracks/2/imported = false
-tracks/2/enabled = true
-tracks/2/path = NodePath("../tridentArm:modulate")
-tracks/2/interp = 1
-tracks/2/loop_wrap = true
-tracks/2/keys = {
-"times": PackedFloat32Array(0, 0.3),
-"transitions": PackedFloat32Array(1, 1),
-"update": 0,
-"values": [Color(0.873785, 0, 0.0178209, 1), Color(1, 1, 1, 1)]
-}
-
 [sub_resource type="Animation" id="Animation_64bom"]
 length = 0.001
 tracks/0/type = "value"
@@ -130,10 +92,64 @@ tracks/2/keys = {
 "values": [Color(1, 1, 1, 1)]
 }
 
+[sub_resource type="Animation" id="Animation_p8ynt"]
+resource_name = "damage"
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("../body:modulate")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.3),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [Color(0.873785, 0, 0.0178209, 1), Color(1, 1, 1, 1)]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("../tommyArm:modulate")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0, 0.3),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [Color(0.873785, 0, 0.0178209, 1), Color(1, 1, 1, 1)]
+}
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("../tridentArm:modulate")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0, 0.3),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [Color(0.873785, 0, 0.0178209, 1), Color(1, 1, 1, 1)]
+}
+
 [sub_resource type="AnimationLibrary" id="AnimationLibrary_t5h3u"]
 _data = {
 &"RESET": SubResource("Animation_64bom"),
 &"damage": SubResource("Animation_p8ynt")
+}
+
+[sub_resource type="Animation" id="Animation_akxiw"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("body:scale")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector2(1, 1)]
 }
 
 [sub_resource type="Animation" id="Animation_abgqm"]
@@ -153,25 +169,174 @@ tracks/0/keys = {
 "values": [Vector2(1, 1), Vector2(1.125, 1.125)]
 }
 
-[sub_resource type="Animation" id="Animation_akxiw"]
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_akxiw"]
+_data = {
+&"RESET": SubResource("Animation_akxiw"),
+&"rest": SubResource("Animation_abgqm")
+}
+
+[sub_resource type="Animation" id="Animation_kvyrv"]
+resource_name = "shoot"
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_nolga"]
+_data = {
+&"shoot": SubResource("Animation_kvyrv")
+}
+
+[sub_resource type="Animation" id="Animation_t5h3u"]
+resource_name = "shoot"
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("tridentArm/Sparkle:scale")
+tracks/0/interp = 1
+tracks/0/loop_wrap = false
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.38),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [Vector2(0.75, 0.75), Vector2(1e-05, 1e-05)]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("tridentArm/Sparkle3:scale")
+tracks/1/interp = 1
+tracks/1/loop_wrap = false
+tracks/1/keys = {
+"times": PackedFloat32Array(0, 0.38),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [Vector2(0.75, 0.75), Vector2(1e-05, 1e-05)]
+}
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("tridentArm/Sparkle2:scale")
+tracks/2/interp = 1
+tracks/2/loop_wrap = false
+tracks/2/keys = {
+"times": PackedFloat32Array(0, 0.38),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [Vector2(0.75, 0.75), Vector2(1e-05, 1e-05)]
+}
+tracks/3/type = "value"
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/path = NodePath("tridentArm/Sparkle:rotation")
+tracks/3/interp = 1
+tracks/3/loop_wrap = true
+tracks/3/keys = {
+"times": PackedFloat32Array(0, 1),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [0.0, 3.14159]
+}
+tracks/4/type = "value"
+tracks/4/imported = false
+tracks/4/enabled = true
+tracks/4/path = NodePath("tridentArm/Sparkle3:rotation")
+tracks/4/interp = 1
+tracks/4/loop_wrap = true
+tracks/4/keys = {
+"times": PackedFloat32Array(0, 1),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [0.0, 3.14159]
+}
+tracks/5/type = "value"
+tracks/5/imported = false
+tracks/5/enabled = true
+tracks/5/path = NodePath("tridentArm/Sparkle2:rotation")
+tracks/5/interp = 1
+tracks/5/loop_wrap = true
+tracks/5/keys = {
+"times": PackedFloat32Array(0, 1),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [0.0, 3.14159]
+}
+
+[sub_resource type="Animation" id="Animation_5ohaw"]
 length = 0.001
 tracks/0/type = "value"
 tracks/0/imported = false
 tracks/0/enabled = true
-tracks/0/path = NodePath("body:scale")
+tracks/0/path = NodePath("tridentArm/Sparkle:scale")
 tracks/0/interp = 1
 tracks/0/loop_wrap = true
 tracks/0/keys = {
 "times": PackedFloat32Array(0),
 "transitions": PackedFloat32Array(1),
 "update": 0,
-"values": [Vector2(1, 1)]
+"values": [Vector2(1e-05, 1e-05)]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("tridentArm/Sparkle3:scale")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector2(1e-05, 1e-05)]
+}
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("tridentArm/Sparkle2:scale")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector2(1e-05, 1e-05)]
+}
+tracks/3/type = "value"
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/path = NodePath("tridentArm/Sparkle:rotation")
+tracks/3/interp = 1
+tracks/3/loop_wrap = true
+tracks/3/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [0.0]
+}
+tracks/4/type = "value"
+tracks/4/imported = false
+tracks/4/enabled = true
+tracks/4/path = NodePath("tridentArm/Sparkle3:rotation")
+tracks/4/interp = 1
+tracks/4/loop_wrap = true
+tracks/4/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [0.0]
+}
+tracks/5/type = "value"
+tracks/5/imported = false
+tracks/5/enabled = true
+tracks/5/path = NodePath("tridentArm/Sparkle2:rotation")
+tracks/5/interp = 1
+tracks/5/loop_wrap = true
+tracks/5/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [0.0]
 }
 
-[sub_resource type="AnimationLibrary" id="AnimationLibrary_akxiw"]
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_5ohaw"]
 _data = {
-&"RESET": SubResource("Animation_akxiw"),
-&"rest": SubResource("Animation_abgqm")
+&"RESET": SubResource("Animation_5ohaw"),
+&"shoot": SubResource("Animation_t5h3u")
 }
 
 [node name="DevilBoss" type="CharacterBody2D"]
@@ -183,9 +348,29 @@ script = ExtResource("1_753d0")
 sprite_frames = SubResource("SpriteFrames_akxiw")
 autoplay = "default"
 
+[node name="Sparkle" type="Sprite2D" parent="tommyArm"]
+position = Vector2(-154, 66)
+scale = Vector2(0.5625, 0.625)
+texture = ExtResource("4_akxiw")
+
 [node name="tridentArm" type="AnimatedSprite2D" parent="."]
 sprite_frames = SubResource("SpriteFrames_p8ynt")
 autoplay = "default"
+
+[node name="Sparkle" type="Sprite2D" parent="tridentArm"]
+position = Vector2(135, 138)
+scale = Vector2(1e-05, 1e-05)
+texture = ExtResource("4_akxiw")
+
+[node name="Sparkle2" type="Sprite2D" parent="tridentArm"]
+position = Vector2(117, 126)
+scale = Vector2(1e-05, 1e-05)
+texture = ExtResource("4_akxiw")
+
+[node name="Sparkle3" type="Sprite2D" parent="tridentArm"]
+position = Vector2(151, 121)
+scale = Vector2(1e-05, 1e-05)
+texture = ExtResource("4_akxiw")
 
 [node name="body" type="AnimatedSprite2D" parent="."]
 sprite_frames = SubResource("SpriteFrames_64bom")
@@ -253,3 +438,17 @@ libraries = {
 libraries = {
 &"": SubResource("AnimationLibrary_akxiw")
 }
+
+[node name="TommyAnimation" type="AnimationPlayer" parent="."]
+root_node = NodePath("../TridentAnimation")
+libraries = {
+&"": SubResource("AnimationLibrary_nolga")
+}
+
+[node name="TridentAnimation" type="AnimationPlayer" parent="."]
+libraries = {
+&"": SubResource("AnimationLibrary_5ohaw")
+}
+
+[connection signal="timeout" from="Phase1Timer" to="." method="_on_phase_1_timer_timeout"]
+[connection signal="timeout" from="StateMachineTimer" to="." method="_on_state_machine_timer_timeout"]
