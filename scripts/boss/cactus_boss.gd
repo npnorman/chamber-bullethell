@@ -2,6 +2,7 @@ extends CharacterBody2D
 
 # fruit
 @export var cactus_fruit:PackedScene
+@export var key:PackedScene
 
 # arms
 @onready var right_arm: Node2D = $RightArm
@@ -274,7 +275,10 @@ func on_death():
 	#Globals.change_scene(Globals.Scenes.WIN)
 
 func to_win_room():
-	Globals.change_scene_and_reset(Globals.Scenes.WIN)
+	var newKey = key.instantiate()
+	newKey.global_position = global_position
+	get_parent().add_child(newKey)
+	newKey.isWin = false
 
 func _on_phase_1_timer_timeout() -> void:
 	isReadyPhase1 = true

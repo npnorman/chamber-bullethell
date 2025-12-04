@@ -14,7 +14,7 @@ enum Level {
 	HELL
 }
 
-var current_level:int = Level.HELL
+var current_level:int = Level.DESERT
 
 #RoomGen enums
 enum ExitType {

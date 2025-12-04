@@ -39,6 +39,7 @@ const DEVIL_BOSS = preload("res://scenes/boss/devil_boss.tscn")
 @onready var boss_origin: Marker2D = $"Boss Room/BossOrigin"
 
 @export var boss_override = false
+@export var boss_start = false
 @onready var starting_transition: AnimationPlayer = $StartingTransition
 
 func _ready() -> void:
@@ -48,14 +49,16 @@ func _ready() -> void:
 	if boss_override:
 		current_boss = DEVIL_BOSS.instantiate()
 	else:
-		current_boss = CACTUS_BOSS.instantiate()
+		set_current_level_boss()
 	
 	#spawn in boss (not activated)
 	current_boss.global_position = boss_origin.global_position
 	add_child(current_boss)
 	
 	camera.zoom = Vector2.ONE * 1.37
-	#spawn_player_in_boss_room()
+	
+	if boss_start:
+		spawn_player_in_boss_room()
 
 func _process(delta: float) -> void:
 	
@@ -89,8 +92,21 @@ func _process(delta: float) -> void:
 	
 	update_boss_hp_bar()
 
+func set_current_level_boss():
+	match Globals.current_level:
+		Globals.Level.DESERT:
+			current_boss = CACTUS_BOSS.instantiate()
+		
+		Globals.Level.HELL:
+			current_boss = DEVIL_BOSS.instantiate()
+		
+		Globals.Level.SALOON:
+			#logic to skip boss room
+			pass
+
 func update_boss_hp_bar():
-	boss_hp_bar.value = current_boss.hp
+	if current_boss != null:
+		boss_hp_bar.value = current_boss.hp
 
 func update_hud_transparency():
 	

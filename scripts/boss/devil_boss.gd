@@ -1,5 +1,7 @@
 extends CharacterBody2D
 
+@export var key:PackedScene
+
 # arms
 @onready var tommy_arm: Node2D = $Tommy
 @onready var trident_arm: Node2D = $Trident
@@ -254,8 +256,13 @@ func shoot_arm(arm):
 
 func on_death():
 	currentState = States.DEATH
-	#animation_player.play("death")
-	Globals.change_scene(Globals.Scenes.WIN)
+	
+	var newKey = key.instantiate()
+	newKey.global_position = global_position
+	get_parent().add_child(newKey)
+	newKey.isWin = true
+	
+	animation_player.play("death")
 
 func to_win_room():
 	Globals.change_scene_and_reset(Globals.Scenes.WIN)

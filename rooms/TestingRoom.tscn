@@ -1,4 +1,4 @@
-[gd_scene load_steps=25 format=4 uid="uid://cd0v14frrlgju"]
+[gd_scene load_steps=26 format=4 uid="uid://cd0v14frrlgju"]
 
 [ext_resource type="Script" uid="uid://dhhfbfplukf3b" path="res://rooms/test_level.gd" id="1_u75bg"]
 [ext_resource type="PackedScene" uid="uid://driwak3eok3gy" path="res://scenes/bullets/player-bullet.tscn" id="2_mj5kq"]
@@ -157,10 +157,14 @@ tracks/1/keys = {
 "values": [Color(1, 1, 1, 1), Color(1, 1, 1, 1), Color(1, 1, 1, 0)]
 }
 
+[sub_resource type="Animation" id="Animation_ctax3"]
+resource_name = "end"
+
 [sub_resource type="AnimationLibrary" id="AnimationLibrary_8hip6"]
 _data = {
 &"RESET": SubResource("Animation_8hip6"),
 &"boss": SubResource("Animation_g5xp7"),
+&"end": SubResource("Animation_ctax3"),
 &"start": SubResource("Animation_mj5kq")
 }
 
@@ -170,6 +174,7 @@ bullet_scene = ExtResource("2_mj5kq")
 bullet_pickup_scene = ExtResource("3_8hip6")
 bullet_fairy = ExtResource("5_b6v1o")
 boss_room = NodePath("Boss Room")
+boss_start = true
 
 [node name="MiniMap" parent="." instance=ExtResource("3_ep8cf")]
 position = Vector2(120, 250)
@@ -207,7 +212,6 @@ bbcode_enabled = true
 text = "[center]Unlock Boss: "
 
 [node name="BlackScreen" type="ColorRect" parent="HUD"]
-visible = false
 z_index = 4096
 z_as_relative = false
 offset_left = -10127.0
