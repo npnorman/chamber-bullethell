@@ -22,7 +22,7 @@ position = Vector2(435, -72)
 position = Vector2(175, -293)
 
 [node name="Enemy3" parent="Enemies" index="2" instance=ExtResource("5_1th3l")]
-position = Vector2(356, -491)
+position = Vector2(467, -222)
 
 [node name="Interactables" parent="." index="3"]
 y_sort_enabled = true
