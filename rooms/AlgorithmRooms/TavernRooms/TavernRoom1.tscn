@@ -20,7 +20,7 @@ position = Vector2(105, -204)
 scale = Vector2(0.6, 0.60249)
 
 [node name="Enemy" parent="Enemies" index="0" instance=ExtResource("2_xkxln")]
-position = Vector2(160, -216)
+position = Vector2(101, -104)
 
 [node name="DiagonalEnemy" parent="Enemies" index="1" instance=ExtResource("4_em1pt")]
 position = Vector2(480, -278)

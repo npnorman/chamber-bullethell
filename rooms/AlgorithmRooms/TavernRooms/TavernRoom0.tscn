@@ -39,11 +39,6 @@ texture = ExtResource("7_21c4c")
 [node name="RoundTable3" parent="TileMapLayer" index="5" instance=ExtResource("3_wrtg1")]
 position = Vector2(456, -215)
 
-[node name="Beer2" type="Sprite2D" parent="." index="2"]
-position = Vector2(456, -223)
-scale = Vector2(0.059375, 0.059375)
-texture = ExtResource("5_wrtg1")
-
 [node name="Enemy" parent="Enemies" index="0" instance=ExtResource("6_2xmrd")]
 position = Vector2(99, -80)
 
@@ -53,7 +48,12 @@ position = Vector2(454, -83)
 [node name="Enemy3" parent="Enemies" index="2" instance=ExtResource("6_2xmrd")]
 position = Vector2(487, -495)
 
-[node name="SquareTable" parent="." index="5" instance=ExtResource("6_21c4c")]
+[node name="Beer2" type="Sprite2D" parent="Interactables" index="0"]
+position = Vector2(456, -223)
+scale = Vector2(0.059375, 0.059375)
+texture = ExtResource("5_wrtg1")
+
+[node name="SquareTable" parent="." index="4" instance=ExtResource("6_21c4c")]
 position = Vector2(191, -420)
 scale = Vector2(0.44, 0.441826)
 
