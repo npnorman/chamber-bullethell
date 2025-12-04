@@ -54,7 +54,7 @@ enum States {
 	DEATH
 }
 
-var currentState = States.REST
+var currentState = States.PHASE1
 var isReadyPhase1 = true
 @onready var state_machine_timer: Timer = $StateMachineTimer
 var moveToNextState = false
@@ -128,34 +128,34 @@ func checkState():
 				moveTime = 15
 			else:
 				currentState = States.PHASE2
-				moveTime = 10
+				moveTime = 15
 			
 		elif currentState == States.PHASE1:
 			# move to rest if hp is good
 			if hp > hpStates[0]:
 				currentState = States.REST
 				animation_player.play("rest")
-				moveTime = 15
+				moveTime = 10
 			else:
 				currentState = States.PHASE2
-				moveTime = 10
+				moveTime = 15
 			
 		elif currentState == States.PHASE2:
 			
 			if hp > hpStates[1]:
 				currentState = States.REST
 				animation_player.play("rest")
-				moveTime = 15
+				moveTime = 10
 			else:
 				currentState = States.PHASE3
-				moveTime = 10
+				moveTime = 15
 		
 		elif currentState == States.PHASE3:
 			
 			velocity = Vector2.ZERO
 			currentState = States.REST
 			animation_player.play("rest")
-			moveTime = 15
+			moveTime = 10
 		
 		elif currentState == States.DEATH:
 			velocity = Vector2.ZERO

@@ -39,8 +39,11 @@ const DEVIL_BOSS = preload("res://scenes/boss/devil_boss.tscn")
 @onready var boss_origin: Marker2D = $"Boss Room/BossOrigin"
 
 @export var boss_override = false
+@onready var starting_transition: AnimationPlayer = $StartingTransition
 
 func _ready() -> void:
+	
+	starting_transition.play("start")
 	
 	if boss_override:
 		current_boss = DEVIL_BOSS.instantiate()
@@ -141,7 +144,10 @@ func check_number_of_enemies():
 	
 	# get label
 	# label shows: Enemies to kill = len - 5, clamp at 0
-	enemy_count.text = "Unlock Boss In: " + str( maxi(numEnemies - enemyDelta, 0) )
+	if Globals.isBossTPUnlocked:
+		enemy_count.text = "BOSS UNLOCKED!"
+	else:
+		enemy_count.text = "Unlock Boss In: " + str( maxi(numEnemies - enemyDelta, 0) )
 	
 	# if enemy count is <= 5
 	if numEnemies <= enemyDelta:
@@ -306,6 +312,8 @@ func _on_player_bullet_fired(pos, dir, id):
 			projectiles.add_child(bullet)
 
 func spawn_player_in_boss_room():
+	
+	starting_transition.play("boss")
 	
 	#hp bar load
 	boss_hp_bar.max_value = current_boss.hp

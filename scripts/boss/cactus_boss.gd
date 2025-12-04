@@ -52,7 +52,7 @@ enum States {
 	DEATH
 }
 
-var currentState = States.REST
+var currentState = States.PHASE1
 var isReadyPhase1 = false
 @onready var state_machine_timer: Timer = $StateMachineTimer
 var moveToNextState = false
@@ -252,12 +252,12 @@ func shoot(shoot_from_position:Vector2, pos:Vector2):
 	newBullet.direction = shoot_from_position.direction_to(shoot_target + bulletSpreadOffset)
 	newBullet.rotation = shoot_from_position.angle_to_point(shoot_target + bulletSpreadOffset) + deg_to_rad(90.0)
 	
-	SfxPlayer.enemy_shot_sound()
 	get_tree().current_scene.add_child(newBullet)
 	
 	newBullet.set_despawn_timer(despawnTime)
 
 func shoot_arm(arm):
+	SfxPlayer.enemy_shot_sound()
 	var pos:Vector2
 	
 	if arm.name == "RightArm":

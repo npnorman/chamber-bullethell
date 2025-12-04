@@ -1,4 +1,4 @@
-[gd_scene load_steps=21 format=4 uid="uid://cd0v14frrlgju"]
+[gd_scene load_steps=25 format=4 uid="uid://cd0v14frrlgju"]
 
 [ext_resource type="Script" uid="uid://dhhfbfplukf3b" path="res://rooms/test_level.gd" id="1_u75bg"]
 [ext_resource type="PackedScene" uid="uid://driwak3eok3gy" path="res://scenes/bullets/player-bullet.tscn" id="2_mj5kq"]
@@ -87,13 +87,89 @@ corner_radius_top_right = 10
 corner_radius_bottom_right = 10
 corner_radius_bottom_left = 10
 
+[sub_resource type="Animation" id="Animation_mj5kq"]
+resource_name = "start"
+length = 10.0
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("HUD/BlackScreen:modulate")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 1),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [Color(1, 1, 1, 1), Color(1, 1, 1, 0)]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("HUD/IntroText:modulate")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0, 7.96667, 9.96667),
+"transitions": PackedFloat32Array(1, 1, 1),
+"update": 0,
+"values": [Color(1, 1, 1, 1), Color(1, 1, 1, 1), Color(1, 1, 1, 0)]
+}
+
+[sub_resource type="Animation" id="Animation_8hip6"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("HUD/BlackScreen:modulate")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Color(1, 1, 1, 1)]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("HUD/IntroText:modulate")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Color(1, 1, 1, 0)]
+}
+
+[sub_resource type="Animation" id="Animation_g5xp7"]
+resource_name = "boss"
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("HUD/BlackScreen:modulate")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 1),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [Color(1, 1, 1, 1), Color(1, 1, 1, 0)]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_8hip6"]
+_data = {
+&"RESET": SubResource("Animation_8hip6"),
+&"boss": SubResource("Animation_g5xp7"),
+&"start": SubResource("Animation_mj5kq")
+}
+
 [node name="Starting Room" type="Node2D" node_paths=PackedStringArray("boss_room")]
 script = ExtResource("1_u75bg")
 bullet_scene = ExtResource("2_mj5kq")
 bullet_pickup_scene = ExtResource("3_8hip6")
 bullet_fairy = ExtResource("5_b6v1o")
 boss_room = NodePath("Boss Room")
-boss_override = true
 
 [node name="MiniMap" parent="." instance=ExtResource("3_ep8cf")]
 position = Vector2(120, 250)
@@ -129,6 +205,36 @@ offset_bottom = 141.16
 theme_override_font_sizes/normal_font_size = 19
 bbcode_enabled = true
 text = "[center]Unlock Boss: "
+
+[node name="BlackScreen" type="ColorRect" parent="HUD"]
+visible = false
+z_index = 4096
+z_as_relative = false
+offset_left = -10127.0
+offset_top = -8428.0
+offset_right = 9831.0
+offset_bottom = 6784.0
+color = Color(0, 0, 0, 1)
+
+[node name="IntroText" type="RichTextLabel" parent="HUD"]
+modulate = Color(1, 1, 1, 0)
+offset_left = 343.0
+offset_top = 109.0
+offset_right = 724.0
+offset_bottom = 180.0
+bbcode_enabled = true
+text = "[center]Press F / LB to Reload
+Press RMB / ZL to Shoot Bullets
+Press LMB / ZR to Shoot Blanks[/center]"
+
+[node name="ColorRect" type="ColorRect" parent="HUD/IntroText"]
+z_index = -1
+layout_mode = 0
+offset_left = -7.0
+offset_top = -11.0
+offset_right = 399.0
+offset_bottom = 104.0
+color = Color(0, 0, 0, 0.572549)
 
 [node name="Camera2D" type="Camera2D" parent="."]
 position_smoothing_enabled = true
@@ -204,6 +310,11 @@ position = Vector2(575, -581)
 [node name="Barrell" parent="." instance=ExtResource("16_g5xp7")]
 position = Vector2(256, -270)
 mass = 100.0
+
+[node name="StartingTransition" type="AnimationPlayer" parent="."]
+libraries = {
+&"": SubResource("AnimationLibrary_8hip6")
+}
 
 [connection signal="timeout" from="BulletFairyTimer" to="." method="_on_bullet_fairy_timer_timeout"]
 [connection signal="ammo_dropped" from="HUD" to="." method="_on_hud_ammo_dropped"]
