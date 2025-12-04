@@ -144,34 +144,52 @@ func display_inventory() -> void:
 	
 # Sets health function visibility and modulation depending on the new health value
 func update_health(new_health: int) -> void:
-	match new_health:
-		0:
-			stache_textures[2].visible = false
-		2:
-			stache_textures[2].modulate = Color(1, 0, 0, 1)
-			stache_textures[2].visible = true
-		3:
-			stache_textures[2].modulate = Color(0, 0, 0, 1)
-			stache_textures[1].visible = false
-			stache_textures[3].visible = false
-		4:
-			stache_textures[1].modulate = Color(1, 0, 0, 1)
-			stache_textures[3].modulate = Color(1, 0, 0, 1)
-			stache_textures[1].visible = true
-			stache_textures[3].visible = true
-		6:
-			stache_textures[1].modulate = Color(0, 0, 0, 1)
-			stache_textures[3].modulate = Color(0, 0, 0, 1)
-			stache_textures[4].visible = false
-			stache_textures[0].visible = false
-		8:
-			stache_textures[4].modulate = Color(1, 0, 0, 1)
-			stache_textures[0].modulate = Color(1, 0, 0, 1)
-			stache_textures[4].visible = true
-			stache_textures[0].visible = true
-		10:
-			stache_textures[0].modulate = Color(0, 0, 0, 1)
-			stache_textures[4].modulate = Color(0, 0, 0, 1)
+	var is_odd = false
+	if new_health < 0:
+		new_health = 0
+	if new_health % 2 == 1:
+		is_odd = true
+	var index: int = 0
+
+	for texture in stache_textures:
+		texture.modulate = Color(0, 0, 0, 0)
+
+	while index <= new_health:
+		if index > 0:
+			stache_textures[(index - 2) / 2].modulate = Color(0, 0, 0, 1)
+		index += 2
+
+	if is_odd:
+		stache_textures[(new_health - 1) / 2].modulate = Color.RED
+	
+	#match new_health:
+		#0:
+			#stache_textures[0].modulate = Color(0, 0, 0, 0)
+		#1:
+			#stache_textures[0].modulate = Color.RED
+		#2:
+			#stache_textures[0].modulate = Color(0, 0, 0, 1)
+			#stache_textures[1].modulate = Color(0, 0, 0, 0)
+		#3:
+			#stache_textures[1].modulate = Color.RED
+		#4:
+			#stache_textures[1].modulate = Color(0, 0, 0, 1)
+			#stache_textures[2].modulate = Color(0, 0, 0, 0)
+		#5:
+			#stache_textures[2].modulate = Color.RED
+		#6:
+			#stache_textures[2].modulate = Color(0, 0, 0, 1)
+			#stache_textures[3].modulate = Color(0, 0, 0, 0)
+		#7:
+			#stache_textures[3].modulate = Color.RED
+		#8:
+			#stache_textures[3].modulate = Color(0, 0, 0, 1)
+			#stache_textures[4].modulate = Color(0, 0, 0, 0)
+		#9:
+			#stache_textures[4].modulate = Color.RED
+		#10:
+			#stache_textures[4].modulate = Color(0, 0, 0, 1)
+			
 
 # Sets held item texture to that of the box clicked and lets you drag it around. If let go of above 
 # the trash icon, drops the item to the left of the player

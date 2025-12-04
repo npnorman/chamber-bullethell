@@ -12,7 +12,7 @@ var text_2 = ""
 
 func _ready() -> void:
 	# start music
-	MusicPlayer.player_cutscene_music()
+	MusicPlayer.play_cutscene_music()
 	
 	if Settings.isMouse:
 		text_1 = mouse_text_1
@@ -24,7 +24,7 @@ func _ready() -> void:
 	rich_text_label.text = text_1
 
 func move_to_starting_scene():
-	MusicPlayer.stop_cutscene_music()
+	MusicPlayer.fade_music_out(load("res://sounds/music/OMORI - OMORI OST - 67 The Heart of the Desert.mp3"))
 	Globals.change_level_and_reset(Globals.Level.DESERT)
 
 func _process(delta: float) -> void:

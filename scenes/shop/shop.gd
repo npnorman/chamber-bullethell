@@ -7,6 +7,7 @@ var has_bullet: Array[bool] = [true, true, true]
 @export var bullet_textures: Array[Resource]
 
 @onready var bullet_areas: Array[Area2D] = [$BuyArea1, $BuyArea2, $BuyArea3]
+@onready var restock_timer: Timer = $RestockTimer
 
 signal bullet_purchased(bullet_id: int, price: int)
 
@@ -40,7 +41,7 @@ func clear_shop(index: int):
 	bullet_areas[index].visible = false
 	has_bullet[index] = false
 	if has_bullet[1] == false and has_bullet[2] == false:
-		_ready()
+		restock_timer.start()
 	
 func update_hud():
 	get_tree().current_scene.update_hud()
@@ -105,3 +106,8 @@ func _on_buy_area_3_body_entered(body: Node2D) -> void:
 			update_hud()
 			clear_shop(2)
 			update_bartender()
+
+func _on_restock_timer_timeout() -> void:
+	$BuyArea2/SmokeParticles2.emitting = true
+	$BuyArea3/SmokeParticles3.emitting = true
+	_ready()

@@ -194,7 +194,7 @@ func take_damage(damage):
 	if not is_invincible and not is_dead:
 		health -= damage
 		update_health.emit(health)
-		if health == 0:
+		if health <= 0:
 			player_die()
 		else:
 			is_invincible = true
@@ -209,6 +209,7 @@ func player_die():
 
 # Function call specifically for the health bullet, can also be used for other healing sources
 func heal():
+	var old_health = health
 	health += 4
 	SfxPlayer.heal_sound()
 	update_health.emit(health)
