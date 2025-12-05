@@ -1,9 +1,10 @@
-[gd_scene load_steps=8 format=4 uid="uid://cikp5hamswlc2"]
+[gd_scene load_steps=9 format=4 uid="uid://cikp5hamswlc2"]
 
 [ext_resource type="PackedScene" uid="uid://ctxgqeaum4461" path="res://rooms/AlgorithmRooms/base_room.tscn" id="1_60818"]
 [ext_resource type="PackedScene" uid="uid://crwot1rdef6uf" path="res://scenes/interactables/chest.tscn" id="2_h11ju"]
 [ext_resource type="PackedScene" uid="uid://dr7vgp2y75n6u" path="res://sprites/RoundTable.tscn" id="3_wrtg1"]
 [ext_resource type="Texture2D" uid="uid://kjstwmv27w1q" path="res://sprites/BEER.png" id="5_wrtg1"]
+[ext_resource type="PackedScene" uid="uid://be3bjg0ua7h2c" path="res://scenes/enemy.tscn" id="6_2xmrd"]
 [ext_resource type="PackedScene" uid="uid://hu0dgs87hr4k" path="res://sprites/SquareTable.tscn" id="6_21c4c"]
 [ext_resource type="Texture2D" uid="uid://qor0ikpx0c6b" path="res://sprites/BarStool.png" id="6_wrtg1"]
 [ext_resource type="Texture2D" uid="uid://bo5chptmg0doy" path="res://sprites/Chair.png" id="7_21c4c"]
@@ -27,21 +28,32 @@ texture = ExtResource("5_wrtg1")
 
 [node name="Chair" type="Sprite2D" parent="TileMapLayer" index="3"]
 position = Vector2(96, -182)
+scale = Vector2(1.35, 1.35)
 texture = ExtResource("7_21c4c")
 
 [node name="Chair2" type="Sprite2D" parent="TileMapLayer" index="4"]
 position = Vector2(444, -421)
+scale = Vector2(1.35, 1.35)
 texture = ExtResource("7_21c4c")
 
 [node name="RoundTable3" parent="TileMapLayer" index="5" instance=ExtResource("3_wrtg1")]
 position = Vector2(456, -215)
 
-[node name="Beer2" type="Sprite2D" parent="." index="2"]
+[node name="Enemy" parent="Enemies" index="0" instance=ExtResource("6_2xmrd")]
+position = Vector2(99, -80)
+
+[node name="Enemy2" parent="Enemies" index="1" instance=ExtResource("6_2xmrd")]
+position = Vector2(454, -83)
+
+[node name="Enemy3" parent="Enemies" index="2" instance=ExtResource("6_2xmrd")]
+position = Vector2(487, -495)
+
+[node name="Beer2" type="Sprite2D" parent="Interactables" index="0"]
 position = Vector2(456, -223)
 scale = Vector2(0.059375, 0.059375)
 texture = ExtResource("5_wrtg1")
 
-[node name="SquareTable" parent="." index="5" instance=ExtResource("6_21c4c")]
+[node name="SquareTable" parent="." index="4" instance=ExtResource("6_21c4c")]
 position = Vector2(191, -420)
 scale = Vector2(0.44, 0.441826)
 

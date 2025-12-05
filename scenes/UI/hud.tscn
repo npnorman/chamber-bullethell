@@ -692,6 +692,9 @@ scale = Vector2(1.75, 1.75)
 pivot_offset = Vector2(20, 20)
 texture = ExtResource("23_r44e2")
 
+[node name="ChamberCenter" type="Marker2D" parent="."]
+position = Vector2(513, 642)
+
 [connection signal="animation_finished" from="CylinderNode/CylinderAnimation" to="." method="_on_cylinder_animation_animation_finished"]
 [connection signal="mouse_entered" from="InventoryAreas/InventoryView/Ammo1/Area1" to="." method="_on_area_1_mouse_entered"]
 [connection signal="mouse_exited" from="InventoryAreas/InventoryView/Ammo1/Area1" to="." method="_on_area_1_mouse_exited"]

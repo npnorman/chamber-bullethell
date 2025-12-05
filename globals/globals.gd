@@ -5,6 +5,15 @@ var tile_size:int = 16
 
 #signal stat_changed
 
+#flag for boss TP
+var isBossTPUnlocked = false
+var is_boss_transition_room_activated = false
+var temporary_loadout = []
+var temporary_types = []
+
+# seed for regen purposes
+var current_seed = -1
+
 # Enums to show what names correspond to what IDs
 enum Bullets {Normal, Ricochet, Shotgun, Explosive, Health, Railgun, Gambler, Empty = -1}
 
@@ -14,7 +23,7 @@ enum Level {
 	HELL
 }
 
-var current_level:int = Level.DESERT
+var current_level:int = Level.SALOON
 
 #RoomGen enums
 enum ExitType {
@@ -39,7 +48,8 @@ enum Special {
 	START,
 	SHOP,
 	BOSS_TP,
-	BOSS
+	BOSS,
+	BOSS_TRANSITION
 }
 
 enum Scenes {
@@ -49,6 +59,20 @@ enum Scenes {
 	WIN,
 	CUSTOM,
 }
+
+func save_current_loadout():
+	print("SAVING:",ammo)
+	temporary_loadout = ammo.duplicate()
+	temporary_types = ammo_types.duplicate()
+
+func load_temp_loadout():
+	if !temporary_loadout.is_empty() and len(temporary_loadout) == len(ammo):
+		print("LOADING:",temporary_loadout)
+		ammo = temporary_loadout.duplicate()
+		ammo_types = temporary_types.duplicate()
+		
+		temporary_loadout.clear()
+		temporary_types.clear()
 
 func get_scene_string(scene_enum:int):
 	match scene_enum:
@@ -157,10 +181,29 @@ var magazine: Array[int] = [-1, -1, -1, -1, -1, -1]:
 # current room
 var current_room_center:Vector2 = Vector2.ZERO
 
+func change_music(level_scheme:int = current_level):
+	if MusicPlayer.stream != null:
+		match level_scheme:
+			Level.SALOON:
+				MusicPlayer.fade_music_out(load("res://sounds/music/Cowagunga.ogg"))
+			Level.DESERT:
+				MusicPlayer.fade_music_out(load("res://sounds/music/Tumbleweeds.ogg"), -14)
+			Level.HELL:
+				pass
+	else:
+		match level_scheme:
+			Level.SALOON:
+				MusicPlayer.play_saloon_music()
+			Level.DESERT:
+				MusicPlayer.play_desert_music()
+			Level.HELL:
+				pass
+
 func change_level(level_scheme:int = current_level):
 	# load level scheme
 	current_level = level_scheme
 	get_tree().change_scene_to_file("res://rooms/TestingRoom.tscn")
+	change_music(level_scheme)
 
 func change_level_and_reset(level_scheme:int=current_level,ammo=true,boss=true,seed=true):
 	change_level(level_scheme)
@@ -189,15 +232,16 @@ func reset_player_stats(ammo = true, boss = true, seed = true):
 		current_seed = -1
 
 func change_scene_and_reset(scene_enum:int, file_name:String = "", ammo = true, boss = true, seed = true):
-	
+	MusicPlayer.stop()
 	change_scene(scene_enum, file_name)
 	reset_player_stats(ammo, boss, seed)
+	
 
-#flag for boss TP
-var isBossTPUnlocked = false
-
-# seed for regen purposes
-var current_seed = -1
+func clear_temp_loadout():
+	temporary_loadout.clear()
+	temporary_types.clear()
+	isBossTPUnlocked = false
+	is_boss_transition_room_activated = false
 
 # cheat codes
 func _input(event: InputEvent) -> void:

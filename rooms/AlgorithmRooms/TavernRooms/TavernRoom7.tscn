@@ -9,19 +9,16 @@
 [node name="BaseRoom2" instance=ExtResource("1_qlucr")]
 
 [node name="MagicianEnemy" parent="Enemies" index="0" instance=ExtResource("2_fh6tq")]
-position = Vector2(88, -426)
+position = Vector2(176, -416)
 
 [node name="MagicianEnemy2" parent="Enemies" index="1" instance=ExtResource("2_fh6tq")]
-position = Vector2(477, -432)
+position = Vector2(391, -426)
 
 [node name="MagicianEnemy3" parent="Enemies" index="2" instance=ExtResource("2_fh6tq")]
-position = Vector2(474, -141)
+position = Vector2(396, -148)
 
 [node name="MagicianEnemy4" parent="Enemies" index="3" instance=ExtResource("2_fh6tq")]
-position = Vector2(83, -141)
-
-[node name="Chest" parent="Enemies" index="4" instance=ExtResource("3_shebr")]
-position = Vector2(284, -290)
+position = Vector2(166, -141)
 
 [node name="Barstool2" parent="." index="4" instance=ExtResource("2_dioxf")]
 position = Vector2(231, -181)
@@ -92,3 +89,6 @@ position = Vector2(447.277, -493.827)
 
 [node name="Barstool19" parent="." index="25" instance=ExtResource("2_dioxf")]
 position = Vector2(507.277, -492.827)
+
+[node name="Chest" parent="." index="26" instance=ExtResource("3_shebr")]
+position = Vector2(284, -290)

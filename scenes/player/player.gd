@@ -13,18 +13,30 @@ var active_bullet_pos: int = 0
 @export var health: int = 6
 @export var bullet_types: Array[int] = [0, -1, -1, -1]
 
+var joy_stick_direction = Vector2.ZERO
+
 # onready variables
 @onready var animated_sprite_2d: AnimatedSprite2D = $AnimatedSprite2D
 @onready var animations: AnimationPlayer = $AnimationPlayer
 @onready var gun_sprite: Sprite2D = $GunSprite
 @onready var dice: Sprite2D = $Dice
 @onready var shot_effects: AnimatedSprite2D = $GunSprite/ShotEffects
+@onready var controller_crosshair: Sprite2D = $GunSprite/ControllerCrosshair
 
 signal bullet_fired(pos: Vector2, direction: Vector2, id: int)
 signal cylinder_cycled
 signal toggle_inventory
 signal update_health(new_health: int)
 signal game_paused(death: bool)
+
+func _ready() -> void:
+	
+	player_direction = Vector2.RIGHT
+	
+	if !Settings.isMouse:
+		controller_crosshair.visible = true
+	else:
+		controller_crosshair.visible = false
 
 func _process(_delta):
 	if not is_dead:
@@ -34,8 +46,23 @@ func _process(_delta):
 			player_knockback = player_knockback.move_toward(Vector2.ZERO, _delta * 10000)
 		move_and_slide()
 		rotate_gun()
-		player_direction = (get_global_mouse_position() - position).normalized()
 		
+		if Settings.isMouse:
+			player_direction = (get_global_mouse_position() - position).normalized()
+		else:
+			#controller
+			var last_direction = player_direction
+			
+			joy_stick_direction.x = Input.get_joy_axis(0,JOY_AXIS_RIGHT_X)
+			joy_stick_direction.y = Input.get_joy_axis(0,JOY_AXIS_RIGHT_Y)
+			
+			joy_stick_direction = joy_stick_direction.normalized()
+			
+			player_direction = joy_stick_direction
+			
+			if player_direction == Vector2.ZERO:
+				player_direction = Vector2.RIGHT
+			
 		if dice.visible == true:
 			dice.position.y -= 25 * _delta
 		
@@ -84,7 +111,12 @@ func _process(_delta):
 # This function will aim the revolver to where the mouse is and can rotate the 
 # sprite vertically depending on which direction it is facing
 func rotate_gun():
-	gun_sprite.look_at(get_global_mouse_position())
+	
+	if Settings.isMouse:
+		gun_sprite.look_at(get_global_mouse_position())
+	else:
+		gun_sprite.rotation = joy_stick_direction.angle()
+	
 	var rounded_rotation: int = abs(gun_sprite.rotation_degrees)
 	if (rounded_rotation % 360) > 90 and (rounded_rotation % 360) < 270:
 		gun_sprite.flip_v = true
@@ -162,7 +194,7 @@ func take_damage(damage):
 	if not is_invincible and not is_dead:
 		health -= damage
 		update_health.emit(health)
-		if health == 0:
+		if health <= 0:
 			player_die()
 		else:
 			is_invincible = true
@@ -177,6 +209,7 @@ func player_die():
 
 # Function call specifically for the health bullet, can also be used for other healing sources
 func heal():
+	var old_health = health
 	health += 4
 	SfxPlayer.heal_sound()
 	update_health.emit(health)

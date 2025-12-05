@@ -1,7 +1,7 @@
 [gd_scene load_steps=13 format=3 uid="uid://b7g2b431gu6nf"]
 
 [ext_resource type="Texture2D" uid="uid://c2joxft8stuwm" path="res://sprites/Animations/CactusAnimations/Cactus1.png" id="1_6mucy"]
-[ext_resource type="Script" path="res://sprites/cactus.gd" id="1_o6mam"]
+[ext_resource type="Script" uid="uid://y8dfim6ppjla" path="res://sprites/cactus.gd" id="1_o6mam"]
 [ext_resource type="Texture2D" uid="uid://dp1dtnta02t6i" path="res://sprites/Animations/CactusAnimations/Cactus2.png" id="2_o6mam"]
 [ext_resource type="Texture2D" uid="uid://blsqrnn3mk0pn" path="res://sprites/Animations/CactusAnimations/Cactus3.png" id="3_qac30"]
 [ext_resource type="Texture2D" uid="uid://c8w76oy3w3ldl" path="res://sprites/Animations/CactusAnimations/Cactus4.png" id="4_05akr"]

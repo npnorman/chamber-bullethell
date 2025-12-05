@@ -1,5 +1,10 @@
 extends Node2D
 
+@onready var start: Button = $CanvasLayer/StartButton
+
+func _ready() -> void:
+	start.grab_focus()
+
 func start_button():
 	Globals.change_scene(Globals.Scenes.CUSTOM,"res://scenes/menu/intro_cutscene.tscn")
 

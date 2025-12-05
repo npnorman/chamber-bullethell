@@ -1,4 +1,4 @@
-[gd_scene load_steps=44 format=3 uid="uid://ckx3iy06eedai"]
+[gd_scene load_steps=45 format=3 uid="uid://ckx3iy06eedai"]
 
 [ext_resource type="Script" uid="uid://defl6cxtq7gxe" path="res://scenes/player/player.gd" id="1_g2els"]
 [ext_resource type="Texture2D" uid="uid://c6ctxmnkckhvd" path="res://sprites/player/player-sheet.png" id="2_gmlin"]
@@ -23,6 +23,7 @@
 [ext_resource type="Texture2D" uid="uid://d1rwwdhi3qtyr" path="res://sprites/Animations/GunrelatedAnimations/GunShootAnim5.png" id="20_5q8fn"]
 [ext_resource type="Texture2D" uid="uid://chgqw4xsvhm0x" path="res://sprites/Animations/GunrelatedAnimations/GunShootAnim6.png" id="21_wva7c"]
 [ext_resource type="Texture2D" uid="uid://bwsnxwqc7iyul" path="res://sprites/Animations/GunrelatedAnimations/GunShootAnim7.png" id="22_7obkq"]
+[ext_resource type="Texture2D" uid="uid://dxbnq133jy6gq" path="res://sprites/crosshair2.png" id="23_cnsyf"]
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_lvxji"]
 atlas = ExtResource("2_gmlin")
@@ -561,7 +562,7 @@ y_sort_enabled = true
 collision_layer = 2
 collision_mask = 45
 script = ExtResource("1_g2els")
-health = 12
+health = 10
 
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
 y_sort_enabled = true
@@ -610,6 +611,11 @@ position = Vector2(17, -4)
 rotation = 3.14159
 sprite_frames = SubResource("SpriteFrames_vo27k")
 animation = &"shoot"
+
+[node name="ControllerCrosshair" type="Sprite2D" parent="GunSprite"]
+position = Vector2(150, 0)
+scale = Vector2(0.5, 0.5)
+texture = ExtResource("23_cnsyf")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 shape = SubResource("CapsuleShape2D_gmlin")

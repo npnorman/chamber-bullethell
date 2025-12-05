@@ -39,7 +39,18 @@ var saloon_rooms = [
 	[1,preload("res://rooms/AlgorithmRooms/TavernRooms/TavernRoom8.tscn")],
 	[1,preload("res://rooms/AlgorithmRooms/TavernRooms/TavernRoom9.tscn")],
 ]
-var hell_rooms = []
+var hell_rooms = [
+	[1,preload("res://rooms/AlgorithmRooms/HellRooms/HellRoom0.tscn")],
+	[1,preload("res://rooms/AlgorithmRooms/HellRooms/HellRoom1.tscn")],
+	[1,preload("res://rooms/AlgorithmRooms/HellRooms/HellRoom2.tscn")],
+	[1,preload("res://rooms/AlgorithmRooms/HellRooms/HellRoom3.tscn")],
+	[5,preload("res://rooms/AlgorithmRooms/HellRooms/HellRoom4.tscn")],
+	[1,preload("res://rooms/AlgorithmRooms/HellRooms/HellRoom5.tscn")],
+	[1,preload("res://rooms/AlgorithmRooms/HellRooms/HellRoom6.tscn")],
+	[1,preload("res://rooms/AlgorithmRooms/HellRooms/HellRoom7.tscn")],
+	[1,preload("res://rooms/AlgorithmRooms/HellRooms/HellRoom8.tscn")],
+	[1,preload("res://rooms/AlgorithmRooms/HellRooms/HellRoom9.tscn")],
+]
 
 # map
 # m x m (m = 10) expand to 11 for overflow

@@ -1,9 +1,10 @@
-[gd_scene load_steps=8 format=4 uid="uid://c1u2cfr1c4pwd"]
+[gd_scene load_steps=9 format=4 uid="uid://c1u2cfr1c4pwd"]
 
 [ext_resource type="PackedScene" uid="uid://ctxgqeaum4461" path="res://rooms/AlgorithmRooms/base_room.tscn" id="1_dgix7"]
 [ext_resource type="PackedScene" uid="uid://hu0dgs87hr4k" path="res://sprites/SquareTable.tscn" id="2_kxrsi"]
 [ext_resource type="PackedScene" uid="uid://be3bjg0ua7h2c" path="res://scenes/enemy.tscn" id="2_xkxln"]
 [ext_resource type="Texture2D" uid="uid://kjstwmv27w1q" path="res://sprites/BEER.png" id="3_xkxln"]
+[ext_resource type="PackedScene" uid="uid://dhsj01pefhfqp" path="res://scenes/diagonal_enemy.tscn" id="4_em1pt"]
 [ext_resource type="Texture2D" uid="uid://bo5chptmg0doy" path="res://sprites/Chair.png" id="4_kxrsi"]
 [ext_resource type="Texture2D" uid="uid://qor0ikpx0c6b" path="res://sprites/BarStool.png" id="5_em1pt"]
 [ext_resource type="PackedScene" uid="uid://dji6t13e6rqr3" path="res://sprites/Barrel.tscn" id="8_em1pt"]
@@ -19,7 +20,10 @@ position = Vector2(105, -204)
 scale = Vector2(0.6, 0.60249)
 
 [node name="Enemy" parent="Enemies" index="0" instance=ExtResource("2_xkxln")]
-position = Vector2(160, -216)
+position = Vector2(101, -104)
+
+[node name="DiagonalEnemy" parent="Enemies" index="1" instance=ExtResource("4_em1pt")]
+position = Vector2(480, -278)
 
 [node name="Beer" type="Sprite2D" parent="." index="5"]
 position = Vector2(106, -212)

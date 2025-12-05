@@ -8,7 +8,9 @@ class_name LevelContainer
 
 # boss room
 @export var boss_room:Node2D
-@onready var cactus_boss: CharacterBody2D = $CactusBoss
+@onready var boss_transition: Node2D = $BossTransition
+@onready var current_boss: CharacterBody2D
+var boss_transition_pos
 
 @onready var hud: CanvasLayer = $HUD
 @onready var pause_menu: CanvasLayer = $PauseMenu
@@ -21,15 +23,52 @@ class_name LevelContainer
 @onready var camera: Camera2D = $Camera2D
 @onready var mini_map: Node2D = $MiniMap
 @onready var enemy_count: RichTextLabel = $HUD/EnemyCount
+@onready var chamber_center: Marker2D = $HUD/ChamberCenter
+@onready var boss_hp_bar: ProgressBar = $"Boss Room/BossHPBar"
 
 var is_bullet_fairy_spawned = false
 var current_room = null
 var room_change_delta: float = Globals.tile_size * 16
 var is_walls_ready = false
 var is_hud_transparent: bool = false
+var chamber_center_world_coordinates
+var hud_distance = 120
+
+# bosses:
+const CACTUS_BOSS = preload("res://scenes/boss/cactus_boss.tscn")
+const DEVIL_BOSS = preload("res://scenes/boss/devil_boss.tscn")
+@onready var boss_origin: Marker2D = $"Boss Room/BossOrigin"
+
+@export var boss_override = false
+@export var boss_start = false
+@export 	var enemyDelta = 25
+@onready var starting_transition: AnimationPlayer = $StartingTransition
 
 func _ready() -> void:
+	
+	boss_transition_pos = boss_transition.position + Vector2(Globals.room_size * Globals.tile_size / 2, -1 * Globals.room_size * Globals.tile_size / 2)
+	
+	if Globals.is_boss_transition_room_activated:
+		spawn_player_in_boss_transition()
+	
+	starting_transition.play("start")
+	
+	if boss_override:
+		current_boss = DEVIL_BOSS.instantiate()
+	else:
+		set_current_level_boss()
+	
+	#spawn in boss (not activated)
+	current_boss.global_position = boss_origin.global_position
+	add_child(current_boss)
+	
 	camera.zoom = Vector2.ONE * 1.37
+	if MusicPlayer.stream == null:
+		Globals.change_music(Globals.current_level)
+	#spawn_player_in_boss_room()
+	
+	if boss_start:
+		spawn_player_in_boss_transition()
 
 func _process(delta: float) -> void:
 	
@@ -59,6 +98,63 @@ func _process(delta: float) -> void:
 	
 	update_camera_position()
 	
+	update_hud_transparency()
+	
+	update_boss_hp_bar()
+
+func set_current_level_boss():
+	match Globals.current_level:
+		Globals.Level.DESERT:
+			current_boss = CACTUS_BOSS.instantiate()
+		
+		Globals.Level.HELL:
+			current_boss = DEVIL_BOSS.instantiate()
+		
+		Globals.Level.SALOON:
+			#logic to skip boss room
+			pass
+
+func update_boss_hp_bar():
+	if current_boss != null:
+		boss_hp_bar.value = current_boss.hp
+
+func update_hud_transparency():
+	
+	chamber_center_world_coordinates = get_canvas_transform().affine_inverse() * chamber_center.global_position
+	
+	if update_hud_on_player():
+		# updated by player position
+		pass
+	else:
+		if Settings.isMouse:
+			update_hud_transparency_mouse()
+		else:
+			update_hud_transparency_controller()
+
+func update_hud_on_player():
+	if player.global_position.distance_to(chamber_center_world_coordinates) < hud_distance:
+		hud.toggle_transparency(true)
+		is_hud_transparent = true
+		return true
+	else:
+		return false
+
+func update_hud_transparency_controller():
+	var joystick = Vector2.ZERO
+	
+	joystick.x = Input.get_joy_axis(0,JOY_AXIS_RIGHT_X)
+	joystick.y = Input.get_joy_axis(0,JOY_AXIS_RIGHT_Y)
+	
+	var joystick_angle_degrees:float = rad_to_deg(joystick.angle())
+	
+	if joystick_angle_degrees > 0 and joystick_angle_degrees < 180:
+		hud.toggle_transparency(true)
+		is_hud_transparent = true
+	else:
+		hud.toggle_transparency(false)
+		is_hud_transparent = false
+
+func update_hud_transparency_mouse():
 	# Make hud see-through if mouse is low enough
 	var mouse_pos = get_viewport().get_mouse_position()
 	if mouse_pos.y > 400 and not is_hud_transparent:
@@ -70,11 +166,13 @@ func _process(delta: float) -> void:
 
 func check_number_of_enemies():
 	var numEnemies = len(get_tree().get_nodes_in_group("Enemy"))
-	var enemyDelta = 25
 	
 	# get label
 	# label shows: Enemies to kill = len - 5, clamp at 0
-	enemy_count.text = "Unlock Boss In: " + str( maxi(numEnemies - enemyDelta, 0) )
+	if Globals.isBossTPUnlocked:
+		enemy_count.text = "BOSS UNLOCKED!"
+	else:
+		enemy_count.text = "Unlock Boss In: " + str( maxi(numEnemies - enemyDelta, 0) )
 	
 	# if enemy count is <= 5
 	if numEnemies <= enemyDelta:
@@ -177,7 +275,7 @@ func _on_player_bullet_fired(pos, dir, id):
 			bullet.position = pos
 			bullet.rotation_degrees = rad_to_deg(dir.angle()) + 90
 			bullet.direction = dir
-			bullet.ricochets = 1
+			bullet.ricochets = 3
 			bullet.bullet_id = Globals.Bullets.Ricochet
 			projectiles.add_child(bullet)
 			
@@ -238,12 +336,36 @@ func _on_player_bullet_fired(pos, dir, id):
 			player.roll_die(dice_roll)
 			projectiles.add_child(bullet)
 
+func spawn_player_in_boss_transition():
+	starting_transition.play("boss")
+	
+	player.position = boss_transition_pos
+	#player.health = 10
+	
+	#save ammo and set respawn point
+	Globals.is_boss_transition_room_activated = true
+	
+	Globals.load_temp_loadout()
+	Globals.save_current_loadout()
+	
+	Globals.ammo[0] += 500
+	
+	hud.update_counters()
+	hud.set_ammo_types()
+
 func spawn_player_in_boss_room():
+	
+	starting_transition.play("boss")
+	
+	#hp bar load
+	boss_hp_bar.max_value = current_boss.hp
+	
 	player.position = boss_room.position + Vector2(Globals.tile_size * Globals.room_size, Globals.tile_size * -10)
 	mini_map.visible = false
 	camera.zoom = Vector2.ONE * 0.69
-	cactus_boss.activate()
-	Globals.ammo[0] += 50
+	current_boss.activate()
+	
+	hud_distance = 200
 
 func _on_bullet_fairy_timer_timeout() -> void:
 	#spawn bullet fairy
@@ -266,3 +388,5 @@ func _on_player_game_paused(death: bool) -> void:
 		pause_menu.on_pause()
 	pause_menu.visible = true
 	get_tree().paused = true
+	pause_menu.can_exit = true
+	pause_menu.set_focus(death)
