@@ -29,6 +29,10 @@ var desert_rooms = [ #dont include start
 ]
 var saloon_rooms = [
 	[5,preload("res://rooms/AlgorithmRooms/TavernRooms/TavernRoom6.tscn")],
+	#boss tp + shop
+	[1,preload("res://rooms/AlgorithmRooms/SpecialtyRooms/Tavern/Tavern_boss_tp.tscn")],
+	[1,preload("res://rooms/AlgorithmRooms/SpecialtyRooms/Tavern/Tavern_Shop.tscn")],
+	
 	[1,preload("res://rooms/AlgorithmRooms/TavernRooms/TavernRoom0.tscn")],
 	[1,preload("res://rooms/AlgorithmRooms/TavernRooms/TavernRoom1.tscn")],
 	[1,preload("res://rooms/AlgorithmRooms/TavernRooms/TavernRoom2.tscn")],
@@ -40,11 +44,15 @@ var saloon_rooms = [
 	[1,preload("res://rooms/AlgorithmRooms/TavernRooms/TavernRoom9.tscn")],
 ]
 var hell_rooms = [
+	[5,preload("res://rooms/AlgorithmRooms/HellRooms/HellRoom4.tscn")],
+	#bosstp and shop
+	[1,preload("res://rooms/AlgorithmRooms/SpecialtyRooms/Hell/hell_boss_tp.tscn")],
+	[1,preload("res://rooms/AlgorithmRooms/SpecialtyRooms/Hell/Hell_Shop.tscn")],
+	
 	[1,preload("res://rooms/AlgorithmRooms/HellRooms/HellRoom0.tscn")],
 	[1,preload("res://rooms/AlgorithmRooms/HellRooms/HellRoom1.tscn")],
 	[1,preload("res://rooms/AlgorithmRooms/HellRooms/HellRoom2.tscn")],
 	[1,preload("res://rooms/AlgorithmRooms/HellRooms/HellRoom3.tscn")],
-	[5,preload("res://rooms/AlgorithmRooms/HellRooms/HellRoom4.tscn")],
 	[1,preload("res://rooms/AlgorithmRooms/HellRooms/HellRoom5.tscn")],
 	[1,preload("res://rooms/AlgorithmRooms/HellRooms/HellRoom6.tscn")],
 	[1,preload("res://rooms/AlgorithmRooms/HellRooms/HellRoom7.tscn")],

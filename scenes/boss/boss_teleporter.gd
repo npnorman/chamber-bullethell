@@ -25,6 +25,6 @@ func unlock():
 func _on_area_2d_body_entered(body: Node2D) -> void:
 	if locked == false:
 		if Globals.current_level == Globals.Level.SALOON:
-			Globals.change_level(Globals.Level.DESERT)
+			Globals.change_level_and_reset(Globals.Level.DESERT)
 		else:
 			get_parent().get_parent().get_parent().get_parent().spawn_player_in_boss_transition()

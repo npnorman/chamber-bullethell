@@ -211,6 +211,8 @@ func player_die():
 func heal():
 	var old_health = health
 	health += 4
+	if health > 10:
+		health = 10
 	SfxPlayer.heal_sound()
 	update_health.emit(health)
 	animations.play("heal")

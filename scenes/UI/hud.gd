@@ -150,6 +150,9 @@ func update_health(new_health: int) -> void:
 	if new_health % 2 == 1:
 		is_odd = true
 	var index: int = 0
+	
+	if index >= len(stache_textures):
+		index = len(stache_textures) - 1
 
 	for texture in stache_textures:
 		texture.modulate = Color(0, 0, 0, 0)

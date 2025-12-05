@@ -112,7 +112,7 @@ func set_current_level_boss():
 		
 		Globals.Level.SALOON:
 			#logic to skip boss room
-			pass
+			current_boss = CACTUS_BOSS.instantiate()
 
 func update_boss_hp_bar():
 	if current_boss != null:
