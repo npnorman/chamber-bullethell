@@ -154,7 +154,7 @@ func get_number_of_exits(room:Vector4):
 	return number_of_exits
 
 # Ammo array where a given bullet ID's ammo is shown in the index of the ID number
-var ammo: Array[int] = [30, 0, 0, 0, 0, 0, 100, 0, 0, 0, 0, 0]:
+var ammo: Array[int] = [30, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0]:
 	get:
 		return ammo
 
@@ -165,7 +165,7 @@ var ammo_max: Array[int] = [999, 999, 999, 999, 999, 999, 999, 999, 999, 999, 99
 var ammo_shop_amount = [999, 18, 18, 18, 3, 12, 18, 30, 30, 30, 30, 30]
 
 # Array of the IDs of ammo the player currently has, with -1 meaning nothing is in the slot
-var ammo_types: Array[int] = [0, 6, -1, -1]
+var ammo_types: Array[int] = [0, -1, -1, -1]
 
 # Shows the rarity of each bullet to be used to determine pickup texture
 var ammo_rarities: Array[int] = [0, 1, 1, 1, 1, 2, 2, 0, 0, 0, 0, 0]

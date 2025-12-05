@@ -175,9 +175,6 @@ bullet_scene = ExtResource("2_mj5kq")
 bullet_pickup_scene = ExtResource("3_8hip6")
 bullet_fairy = ExtResource("5_b6v1o")
 boss_room = NodePath("Boss Room")
-boss_override = true
-boss_start = true
-enemyDelta = 500
 
 [node name="MiniMap" parent="." instance=ExtResource("3_ep8cf")]
 position = Vector2(120, 250)
