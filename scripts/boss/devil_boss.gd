@@ -1,18 +1,23 @@
 extends CharacterBody2D
 
-# fruit
-@export var cactus_fruit:PackedScene
 @export var key:PackedScene
 
 # arms
-@onready var right_arm: Node2D = $RightArm
-@onready var left_arm: Node2D = $LeftArm
+@onready var tommy_arm: Node2D = $Tommy
+@onready var trident_arm: Node2D = $Trident
 
 @onready var phase_1_timer: Timer = $Phase1Timer
+@onready var phase_2_timer: Timer = $Phase2Timer
+@onready var phase_3_timer: Timer = $Phase3Timer
+
 @onready var animation_player: AnimationPlayer = $AnimationPlayer
-@onready var arms: AnimatedSprite2D = $arms
-@onready var body: AnimatedSprite2D = $body
 @onready var damage_player: AnimationPlayer = $DamagePlayer
+@onready var trident_animation: AnimationPlayer = $TridentAnimation
+@onready var tommy_animation: AnimationPlayer = $TommyAnimation
+
+@onready var tommy_arm_sprite: AnimatedSprite2D = $tommyArm
+@onready var trident_arm_sprite: AnimatedSprite2D = $tridentArm
+@onready var body_sprite: AnimatedSprite2D = $body
 
 var target:Vector2 = Vector2.ZERO
 var origin:Vector2 = Vector2.ZERO
@@ -20,8 +25,8 @@ var direction:Vector2 = Vector2.ZERO
 var speed : float = 500
 
 # Bullets
-var bulletDamage = 1
-var bulletSpeed = 100
+var bulletDamage = 3
+var bulletSpeed = 500
 var despawnTime = 10
 @export var bulletScene:PackedScene
 var player
@@ -54,13 +59,14 @@ enum States {
 }
 
 var currentState = States.PHASE1
-var isReadyPhase1 = false
+var isReadyPhase1 = true
 @onready var state_machine_timer: Timer = $StateMachineTimer
 var moveToNextState = false
+var moveTime = 10
 
 # Health info
-@export var hp = 600
-var hpStates = [500, 300]
+@export var hp = 800
+var hpStates = [600, 400]
 
 func activate():
 	moveToNextState = true
@@ -68,9 +74,8 @@ func activate():
 func _ready() -> void:
 	#get player
 	player = get_tree().get_first_node_in_group("Player")
-	
 	origin = global_position
-	set_target(origin + phase2[movementOffset])
+	set_target(origin)
 
 func _physics_process(delta: float) -> void:
 	
@@ -82,6 +87,9 @@ func _physics_process(delta: float) -> void:
 	
 	if currentState == States.REST:
 		velocity = Vector2.ZERO
+		body_sprite.play("throne")
+		tommy_arm_sprite.visible = false
+		trident_arm_sprite.visible = false
 	elif currentState == States.PHASE1:
 		phase1_pattern(delta)
 	elif currentState == States.PHASE2:
@@ -95,16 +103,16 @@ func _physics_process(delta: float) -> void:
 	move_and_slide()
 
 func checkHealth():
+	# play sprites for different health stages
 	if hp > hpStates[0]:
-		body.play("hp1")
+		pass
 	elif hp > hpStates[1]:
-		body.play("hp2")
+		pass
 	elif hp > 0:
-		body.play("hp3")
+		pass
 	elif hp <= 0:
 		on_death()
 
-var moveTime = 10
 func checkState():
 	# handles enter/exit
 	
@@ -114,42 +122,44 @@ func checkState():
 		
 		if currentState == States.REST:
 			# can move to phase 1
+			animation_player.play("RESET")
+			body_sprite.play("default")
+			tommy_arm_sprite.visible = true
+			trident_arm_sprite.visible = true
+			
 			if hp > hpStates[1]:
-				isReadyPhase1 = true
-				set_target(origin)
 				currentState = States.PHASE1
-				animation_player.play("RESET")
 				moveTime = 15
 			else:
 				currentState = States.PHASE2
-				moveTime = 10
+				moveTime = 15
 			
 		elif currentState == States.PHASE1:
 			# move to rest if hp is good
 			if hp > hpStates[0]:
 				currentState = States.REST
 				animation_player.play("rest")
-				moveTime = 15
+				moveTime = 10
 			else:
 				currentState = States.PHASE2
-				moveTime = 10
+				moveTime = 15
 			
 		elif currentState == States.PHASE2:
 			
 			if hp > hpStates[1]:
 				currentState = States.REST
 				animation_player.play("rest")
-				moveTime = 15
+				moveTime = 10
 			else:
 				currentState = States.PHASE3
-				moveTime = 10
+				moveTime = 15
 		
 		elif currentState == States.PHASE3:
 			
 			velocity = Vector2.ZERO
 			currentState = States.REST
 			animation_player.play("rest")
-			moveTime = 15
+			moveTime = 10
 		
 		elif currentState == States.DEATH:
 			velocity = Vector2.ZERO
@@ -159,11 +169,8 @@ func checkState():
 
 func phase1_pattern(delta):
 	if isReadyPhase1:
-		print("shooting")
 		isReadyPhase1 = false
-		shoot_arm(right_arm)
-		shoot_arm(left_arm)
-		animation_player.play("shoot")
+		shoot_trident()
 		phase_1_timer.start()
 	
 	if global_position.distance_to(target) < targetDelta:
@@ -178,11 +185,10 @@ func phase2_pattern(delta):
 		# set new target
 		movementOffset = (movementOffset + 1) % len(phase2)
 		set_target(origin + (phase2[movementOffset] * movementSize))
-		
-		animation_player.play("shoot")
-		shoot_arm(right_arm)
-		shoot_arm(left_arm)
-		
+	
+	if phase_2_timer.is_stopped():
+		phase_2_timer.start()
+	
 	move_to_target(delta)
 
 func phase3_pattern(delta):
@@ -191,22 +197,11 @@ func phase3_pattern(delta):
 		movementOffset = (movementOffset + 1) % len(phase3)
 		set_target(origin + (phase3[movementOffset] * movementSize))
 		
-		for i in range(0,3):
-			spawn_fruit()
+	# spin attack and trident attack
+	if phase_3_timer.is_stopped():
+		phase_3_timer.start()
 	
 	move_to_target(delta)
-
-func spawn_fruit():
-	# spawn in fruit
-	var fruit = cactus_fruit.instantiate()
-	
-	# spawn above player
-	
-	# pick spot in radius of origin
-	var rand = RandomNumberGenerator.new().randi_range(-5,5)
-	fruit.global_position = global_position + Vector2(rand,-10 + rand) * 100
-	
-	get_parent().add_child(fruit)
 
 func take_damage(damage:int):
 	hp -= damage
@@ -231,57 +226,87 @@ func move_to_target(delta):
 func get_shoot_target():
 	return player.global_position
 
+func shoot_circle(shoot_from_position:Vector2, step:int):
+	var newBullet:Area2D = bulletScene.instantiate()
+	var shoot_direction:Vector2 = Vector2.RIGHT.rotated(step * PI / 8)
+	
+	newBullet.damage = bulletDamage
+	newBullet.speed = bulletSpeed
+	newBullet.global_position = shoot_from_position
+	newBullet.direction = shoot_direction
+	newBullet.rotation = shoot_from_position.angle_to(shoot_direction)# + deg_to_rad(90.0)
+	
+	SfxPlayer.enemy_shot_sound()
+	get_tree().current_scene.add_child(newBullet)
+	
+	newBullet.set_despawn_timer(despawnTime)
+	
+	animation_player.play("shoot")
+	tommy_animation.stop()
+	tommy_animation.play("shoot")
+
 func shoot(shoot_from_position:Vector2, pos:Vector2):
 	var newBullet:Area2D = bulletScene.instantiate()
 	var shoot_target:Vector2 = get_shoot_target()
 	
-	var rng:RandomNumberGenerator = RandomNumberGenerator.new()
-	var colors = [Color("Yellow"), Color("8c6e00"), Color("ffc64a")]
-	var color_index:int = rng.randi_range(0, len(colors) - 1)
-	
-	var color:Color = colors[color_index]
-	
-	# speed variartion
-	
-	var bulletSpeedIncrease = rng.randi_range(0,100)
-	var bulletSpreadOffset = Vector2(1,0) * pos.distance_squared_to(shoot_from_position) * 0.5 * sign(pos.x - shoot_target.x)
-	
-	newBullet.get_node("Sprite2D").modulate = color
 	newBullet.damage = bulletDamage
-	newBullet.speed = bulletSpeed + bulletSpeedIncrease
+	newBullet.speed = bulletSpeed
 	newBullet.global_position = shoot_from_position
-	newBullet.direction = shoot_from_position.direction_to(shoot_target + bulletSpreadOffset)
-	newBullet.rotation = shoot_from_position.angle_to_point(shoot_target + bulletSpreadOffset) + deg_to_rad(90.0)
+	newBullet.direction = shoot_from_position.direction_to(shoot_target)
+	newBullet.rotation = shoot_from_position.angle_to_point(shoot_target) + deg_to_rad(90.0)
 	
+	SfxPlayer.enemy_shot_sound()
 	get_tree().current_scene.add_child(newBullet)
 	
 	newBullet.set_despawn_timer(despawnTime)
 
+func shoot_trident():
+	trident_animation.stop()
+	trident_animation.play("shoot")
+	shoot_arm(trident_arm)
+	animation_player.play("shoot")
+
+func shoot_tommy_gun():
+	animation_player.play("shoot")
+	tommy_animation.stop()
+	tommy_animation.play("shoot")
+	shoot_arm(tommy_arm)
+
 func shoot_arm(arm):
-	SfxPlayer.enemy_shot_sound()
 	var pos:Vector2
 	
-	if arm.name == "RightArm":
-		pos = right_arm.global_position
-	else:
-		pos = left_arm.global_position
+	pos = arm.global_position
 	
 	for marker:Marker2D in arm.get_children():
 		shoot(marker.global_position, pos)
 
 func on_death():
 	currentState = States.DEATH
+	
 	animation_player.play("death")
-	#Globals.change_scene(Globals.Scenes.WIN)
 
 func to_win_room():
 	var newKey = key.instantiate()
 	newKey.global_position = global_position
 	get_parent().add_child(newKey)
-	newKey.isWin = false
+	newKey.isWin = true
 
 func _on_phase_1_timer_timeout() -> void:
 	isReadyPhase1 = true
+
+func _on_phase_2_timer_timeout() -> void:
+	shoot_tommy_gun()
+
+var step = 0
+func _on_phase_3_timer_timeout() -> void:
+	
+	if step % 16 == 0:
+		shoot_trident()
+	
+
+	step += 1
+	for marker in tommy_arm.get_children():
+		shoot_circle(marker.global_position, step)
 
 func _on_state_machine_timer_timeout() -> void:
 	moveToNextState = true
