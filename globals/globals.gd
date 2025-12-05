@@ -130,7 +130,7 @@ func get_number_of_exits(room:Vector4):
 	return number_of_exits
 
 # Ammo array where a given bullet ID's ammo is shown in the index of the ID number
-var ammo: Array[int] = [30, 0, 0, 0, 9, 0, 0, 0, 0, 0, 0, 0]:
+var ammo: Array[int] = [30, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0]:
 	get:
 		return ammo
 
@@ -141,7 +141,7 @@ var ammo_max: Array[int] = [999, 999, 999, 999, 999, 999, 999, 999, 999, 999, 99
 var ammo_shop_amount = [999, 18, 18, 18, 3, 12, 18, 30, 30, 30, 30, 30]
 
 # Array of the IDs of ammo the player currently has, with -1 meaning nothing is in the slot
-var ammo_types: Array[int] = [0, 4, -1, -1]
+var ammo_types: Array[int] = [0, -1, -1, -1]
 
 # Shows the rarity of each bullet to be used to determine pickup texture
 var ammo_rarities: Array[int] = [0, 1, 1, 1, 1, 2, 2, 0, 0, 0, 0, 0]
@@ -157,10 +157,29 @@ var magazine: Array[int] = [-1, -1, -1, -1, -1, -1]:
 # current room
 var current_room_center:Vector2 = Vector2.ZERO
 
+func change_music(level_scheme:int = current_level):
+	if MusicPlayer.stream != null:
+		match level_scheme:
+			Level.SALOON:
+				MusicPlayer.fade_music_out(load("res://sounds/music/Cowagunga.ogg"))
+			Level.DESERT:
+				MusicPlayer.fade_music_out(load("res://sounds/music/Tumbleweeds.ogg"), -14)
+			Level.HELL:
+				pass
+	else:
+		match level_scheme:
+			Level.SALOON:
+				MusicPlayer.play_saloon_music()
+			Level.DESERT:
+				MusicPlayer.play_desert_music()
+			Level.HELL:
+				pass
+
 func change_level(level_scheme:int = current_level):
 	# load level scheme
 	current_level = level_scheme
 	get_tree().change_scene_to_file("res://rooms/TestingRoom.tscn")
+	change_music(level_scheme)
 
 func change_level_and_reset(level_scheme:int=current_level,ammo=true,boss=true,seed=true):
 	change_level(level_scheme)
@@ -189,9 +208,10 @@ func reset_player_stats(ammo = true, boss = true, seed = true):
 		current_seed = -1
 
 func change_scene_and_reset(scene_enum:int, file_name:String = "", ammo = true, boss = true, seed = true):
-	
+	MusicPlayer.stop()
 	change_scene(scene_enum, file_name)
 	reset_player_stats(ammo, boss, seed)
+	
 
 #flag for boss TP
 var isBossTPUnlocked = false

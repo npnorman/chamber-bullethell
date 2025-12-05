@@ -33,6 +33,8 @@ var hud_distance = 120
 
 func _ready() -> void:
 	camera.zoom = Vector2.ONE * 1.37
+	if MusicPlayer.stream == null:
+		Globals.change_music(Globals.current_level)
 	#spawn_player_in_boss_room()
 
 func _process(delta: float) -> void:

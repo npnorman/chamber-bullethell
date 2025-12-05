@@ -24,7 +24,7 @@ func _ready() -> void:
 	rich_text_label.text = text_1
 
 func move_to_starting_scene():
-	MusicPlayer.fade_music_out(load("res://sounds/music/OMORI - OMORI OST - 67 The Heart of the Desert.mp3"))
+	MusicPlayer.fade_music_out(load("res://sounds/music/Tumbleweeds.ogg"))
 	Globals.change_level_and_reset(Globals.Level.DESERT)
 
 func _process(delta: float) -> void:
