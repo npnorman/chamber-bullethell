@@ -58,6 +58,7 @@ func _on_go_to_menu_pressed() -> void:
 
 func _on_restart_pressed() -> void:
 	game_resumed.emit()
+	
 	Globals.change_level_and_reset()
 
 func on_death() -> void:

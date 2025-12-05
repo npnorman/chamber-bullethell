@@ -8,6 +8,8 @@ extends CharacterBody2D
 
 @onready var phase_1_timer: Timer = $Phase1Timer
 @onready var phase_2_timer: Timer = $Phase2Timer
+@onready var phase_3_timer: Timer = $Phase3Timer
+
 @onready var animation_player: AnimationPlayer = $AnimationPlayer
 @onready var damage_player: AnimationPlayer = $DamagePlayer
 @onready var trident_animation: AnimationPlayer = $TridentAnimation
@@ -168,10 +170,7 @@ func checkState():
 func phase1_pattern(delta):
 	if isReadyPhase1:
 		isReadyPhase1 = false
-		trident_animation.stop()
-		trident_animation.play("shoot")
-		shoot_arm(trident_arm)
-		animation_player.play("shoot")
+		shoot_trident()
 		phase_1_timer.start()
 	
 	if global_position.distance_to(target) < targetDelta:
@@ -198,15 +197,11 @@ func phase3_pattern(delta):
 		movementOffset = (movementOffset + 1) % len(phase3)
 		set_target(origin + (phase3[movementOffset] * movementSize))
 		
-		# spawn smoke!
-		spawn_smoke()
+	# spin attack and trident attack
+	if phase_3_timer.is_stopped():
+		phase_3_timer.start()
 	
 	move_to_target(delta)
-
-func spawn_smoke():
-	# spawn in fruit
-	print("Smoking")
-	pass
 
 func take_damage(damage:int):
 	hp -= damage
@@ -231,6 +226,25 @@ func move_to_target(delta):
 func get_shoot_target():
 	return player.global_position
 
+func shoot_circle(shoot_from_position:Vector2, step:int):
+	var newBullet:Area2D = bulletScene.instantiate()
+	var shoot_direction:Vector2 = Vector2.RIGHT.rotated(step * PI / 8)
+	
+	newBullet.damage = bulletDamage
+	newBullet.speed = bulletSpeed
+	newBullet.global_position = shoot_from_position
+	newBullet.direction = shoot_direction
+	newBullet.rotation = shoot_from_position.angle_to(shoot_direction)# + deg_to_rad(90.0)
+	
+	SfxPlayer.enemy_shot_sound()
+	get_tree().current_scene.add_child(newBullet)
+	
+	newBullet.set_despawn_timer(despawnTime)
+	
+	animation_player.play("shoot")
+	tommy_animation.stop()
+	tommy_animation.play("shoot")
+
 func shoot(shoot_from_position:Vector2, pos:Vector2):
 	var newBullet:Area2D = bulletScene.instantiate()
 	var shoot_target:Vector2 = get_shoot_target()
@@ -246,6 +260,18 @@ func shoot(shoot_from_position:Vector2, pos:Vector2):
 	
 	newBullet.set_despawn_timer(despawnTime)
 
+func shoot_trident():
+	trident_animation.stop()
+	trident_animation.play("shoot")
+	shoot_arm(trident_arm)
+	animation_player.play("shoot")
+
+func shoot_tommy_gun():
+	animation_player.play("shoot")
+	tommy_animation.stop()
+	tommy_animation.play("shoot")
+	shoot_arm(tommy_arm)
+
 func shoot_arm(arm):
 	var pos:Vector2
 	
@@ -257,24 +283,30 @@ func shoot_arm(arm):
 func on_death():
 	currentState = States.DEATH
 	
+	animation_player.play("death")
+
+func to_win_room():
 	var newKey = key.instantiate()
 	newKey.global_position = global_position
 	get_parent().add_child(newKey)
 	newKey.isWin = true
-	
-	animation_player.play("death")
-
-func to_win_room():
-	Globals.change_scene_and_reset(Globals.Scenes.WIN)
 
 func _on_phase_1_timer_timeout() -> void:
 	isReadyPhase1 = true
 
 func _on_phase_2_timer_timeout() -> void:
-	animation_player.play("shoot")
-	tommy_animation.stop()
-	tommy_animation.play("shoot")
-	shoot_arm(tommy_arm)
+	shoot_tommy_gun()
+
+var step = 0
+func _on_phase_3_timer_timeout() -> void:
+	
+	if step % 16 == 0:
+		shoot_trident()
+	
+
+	step += 1
+	for marker in tommy_arm.get_children():
+		shoot_circle(marker.global_position, step)
 
 func _on_state_machine_timer_timeout() -> void:
 	moveToNextState = true

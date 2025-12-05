@@ -5,6 +5,15 @@ var tile_size:int = 16
 
 #signal stat_changed
 
+#flag for boss TP
+var isBossTPUnlocked = false
+var is_boss_transition_room_activated = false
+var temporary_loadout = []
+var temporary_types = []
+
+# seed for regen purposes
+var current_seed = -1
+
 # Enums to show what names correspond to what IDs
 enum Bullets {Normal, Ricochet, Shotgun, Explosive, Health, Railgun, Gambler, Empty = -1}
 
@@ -39,7 +48,8 @@ enum Special {
 	START,
 	SHOP,
 	BOSS_TP,
-	BOSS
+	BOSS,
+	BOSS_TRANSITION
 }
 
 enum Scenes {
@@ -49,6 +59,20 @@ enum Scenes {
 	WIN,
 	CUSTOM,
 }
+
+func save_current_loadout():
+	print("SAVING:",ammo)
+	temporary_loadout = ammo.duplicate()
+	temporary_types = ammo_types.duplicate()
+
+func load_temp_loadout():
+	if !temporary_loadout.is_empty() and len(temporary_loadout) == len(ammo):
+		print("LOADING:",temporary_loadout)
+		ammo = temporary_loadout.duplicate()
+		ammo_types = temporary_types.duplicate()
+		
+		temporary_loadout.clear()
+		temporary_types.clear()
 
 func get_scene_string(scene_enum:int):
 	match scene_enum:
@@ -193,11 +217,11 @@ func change_scene_and_reset(scene_enum:int, file_name:String = "", ammo = true, 
 	change_scene(scene_enum, file_name)
 	reset_player_stats(ammo, boss, seed)
 
-#flag for boss TP
-var isBossTPUnlocked = false
-
-# seed for regen purposes
-var current_seed = -1
+func clear_temp_loadout():
+	temporary_loadout.clear()
+	temporary_types.clear()
+	isBossTPUnlocked = false
+	is_boss_transition_room_activated = false
 
 # cheat codes
 func _input(event: InputEvent) -> void:

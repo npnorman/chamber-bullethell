@@ -8,8 +8,9 @@ class_name LevelContainer
 
 # boss room
 @export var boss_room:Node2D
+@onready var boss_transition: Node2D = $BossTransition
 @onready var current_boss: CharacterBody2D
-
+var boss_transition_pos
 
 @onready var hud: CanvasLayer = $HUD
 @onready var pause_menu: CanvasLayer = $PauseMenu
@@ -40,9 +41,15 @@ const DEVIL_BOSS = preload("res://scenes/boss/devil_boss.tscn")
 
 @export var boss_override = false
 @export var boss_start = false
+@export 	var enemyDelta = 25
 @onready var starting_transition: AnimationPlayer = $StartingTransition
 
 func _ready() -> void:
+	
+	boss_transition_pos = boss_transition.position + Vector2(Globals.room_size * Globals.tile_size / 2, -1 * Globals.room_size * Globals.tile_size / 2)
+	
+	if Globals.is_boss_transition_room_activated:
+		spawn_player_in_boss_transition()
 	
 	starting_transition.play("start")
 	
@@ -58,7 +65,7 @@ func _ready() -> void:
 	camera.zoom = Vector2.ONE * 1.37
 	
 	if boss_start:
-		spawn_player_in_boss_room()
+		spawn_player_in_boss_transition()
 
 func _process(delta: float) -> void:
 	
@@ -156,7 +163,6 @@ func update_hud_transparency_mouse():
 
 func check_number_of_enemies():
 	var numEnemies = len(get_tree().get_nodes_in_group("Enemy"))
-	var enemyDelta = 25
 	
 	# get label
 	# label shows: Enemies to kill = len - 5, clamp at 0
@@ -327,6 +333,23 @@ func _on_player_bullet_fired(pos, dir, id):
 			player.roll_die(dice_roll)
 			projectiles.add_child(bullet)
 
+func spawn_player_in_boss_transition():
+	starting_transition.play("boss")
+	
+	player.position = boss_transition_pos
+	#player.health = 10
+	
+	#save ammo and set respawn point
+	Globals.is_boss_transition_room_activated = true
+	
+	Globals.load_temp_loadout()
+	Globals.save_current_loadout()
+	
+	Globals.ammo[0] += 500
+	
+	hud.update_counters()
+	hud.set_ammo_types()
+
 func spawn_player_in_boss_room():
 	
 	starting_transition.play("boss")
@@ -338,7 +361,7 @@ func spawn_player_in_boss_room():
 	mini_map.visible = false
 	camera.zoom = Vector2.ONE * 0.69
 	current_boss.activate()
-	Globals.ammo[0] += 500
+	
 	hud_distance = 200
 
 func _on_bullet_fairy_timer_timeout() -> void:
