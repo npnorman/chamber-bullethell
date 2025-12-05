@@ -1,6 +1,7 @@
-[gd_scene load_steps=7 format=4 uid="uid://dowaq5xlc2m63"]
+[gd_scene load_steps=8 format=4 uid="uid://dowaq5xlc2m63"]
 
 [ext_resource type="TileSet" uid="uid://b5dr7xs5s30fq" path="res://tilesets/multi_tileset.tres" id="1_j3wbb"]
+[ext_resource type="Script" uid="uid://b0xvu25cslpnt" path="res://scripts/room_gen/room_classification.gd" id="1_pclh3"]
 [ext_resource type="PackedScene" uid="uid://db72yr73ei6ps" path="res://sprites/Bar.tscn" id="2_wqrcf"]
 [ext_resource type="Texture2D" uid="uid://kjstwmv27w1q" path="res://sprites/BEER.png" id="3_pclh3"]
 [ext_resource type="PackedScene" uid="uid://b83epnlti1mg6" path="res://scenes/shop/shop.tscn" id="4_o7806"]
@@ -8,6 +9,8 @@
 [ext_resource type="Texture2D" uid="uid://eot7124pxq0b" path="res://sprites/Skull.png" id="6_wqrcf"]
 
 [node name="HellShop" type="Node2D"]
+script = ExtResource("1_pclh3")
+special = 2
 
 [node name="NavigationRegion2D" type="NavigationRegion2D" parent="."]
 

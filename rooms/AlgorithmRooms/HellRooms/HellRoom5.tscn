@@ -3,7 +3,7 @@
 [ext_resource type="PackedScene" uid="uid://ctxgqeaum4461" path="res://rooms/AlgorithmRooms/base_room.tscn" id="1_wtpss"]
 [ext_resource type="Texture2D" uid="uid://eot7124pxq0b" path="res://sprites/Skull.png" id="2_bmbvu"]
 [ext_resource type="PackedScene" uid="uid://be3bjg0ua7h2c" path="res://scenes/enemy.tscn" id="2_mf61o"]
-[ext_resource type="PackedScene" uid="uid://c1fsemoplmeeb" path="res://scenes/magician_enemy.tscn" id="3_dx7ha"]
+[ext_resource type="PackedScene" uid="uid://4q6hltkymfhy" path="res://scenes/Auctioneer.tscn" id="3_mf61o"]
 
 [node name="BaseRoom2" instance=ExtResource("1_wtpss")]
 exit_type = 3
@@ -18,8 +18,8 @@ position = Vector2(92, -121)
 [node name="Enemy2" parent="Enemies" index="1" instance=ExtResource("2_mf61o")]
 position = Vector2(467, -119)
 
-[node name="MagicianEnemy" parent="Enemies" index="2" instance=ExtResource("3_dx7ha")]
-position = Vector2(277, -320)
+[node name="Auctioneer" parent="Enemies" index="2" instance=ExtResource("3_mf61o")]
+position = Vector2(280, -300)
 
 [node name="Skull2" type="Sprite2D" parent="." index="4"]
 position = Vector2(475, -32)
