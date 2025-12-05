@@ -63,6 +63,9 @@ func _ready() -> void:
 	add_child(current_boss)
 	
 	camera.zoom = Vector2.ONE * 1.37
+	if MusicPlayer.stream == null:
+		Globals.change_music(Globals.current_level)
+	#spawn_player_in_boss_room()
 	
 	if boss_start:
 		spawn_player_in_boss_transition()
