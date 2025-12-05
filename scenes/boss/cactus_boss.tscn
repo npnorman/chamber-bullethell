@@ -786,7 +786,6 @@ script = ExtResource("1_vsy1h")
 cactus_fruit = ExtResource("2_ot8wp")
 key = ExtResource("3_lnpyb")
 bulletScene = ExtResource("2_31ex3")
-hp = 1
 
 [node name="arms" type="AnimatedSprite2D" parent="."]
 sprite_frames = SubResource("SpriteFrames_7dvcw")
