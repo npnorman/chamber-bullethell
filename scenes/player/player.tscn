@@ -562,7 +562,7 @@ y_sort_enabled = true
 collision_layer = 2
 collision_mask = 45
 script = ExtResource("1_g2els")
-health = 12
+health = 10
 
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
 y_sort_enabled = true
