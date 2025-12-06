@@ -74,6 +74,9 @@ func _process(_delta):
 			# Blank input, adds knockback for no bullet cost and has a 1.5 second cooldown
 			if Input.is_action_pressed("Blank") and can_blank:
 				blank()
+			
+			if Input.is_action_pressed("Unload") and can_reload:
+				unload()
 		
 		# Normal reload and Special reload inputs
 		if Input.is_action_just_pressed("Main Reload") and Globals.magazine[active_bullet_pos] == Globals.Bullets.Empty and Globals.ammo[0] > 0:
@@ -159,6 +162,22 @@ func reload(id: int):
 			get_tree().current_scene.update_hud()
 		can_reload = false
 		cycle_cylinder()
+
+# Removes current round and adds it back to your inventory if you have it in a slot
+func unload():
+	var active_id = Globals.magazine[active_bullet_pos]
+	var first_empty_slot = Globals.ammo_types.find(-1)
+	var in_inventory: bool = false
+	if Globals.ammo_types.find(active_id) != -1:
+		in_inventory = true
+	if active_id != -1:
+		Globals.ammo[active_id] += 1
+	Globals.magazine[active_bullet_pos] = Globals.Bullets.Empty
+	if first_empty_slot != -1 and in_inventory == false:
+		Globals.ammo_types[first_empty_slot] = active_id
+		get_tree().current_scene.update_hud()
+	can_reload = false
+	cycle_cylinder()
 
 # Moves every bullet in the cyclinder to the left (or right) once
 func cycle_cylinder():

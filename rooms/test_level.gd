@@ -309,7 +309,7 @@ func _on_player_bullet_fired(pos, dir, id):
 			var bullet = bullet_scene.instantiate()
 			bullet.bullet_id = Globals.Bullets.Railgun
 			bullet.position = pos
-			bullet.damage = 10
+			bullet.damage = 12
 			bullet.rotation_degrees = rad_to_deg(dir.angle()) + 90
 			bullet.direction = dir
 			projectiles.add_child(bullet)
