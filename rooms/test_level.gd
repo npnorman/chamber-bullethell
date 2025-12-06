@@ -223,6 +223,7 @@ func update_camera_position():
 func update_hud():
 	hud.set_ammo_types()
 	hud.update_counters()
+	hud.update_chamber_textures()
 
 # Adjust HUD when cylinder changes
 func _on_player_cylinder_cycled() -> void:

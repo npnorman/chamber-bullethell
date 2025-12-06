@@ -75,8 +75,10 @@ func _process(_delta):
 			if Input.is_action_pressed("Blank") and can_blank:
 				blank()
 			
-			if Input.is_action_pressed("Unload") and can_reload:
+			if Input.is_action_just_pressed("Unload") and can_reload:
 				unload()
+			if Input.is_action_pressed("Old_Unload") and can_reload:
+				unload(1)
 		
 		# Normal reload and Special reload inputs
 		if Input.is_action_just_pressed("Main Reload") and Globals.magazine[active_bullet_pos] == Globals.Bullets.Empty and Globals.ammo[0] > 0:
@@ -164,20 +166,35 @@ func reload(id: int):
 		cycle_cylinder()
 
 # Removes current round and adds it back to your inventory if you have it in a slot
-func unload():
-	var active_id = Globals.magazine[active_bullet_pos]
-	var first_empty_slot = Globals.ammo_types.find(-1)
-	var in_inventory: bool = false
-	if Globals.ammo_types.find(active_id) != -1:
-		in_inventory = true
-	if active_id != -1:
-		Globals.ammo[active_id] += 1
-	Globals.magazine[active_bullet_pos] = Globals.Bullets.Empty
-	if first_empty_slot != -1 and in_inventory == false:
-		Globals.ammo_types[first_empty_slot] = active_id
+func unload(type: int = 0):
+	if type == 0:
+		var index: int = 0
+		for bullet in Globals.magazine:
+			var first_empty_slot = Globals.ammo_types.find(-1)
+			if bullet != Globals.Bullets.Empty:
+				Globals.ammo[bullet] += 1
+				Globals.magazine[index] = Globals.Bullets.Empty
+			if Globals.ammo_types.find(bullet) == -1 and first_empty_slot != -1:
+				Globals.ammo_types[first_empty_slot] = bullet
+			index += 1
+		SfxPlayer.cylinder_click_sound()
 		get_tree().current_scene.update_hud()
-	can_reload = false
-	cycle_cylinder()
+	if type == 1:
+		var active_id = Globals.magazine[active_bullet_pos]
+		var first_empty_slot = Globals.ammo_types.find(-1)
+		var in_inventory: bool = false
+		if Globals.ammo_types.find(active_id) != -1:
+			in_inventory = true
+		if active_id != Globals.Bullets.Empty:
+			Globals.ammo[active_id] += 1
+		Globals.magazine[active_bullet_pos] = Globals.Bullets.Empty
+		if first_empty_slot != -1 and in_inventory == false:
+			Globals.ammo_types[first_empty_slot] = active_id
+			get_tree().current_scene.update_hud()
+		can_reload = false
+		cycle_cylinder()
+
+			
 
 # Moves every bullet in the cyclinder to the left (or right) once
 func cycle_cylinder():
