@@ -223,6 +223,7 @@ func update_camera_position():
 func update_hud():
 	hud.set_ammo_types()
 	hud.update_counters()
+	hud.update_chamber_textures()
 
 # Adjust HUD when cylinder changes
 func _on_player_cylinder_cycled() -> void:
@@ -309,7 +310,7 @@ func _on_player_bullet_fired(pos, dir, id):
 			var bullet = bullet_scene.instantiate()
 			bullet.bullet_id = Globals.Bullets.Railgun
 			bullet.position = pos
-			bullet.damage = 10
+			bullet.damage = 12
 			bullet.rotation_degrees = rad_to_deg(dir.angle()) + 90
 			bullet.direction = dir
 			projectiles.add_child(bullet)
