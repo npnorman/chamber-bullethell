@@ -6,8 +6,6 @@
 [ext_resource type="PackedScene" uid="uid://dr7vgp2y75n6u" path="res://sprites/RoundTable.tscn" id="4_idwlu"]
 
 [sub_resource type="NavigationPolygon" id="NavigationPolygon_idwlu"]
-vertices = PackedVector2Array(536.102, -537.117, 541.883, -19.0703, 14.1563, -22.9219, 22.8281, -543.859)
-polygons = Array[PackedInt32Array]([PackedInt32Array(0, 1, 2, 3)])
 outlines = Array[PackedVector2Array]([PackedVector2Array(13, -554, 546, -547, 552, -9, 4, -13)])
 
 [node name="BaseRoom2" instance=ExtResource("1_s2bak")]
@@ -27,12 +25,12 @@ position = Vector2(92, -241)
 position = Vector2(439, -239)
 
 [node name="Chair3" type="Sprite2D" parent="." index="4"]
-position = Vector2(56, -496)
+position = Vector2(76, -457)
 scale = Vector2(1.5, 1.5)
 texture = ExtResource("2_wv40b")
 
 [node name="Chair4" type="Sprite2D" parent="." index="5"]
-position = Vector2(115, -495)
+position = Vector2(145, -456)
 scale = Vector2(1.5, 1.5)
 texture = ExtResource("2_wv40b")
 
@@ -76,4 +74,4 @@ position = Vector2(434, -127)
 position = Vector2(432, -311)
 
 [node name="RoundTable9" parent="." index="15" instance=ExtResource("4_idwlu")]
-position = Vector2(86, -499)
+position = Vector2(110, -456)

@@ -9,16 +9,16 @@
 [node name="BaseRoom2" instance=ExtResource("1_qlucr")]
 
 [node name="MagicianEnemy" parent="Enemies" index="0" instance=ExtResource("2_fh6tq")]
-position = Vector2(176, -416)
+position = Vector2(123, -412)
 
 [node name="MagicianEnemy2" parent="Enemies" index="1" instance=ExtResource("2_fh6tq")]
-position = Vector2(391, -426)
+position = Vector2(443, -419)
 
 [node name="MagicianEnemy3" parent="Enemies" index="2" instance=ExtResource("2_fh6tq")]
-position = Vector2(396, -148)
+position = Vector2(427, -272)
 
 [node name="MagicianEnemy4" parent="Enemies" index="3" instance=ExtResource("2_fh6tq")]
-position = Vector2(166, -141)
+position = Vector2(169, -276)
 
 [node name="Barstool2" parent="." index="4" instance=ExtResource("2_dioxf")]
 position = Vector2(231, -181)
@@ -27,10 +27,10 @@ position = Vector2(231, -181)
 position = Vector2(190, -222)
 
 [node name="Barstool4" parent="." index="6" instance=ExtResource("2_dioxf")]
-position = Vector2(396, -252)
+position = Vector2(391, -226)
 
 [node name="Barstool5" parent="." index="7" instance=ExtResource("2_dioxf")]
-position = Vector2(362, -194)
+position = Vector2(353, -197)
 
 [node name="Barstool6" parent="." index="8" instance=ExtResource("2_dioxf")]
 position = Vector2(300, -177)
@@ -48,47 +48,47 @@ position = Vector2(391, -316)
 position = Vector2(350, -366)
 
 [node name="Barstool11" parent="." index="13" instance=ExtResource("2_dioxf")]
-position = Vector2(298, -382)
+position = Vector2(290, -382)
 
 [node name="RoundTable" parent="." index="14" instance=ExtResource("3_fh6tq")]
-position = Vector2(85, -80)
+position = Vector2(87, -134)
 scale = Vector2(1.31848, 1.38791)
 
 [node name="Barstool12" parent="." index="15" instance=ExtResource("2_dioxf")]
-position = Vector2(55, -69)
+position = Vector2(58, -122)
 
 [node name="Barstool13" parent="." index="16" instance=ExtResource("2_dioxf")]
-position = Vector2(115, -68)
+position = Vector2(114, -122)
 
 [node name="RoundTable2" parent="." index="17" instance=ExtResource("3_fh6tq")]
-position = Vector2(472.138, -80.8272)
+position = Vector2(443, -120)
 scale = Vector2(1.31848, 1.38791)
 
 [node name="Barstool14" parent="." index="18" instance=ExtResource("2_dioxf")]
-position = Vector2(442.138, -69.8272)
+position = Vector2(414, -106)
 
 [node name="Barstool15" parent="." index="19" instance=ExtResource("2_dioxf")]
-position = Vector2(502.138, -68.8272)
+position = Vector2(469, -106)
 
 [node name="RoundTable3" parent="." index="20" instance=ExtResource("3_fh6tq")]
-position = Vector2(90.1384, -504)
+position = Vector2(110, -491)
 scale = Vector2(1.31848, 1.38791)
 
 [node name="Barstool16" parent="." index="21" instance=ExtResource("2_dioxf")]
-position = Vector2(60.1384, -493)
+position = Vector2(81, -479)
 
 [node name="Barstool17" parent="." index="22" instance=ExtResource("2_dioxf")]
-position = Vector2(120.138, -492)
+position = Vector2(137, -479)
 
 [node name="RoundTable4" parent="." index="23" instance=ExtResource("3_fh6tq")]
-position = Vector2(477.277, -504.827)
+position = Vector2(406, -502)
 scale = Vector2(1.31848, 1.38791)
 
 [node name="Barstool18" parent="." index="24" instance=ExtResource("2_dioxf")]
-position = Vector2(447.277, -493.827)
+position = Vector2(382, -488)
 
 [node name="Barstool19" parent="." index="25" instance=ExtResource("2_dioxf")]
-position = Vector2(507.277, -492.827)
+position = Vector2(432, -488)
 
 [node name="Chest" parent="." index="26" instance=ExtResource("3_shebr")]
 position = Vector2(284, -290)
