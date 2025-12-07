@@ -1,0 +1,18 @@
+[gd_resource type="AnimatedTexture" load_steps=5 format=3 uid="uid://vtxcmp40xbd5"]
+
+[ext_resource type="Texture2D" uid="uid://b0ktadiqo6dtg" path="res://tilesets/MovingLava1.png" id="1_bcbkk"]
+[ext_resource type="Texture2D" uid="uid://cwllgs5em16ry" path="res://tilesets/MovingLava2.png" id="2_0y0hj"]
+[ext_resource type="Texture2D" uid="uid://w60vvgg2duml" path="res://tilesets/MovingLava3.png" id="3_ri0jy"]
+[ext_resource type="Texture2D" uid="uid://c3tt0vm138hbj" path="res://tilesets/MovingLava4.png" id="4_8kvle"]
+
+[resource]
+frames = 4
+speed_scale = 0.5
+frame_0/texture = ExtResource("1_bcbkk")
+frame_0/duration = 0.1
+frame_1/texture = ExtResource("2_0y0hj")
+frame_1/duration = 0.1
+frame_2/texture = ExtResource("3_ri0jy")
+frame_2/duration = 0.1
+frame_3/texture = ExtResource("4_8kvle")
+frame_3/duration = 0.1
