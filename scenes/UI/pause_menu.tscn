@@ -164,6 +164,9 @@ E or 2 - Reload Special Bullet 1
 
 R or 3 - Reload Special Bullet 3
 
+Z - Unload bullet
+Hold Z to unload all bullets
+
 Tab - Open/Close Inventory"
 
 [node name="ExitControls" type="Button" parent="ControlScreen"]
