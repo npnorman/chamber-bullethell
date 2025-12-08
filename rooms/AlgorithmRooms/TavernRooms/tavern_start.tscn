@@ -1,0 +1,67 @@
+[gd_scene load_steps=5 format=3 uid="uid://csc3gqiqc8aja"]
+
+[ext_resource type="PackedScene" uid="uid://cuk5py63ydbdx" path="res://rooms/AlgorithmRooms/TavernRooms/TavernRoomBase.tscn" id="1_8c21m"]
+[ext_resource type="PackedScene" uid="uid://dr5sgeuw3erhu" path="res://scenes/interactables/beer.tscn" id="2_xpptf"]
+[ext_resource type="Texture2D" uid="uid://bo5chptmg0doy" path="res://sprites/Chair.png" id="3_byrau"]
+[ext_resource type="PackedScene" uid="uid://hu0dgs87hr4k" path="res://sprites/SquareTable.tscn" id="4_lmn2w"]
+
+[node name="BaseRoom2" instance=ExtResource("1_8c21m")]
+
+[node name="Beer4" parent="Interactables" index="0" instance=ExtResource("2_xpptf")]
+position = Vector2(503, -398)
+
+[node name="Beer5" parent="Interactables" index="1" instance=ExtResource("2_xpptf")]
+position = Vector2(508, -386)
+rotation = -2.11303
+
+[node name="Chair" type="Sprite2D" parent="." index="4"]
+position = Vector2(109, -498)
+scale = Vector2(1.5, 1.4375)
+texture = ExtResource("3_byrau")
+
+[node name="Chair2" type="Sprite2D" parent="." index="5"]
+position = Vector2(137, -497)
+scale = Vector2(1.5, 1.4375)
+texture = ExtResource("3_byrau")
+
+[node name="Chair3" type="Sprite2D" parent="." index="6"]
+position = Vector2(434, -492)
+scale = Vector2(1.5, 1.4375)
+texture = ExtResource("3_byrau")
+
+[node name="Chair4" type="Sprite2D" parent="." index="7"]
+position = Vector2(462, -491)
+scale = Vector2(1.5, 1.4375)
+texture = ExtResource("3_byrau")
+
+[node name="Chair9" type="Sprite2D" parent="." index="8"]
+position = Vector2(115, -150)
+scale = Vector2(1.5, 1.4375)
+texture = ExtResource("3_byrau")
+
+[node name="Chair10" type="Sprite2D" parent="." index="9"]
+position = Vector2(143, -149)
+scale = Vector2(1.5, 1.4375)
+texture = ExtResource("3_byrau")
+
+[node name="Chair11" type="Sprite2D" parent="." index="10"]
+position = Vector2(437, -151)
+scale = Vector2(1.5, 1.4375)
+texture = ExtResource("3_byrau")
+
+[node name="Chair12" type="Sprite2D" parent="." index="11"]
+position = Vector2(465, -150)
+scale = Vector2(1.5, 1.4375)
+texture = ExtResource("3_byrau")
+
+[node name="SquareTable" parent="." index="12" instance=ExtResource("4_lmn2w")]
+position = Vector2(123, -470)
+
+[node name="SquareTable3" parent="." index="13" instance=ExtResource("4_lmn2w")]
+position = Vector2(449, -464)
+
+[node name="SquareTable5" parent="." index="14" instance=ExtResource("4_lmn2w")]
+position = Vector2(449, -121)
+
+[node name="SquareTable6" parent="." index="15" instance=ExtResource("4_lmn2w")]
+position = Vector2(128, -122)
