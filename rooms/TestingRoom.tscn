@@ -228,11 +228,12 @@ modulate = Color(1, 1, 1, 0)
 offset_left = 343.0
 offset_top = 109.0
 offset_right = 724.0
-offset_bottom = 180.0
+offset_bottom = 205.0
 bbcode_enabled = true
 text = "[center]Press F / LB to Reload
 Press RMB / ZL to Shoot Bullets
-Press LMB / ZR to Shoot Blanks[/center]"
+Press LMB / ZR to Shoot Blanks
+Press X to unload the cylinder[/center]"
 
 [node name="ColorRect" type="ColorRect" parent="HUD/IntroText"]
 z_index = -1

@@ -555,6 +555,26 @@ position = Vector2(60, 59)
 scale = Vector2(7, 7)
 shape = SubResource("RectangleShape2D_kj32l")
 
+[node name="TipPanel" type="PanelContainer" parent="InventoryAreas"]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -508.0
+offset_top = -40.0
+offset_right = -364.0
+offset_bottom = 66.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="TextDescription" type="RichTextLabel" parent="InventoryAreas/TipPanel"]
+layout_mode = 2
+mouse_filter = 1
+bbcode_enabled = true
+text = "Click and drag special bullet types to the trash can to drop them"
+
 [node name="TextPanel" type="PanelContainer" parent="."]
 visible = false
 anchors_preset = 8

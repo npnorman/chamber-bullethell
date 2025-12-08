@@ -69,6 +69,3 @@ func fade_music_in(music: AudioStream, volume: int = -10):
 	_play_music(music)
 	var tween = create_tween()
 	tween.tween_property(self, "volume_db", volume + music_volume, 2)
-
-func set_volume(new_volume: int):
-	volume_db = music_volume + new_volume

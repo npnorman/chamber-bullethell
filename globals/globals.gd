@@ -64,6 +64,7 @@ func save_current_loadout():
 	print("SAVING:",ammo)
 	temporary_loadout = ammo.duplicate()
 	temporary_types = ammo_types.duplicate()
+	
 
 func load_temp_loadout():
 	if !temporary_loadout.is_empty() and len(temporary_loadout) == len(ammo):
@@ -204,10 +205,14 @@ func change_level(level_scheme:int = current_level):
 	current_level = level_scheme
 	get_tree().change_scene_to_file("res://rooms/TestingRoom.tscn")
 	change_music(level_scheme)
+	print(temporary_loadout)
+	load_temp_loadout()
+	magazine = [-1, -1, -1, -1, -1, -1]
 
 func change_level_and_reset(level_scheme:int=current_level,ammo=true,boss=true,seed=true):
 	change_level(level_scheme)
 	reset_player_stats(ammo,boss,seed)
+
 
 func change_scene(scene_enum:int, file_name:String = ""):
 	if scene_enum != Scenes.CUSTOM:
