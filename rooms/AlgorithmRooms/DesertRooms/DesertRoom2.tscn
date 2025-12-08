@@ -1,7 +1,7 @@
 [gd_scene load_steps=7 format=4 uid="uid://b5b4yc3fgmpul"]
 
 [ext_resource type="PackedScene" uid="uid://ctxgqeaum4461" path="res://rooms/AlgorithmRooms/base_room.tscn" id="1_b3twf"]
-[ext_resource type="Texture2D" uid="uid://kjstwmv27w1q" path="res://sprites/BEER.png" id="3_b3twf"]
+[ext_resource type="PackedScene" uid="uid://dr5sgeuw3erhu" path="res://scenes/interactables/beer.tscn" id="4_6o818"]
 [ext_resource type="PackedScene" uid="uid://c0hpokmr76hlq" path="res://sprites/Cactus2.tscn" id="4_b3twf"]
 [ext_resource type="PackedScene" uid="uid://b7g2b431gu6nf" path="res://sprites/Cactus.tscn" id="5_6o818"]
 [ext_resource type="PackedScene" uid="uid://dhsj01pefhfqp" path="res://scenes/diagonal_enemy.tscn" id="6_5sb6d"]
@@ -25,20 +25,18 @@ position = Vector2(133, -379)
 [node name="Enemy3" parent="Enemies" index="3" instance=ExtResource("7_fkj2u")]
 position = Vector2(486, -304)
 
-[node name="Beer" type="Sprite2D" parent="." index="4"]
-position = Vector2(112, -114.5)
+[node name="Beer" parent="Interactables" index="0" instance=ExtResource("4_6o818")]
+position = Vector2(114, -134)
 rotation = -1.5708
-scale = Vector2(0.0640625, 0.0640625)
-texture = ExtResource("3_b3twf")
 
-[node name="Cactus5" parent="." index="5" instance=ExtResource("4_b3twf")]
+[node name="Cactus5" parent="." index="4" instance=ExtResource("4_b3twf")]
 position = Vector2(393, -209)
 
-[node name="Cactus" parent="." index="6" instance=ExtResource("5_6o818")]
+[node name="Cactus" parent="." index="5" instance=ExtResource("5_6o818")]
 position = Vector2(259, -108)
 
-[node name="Cactus6" parent="." index="7" instance=ExtResource("4_b3twf")]
+[node name="Cactus6" parent="." index="6" instance=ExtResource("4_b3twf")]
 position = Vector2(445, -408)
 
-[node name="Cactus7" parent="." index="8" instance=ExtResource("5_6o818")]
+[node name="Cactus7" parent="." index="7" instance=ExtResource("5_6o818")]
 position = Vector2(104, -237)
