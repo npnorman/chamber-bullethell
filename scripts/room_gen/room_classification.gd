@@ -20,6 +20,12 @@ var coordinates = [
 	Vector2(Globals.tile_size / 2, -room / 2), # Left Wall
 	Vector2(room / 2, -Globals.tile_size / 2), # Bottom Wall
 	]
+var tilemap_right_walls: Array[Vector2i] = [Vector2i(7,1),Vector2i(6,1),Vector2i(7,2)]
+var tilemap_top_walls: Array[Vector2i] = [Vector2i(6,0),Vector2i(5,0),Vector2i(3,1)]
+var tilemap_left_walls: Array[Vector2i] = [Vector2i(5,1),Vector2i(4,1),Vector2i(5,2)]
+var tilemap_bottom_walls: Array[Vector2i] = [Vector2i(6,2),Vector2i(5,2),Vector2i(3,1)]
+var tilemap_hell_second_right: Vector2i = Vector2i(3,3)
+var tilemap_hell_second_left: Vector2i = Vector2i(1,3)
 
 func _process(delta: float) -> void:
 	if enemies != null:
@@ -70,6 +76,18 @@ func remove_walls():
 
 func set_dead_ends(invalid_exits):
 	var exits = Globals.get_exits(Vector4(0,0,exit_type,room_rotation))
+	var tile_source: int
+	var level_number: int
+	match Globals.current_level:
+		Globals.Level.SALOON:
+			tile_source = 3
+			level_number = 0
+		Globals.Level.DESERT:
+			tile_source = 0
+			level_number = 1
+		Globals.Level.HELL:
+			tile_source = 2
+			level_number = 2
 	self.invalid_exits = invalid_exits
 	
 	if !is_completed and len(walls) == 0:
@@ -82,16 +100,23 @@ func set_dead_ends(invalid_exits):
 				if i == 0: #right
 					for k in range(-21,-12):
 						# tile location, tileset id, tile location in atlas
-						tile_map_layer.set_cell(Vector2i(34,k),0,Vector2i(6,1))
+						tile_map_layer.set_cell(Vector2i(34,k),tile_source,tilemap_right_walls[level_number])
+						if level_number == 2:
+							tile_map_layer.set_cell(Vector2i(33,k),tile_source,tilemap_hell_second_right)
 				elif i == 1: #top
 					for k in range(12,22):
 						# tile location, tileset id, tile location in atlas
-						tile_map_layer.set_cell(Vector2i(k,-35),0,Vector2i(5,0))
+						tile_map_layer.set_cell(Vector2i(k,-35),tile_source,tilemap_top_walls[level_number])
 				elif i == 2: #left
 					for k in range(-21,-12):
 						# tile location, tileset id, tile location in atlas
-						tile_map_layer.set_cell(Vector2i(0,k),0,Vector2i(4,1))
+						tile_map_layer.set_cell(Vector2i(0,k),tile_source,tilemap_left_walls[level_number])
+						if level_number == 2:
+							tile_map_layer.set_cell(Vector2i(1,k),tile_source,tilemap_hell_second_left)
 				elif i == 3: #bottom
 					for k in range(12,22):
-						# tile location, tileset id, tile location in atlas
-						tile_map_layer.set_cell(Vector2i(k,-1),0,Vector2i(5,2))
+						if level_number == 2:
+							tile_map_layer.set_cell(Vector2i(k,-1),tile_source,tilemap_bottom_walls[level_number], 1)
+						else:
+							# tile location, tileset id, tile location in atlas
+							tile_map_layer.set_cell(Vector2i(k,-1),tile_source,tilemap_bottom_walls[level_number])
