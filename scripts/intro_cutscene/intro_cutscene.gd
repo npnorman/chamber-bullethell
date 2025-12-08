@@ -25,7 +25,7 @@ func _ready() -> void:
 
 func move_to_starting_scene():
 	MusicPlayer.fade_music_out(load("res://sounds/music/Tumbleweeds.ogg"))
-	Globals.change_level_and_reset(Globals.Level.DESERT)
+	Globals.change_level_and_reset(Globals.Level.SALOON)
 
 func _process(delta: float) -> void:
 	if Input.is_action_just_pressed("Inventory"):

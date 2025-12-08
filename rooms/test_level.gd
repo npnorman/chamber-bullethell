@@ -46,8 +46,8 @@ const DEVIL_BOSS = preload("res://scenes/boss/devil_boss.tscn")
 
 func _ready() -> void:
 	
+	update_hud()
 	boss_transition_pos = boss_transition.position + Vector2(Globals.room_size * Globals.tile_size / 2, -1 * Globals.room_size * Globals.tile_size / 2)
-	
 	if Globals.is_boss_transition_room_activated:
 		spawn_player_in_boss_transition()
 	

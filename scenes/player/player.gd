@@ -10,7 +10,7 @@ var active_bullet_pos: int = 0
 @export var can_reload: bool = true
 @export var player_direction: Vector2
 @export var speed: int = 150
-@export var health: int = 6
+@export var health: int = 10
 @export var bullet_types: Array[int] = [0, -1, -1, -1]
 
 var joy_stick_direction = Vector2.ZERO

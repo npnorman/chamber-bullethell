@@ -5,6 +5,7 @@ const saloon_music = preload("res://sounds/music/Cowagunga.ogg")
 const desert_music = preload("res://sounds/music/Tumbleweeds.ogg")
 
 var fade_in_progress: bool = false
+var music_volume: int = 0
 #func _play_sound(sound, volume: float = -10.0) -> void:
 	#var audio_stream_player: AudioStreamPlayer = AudioStreamPlayer.new()
 	#add_child(audio_stream_player)
@@ -39,9 +40,8 @@ var fade_in_progress: bool = false
 func _play_music(music: AudioStream, volume: float = -5.0) -> void:
 	if stream == music:
 		return
-	
 	stream = music
-	volume_db = volume
+	volume_db = volume + music_volume
 	play()
 
 func play_cutscene_music() -> void:
@@ -68,5 +68,4 @@ func fade_music_out(music: AudioStream = null, volume: int = -10) -> void:
 func fade_music_in(music: AudioStream, volume: int = -10):
 	_play_music(music)
 	var tween = create_tween()
-	tween.tween_property(self, "volume_db", volume, 2)
-	
+	tween.tween_property(self, "volume_db", volume + music_volume, 2)

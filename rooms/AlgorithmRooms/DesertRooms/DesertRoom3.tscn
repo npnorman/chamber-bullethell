@@ -36,4 +36,3 @@ position = Vector2(52, -463)
 
 [node name="Chest" parent="." index="7" instance=ExtResource("5_fe165")]
 position = Vector2(85, -292)
-bullet_id = 4

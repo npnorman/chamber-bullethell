@@ -13,22 +13,22 @@ tile_map_data = PackedByteArray("AAAAAN3/AAAAAAAAAAAAAN7/AAAAAAEAAAAAAN//AAAAAAE
 [node name="Chest" parent="." index="4" instance=ExtResource("3_sccw7")]
 position = Vector2(159, -310)
 bullet_id = 5
-bullet_amount = 30
+bullet_amount = 18
 
 [node name="Chest2" parent="." index="5" instance=ExtResource("3_sccw7")]
 position = Vector2(403, -307)
 bullet_id = 3
-bullet_amount = 30
+bullet_amount = 24
 
 [node name="Chest3" parent="." index="6" instance=ExtResource("3_sccw7")]
 position = Vector2(75, -210)
 bullet_id = 6
-bullet_amount = 30
+bullet_amount = 24
 
 [node name="Chest4" parent="." index="7" instance=ExtResource("3_sccw7")]
 position = Vector2(483, -211)
 bullet_id = 2
-bullet_amount = 30
+bullet_amount = 24
 
 [node name="Area2D" type="Area2D" parent="." index="8"]
 collision_layer = 0

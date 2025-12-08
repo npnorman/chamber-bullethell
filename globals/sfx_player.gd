@@ -14,12 +14,14 @@ const explosion = preload("res://sounds/Explosion3.wav")
 const splash = preload("res://sounds/Splash.wav")
 const enemy_shot = preload("res://sounds/Shot4.wav")
 
+var sfx_volume: int = 0
+
 func _play_sound(sound: AudioStreamWAV, volume: float = -10.0) -> void:
 	var audio_stream_player: AudioStreamPlayer = AudioStreamPlayer.new()
 	add_child(audio_stream_player)
 	
 	audio_stream_player.stream = sound
-	audio_stream_player.volume_db = volume
+	audio_stream_player.volume_db = volume + sfx_volume
 	audio_stream_player.play()
 	await audio_stream_player.finished
 	audio_stream_player.queue_free()
