@@ -23,6 +23,7 @@ var target:Vector2 = Vector2.ZERO
 var origin:Vector2 = Vector2.ZERO
 var direction:Vector2 = Vector2.ZERO
 var speed : float = 500
+var active: bool = false
 
 # Bullets
 var bulletDamage = 3
@@ -70,6 +71,7 @@ var hpStates = [600, 400]
 
 func activate():
 	moveToNextState = true
+	active = true
 
 func _ready() -> void:
 	#get player
@@ -90,7 +92,7 @@ func _physics_process(delta: float) -> void:
 		body_sprite.play("throne")
 		tommy_arm_sprite.visible = false
 		trident_arm_sprite.visible = false
-	elif currentState == States.PHASE1:
+	elif currentState == States.PHASE1 and active:
 		phase1_pattern(delta)
 	elif currentState == States.PHASE2:
 		phase2_pattern(delta)

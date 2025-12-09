@@ -169,12 +169,11 @@ _data = {
 &"start": SubResource("Animation_mj5kq")
 }
 
-[node name="Starting Room" type="Node2D" node_paths=PackedStringArray("boss_room")]
+[node name="Starting Room" type="Node2D"]
 script = ExtResource("1_u75bg")
 bullet_scene = ExtResource("2_mj5kq")
 bullet_pickup_scene = ExtResource("3_8hip6")
 bullet_fairy = ExtResource("5_b6v1o")
-boss_room = NodePath("Boss Room")
 
 [node name="MiniMap" parent="." instance=ExtResource("3_ep8cf")]
 position = Vector2(120, 250)
@@ -301,7 +300,6 @@ position = Vector2(-3191, -6512)
 
 [node name="Boss Room" parent="." instance=ExtResource("16_8hip6")]
 position = Vector2(-509, -6236)
-metadata/_edit_lock_ = true
 
 [node name="BossHPBar" type="ProgressBar" parent="Boss Room"]
 offset_left = 1151.0

@@ -7,10 +7,12 @@ class_name LevelContainer
 @export var bullet_fairy:PackedScene
 
 # boss room
-@export var boss_room:Node2D
-@onready var boss_transition: Node2D = $BossTransition
+@onready var boss_rooms: Array[PackedScene] = [preload("res://rooms/AlgorithmRooms/SpecialtyRooms/Desert/desert_boss.tscn"), preload("res://rooms/AlgorithmRooms/SpecialtyRooms/Desert/desert_boss.tscn"), preload("res://rooms/AlgorithmRooms/SpecialtyRooms/Hell/hell_boss.tscn")]
+@onready var boss_transitions: Array[PackedScene] = [preload("res://rooms/AlgorithmRooms/SpecialtyRooms/Desert/desert_boss_transtion.tscn"), preload("res://rooms/AlgorithmRooms/SpecialtyRooms/Desert/desert_boss_transtion.tscn"), preload("res://rooms/AlgorithmRooms/SpecialtyRooms/Hell/hell_boss_transition.tscn")]
 @onready var current_boss: CharacterBody2D
 var boss_transition_pos
+var boss_room: Node2D
+var boss_transition: Node2D
 
 @onready var hud: CanvasLayer = $HUD
 @onready var pause_menu: CanvasLayer = $PauseMenu
@@ -37,15 +39,20 @@ var hud_distance = 120
 # bosses:
 const CACTUS_BOSS = preload("res://scenes/boss/cactus_boss.tscn")
 const DEVIL_BOSS = preload("res://scenes/boss/devil_boss.tscn")
-@onready var boss_origin: Marker2D = $"Boss Room/BossOrigin"
+@onready var boss_origin: Marker2D = $"Bosas Room/BossOrigin"
 
 @export var boss_override = false
-@export var boss_start = false
-@export 	var enemyDelta = 25
+@export var boss_start = true
+@export var enemyDelta = 25
 @onready var starting_transition: AnimationPlayer = $StartingTransition
 
 func _ready() -> void:
-	
+	boss_room = boss_rooms[Globals.current_level].instantiate()
+	boss_transition = boss_transitions[Globals.current_level].instantiate()
+	self.add_child(boss_room)
+	self.add_child(boss_transition)
+	boss_room.position = Vector2(-509.0,-6236.0)
+	boss_transition.position = Vector2(-3191.0,-6512.0)
 	update_hud()
 	boss_transition_pos = boss_transition.position + Vector2(Globals.room_size * Globals.tile_size / 2, -1 * Globals.room_size * Globals.tile_size / 2)
 	if Globals.is_boss_transition_room_activated:
@@ -292,7 +299,6 @@ func _on_player_bullet_fired(pos, dir, id):
 				bullet.direction = Vector2(cos(new_angle), sin(new_angle))
 				projectiles.add_child(bullet)
 		
-		#TODO: Add explosive functionality to this bullet
 		Globals.Bullets.Explosive:
 			var bullet = bullet_scene.instantiate()
 			bullet.position = pos
@@ -305,7 +311,6 @@ func _on_player_bullet_fired(pos, dir, id):
 		Globals.Bullets.Health:
 			player.heal()
 		
-		#TODO: Add railgun functionality to this bullet
 		Globals.Bullets.Railgun:
 			var bullet = bullet_scene.instantiate()
 			bullet.bullet_id = Globals.Bullets.Railgun
