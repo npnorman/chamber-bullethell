@@ -68,8 +68,9 @@ func _ready() -> void:
 		set_current_level_boss()
 	
 	#spawn in boss (not activated)
-	current_boss.global_position = boss_origin.global_position
-	add_child(current_boss)
+	if Globals.current_level != Globals.Level.SALOON:
+		current_boss.global_position = boss_origin.global_position
+		add_child(current_boss)
 	
 	camera.zoom = Vector2.ONE * 1.37
 	if MusicPlayer.stream == null:
