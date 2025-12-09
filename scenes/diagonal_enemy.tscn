@@ -40,7 +40,6 @@ animations = [{
 [node name="DiagonalEnemy" instance=ExtResource("1_nbc8c")]
 script = ExtResource("2_vllhx")
 distance_diagonal_from_player = 100.0
-health = 6
 wait_time = 0.1
 wiggle = 0.2
 

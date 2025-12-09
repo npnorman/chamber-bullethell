@@ -9,8 +9,6 @@ var two_apart_room = preload("res://scenes/RoomGen/room_types/test_two_apart.tsc
 var three_room = preload("res://scenes/RoomGen/room_types/test_three.tscn")
 var four_room = preload("res://rooms/AlgorithmRooms/DesertRooms/DesertRoom4.tscn")
 var desert_start_room = preload("res://rooms/AlgorithmRooms/DesertRooms/desert_start.tscn")
-var tavern_start_room = preload("res://rooms/AlgorithmRooms/TavernRooms/tavern_start.tscn")
-var hell_start_room = preload("res://rooms/AlgorithmRooms/HellRooms/hell_start.tscn")
 
 var desert_shop = preload("res://rooms/AlgorithmRooms/SpecialtyRooms/Desert/desert_shop.tscn")
 var desert_boss_tp = preload("res://rooms/AlgorithmRooms/SpecialtyRooms/Desert/desert_boss_tp.tscn")
@@ -209,14 +207,7 @@ func place_room_at_xy(coords:Vector4,center:Vector2, invalid_exit):
 	if coords.x == center.x and coords.y == center.y:
 		#starting room
 		#use starting room instead of roomsack
-		match Globals.current_level:
-			Globals.Level.SALOON:
-				newRoom = tavern_start_room.instantiate()
-			Globals.Level.DESERT:
-				newRoom = desert_start_room.instantiate()
-			Globals.Level.HELL:
-				newRoom = hell_start_room.instantiate()
-		
+		newRoom = desert_start_room.instantiate()
 	else:
 		#look thru roomsack
 		#shuffle the roomsack
