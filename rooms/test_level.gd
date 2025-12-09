@@ -42,7 +42,7 @@ const DEVIL_BOSS = preload("res://scenes/boss/devil_boss.tscn")
 @onready var boss_origin: Marker2D = $"Bosas Room/BossOrigin"
 
 @export var boss_override = false
-@export var boss_start = true
+@export var boss_start = false
 @export var enemyDelta = 25
 @onready var starting_transition: AnimationPlayer = $StartingTransition
 
@@ -66,8 +66,9 @@ func _ready() -> void:
 		set_current_level_boss()
 	
 	#spawn in boss (not activated)
-	current_boss.global_position = boss_origin.global_position
-	add_child(current_boss)
+	if Globals.current_level != Globals.Level.SALOON:
+		current_boss.global_position = boss_origin.global_position
+		add_child(current_boss)
 	
 	camera.zoom = Vector2.ONE * 1.37
 	if MusicPlayer.stream == null:
