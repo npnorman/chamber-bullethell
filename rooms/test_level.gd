@@ -26,7 +26,7 @@ var boss_transition: Node2D
 @onready var mini_map: Node2D = $MiniMap
 @onready var enemy_count: RichTextLabel = $HUD/EnemyCount
 @onready var chamber_center: Marker2D = $HUD/ChamberCenter
-@onready var boss_hp_bar: ProgressBar = $"Boss Room/BossHPBar"
+@onready var boss_hp_bar: ProgressBar
 
 var is_bullet_fairy_spawned = false
 var current_room = null
@@ -39,7 +39,7 @@ var hud_distance = 120
 # bosses:
 const CACTUS_BOSS = preload("res://scenes/boss/cactus_boss.tscn")
 const DEVIL_BOSS = preload("res://scenes/boss/devil_boss.tscn")
-@onready var boss_origin: Marker2D = $"Bosas Room/BossOrigin"
+@onready var boss_origin: Marker2D
 
 @export var boss_override = false
 @export var boss_start = false
@@ -51,6 +51,8 @@ func _ready() -> void:
 	boss_transition = boss_transitions[Globals.current_level].instantiate()
 	self.add_child(boss_room)
 	self.add_child(boss_transition)
+	boss_origin = boss_room.find_child("BossOrigin")
+	boss_hp_bar = boss_room.find_child("BossHP*")
 	boss_room.position = Vector2(-509.0,-6236.0)
 	boss_transition.position = Vector2(-3191.0,-6512.0)
 	update_hud()

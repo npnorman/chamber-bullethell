@@ -1,4 +1,4 @@
-[gd_scene load_steps=27 format=4 uid="uid://cd0v14frrlgju"]
+[gd_scene load_steps=23 format=4 uid="uid://cd0v14frrlgju"]
 
 [ext_resource type="Script" uid="uid://dhhfbfplukf3b" path="res://rooms/test_level.gd" id="1_u75bg"]
 [ext_resource type="PackedScene" uid="uid://driwak3eok3gy" path="res://scenes/bullets/player-bullet.tscn" id="2_mj5kq"]
@@ -11,10 +11,8 @@
 [ext_resource type="PackedScene" uid="uid://chtu6kuwhxen6" path="res://scenes/UI/hud.tscn" id="7_7e8gg"]
 [ext_resource type="PackedScene" uid="uid://csr22g6iy124u" path="res://scenes/interactables/interactable_item.tscn" id="12_ep8cf"]
 [ext_resource type="Shader" uid="uid://c8627l0fjhsx4" path="res://shaders/scroll.gdshader" id="14_8hip6"]
-[ext_resource type="PackedScene" uid="uid://w78kel8pwhfm" path="res://rooms/AlgorithmRooms/SpecialtyRooms/Desert/desert_boss_transtion.tscn" id="14_g5xp7"]
 [ext_resource type="Texture2D" uid="uid://dr5j25xvk3een" path="res://sprites/background/wind.png" id="14_mj5kq"]
 [ext_resource type="PackedScene" uid="uid://bsp2v6s7o2ey2" path="res://scenes/UI/pause_menu.tscn" id="15_mj5kq"]
-[ext_resource type="PackedScene" uid="uid://cvevnrc2m5fig" path="res://rooms/AlgorithmRooms/SpecialtyRooms/Desert/desert_boss.tscn" id="16_8hip6"]
 [ext_resource type="PackedScene" uid="uid://40wmqfnn0y2j" path="res://scenes/interactables/barrell.tscn" id="16_g5xp7"]
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_gc8kv"]
@@ -73,20 +71,6 @@ shader = ExtResource("14_8hip6")
 shader_parameter/speed_x = 0.5
 shader_parameter/speed_y = 0.25
 shader_parameter/amplitude = 0.2
-
-[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_8hip6"]
-bg_color = Color(1, 1, 1, 1)
-corner_radius_top_left = 10
-corner_radius_top_right = 10
-corner_radius_bottom_right = 10
-corner_radius_bottom_left = 10
-
-[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_g5xp7"]
-bg_color = Color(0.559292, 0, 0.0126894, 1)
-corner_radius_top_left = 10
-corner_radius_top_right = 10
-corner_radius_bottom_right = 10
-corner_radius_bottom_left = 10
 
 [sub_resource type="Animation" id="Animation_8hip6"]
 length = 0.001
@@ -294,26 +278,6 @@ offset_top = -3260.0
 offset_right = -3537.0
 offset_bottom = -3220.0
 color = Color(0.384314, 0.341176, 0.286275, 1)
-
-[node name="BossTransition" parent="." instance=ExtResource("14_g5xp7")]
-position = Vector2(-3191, -6512)
-
-[node name="Boss Room" parent="." instance=ExtResource("16_8hip6")]
-position = Vector2(-509, -6236)
-
-[node name="BossHPBar" type="ProgressBar" parent="Boss Room"]
-offset_left = 1151.0
-offset_top = -1077.0
-offset_right = 1231.0
-offset_bottom = -39.0
-theme_override_styles/background = SubResource("StyleBoxFlat_8hip6")
-theme_override_styles/fill = SubResource("StyleBoxFlat_g5xp7")
-value = 77.0
-fill_mode = 3
-show_percentage = false
-
-[node name="BossOrigin" type="Marker2D" parent="Boss Room"]
-position = Vector2(575, -581)
 
 [node name="Barrell" parent="." instance=ExtResource("16_g5xp7")]
 position = Vector2(256, -270)
