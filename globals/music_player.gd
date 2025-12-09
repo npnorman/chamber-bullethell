@@ -3,39 +3,10 @@ extends AudioStreamPlayer
 const cutscene_music = preload("res://sounds/music/cupcakes_vinegar-sour_mood.mp3")
 const saloon_music = preload("res://sounds/music/Cowagunga.ogg")
 const desert_music = preload("res://sounds/music/Tumbleweeds.ogg")
+const hell_music = preload("res://sounds/music/A Hell of a Deal.ogg")
 
 var fade_in_progress: bool = false
 var music_volume: int = 0
-#func _play_sound(sound, volume: float = -10.0) -> void:
-	#var audio_stream_player: AudioStreamPlayer = AudioStreamPlayer.new()
-	#add_child(audio_stream_player)
-	#
-	#audio_stream_player.stream = sound
-	#audio_stream_player.volume_db = volume
-	#audio_stream_player.play()
-	#await audio_stream_player.finished
-	#audio_stream_player.queue_free()
-#
-#func _play_sound_cutoff(sound, volume: float = -10.0) -> void:
-	#var audio_stream_player: AudioStreamPlayer = AudioStreamPlayer.new()
-	#add_child(audio_stream_player)
-	#
-	#audio_stream_player.stream = sound
-	#audio_stream_player.volume_db = volume
-	#audio_stream_player.play()
-	#
-	#cutscene_music_players.push_back(audio_stream_player)
-#
-#var cutscene_music_players = []
-#
-#func player_cutscene_music() -> void:
-	#_play_sound_cutoff(cutscene_music, -5)
-#
-#func stop_cutscene_music():
-	#if len(cutscene_music_players) > 0:
-		#var mp = cutscene_music_players.pop_front()
-		#mp.stop()
-		#mp.queue_free()
 
 func _play_music(music: AudioStream, volume: float = -5.0) -> void:
 	if stream == music:
@@ -52,6 +23,9 @@ func play_saloon_music() -> void:
 	
 func play_desert_music() -> void:
 	_play_music(desert_music, -14)
+	
+func play_hell_music() -> void:
+	_play_music(hell_music, -10)
 
 func stop_music() -> void:
 	stop()

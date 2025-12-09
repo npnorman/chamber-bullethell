@@ -190,7 +190,7 @@ func change_music(level_scheme:int = current_level):
 			Level.DESERT:
 				MusicPlayer.fade_music_out(load("res://sounds/music/Tumbleweeds.ogg"), -14)
 			Level.HELL:
-				pass
+				MusicPlayer.fade_music_out(load("res://sounds/music/A Hell of a Deal.ogg"))
 	else:
 		match level_scheme:
 			Level.SALOON:
@@ -198,7 +198,7 @@ func change_music(level_scheme:int = current_level):
 			Level.DESERT:
 				MusicPlayer.play_desert_music()
 			Level.HELL:
-				MusicPlayer.play_desert_music()
+				MusicPlayer.play_hell_music()
 
 func change_level(level_scheme:int = current_level):
 	# load level scheme

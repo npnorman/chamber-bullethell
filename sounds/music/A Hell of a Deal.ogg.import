@@ -1,0 +1,19 @@
+[remap]
+
+importer="oggvorbisstr"
+type="AudioStreamOggVorbis"
+uid="uid://c10q6thhwknj8"
+path="res://.godot/imported/A Hell of a Deal.ogg-7aba52cee04ed96a0e3f6d2f42d0b8e5.oggvorbisstr"
+
+[deps]
+
+source_file="res://sounds/music/A Hell of a Deal.ogg"
+dest_files=["res://.godot/imported/A Hell of a Deal.ogg-7aba52cee04ed96a0e3f6d2f42d0b8e5.oggvorbisstr"]
+
+[params]
+
+loop=true
+loop_offset=0.0
+bpm=0.0
+beat_count=0
+bar_beats=4
