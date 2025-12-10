@@ -2,6 +2,7 @@ extends Node2D
 class_name LevelContainer
 
 @export var bullet_scene: PackedScene
+@export var ricochet_bullet_scene: PackedScene
 @export var bullet_pickup_scene: PackedScene 
 
 @export var bullet_fairy:PackedScene
@@ -282,12 +283,10 @@ func _on_player_bullet_fired(pos, dir, id):
 			projectiles.add_child(bullet)
 			
 		Globals.Bullets.Ricochet:
-			var bullet = bullet_scene.instantiate()
+			var bullet = ricochet_bullet_scene.instantiate()
 			bullet.position = pos
 			bullet.rotation_degrees = rad_to_deg(dir.angle()) + 90
 			bullet.direction = dir
-			bullet.ricochets = 3
-			bullet.bullet_id = Globals.Bullets.Ricochet
 			projectiles.add_child(bullet)
 			
 		Globals.Bullets.Shotgun: 

@@ -1,0 +1,52 @@
+[gd_scene load_steps=6 format=3 uid="uid://bjbafvugldk4p"]
+
+[ext_resource type="Script" uid="uid://befasm0x88r0n" path="res://scenes/bullets/ricochet_bullet.gd" id="1_gnr4f"]
+[ext_resource type="Texture2D" uid="uid://lj0q8273oj2b" path="res://sprites/bullets/test_bullet.png" id="2_gnr4f"]
+
+[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_gnr4f"]
+radius = 3.0
+height = 8.0
+
+[sub_resource type="Gradient" id="Gradient_h1xss"]
+offsets = PackedFloat32Array(0, 0.162338, 0.311688, 0.428571, 0.62987, 0.805195, 1)
+colors = PackedColorArray(1, 1, 1, 1, 0.837662, 0.837662, 0.837662, 1, 0.623377, 0.623377, 0.623377, 1, 0.571429, 0.571429, 0.571429, 1, 0.37013, 0.37013, 0.37013, 1, 0.194805, 0.194805, 0.194805, 1, 0, 0, 0, 1)
+
+[sub_resource type="GradientTexture2D" id="GradientTexture2D_c5adk"]
+gradient = SubResource("Gradient_h1xss")
+fill = 2
+fill_from = Vector2(1, 0)
+fill_to = Vector2(0, 1)
+repeat = 2
+
+[node name="Ricochet_Bullet" type="CharacterBody2D"]
+collision_layer = 0
+collision_mask = 73
+motion_mode = 1
+script = ExtResource("1_gnr4f")
+
+[node name="Area2D" type="Area2D" parent="."]
+collision_layer = 0
+collision_mask = 4
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Area2D"]
+shape = SubResource("CapsuleShape2D_gnr4f")
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+texture = ExtResource("2_gnr4f")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+shape = SubResource("CapsuleShape2D_gnr4f")
+
+[node name="PointLight2D" type="PointLight2D" parent="."]
+position = Vector2(1.19209e-07, 14.4407)
+rotation = -1.1779
+scale = Vector2(0.406025, 0.405934)
+skew = 0.785398
+energy = 0.5
+texture = SubResource("GradientTexture2D_c5adk")
+
+[node name="DespawnTimer" type="Timer" parent="."]
+wait_time = 2.5
+
+[connection signal="body_entered" from="Area2D" to="." method="_on_area_2d_body_entered"]
+[connection signal="timeout" from="DespawnTimer" to="." method="_on_despawn_timer_timeout"]

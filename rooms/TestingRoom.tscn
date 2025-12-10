@@ -1,10 +1,11 @@
-[gd_scene load_steps=23 format=4 uid="uid://cd0v14frrlgju"]
+[gd_scene load_steps=25 format=4 uid="uid://cd0v14frrlgju"]
 
 [ext_resource type="Script" uid="uid://dhhfbfplukf3b" path="res://rooms/test_level.gd" id="1_u75bg"]
 [ext_resource type="PackedScene" uid="uid://driwak3eok3gy" path="res://scenes/bullets/player-bullet.tscn" id="2_mj5kq"]
 [ext_resource type="PackedScene" uid="uid://d1pe7q747exgv" path="res://scenes/RoomGen/floor_generator.tscn" id="2_ovcuh"]
 [ext_resource type="PackedScene" uid="uid://b3pyw2ywa2gic" path="res://scenes/bullets/bullet_pickup.tscn" id="3_8hip6"]
 [ext_resource type="PackedScene" uid="uid://bejlis2xb16qo" path="res://scenes/menu/mini_map.tscn" id="3_ep8cf"]
+[ext_resource type="PackedScene" uid="uid://bjbafvugldk4p" path="res://scenes/bullets/ricochet_bullet.tscn" id="3_g5xp7"]
 [ext_resource type="PackedScene" uid="uid://ckx3iy06eedai" path="res://scenes/player/player.tscn" id="3_i3fwb"]
 [ext_resource type="PackedScene" uid="uid://chqsm4w7oks0t" path="res://scenes/bullet_fairy/bullet_fairy.tscn" id="5_b6v1o"]
 [ext_resource type="Texture2D" uid="uid://c8rdbv3u77b5i" path="res://tilesets/HelltileWalls.png" id="7_0yuyw"]
@@ -12,6 +13,7 @@
 [ext_resource type="PackedScene" uid="uid://csr22g6iy124u" path="res://scenes/interactables/interactable_item.tscn" id="12_ep8cf"]
 [ext_resource type="Shader" uid="uid://c8627l0fjhsx4" path="res://shaders/scroll.gdshader" id="14_8hip6"]
 [ext_resource type="Texture2D" uid="uid://dr5j25xvk3een" path="res://sprites/background/wind.png" id="14_mj5kq"]
+[ext_resource type="PackedScene" uid="uid://crwot1rdef6uf" path="res://scenes/interactables/chest.tscn" id="15_8hip6"]
 [ext_resource type="PackedScene" uid="uid://bsp2v6s7o2ey2" path="res://scenes/UI/pause_menu.tscn" id="15_mj5kq"]
 [ext_resource type="PackedScene" uid="uid://40wmqfnn0y2j" path="res://scenes/interactables/barrell.tscn" id="16_g5xp7"]
 
@@ -156,6 +158,7 @@ _data = {
 [node name="Starting Room" type="Node2D"]
 script = ExtResource("1_u75bg")
 bullet_scene = ExtResource("2_mj5kq")
+ricochet_bullet_scene = ExtResource("3_g5xp7")
 bullet_pickup_scene = ExtResource("3_8hip6")
 bullet_fairy = ExtResource("5_b6v1o")
 
@@ -209,14 +212,15 @@ metadata/_edit_lock_ = true
 [node name="IntroText" type="RichTextLabel" parent="HUD"]
 modulate = Color(1, 1, 1, 0)
 offset_left = 343.0
-offset_top = 109.0
+offset_top = 50.0
 offset_right = 724.0
-offset_bottom = 205.0
+offset_bottom = 250.0
 bbcode_enabled = true
-text = "[center]Press F / LB to Reload
-Press RMB / ZL to Shoot Bullets
-Press LMB / ZR to Shoot Blanks
-Press X to unload the cylinder[/center]"
+text = "[center]Press F / LB to Reload (shown in HUD)
+Press LMB / ZR to Shoot Bullets
+Press RMB / ZL to Shoot Blanks
+Press X to unload the cylinder
+Press Tab to open your inventory[/center]"
 
 [node name="ColorRect" type="ColorRect" parent="HUD/IntroText"]
 z_index = -1
@@ -224,7 +228,7 @@ layout_mode = 0
 offset_left = -7.0
 offset_top = -11.0
 offset_right = 399.0
-offset_bottom = 104.0
+offset_bottom = 122.0
 color = Color(0, 0, 0, 0.572549)
 
 [node name="Camera2D" type="Camera2D" parent="."]
@@ -287,6 +291,11 @@ mass = 100.0
 libraries = {
 &"": SubResource("AnimationLibrary_8hip6")
 }
+
+[node name="Chest" parent="." instance=ExtResource("15_8hip6")]
+position = Vector2(177, -189)
+bullet_id = 1
+bullet_amount = 999
 
 [connection signal="timeout" from="BulletFairyTimer" to="." method="_on_bullet_fairy_timer_timeout"]
 [connection signal="ammo_dropped" from="HUD" to="." method="_on_hud_ammo_dropped"]

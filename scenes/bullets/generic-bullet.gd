@@ -21,15 +21,7 @@ func _ready():
 func _process(delta):
 	var velocity: Vector2 = direction * speed * delta
 	position += velocity
-	raycast.target_position.y = (velocity.length() * -1) * 2
-	if raycast.is_colliding() and not found_angle:
-		collision_normal = raycast.get_collision_normal()
-		collision_point = raycast.get_collision_point()
-		found_angle = true
-	if raycast.is_colliding():
-		if ricochets == 0:
-			speed = 0
-			self.position = collision_point
+	raycast.target_position.y = (velocity.length() * -1)
 	
 func _on_despawn_timer_timeout() -> void:
 	self.queue_free()
