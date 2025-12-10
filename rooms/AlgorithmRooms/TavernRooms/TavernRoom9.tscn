@@ -21,10 +21,10 @@ position = Vector2(223, -289)
 position = Vector2(335, -287)
 
 [node name="MagicianEnemy" parent="Enemies" index="2" instance=ExtResource("3_4m84t")]
-position = Vector2(231, -478)
+position = Vector2(273, -413)
 
 [node name="MagicianEnemy2" parent="Enemies" index="3" instance=ExtResource("3_4m84t")]
-position = Vector2(381, -145)
+position = Vector2(274, -143)
 
 [node name="Bar" parent="." index="4" instance=ExtResource("4_jl6w0")]
 position = Vector2(324, -291)
@@ -63,21 +63,21 @@ texture = ExtResource("5_0as81")
 position = Vector2(109, -136)
 
 [node name="RoundTable3" parent="." index="12" instance=ExtResource("7_ph5p6")]
-position = Vector2(90.1384, -504)
+position = Vector2(117, -450)
 scale = Vector2(1.31848, 1.38791)
 
 [node name="Barstool16" parent="." index="13" instance=ExtResource("8_tk50w")]
-position = Vector2(60.1384, -493)
+position = Vector2(84, -445)
 
 [node name="Barstool17" parent="." index="14" instance=ExtResource("8_tk50w")]
-position = Vector2(120.138, -492)
+position = Vector2(149, -445)
 
 [node name="RoundTable4" parent="." index="15" instance=ExtResource("7_ph5p6")]
-position = Vector2(470, -111)
+position = Vector2(431, -138)
 scale = Vector2(1.31848, 1.38791)
 
 [node name="Barstool18" parent="." index="16" instance=ExtResource("8_tk50w")]
-position = Vector2(441, -104)
+position = Vector2(400, -128)
 
 [node name="Barstool19" parent="." index="17" instance=ExtResource("8_tk50w")]
-position = Vector2(498, -103)
+position = Vector2(464, -130)

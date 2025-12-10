@@ -74,24 +74,24 @@ position = Vector2(414, -106)
 position = Vector2(469, -106)
 
 [node name="RoundTable3" parent="." index="20" instance=ExtResource("3_fh6tq")]
-position = Vector2(128, -484)
+position = Vector2(126, -464)
 scale = Vector2(1.31848, 1.38791)
 
 [node name="Barstool16" parent="." index="21" instance=ExtResource("2_dioxf")]
-position = Vector2(100, -472)
+position = Vector2(95, -452)
 
 [node name="Barstool17" parent="." index="22" instance=ExtResource("2_dioxf")]
-position = Vector2(156, -473)
+position = Vector2(157, -456)
 
 [node name="RoundTable4" parent="." index="23" instance=ExtResource("3_fh6tq")]
-position = Vector2(407, -481)
+position = Vector2(409, -459)
 scale = Vector2(1.31848, 1.38791)
 
 [node name="Barstool18" parent="." index="24" instance=ExtResource("2_dioxf")]
-position = Vector2(382, -469)
+position = Vector2(379, -444)
 
 [node name="Barstool19" parent="." index="25" instance=ExtResource("2_dioxf")]
-position = Vector2(432, -470)
+position = Vector2(439, -446)
 
 [node name="Chest" parent="." index="26" instance=ExtResource("3_shebr")]
 position = Vector2(284, -290)
