@@ -1,7 +1,8 @@
-[gd_scene load_steps=6 format=3 uid="uid://bsp2v6s7o2ey2"]
+[gd_scene load_steps=7 format=3 uid="uid://bsp2v6s7o2ey2"]
 
 [ext_resource type="Script" uid="uid://bopdsby03kbss" path="res://scenes/UI/pause_menu.gd" id="1_qo2fb"]
 [ext_resource type="Texture2D" uid="uid://dj78tha4xkjpf" path="res://sprites/bullet_fairy/miner.png" id="2_bl585"]
+[ext_resource type="FontFile" uid="uid://dyb483t2gk0t" path="res://Pixel-Western.ttf" id="2_mko1u"]
 
 [sub_resource type="Animation" id="Animation_feath"]
 length = 0.001
@@ -86,25 +87,60 @@ grow_horizontal = 2
 grow_vertical = 2
 
 [node name="Resume" type="Button" parent="VBoxContainer"]
+custom_minimum_size = Vector2(0, 32)
 layout_mode = 2
-text = "Resume"
+theme_override_fonts/font = ExtResource("2_mko1u")
+text = "
+
+
+
+Resume"
 
 [node name="GoToMenu" type="Button" parent="VBoxContainer"]
+custom_minimum_size = Vector2(0, 32)
 layout_mode = 2
-text = "Return to Menu"
+theme_override_fonts/font = ExtResource("2_mko1u")
+text = "
+
+
+
+Return to Menu"
 
 [node name="Restart" type="Button" parent="VBoxContainer"]
+custom_minimum_size = Vector2(0, 32)
 layout_mode = 2
-text = "Restart"
+theme_override_fonts/font = ExtResource("2_mko1u")
+text = "
+
+
+
+Restart"
 
 [node name="RestartSameSeed" type="Button" parent="VBoxContainer"]
+custom_minimum_size = Vector2(0, 64)
 layout_mode = 2
-text = "Restart
+theme_override_fonts/font = ExtResource("2_mko1u")
+text = "
+
+
+Restart
+
+
+
+
+
+
 (Keep Layout)"
 
 [node name="Controls" type="Button" parent="VBoxContainer"]
+custom_minimum_size = Vector2(0, 32)
 layout_mode = 2
-text = "View Controls"
+theme_override_fonts/font = ExtResource("2_mko1u")
+text = "
+
+
+
+View Controls"
 
 [node name="DeathText" type="RichTextLabel" parent="."]
 offset_left = 249.0
@@ -127,17 +163,13 @@ text = "[right]seed: [/right]"
 [node name="ControlScreen" type="Control" parent="."]
 visible = false
 layout_mode = 3
-anchors_preset = 8
+anchors_preset = 5
 anchor_left = 0.5
-anchor_top = 0.5
 anchor_right = 0.5
-anchor_bottom = 0.5
 offset_left = -300.0
-offset_top = -334.0
 offset_right = 300.0
-offset_bottom = 266.0
+offset_bottom = 600.0
 grow_horizontal = 2
-grow_vertical = 2
 
 [node name="ExitControls" type="Button" parent="ControlScreen"]
 layout_mode = 0
@@ -170,7 +202,9 @@ E or 2 - Reload Special Bullet 1
 
 R or 3 - Reload Special Bullet 3
 
-Z - Unload bullet
+X - Unload Entire Cylinder
+
+Z - Unload Single Bullet
 Hold Z to unload all bullets
 
 Tab - Open/Close Inventory"
