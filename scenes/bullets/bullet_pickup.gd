@@ -18,10 +18,12 @@ func _on_body_entered(body: Node2D) -> void:
 	if Globals.ammo_types.has(bullet_id):
 		var pickup_check: bool = increase_ammo()
 		if pickup_check:
+			SfxPlayer.ammo_get_sound()
 			ammo_changed.emit(false, 0, 0)
 			queue_free()
 	elif Globals.ammo_types.has(-1):
 		var empty_slot: int
+		SfxPlayer.ammo_get_sound()
 		empty_slot = Globals.ammo_types.find(-1)
 		Globals.ammo_types[empty_slot] = bullet_id
 		Globals.ammo[bullet_id] += amount
@@ -30,7 +32,7 @@ func _on_body_entered(body: Node2D) -> void:
 
 # Adds pickup amount to the contained ammo type in the Global script
 func increase_ammo() -> bool:
-	if (Globals.ammo[bullet_id] + amount) == Globals.ammo_max[bullet_id]:
+	if (Globals.ammo[bullet_id] + amount) >= Globals.ammo_max[bullet_id]:
 		return false
 	if (Globals.ammo[bullet_id] + amount) <= Globals.ammo_max[bullet_id]:
 		Globals.ammo[bullet_id] = Globals.ammo[bullet_id] + amount
