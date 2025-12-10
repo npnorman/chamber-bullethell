@@ -65,6 +65,7 @@ func enemy_die():
 	# or dead body
 	if not is_dead:
 		get_tree().current_scene.spawn_pickup(Globals.Bullets.Normal, 3, global_position)
+		SfxPlayer.enemy_death_sound()
 	is_dead = true
 	animated_sprite_2d.play("death")
 	animation_player.play("death")
