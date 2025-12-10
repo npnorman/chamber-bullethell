@@ -1,4 +1,4 @@
-[gd_scene load_steps=24 format=4 uid="uid://cd0v14frrlgju"]
+[gd_scene load_steps=22 format=4 uid="uid://cd0v14frrlgju"]
 
 [ext_resource type="Script" uid="uid://dhhfbfplukf3b" path="res://rooms/test_level.gd" id="1_u75bg"]
 [ext_resource type="PackedScene" uid="uid://driwak3eok3gy" path="res://scenes/bullets/player-bullet.tscn" id="2_mj5kq"]
@@ -10,11 +10,9 @@
 [ext_resource type="PackedScene" uid="uid://chqsm4w7oks0t" path="res://scenes/bullet_fairy/bullet_fairy.tscn" id="5_b6v1o"]
 [ext_resource type="Texture2D" uid="uid://c8rdbv3u77b5i" path="res://tilesets/HelltileWalls.png" id="7_0yuyw"]
 [ext_resource type="PackedScene" uid="uid://chtu6kuwhxen6" path="res://scenes/UI/hud.tscn" id="7_7e8gg"]
-[ext_resource type="PackedScene" uid="uid://csr22g6iy124u" path="res://scenes/interactables/interactable_item.tscn" id="12_ep8cf"]
 [ext_resource type="Shader" uid="uid://c8627l0fjhsx4" path="res://shaders/scroll.gdshader" id="14_8hip6"]
 [ext_resource type="Texture2D" uid="uid://dr5j25xvk3een" path="res://sprites/background/wind.png" id="14_mj5kq"]
 [ext_resource type="PackedScene" uid="uid://bsp2v6s7o2ey2" path="res://scenes/UI/pause_menu.tscn" id="15_mj5kq"]
-[ext_resource type="PackedScene" uid="uid://40wmqfnn0y2j" path="res://scenes/interactables/barrell.tscn" id="16_g5xp7"]
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_gc8kv"]
 texture = ExtResource("7_0yuyw")
@@ -244,9 +242,6 @@ tile_map_data = PackedByteArray("AADq//D/AAAGAAUAAADr//D/AAAGAAUAAADs//D/AAAGAAU
 enabled = false
 tile_set = SubResource("TileSet_5vbr4")
 
-[node name="InteractableItem" parent="." instance=ExtResource("12_ep8cf")]
-position = Vector2(204, -272)
-
 [node name="PauseMenu" parent="." instance=ExtResource("15_mj5kq")]
 visible = false
 
@@ -281,10 +276,6 @@ offset_top = -3260.0
 offset_right = -3537.0
 offset_bottom = -3220.0
 color = Color(0.384314, 0.341176, 0.286275, 1)
-
-[node name="Barrell" parent="." instance=ExtResource("16_g5xp7")]
-position = Vector2(256, -270)
-mass = 100.0
 
 [node name="StartingTransition" type="AnimationPlayer" parent="."]
 libraries = {

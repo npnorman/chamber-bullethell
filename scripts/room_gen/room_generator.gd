@@ -2,6 +2,30 @@ extends Node2D
 
 var level_scheme = Globals.Level.DESERT
 @export var seed:int = -1
+var whitelisted_seeds: Array[int] = [
+	-8936538142480759030,
+	8330090822928439027,
+	-2374852792297491077,
+	5791905783169608974,
+	8709846147640377037,
+	4123980760642043700,
+	-7566002206154862345,
+	-7716214477206242611,
+	-6119666404580504737,
+	-1968190462505291320,
+	-7958553637138446281,
+	-5937690610881136008,
+	-3094195938774167016,
+	5609049809592965788,
+	608514840451453305,
+	4001039430144054665,
+	-464886403964471626,
+	3370616903778519379,
+	-7441315699145809511,
+	-244267153831101229,
+	-6807139612009162576,
+	2819756536803145403
+]
 
 var one_room = preload("res://scenes/RoomGen/room_types/test_one.tscn")
 var two_close_room = preload("res://scenes/RoomGen/room_types/test_two_close.tscn")
@@ -119,6 +143,10 @@ func _ready() -> void:
 		knapsack += generateRooms(tempRoom.exit_type, tempRoom.room_rotation, room[0])
 	
 	add_room_current_location(starting_room)
+	if seed == -1:
+		var rng:RandomNumberGenerator = RandomNumberGenerator.new()
+		var seed_index = rng.randi_range(0, whitelisted_seeds.size() - 1)
+		seed = whitelisted_seeds[seed_index]
 	generateMap(m,n,seed)
 	print("Rooms:    ",roomstack)
 	print("Rejected: ",rejected_knapsack)

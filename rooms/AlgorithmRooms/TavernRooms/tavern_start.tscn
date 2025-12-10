@@ -1,8 +1,9 @@
-[gd_scene load_steps=5 format=4 uid="uid://csc3gqiqc8aja"]
+[gd_scene load_steps=6 format=4 uid="uid://csc3gqiqc8aja"]
 
 [ext_resource type="PackedScene" uid="uid://cuk5py63ydbdx" path="res://rooms/AlgorithmRooms/TavernRooms/TavernRoomBase.tscn" id="1_8c21m"]
 [ext_resource type="PackedScene" uid="uid://dr5sgeuw3erhu" path="res://scenes/interactables/beer.tscn" id="2_xpptf"]
 [ext_resource type="Texture2D" uid="uid://bo5chptmg0doy" path="res://sprites/Chair.png" id="3_byrau"]
+[ext_resource type="PackedScene" uid="uid://40wmqfnn0y2j" path="res://scenes/interactables/barrell.tscn" id="3_xpptf"]
 [ext_resource type="PackedScene" uid="uid://hu0dgs87hr4k" path="res://sprites/SquareTable.tscn" id="4_lmn2w"]
 
 [node name="BaseRoom2" instance=ExtResource("1_8c21m")]
@@ -19,6 +20,17 @@ position = Vector2(503, -398)
 [node name="Beer5" parent="Interactables" index="1" instance=ExtResource("2_xpptf")]
 position = Vector2(508, -386)
 rotation = -2.11303
+
+[node name="Barrell" parent="Interactables" index="2" instance=ExtResource("3_xpptf")]
+position = Vector2(450, -300)
+mass = 100.0
+
+[node name="Barrell2" parent="Interactables" index="3" instance=ExtResource("3_xpptf")]
+position = Vector2(121, -304)
+mass = 100.0
+
+[node name="Beer6" parent="Interactables" index="4" instance=ExtResource("2_xpptf")]
+position = Vector2(174, -449)
 
 [node name="Chair" type="Sprite2D" parent="." index="4"]
 position = Vector2(109, -498)

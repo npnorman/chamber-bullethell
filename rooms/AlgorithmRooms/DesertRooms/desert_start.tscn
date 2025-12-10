@@ -1,7 +1,9 @@
-[gd_scene load_steps=3 format=4 uid="uid://c2o84ksi041kh"]
+[gd_scene load_steps=5 format=4 uid="uid://c2o84ksi041kh"]
 
 [ext_resource type="PackedScene" uid="uid://ctxgqeaum4461" path="res://rooms/AlgorithmRooms/base_room.tscn" id="1_onw5p"]
 [ext_resource type="PackedScene" uid="uid://b7g2b431gu6nf" path="res://sprites/Cactus.tscn" id="2_x4d5a"]
+[ext_resource type="PackedScene" uid="uid://csr22g6iy124u" path="res://scenes/interactables/interactable_item.tscn" id="3_cq2ps"]
+[ext_resource type="PackedScene" uid="uid://40wmqfnn0y2j" path="res://scenes/interactables/barrell.tscn" id="4_6aonb"]
 
 [node name="DesertStart" instance=ExtResource("1_onw5p")]
 exit_type = 4
@@ -13,3 +15,10 @@ tile_map_data = PackedByteArray("AAAAAN3/AAAAAAAAAAAAAN7/AAAAAAEAAAAAAN//AAAAAAE
 
 [node name="Cactus" parent="." index="4" instance=ExtResource("2_x4d5a")]
 position = Vector2(273, -401)
+
+[node name="InteractableItem" parent="." index="5" instance=ExtResource("3_cq2ps")]
+position = Vector2(95, -291)
+
+[node name="Barrell" parent="." index="6" instance=ExtResource("4_6aonb")]
+position = Vector2(462, -286)
+mass = 100.0

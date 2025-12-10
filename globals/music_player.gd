@@ -22,17 +22,19 @@ func play_saloon_music() -> void:
 	_play_music(saloon_music, -10)
 	
 func play_desert_music() -> void:
-	_play_music(desert_music, -14)
+	_play_music(desert_music, -15)
 	
 func play_hell_music() -> void:
-	_play_music(hell_music, -10)
+	_play_music(hell_music, -7.5)
 
 func stop_music() -> void:
 	stop()
 
 func fade_music_out(music: AudioStream = null, volume: int = -10) -> void:
+	if music == stream:
+		return
 	var tween = create_tween()
-	tween.tween_property(self, "volume_db", -50, 2)
+	tween.tween_property(self, "volume_db", -50, 1.5)
 	if music == null:
 		tween.finished.connect(stop_music)
 	if music != null:
@@ -42,4 +44,4 @@ func fade_music_out(music: AudioStream = null, volume: int = -10) -> void:
 func fade_music_in(music: AudioStream, volume: int = -10):
 	_play_music(music)
 	var tween = create_tween()
-	tween.tween_property(self, "volume_db", volume + music_volume, 2)
+	tween.tween_property(self, "volume_db", volume + music_volume, 1.5)

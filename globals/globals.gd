@@ -89,18 +89,23 @@ func get_scene_string(scene_enum:int):
 	return ""
 
 func get_exits(room:Vector4):
+	# [right, down, left, up]
 	var exits:Array = [0,0,0,0]
 	# offset of (x+1,y+1,x-1,y-1)
 		# a 1 if correct, a zero if not
 	
 	match int(room.z):
 		Globals.ExitType.ONE:
+			# Starts with left only (matches actual rooms)
 			exits = [0,0,1,0]
 		Globals.ExitType.TWO_CLOSE:
+			# Starts with down, left (does not match actual rooms)
 			exits = [0,1,1,0]
 		Globals.ExitType.TWO_APART:
+			# Starts with right, left (matches actual rooms)
 			exits = [1,0,1,0]
 		Globals.ExitType.THREE:
+			# Starts with right, down, up (matches actual rooms)
 			exits = [1,1,0,1]
 		Globals.ExitType.FOUR:
 			exits = [1,1,1,1]
