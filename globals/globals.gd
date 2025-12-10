@@ -209,6 +209,7 @@ func change_level(level_scheme:int = current_level):
 	# load level scheme
 	current_level = level_scheme
 	is_boss_transition_room_activated = false
+	isBossTPUnlocked = false
 	get_tree().change_scene_to_file("res://rooms/TestingRoom.tscn")
 	change_music(level_scheme)
 	print(temporary_loadout)
