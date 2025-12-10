@@ -5,6 +5,7 @@ var can_blank: bool = true
 var mouse_ui_mode: bool = false
 var is_invincible: bool = false
 var is_dead: bool = false
+var can_step: bool = true
 var player_knockback: Vector2
 var active_bullet_pos: int = 0
 @export var can_reload: bool = true
@@ -97,10 +98,17 @@ func _process(_delta):
 		if Input.is_action_just_pressed("Menu"):
 			game_paused.emit(false)
 		
+		#footstep sound
+		if (Input.is_action_pressed("Down") or Input.is_action_pressed("Up") or Input.is_action_pressed("Right") or Input.is_action_pressed("Left")) and can_step:
+			SfxPlayer.step_sound()
+			can_step = false
+			$StepTimer.start()
+		
 		# Animations
 		if Input.is_action_pressed("Down"):
 			animated_sprite_2d.play("walk")
-		
+			if can_step:
+				pass
 		elif Input.is_action_pressed("Up"):
 			animated_sprite_2d.play("walk")
 			
@@ -240,6 +248,8 @@ func take_damage(damage):
 
 # Stops player from moving and plays death animation
 func player_die():
+	if not is_dead:
+		SfxPlayer.player_death_sound()
 	is_dead = true
 	animations.play("death")
 
@@ -256,11 +266,12 @@ func heal():
 # Temporarily displays a die sprite over the player showing what their gambler round roll was
 func roll_die(roll: int) -> void:
 	var dice_atlas: AtlasTexture = dice.texture
-	dice.position = Vector2(0, -35)
+	dice.position = Vector2(0, -45)
 	dice.get_child(0).visible = false
 	match roll:
 		1:
 			dice_atlas.region = Rect2(0,0,16,16)
+			SfxPlayer.miss_sound()
 		2:
 			dice_atlas.region = Rect2(16,0,16,16)
 		3:
@@ -271,6 +282,7 @@ func roll_die(roll: int) -> void:
 			dice_atlas.region = Rect2(0,32,16,16)
 		6:
 			dice_atlas.region = Rect2(16,32,16,16)
+			SfxPlayer.success_sound()
 			dice.get_child(0).visible = true
 	dice.visible = true
 	$DiceTimer.start()
@@ -293,4 +305,8 @@ func _on_dice_timer_timeout() -> void:
 
 func _on_animation_player_animation_finished(anim_name: StringName) -> void:
 	if anim_name == "death":
+		SfxPlayer.loss_tune_sound()
 		game_paused.emit(true)
+
+func _on_step_timer_timeout() -> void:
+	can_step = true

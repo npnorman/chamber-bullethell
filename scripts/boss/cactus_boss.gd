@@ -270,6 +270,8 @@ func shoot_arm(arm):
 		shoot(marker.global_position, pos)
 
 func on_death():
+	if currentState != States.DEATH:
+		SfxPlayer.boss_death_sound()
 	currentState = States.DEATH
 	animation_player.play("death")
 	#Globals.change_scene(Globals.Scenes.WIN)

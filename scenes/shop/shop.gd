@@ -61,11 +61,13 @@ func _on_buy_area_1_body_entered(body: Node2D) -> void:
 			Globals.ammo[0] -= bullet_prices[0]
 			Globals.ammo[bullet_ids[0]] += 1
 			Globals.ammo_types[empty_slot] = bullet_ids[0]
+			SfxPlayer.ammo_get_sound()
 			update_hud()
 			update_bartender()
 		elif Globals.ammo_types.has(bullet_ids[0]) and health_count > 0 and has_bullet[0] and Globals.ammo[bullet_ids[0]] < Globals.ammo_max[bullet_ids[0]]:
 			Globals.ammo[0] -= bullet_prices[0]
 			Globals.ammo[bullet_ids[0]] += 1
+			SfxPlayer.ammo_get_sound()
 			update_hud()
 			update_bartender()
 
@@ -77,6 +79,7 @@ func _on_buy_area_2_body_entered(body: Node2D) -> void:
 			Globals.ammo[0] -= bullet_prices[1]
 			Globals.ammo_types[empty_slot] = bullet_ids[1]
 			Globals.ammo[bullet_ids[1]] += Globals.ammo_shop_amount[bullet_ids[1]]
+			SfxPlayer.ammo_get_sound()
 			update_hud()
 			clear_shop(1)
 			update_bartender()
@@ -84,6 +87,7 @@ func _on_buy_area_2_body_entered(body: Node2D) -> void:
 			Globals.ammo[0] -= bullet_prices[1]
 			Globals.ammo[bullet_ids[1]] += bullet_prices[1]
 			Globals.ammo[bullet_ids[1]] = Globals.ammo_shop_amount[bullet_ids[1]]
+			SfxPlayer.ammo_get_sound()
 			update_hud()
 			clear_shop(1)
 			update_bartender()
@@ -96,6 +100,7 @@ func _on_buy_area_3_body_entered(body: Node2D) -> void:
 			Globals.ammo[0] -= bullet_prices[2]
 			Globals.ammo_types[empty_slot] = bullet_ids[2]
 			Globals.ammo[bullet_ids[2]] = Globals.ammo_shop_amount[bullet_ids[2]]
+			SfxPlayer.ammo_get_sound()
 			update_hud()
 			clear_shop(2)
 			update_bartender()
@@ -103,6 +108,7 @@ func _on_buy_area_3_body_entered(body: Node2D) -> void:
 			Globals.ammo[0] -= bullet_prices[2]
 			Globals.ammo[bullet_ids[2]] += bullet_prices[2]
 			Globals.ammo[bullet_ids[2]] += Globals.ammo_shop_amount[bullet_ids[2]]
+			SfxPlayer.ammo_get_sound()
 			update_hud()
 			clear_shop(2)
 			update_bartender()

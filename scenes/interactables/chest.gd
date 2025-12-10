@@ -21,6 +21,7 @@ func _ready() -> void:
 func _on_body_entered(body: Node2D) -> void:
 	if not opened:
 		sprite.play("opening")
+		SfxPlayer.chest_open_sound()
 		particles.emitting = true
 		var pickup_position: Vector2 = global_position + Vector2(0, 10)
 		get_tree().current_scene.spawn_pickup(bullet_id, bullet_amount, pickup_position)
