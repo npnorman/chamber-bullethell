@@ -28,6 +28,7 @@ var boss_transition: Node2D
 @onready var enemy_count: RichTextLabel = $HUD/EnemyCount
 @onready var chamber_center: Marker2D = $HUD/ChamberCenter
 @onready var boss_hp_bar: ProgressBar
+@onready var background_texture: TextureRect = $TextureRect
 
 var is_bullet_fairy_spawned = false
 var current_room = null
@@ -60,6 +61,15 @@ func _ready() -> void:
 	boss_transition_pos = boss_transition.position + Vector2(Globals.room_size * Globals.tile_size / 2, -1 * Globals.room_size * Globals.tile_size / 2)
 	if Globals.is_boss_transition_room_activated:
 		spawn_player_in_boss_transition()
+	
+	match Globals.current_level:
+		Globals.Level.SALOON:
+			background_texture.texture = load("res://sprites/background/wind_tavern.png")
+		Globals.Level.DESERT:
+			background_texture.texture = load("res://sprites/background/wind.png")
+		Globals.Level.HELL:
+			background_texture.texture = load("res://sprites/background/wind_hell.png")
+	background_texture.texture
 	
 	starting_transition.play("start")
 	
